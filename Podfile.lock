@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (5.10.2)
+  - ICViewPager (1.5.1)
+  - KeychainAccess (4.2.2)
+  - SVProgressHUD (2.3.1):
+    - SVProgressHUD/Core (= 2.3.1)
+  - SVProgressHUD/Core (2.3.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.6)
+  - ICViewPager
+  - KeychainAccess (~> 4.2)
+  - SVProgressHUD
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - ICViewPager
+    - KeychainAccess
+    - SVProgressHUD
+
+SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  ICViewPager: 032dc71a50fe898e185fae6112ded4bed0e0523c
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
+
+PODFILE CHECKSUM: 31d1554014b5a04fa5b6874aee44d1e103197b69
+
+COCOAPODS: 1.16.2
