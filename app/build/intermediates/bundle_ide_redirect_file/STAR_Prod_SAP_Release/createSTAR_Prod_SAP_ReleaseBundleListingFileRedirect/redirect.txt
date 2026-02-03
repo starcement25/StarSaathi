@@ -1,0 +1,2 @@
+#- File Locator -
+listingFile=../../../bundle_ide_model/STAR_Prod_SAP_Release/produceSTAR_Prod_SAP_ReleaseBundleIdeListingFile/output-metadata.json

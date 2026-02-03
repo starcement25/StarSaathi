@@ -1,0 +1,16 @@
+
+Ù
+;
+android*http://schemas.android.com/apk/res/android	1
+4
+app'http://schemas.android.com/apk/res-auto	1RelativeLayout"K
+*http://schemas.android.com/apk/res/androidpadding10dp"	(Õ„2:h"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"	(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"	(õ„2:0ÿÿÿÿÿÿÿÿÿ"Y
+*http://schemas.android.com/apk/res/androidid	@+id/main"	(Ğ„2
+Áƒ øid/main0*æ
+İ)androidx.recyclerview.widget.RecyclerView"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"k
+*http://schemas.android.com/apk/res/androidid@+id/firstListView"(Ğ„2
+š‚ øid/firstListView0*	1

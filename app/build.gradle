@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+// Add the Crashlytics Gradle plugin
+//apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    signingConfigs {
+        def path =  "${project.rootDir}/KEY_STORE/starcement.jks"
+        println  " amitabha2715_i_1 $path"
+        def  f_path = path.replaceAll("\\\\", "/")
+        println  " amitabha2715_i_2 $f_path"
+        
+        debug {
+            storeFile file(f_path)
+            storePassword 'android'
+            keyAlias = 'android'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file(f_path)
+            storePassword 'android'
+            keyAlias = 'android'
+            keyPassword 'android'
+        }
+    }
+    compileSdk 35
+    buildToolsVersion = '35.0.0'
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId "org.forcepower.starcement"
+        minSdk 26
+        targetSdk 35
+        multiDexEnabled true
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            flavorDimensions = ["one"]
+            productFlavors {
+                STAR_Prod_SAP_ {
+                    dimension = "one"
+                    applicationId "org.forcepower.starcement"
+                    resValue "string", "app_name", "STAR SAATHI"
+                    buildConfigField  ("String", "API_URL", '"https://starsaathi.com/SAP/"')
+                    buildConfigField  ("String", "App_Nick_Name", '"START"')
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    namespace 'org.forcepower.starcement'
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def version = variant.versionName
+            def date = new Date()
+            def formattedDate = date.format('MMM_dd_yyyy')
+            def newApkName =   formattedDate+ "_" + "STAR_SAATHI" + "_.apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.activity:activity:1.10.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation project(':MPChartLib')
+    implementation project(':MPChartLib_old')
+    implementation project(':my_crop')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-messaging:24.1.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.4.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.loopj.android:android-async-http:1.4.11'
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
+    implementation "androidx.viewpager2:viewpager2:1.1.0"
+    implementation 'androidx.core:core-ktx:1.15.0'
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+//    implementation("com.google.firebase:firebase-crashlytics")
+//    implementation("com.google.firebase:firebase-analytics")
+}
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'org.jetbrains.kotlin.android'

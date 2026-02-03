@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "PACKAGED_MANIFESTS",
+    "kind": "Directory"
+  },
+  "applicationId": "org.forcepower.starcement",
+  "variantName": "STAR_Prod_SAP_Release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 127,
+      "versionName": "22.026",
+      "outputFile": "AndroidManifest.xml"
+    }
+  ],
+  "elementType": "File"
+}

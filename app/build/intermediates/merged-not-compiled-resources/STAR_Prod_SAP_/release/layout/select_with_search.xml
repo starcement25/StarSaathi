@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+    <!--header-->
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorRed"
+        android:orientation="horizontal"
+        android:padding="3dp" >
+
+        <ImageView
+            android:id="@+id/imagelogo"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back_bg" />
+        <TextView
+            android:id="@+id/tvDestHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="SELECT SUB DEALERS"
+            android:layout_toRightOf="@+id/back"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:textSize="14sp"
+            android:textAllCaps="true"
+            />
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_w"
+            android:layout_toLeftOf="@+id/no_ordr"
+            android:layout_centerVertical="true"
+            android:visibility="invisible"
+            />
+        <Button
+            android:id="@+id/no_ordr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="2dp"
+            android:visibility="invisible"
+            android:enabled="false" />
+        <LinearLayout
+            android:id="@+id/ll_Search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_margin="7dp"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/search_g"
+                android:layout_margin="5dp"
+                />
+            <EditText
+                android:id="@+id/et_SearchProduct"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:hint="Search"
+                android:layout_gravity="center"
+                android:gravity="center|left"
+                android:background="@null"
+                />
+            <ImageView
+                android:id="@+id/ivSearchCross"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/cross"
+                android:layout_margin="5dp"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_d_search"
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:padding="9dp"
+        >
+        <EditText
+            android:id="@+id/autoCompleteTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:hint="Search"
+            android:drawableLeft="@drawable/searchx"
+            android:ems="10"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:textColor="#003399"
+            android:background="@drawable/rounded_grey_search"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:layout_below="@+id/ll_d_search"
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_d_submit"
+        android:scrollbars="none"
+        android:divider="#d3d3d3"
+        android:dividerHeight="2dp"
+        android:listSelector="@android:color/transparent"
+        />
+
+    <TextView
+        android:id="@+id/tv_d_submit"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#363f45"
+        android:text="Submit"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>

@@ -1,0 +1,33 @@
+
+õ
+;
+android*http://schemas.android.com/apk/res/android&
+4
+app'http://schemas.android.com/apk/res-auto&RelativeLayout"ƒ
+*http://schemas.android.com/apk/res/android
+background@android:color/transparent"(Ô„2$
+"€˜android:color/transparent0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"T
+*http://schemas.android.com/apk/res/androidfitsSystemWindowstrue"(İ„2:@*Î	
+Å	!androidx.cardview.widget.CardView"L
+*http://schemas.android.com/apk/res/android	elevation5dp"(Àˆ„2:h
+"P
+*http://schemas.android.com/apk/res/androidlayout_margin5dp"(ö„2:h
+"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ"Q
+'http://schemas.android.com/apk/res-autocardCornerRadius5dp"(œŒø2:h
+*ç
+ŞRelativeLayout"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ*†
+ı	ImageView"m
+*http://schemas.android.com/apk/res/androidsrc@drawable/default_"(™‚„2
+¦œødrawable/default_0"M
+*http://schemas.android.com/apk/res/android	scaleTypefitXY"(‚„2:0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"m
+*http://schemas.android.com/apk/res/androidid@+id/iv_home_slider"(Ğ„2
+ï‚ øid/iv_home_slider0
+&

@@ -1,0 +1,18 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "BUNDLE",
+    "kind": "RegularFile"
+  },
+  "applicationId": "org.forcepower.starcement",
+  "variantName": "STAR_Prod_SAP_Release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "outputFile": "../../../../../STAR_Prod_SAP_/release/app-STAR_Prod_SAP_-release.aab"
+    }
+  ],
+  "elementType": "File"
+}

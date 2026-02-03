@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+    <include
+        android:id="@+id/common_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        layout="@layout/header_common_layout"
+        />
+
+    <RelativeLayout
+        android:layout_below="@+id/common_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#f3f3f3"
+        >
+        <RelativeLayout
+            android:id="@+id/ll_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            android:padding="9dp"
+            >
+            <TextView
+                android:id="@+id/autoCompleteTextView1"
+                android:layout_toStartOf="@+id/ivAddRSSD"
+                android:layout_width="match_parent"
+                android:minHeight="45dp"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:hint="Selected Dealers"
+                android:gravity="start|center"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:background="@drawable/rounded_grey_search"
+                />
+
+            <ImageView
+                android:id="@+id/ivAddRSSD"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/filtered"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:paddingStart="9dp"
+                android:layout_alignParentEnd="true"
+                app:tint="@color/colorRed"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/ll_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/rl_sliderOne"
+            >
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/sliding_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                app:tabMode="scrollable"
+                app:tabTextColor="@color/black"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                >
+
+            </com.google.android.material.tabs.TabLayout>
+            <!--        <androidx.recyclerview.widget.RecyclerView-->
+            <!--            android:layout_below="@+id/sliding_tabs"-->
+            <!--            android:id="@+id/recycler_view"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:scrollbars="none"-->
+            <!--            />-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_below="@+id/sliding_tabs"
+
+                android:id="@+id/view_pager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

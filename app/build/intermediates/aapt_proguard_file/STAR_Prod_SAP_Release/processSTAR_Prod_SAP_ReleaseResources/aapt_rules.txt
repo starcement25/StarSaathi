@@ -1,0 +1,283 @@
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+-keep class androidx.core.content.FileProvider { <init>(); }
+-keep class androidx.profileinstaller.ProfileInstallReceiver { <init>(); }
+-keep class androidx.startup.InitializationProvider { <init>(); }
+-keep class com.google.android.datatransport.runtime.backends.TransportBackendDiscovery { <init>(); }
+-keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver { <init>(); }
+-keep class com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService { <init>(); }
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+-keep class com.google.firebase.components.ComponentDiscoveryService { <init>(); }
+-keep class com.google.firebase.iid.FirebaseInstanceIdReceiver { <init>(); }
+-keep class com.google.firebase.messaging.FirebaseMessagingService { <init>(); }
+-keep class com.google.firebase.provider.FirebaseInitProvider { <init>(); }
+-keep class com.yalantis.ucrop.UCropActivity { <init>(); }
+-keep class my_crop.vola.ImagePickerActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.ActivityOrderFilter { <init>(); }
+-keep class org.forcepower.starcement.aaa.AddLiftingActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.AgeingActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.CommonWebViewActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.ConsumerSchemeActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.CreditLimitActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.DealerFormWebViewActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.DealerLiftingActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.DealerLiftingAssignedAllocatedInvActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.DetailsActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.EpodActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.HelpActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.InvoiceActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.KYCActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.LedgerActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.LedgerMonthWiseActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.LoginActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.MaterialRcvActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.MenuActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.NewOrderConfirmationActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.NewSubDealerLiftingActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.NotificationDetailsActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.NotificationListActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.NotificationPdfActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.OrderConfirmationActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.OrderFormActivityAlternateDesign { <init>(); }
+-keep class org.forcepower.starcement.aaa.OtpActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PayAmountActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PayAmountPopActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PaymentActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PaymentSummaryActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PaymentWebViewActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PdfViewerActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PlaceOrderActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PlaceOrderRssdActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PopOrderFeedBackActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PopPaymentWebViewActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.PopProductActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.ProductWiseGraphActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.ReviewRatingActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.ReviewRatingListActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SchemeListPdfActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SchemePdfActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SelfAppraisalDetailsListActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SelfAppraisalLandingActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SplashActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SubDealerLedgerActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SubDealerShowAllocateActivity { <init>(); }
+-keep class org.forcepower.starcement.aaa.SubDealerTrackOrderNewActivityNew { <init>(); }
+-keep class org.forcepower.starcement.aaa.TrackOrderActivityNewInv { <init>(); }
+-keep class org.forcepower.starcement.activity.WebViewActivity { <init>(); }
+-keep class org.forcepower.starcement.activity.dealer_lifting_allocation.DealerLiftingAllocationActivity { <init>(); }
+-keep class org.forcepower.starcement.activity.declaration_of_dealer.DealerDeclarationActivity { <init>(); }
+-keep class org.forcepower.starcement.activity.kismet_ki_bori.KismetKiBoriActivity { <init>(); }
+-keep class org.forcepower.starcement.activity.test.TextActivity { <init>(); }
+-keep class org.forcepower.starcement.application.ParentApplication { <init>(); }
+-keep class org.forcepower.starcement.firebase.MyFirebaseMessagingService { <init>(); }
+-keep class android.widget.Space { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.app.AlertController$RecycleListView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.view.menu.ActionMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.view.menu.ExpandedMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.view.menu.ListMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionBarContainer { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionBarContextView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionBarOverlayLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActionMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ActivityChooserView$InnerLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.AlertDialogLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ButtonBarLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ContentFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.DialogTitle { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.FitWindowsFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.FitWindowsLinearLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.SearchView$SearchAutoComplete { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.Toolbar { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.appcompat.widget.ViewStubCompat { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.cardview.widget.CardView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.constraintlayout.helper.widget.Flow { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.constraintlayout.widget.ConstraintLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.coordinatorlayout.widget.CoordinatorLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.core.widget.NestedScrollView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.drawerlayout.widget.DrawerLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.fragment.app.FragmentContainerView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.recyclerview.widget.RecyclerView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.swiperefreshlayout.widget.SwipeRefreshLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.viewpager.widget.ViewPager { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class androidx.viewpager2.widget.ViewPager2 { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.github.mikephil.charting.charts.LineChart { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.github.mikephil.charting_.charts.BarChart { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.appbar.MaterialToolbar { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.button.MaterialButton { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.button.MaterialButtonToggleGroup { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.chip.Chip { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.datepicker.MaterialCalendarGridView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.floatingactionbutton.FloatingActionButton { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.internal.BaselineLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.internal.CheckableImageButton { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.internal.ClippableRoundedCornerLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.internal.NavigationMenuItemView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.internal.NavigationMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.internal.TouchObserverFrameLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.snackbar.Snackbar$SnackbarLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.snackbar.SnackbarContentLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.tabs.TabItem { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.tabs.TabLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.textfield.TextInputEditText { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.textfield.TextInputLayout { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.timepicker.ChipTextInputComboView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.timepicker.ClockFaceView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.timepicker.ClockHandView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.google.android.material.timepicker.TimePickerView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.mikhaellopez.circularimageview.CircularImageView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.yalantis.ucrop.view.GestureCropImageView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.yalantis.ucrop.view.OverlayView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.yalantis.ucrop.view.UCropView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.yalantis.ucrop.view.widget.AspectRatioTextView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class com.yalantis.ucrop.view.widget.HorizontalProgressWheelView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class org.forcepower.starcement.GridViewScrollable { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class org.forcepower.starcement.NonScrollListView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keep class org.forcepower.starcement.TouchImageView { <init>(android.content.Context, android.util.AttributeSet); }
+
+-keepclassmembers class * { *** ContinueLogin(android.view.View); }
+
+-keepclassmembers class * { *** DOB(android.view.View); }
+
+-keepclassmembers class * { *** DOM(android.view.View); }
+
+-keepclassmembers class * { *** RECEIVED(android.view.View); }
+
+-keepclassmembers class * { *** Terms_and_Conditions(android.view.View); }
+
+-keepclassmembers class * { *** _con_scheme(android.view.View); }
+
+-keepclassmembers class * { *** appPaymentHistory(android.view.View); }
+
+-keepclassmembers class * { *** chooseYourImage(android.view.View); }
+
+-keepclassmembers class * { *** confirmLedger(android.view.View); }
+
+-keepclassmembers class * { *** continueLogin(android.view.View); }
+
+-keepclassmembers class * { *** exclusiveDealerDeclaration(android.view.View); }
+
+-keepclassmembers class * { *** false_loader(android.view.View); }
+
+-keepclassmembers class * { *** goto_cart(android.view.View); }
+
+-keepclassmembers class * { *** ivFilter(android.view.View); }
+
+-keepclassmembers class * { *** ivMnuDashboard(android.view.View); }
+
+-keepclassmembers class * { *** ivMnuFB(android.view.View); }
+
+-keepclassmembers class * { *** ivMnuFBWeb(android.view.View); }
+
+-keepclassmembers class * { *** ivMnuYouTube(android.view.View); }
+
+-keepclassmembers class * { *** ivNotification(android.view.View); }
+
+-keepclassmembers class * { *** ivSync(android.view.View); }
+
+-keepclassmembers class * { *** kismetKiBori(android.view.View); }
+
+-keepclassmembers class * { *** make_payment(android.view.View); }
+
+-keepclassmembers class * { *** myAboutUs(android.view.View); }
+
+-keepclassmembers class * { *** myConsumerScheme(android.view.View); }
+
+-keepclassmembers class * { *** myCreditLimit(android.view.View); }
+
+-keepclassmembers class * { *** myHelp(android.view.View); }
+
+-keepclassmembers class * { *** myIssues(android.view.View); }
+
+-keepclassmembers class * { *** myKYC(android.view.View); }
+
+-keepclassmembers class * { *** myLogOut(android.view.View); }
+
+-keepclassmembers class * { *** myPrivacyPolicy(android.view.View); }
+
+-keepclassmembers class * { *** myRefundPolicy(android.view.View); }
+
+-keepclassmembers class * { *** order_submit(android.view.View); }
+
+-keepclassmembers class * { *** payment_proceed(android.view.View); }
+
+-keepclassmembers class * { *** payment_summary(android.view.View); }
+
+-keepclassmembers class * { *** reload(android.view.View); }
+
+-keepclassmembers class * { *** select_date(android.view.View); }
+
+-keepclassmembers class * { *** select_products(android.view.View); }
+
+-keepclassmembers class * { *** select_sub_dealer(android.view.View); }
+
+-keepclassmembers class * { *** show_calendar(android.view.View); }
+
+-keepclassmembers class * { *** show_info(android.view.View); }
+
+-keepclassmembers class * { *** submit_order(android.view.View); }
+
+-keepclassmembers class * { *** submit_yellow_card(android.view.View); }
+
+-keepclassmembers class * { *** updateKYC(android.view.View); }
+

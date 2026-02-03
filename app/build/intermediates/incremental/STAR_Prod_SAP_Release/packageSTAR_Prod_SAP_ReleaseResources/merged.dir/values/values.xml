@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">@android:color/black</color>
+    <color name="blue">#ff33b5e5</color>
+    <color name="colorGreen">#4a973a</color>
+    <color name="colorPrimary">@color/colorRed</color>
+    <color name="colorRed">#ec2427</color>
+    <color name="colorRed_StatusBar">#c8292D</color>
+    <color name="colorYellow">#ffec40</color>
+    <color name="dark_grey">#444</color>
+    <color name="grey">#b9b9b9</color>
+    <color name="red">#e00000</color>
+    <color name="translucent_black">#80000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">@android:color/white</color>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_size">30sp</dimen>
+    <string name="Details_not_found">.</string>
+    <string name="Rs" translatable="false">\u20B9</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="app_name" translatable="false">STAR SAATHI</string>
+    <string name="appraisal_spinner_text" translatable="false">Choose type</string>
+    <string name="authentic_user" translatable="false">Access Granted!</string>
+    <string name="backSpace" translatable="false">\u232b</string>
+    <string name="choose_destination" translatable="false">Choose Destination</string>
+    <string name="colored_text">
+		<![CDATA[
+		Additional loyalty points related to TDS, an equivalent amount will be debited after redemption.
+		]]>
+	</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_web_client_id" translatable="false">407967146676-phl4df4t02d954hn4a4u7i34ibb66mk0.apps.googleusercontent.com</string>
+    <string name="device_compatibility_error" translatable="false">Device not compatible to run this APP…Please contact ADMIN</string>
+    <string name="dot" translatable="false">\u2219</string>
+    <string name="drawer_close" translatable="false">Close</string>
+    <string name="drawer_open" translatable="false">Open</string>
+    <string name="firebase_database_url" translatable="false">https://star-saathi.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">407967146676</string>
+    <string name="google_api_key" translatable="false">AIzaSyCKyLQLK2xnrb_YtP2W5TEkxpGwawZhrsM</string>
+    <string name="google_app_id" translatable="false">1:407967146676:android:23786b9dfefefa71</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCKyLQLK2xnrb_YtP2W5TEkxpGwawZhrsM</string>
+    <string name="google_storage_bucket" translatable="false">star-saathi.appspot.com</string>
+    <string name="gst_spinner_text" translatable="false">Choose GST type</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="help_attendance" translatable="false">         Attendance is the license to start the days work.On press Attendance Users marked as present with date and Time Tag.
+	    			This Menu can be found on the right hand top corner of the Menu Page just after Login. </string>
+    <string name="help_collection" translatable="false">         COLLECTION can be of 2 types.
+	    	    	\ni.Bill 2 Bill Collection
+	    	    	\nii.On Account Collection
+	    			\n\nBill 2 Bill Collection : Flow is same as Order Collection.
+	    			\n1.ROUTE SELECTION 
+	    			\n2.CUSTOMER SELECTION - Only those who have Outstanding.
+					\n3.INVOICE SELECTION - User has to choose an Invoice from Outstanding list.
+					\n4.ENTER AMOUNT - User has to enter the Amount to be collected.If Collected amount 
+					is less than the Outstanding Amount then APP will ask whether the remaining amount is as 
+					discount or not.  
+					\n5.Click Go For Payment.
+					\n\nOn Account Collection : User has to enter Amount and Click Go For Payment.
+					\n\n6.User need to specify the Mode of Collection between
+	    			\ni.Cash
+	    			\nii.CHEQUE Collection
+	    			\niii.NEFT
+	    			\niv.RTGS
+	    			\nv.IMPS.    
+					\n7.User has to provide other details such as DATE,BANK NAME,CHEQUE No./TRANSACTION No.,Remarks 
+					\n8.Press SUBMIT to complete the transaction.</string>
+    <string name="help_delete" translatable="false">Coming Soon</string>
+    <string name="help_feedback" translatable="false">Coming Soon</string>
+    <string name="help_loyalty" translatable="false">Coming Soon</string>
+    <string name="help_merchandising" translatable="false">Normal procedure like Order &amp; Collection.
+	    			\n1. Need to select Customer from the list. 
+	    			\n2. Automatically Camera become active and user need to capture desired image and to submit. 
+	    			\n 3.This analyze and verify whether merchandising activity has been performed by outsource agencies or not.</string>
+    <string name="help_mis" translatable="false">Coming Soon</string>
+    <string name="help_order" translatable="false">         1.ROUTE SELECTION : User has to select a Route from the List of Route(s).
+	    			\n2.CUSTOMER SELECTION : User has to select the Customer from the List of Customers(s).
+	    			\n3.AVAILABLE CREDIT LIMIT (Optional): If this option is enabled then user can view that current Credit Limit. 
+	    			\n4.PRODUCT SELECTION : Product Selection is done on Hierarchical basis based on Product Filter number.
+	    			\ni.Selection of BRAND / GROUP / CATEGORY
+	    			\nii.Selection of BRAND FORM/ SUB GROUP / SUB CATEGORY
+	    			\niii.Selection of BRAND SUB FORM / SUB SUB GROUP /SUB SUB CATEGORY
+	    			\niv.Selection of SKU
+	    			\n5.Qty(Mandetory) - This is a must entered field.
+	    			\n6.MRP/Sale Rate(SETUP Defined) - User can select from a List of MRP or can input the same. 
+	    			\n7.Cl Stk(SETUP Defined) - User can see the Cl Stk of the SKU of his respective Depoy/Warehouse.
+	    			\n8.TD(SETUP Defined) - User can input the TD for that SKU.
+	    			\n9.ADD TO CART : Once the order has been freezed for that particular SKU user need to press this button. 
+	    			Upon press the same user can see the Order Value on Top of Available Credit Limit.
+	    			User can choose multiple SKU\'s in asingle Order Form just using above mentioned procedure.
+	    			\n10.CHECK OUT :  Once Order Process has been completed press this button which will lead to Final Order Form.
+	    			\nFinal Order Form shows the Details of Per Line Call information.
+	    			User can Edit any of the Inputs by pressing once on the line. It will appear to edit the inputs.
+	    			User may also DELETE that Line by LONG PRESS on the line.
+	    			\nBefore Submit the Final Order User can enter following :
+	    			\ni.REMARKS/DELIVERY INSTRUCTION.
+	    			\nii.PAYMENT MODE
+	    			\n\nNO ACTIVITY : Present at Top Right Hand Corner of Order Form,this is to confirm that User 
+	    			has visited the Customer but No Activity happened. </string>
+    <string name="help_outstanding" translatable="false">User gets a comprehensive total outstanding list for his all customers.
+	    			\nThis list provides Customer wise TOTAL OUTSTANDING and on click of a particular Customer 
+	    			list provides Invoice wise outstanding along with no. of days that particular days that invoice is pending. </string>
+    <string name="help_prospect" translatable="false">     User can register the meeting a new Lead or Business Prospect for future business.
+        			\n1. User needs to input Prospects Name, Address, Pin Code &amp; Phone No. all are mandatory inputs. 
+        			Area is auto filled mode from Users Routeé/Beat Plan.After feeling the basic info,press Next. 
+        			\n2.User need to Select the Product/SKU he has discussed with prospect.
+        			\n3.User need to click Submit to complete transaction</string>
+    <string name="help_report" translatable="false">Coming Soon</string>
+    <string name="help_routeplan" translatable="false">         On Press ROUTE PLAN a CALENDER opens. User need to LONG PRESS a date to get
+					the list of his Market/Beat . User need to select the Route(s) for that day.                                   
+					User can create a NEW ROUTE also by selecting ADD NEW ROUTE.\nOnce User has defined the Route,he need to press SUBMIT to confirm. 
+					It leads back to CALENDER SCREEN. User need to press SUBMIT to complete the transaction.\nOnce submitted User can change the Plan too. 
+					Long Press the Date for which date he needs to change. There User can 
+					ADD another Route and/or can also Delete the previously slected Routes.</string>
+    <string name="help_sales" translatable="false">Coming Soon</string>
+    <string name="help_stockaudit" translatable="false">A unique tool to monitore the stock movement of a particular product and/or group of products
+	    			and/or focus products and/or price protection.Very simple to use
+	    			\n1. Need to select the CUSTOMER.
+	    			\n2. Select the PRODUCT from list
+	    			\n 3.INPUT the SHELF STOCK of that particular PRODUCT of that selected CUSTOMER.
+	    			\n\n(SETUP Defined)Users can also scan the BARCODE of the stock lying at CUSTOMER-END 
+	    			and crosscheck whether that particular is eligible to get PRICE PROTECTION or not.</string>
+    <string name="help_tourexp" translatable="false">Coming Soon</string>
+    <string name="invalid_credential" translatable="false">Forgot Password….Contact Admin</string>
+    <string name="invalid_userid_password" translatable="false">Sorry…Login ID and/or Password mismatched! Contact Admin</string>
+    <string name="library_condition_failed" translatable="false">Please Check following………\n1. External Memory Mounted\n2. GPS is On\n3. Mobile Data and Roaming Mobile Data Enabled</string>
+    <string name="no_device_id" translatable="false">Device not responding to this app….Please Re-Login!</string>
+    <string name="no_internet" translatable="false">Please Check your Data Connectivity……</string>
+    <string name="privacy_policy" translatable="false">
+ The Digital Personal Data Protection (DPDP) Act was passed in early August of 2023. The act is expected to come into force to companies like us anytime through a government notification.
+
+ \n\nDue to this ‘Personal Data’ of any individual (employee, dealer, customer, business partner) is extreme critical and sensitive entity of any organisation and we need to take outmost protection and privacy of such ‘data’ and this is to be informed via our ‘ Privacy Policy’ to whosever who visits to our websites.
+ Please note any violation in particular for the failure to implement information security measures necessary to mitigate the risk of a personal data breach - could result in fines of up to 250 crore INR/$30 million.
+
+ \n\nIn connection to the above in our recent revamped website, I found some changes is needed and my drafted Privacy Policy is attached for your reference.
+
+ \n\nAlso, I found my name and mobile number is visible in the policy, mentioned as ‘Grievance Officer (as per requirement of Information Technology Rules)’ without my knowledge and consent. Nowhere any person name/contact details should be written, and instead of only email id and contact number should be displayed. You may give email / contact no for our Legal Officer, who can connect us (IT Dept.) later any IT related issues.
+
+ \n\nYou can enquire/check with other websites or related website design vendor.
+	</string>
+    <string name="progress_dialog_msg_auth" translatable="false">Initializing…….. Please wait……</string>
+    <string name="project_id" translatable="false">star-saathi</string>
+    <string name="refund_policy" translatable="false">
+		Refund Policy\n
+    \n1. Star Cement Limited (SCL) will not be responsible for any refunds arising out of any failures in online payments and in case the amount gets deducted from customers saving/current account, credit/debit card and does not get credited in SCL account, before the transaction is complete. Users in this case will have to contact his Bank to clarify the same and get refund.
+    \n2. SCL shall have right to adjust any excess amount paid by the party with the future orders or else with the final settlement whichever so is earlier.
+    \n3. SCL shall have the right to forfeit or adjust the whole or part of customers security deposit held with SCL in the manner as SCL may deem fit at the time of final settlement account.
+    \n4. SCL reserves the right to modify and amend refund policy at its sole discretion.
+	</string>
+    <string name="rs" translatable="false">\u20A8</string>
+    <string name="spinner_prompt_choose_prod_cat" translatable="false">Select Category</string>
+    <string name="spl_charecter">0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,-_\n</string>
+    <string name="terms_conditions" translatable="false">
+		Terms and conditions of use\n
+\n1. Before you register, ensure to have a valid email id and a phone number.
+\n2. In case user wants to change the mobile no. and email id, it can do so by registering new mobile no. and email id and cancel the existing registered no. and id.
+\n3. The mobile application is prohibited to limited usage.
+\n4. The company can terminate any mobile application user if found misleading and contrary to the policies of the Company without any further intimation to the user.
+\n5. The payment clauses solely depend on the Company purview.
+\n6. This mobile application does not create any right in favour of any of the application users.
+\n7. All taxes existing or new levied by the Govt. will be payable extra by the applicant, without disputing the same.
+\n8. The company reserves all the right to withdraw the application anytime without any references.
+\n9. Any disputes are within the jurisdiction of the Kolkata Court.
+	</string>
+    <string name="unauthentic_user" translatable="false">Access Denied!</string>
+    <string name="unlisenced_user" translatable="false">Licesnsing Failed! Contact Admin</string>
+    <string name="userid_password_blank" translatable="false">Please Check Employee Code and/or Password……</string>
+    <string name="vertical_spinner_text" translatable="false">Choose Vertical</string>
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+    <style name="MyDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+    <style name="PauseDialog" parent="@android:style/Theme.Dialog"/>
+    <style name="PauseDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/fadeut</item>
+    </style>
+    <style name="myAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        
+        <item name="colorPrimary">@color/colorRed</item>
+        <item name="colorPrimaryDark">@color/colorRed</item>
+        <item name="colorAccent">@color/colorRed</item>
+        <item name="android:statusBarColor">@color/colorRed_StatusBar</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:forceDarkAllowed" ns1:ignore="NewApi">false</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+    </style>
+    <style name="mySpinnerItemStyle" parent="android:Theme.Light">
+        <item name="android:textSize">@dimen/text_size</item>
+    </style>
+</resources>

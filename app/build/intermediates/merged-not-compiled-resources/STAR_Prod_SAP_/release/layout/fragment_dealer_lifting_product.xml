@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+    <TextView
+        android:id="@+id/tv_p_boder_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        />
+
+    <RelativeLayout
+        android:layout_below="@+id/tv_p_boder_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/view_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            >
+            <LinearLayout
+                android:id="@+id/ll_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="12dp"
+
+                >
+                <TextView
+                    android:id="@+id/list_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:gravity="start"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:padding="3dp"
+                    android:textSize="12sp"
+
+                    />
+
+                <EditText
+                    android:id="@+id/etProdQty_new"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/gray_border_gray_bg"
+                    android:layout_weight=".75"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginRight="9dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:digits="0123456789."
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight=".75"
+                    android:layout_height="wrap_content"
+                    android:text="QTY (MT)"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="9dp"
+                    android:textSize="12sp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/ll_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                >
+                <TextView
+                    android:id="@+id/tv_allo_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Remaining Allocation Qty : 0"
+                    android:gravity="start"
+
+                    android:textColor="@color/black"
+                    android:padding="3dp"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_allo_dispatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Dispatch Qty : 0"
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:padding="3dp"
+                    android:textSize="12sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_allo_4days_dispatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint=""
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:padding="3dp"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+        <TextView
+            android:layout_below="@+id/view_input"
+            android:id="@+id/tv_submit_allocation"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="Allocate"
+            android:textSize="10sp"
+            android:textColor="@color/white"
+            android:background="@drawable/rounded_black"
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            />
+    </RelativeLayout>
+</RelativeLayout>

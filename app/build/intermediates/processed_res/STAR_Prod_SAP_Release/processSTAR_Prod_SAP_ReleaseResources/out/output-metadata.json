@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "PROCESSED_RES",
+    "kind": "Directory"
+  },
+  "applicationId": "org.forcepower.starcement",
+  "variantName": "STAR_Prod_SAP_Release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 127,
+      "versionName": "22.026",
+      "outputFile": "resources-STAR_Prod_SAP_Release.ap_"
+    }
+  ],
+  "elementType": "File"
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="KGk-i7-Jjw" customClass="SubDealerForLiftingAllocationCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kr0-de-MF0">
+                        <rect key="frame" x="16" y="10" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="aUr-EK-XRU"/>
+                            <constraint firstAttribute="height" constant="24" id="fEu-yv-DCV"/>
+                        </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="checkbox_unchecked"/>
+                        <state key="selected" image="checkbox_checked"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubDealer Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHE-Qd-I6y">
+                        <rect key="frame" x="48" y="13.666666666666664" width="264" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fHE-Qd-I6y" secondAttribute="trailing" constant="8" id="4jL-S5-N6h"/>
+                    <constraint firstItem="fHE-Qd-I6y" firstAttribute="leading" secondItem="kr0-de-MF0" secondAttribute="trailing" constant="8" id="HGU-O1-uDZ"/>
+                    <constraint firstItem="kr0-de-MF0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="JRl-gv-yYU"/>
+                    <constraint firstItem="kr0-de-MF0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cwb-Jk-vtw"/>
+                    <constraint firstItem="fHE-Qd-I6y" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g7a-XM-v9J"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="btnCheckBox" destination="kr0-de-MF0" id="jZu-a4-WCf"/>
+                <outlet property="lblSubDealerName" destination="fHE-Qd-I6y" id="wFR-X4-rZl"/>
+            </connections>
+            <point key="canvasLocation" x="102" y="21"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkbox_checked" width="24" height="24"/>
+        <image name="checkbox_unchecked" width="24" height="24"/>
+    </resources>
+</document>

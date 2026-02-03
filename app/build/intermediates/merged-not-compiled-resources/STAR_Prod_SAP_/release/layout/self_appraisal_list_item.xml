@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:id="@+id/ll_bg_id"
+    >
+    <!--android:showDividers="middle"-->
+    <!--android:divider="@drawable/divider"-->
+    <TextView
+        android:id="@+id/customerBranchName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="Month"
+        android:textSize="12sp"
+        />
+
+    <TextView
+            android:id="@+id/tvtarget"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="0"
+            android:textSize="14sp"
+        />
+        <TextView
+            android:id="@+id/tvachievement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="0"
+            android:textSize="14sp"
+             />
+
+
+
+</LinearLayout>

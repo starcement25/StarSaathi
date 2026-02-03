@@ -1,0 +1,1255 @@
+-- Merging decision tree log ---
+provider#androidx.core.content.FileProvider
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:120:9-128:20
+	android:grantUriPermissions
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:124:13-47
+	android:authorities
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:122:13-60
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:123:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:121:13-62
+manifest
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:2:1-335:12
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:2:1-335:12
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:2:1-335:12
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:2:1-335:12
+MERGED from [com.google.android.material:material:1.12.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e92778a7d1f132f36eaa5bf95f48cdcd/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e9eb27d00b7b64737b14712e7ac438b6/transformed/constraintlayout-2.2.1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.mikhaellopez:circularimageview:4.3.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d685b7b189c03b2c9da2465387567fe3/transformed/jetified-circularimageview-4.3.1/AndroidManifest.xml:2:1-9:12
+MERGED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:2:1-20:12
+MERGED from [com.github.yalantis:ucrop:2.2.6] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/4281e3955abd361ae071e113e0d140d2/transformed/jetified-ucrop-2.2.6/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/18e803173496d3ec4edfd4594b398dd5/transformed/jetified-appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/344c199ef14d817a8994b06340d01a35/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5b68090c04b7cbed90ed4a91f17e16ff/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d295d4252d1dcff5bb5eb6f0e3e8fb36/transformed/jetified-glide-4.14.2/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.recyclerview:recyclerview:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/17f36405097bc4073a758c151f94e047/transformed/recyclerview-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.viewpager2:viewpager2:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/47cce7261ac7d0d4175fb28cb7a092df/transformed/jetified-viewpager2-1.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:17:1-66:12
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/04d2a77b590eaf97ce63f1979b0e650e/transformed/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:2:1-24:12
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:2:1-18:12
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d61fe33225694014a467ccdc54ddd50/transformed/jetified-play-services-stats-17.0.2/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/db30d4eedca9a6252d482aa66ffc3734/transformed/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/29db7068dd39c552bbd3367af0a12744/transformed/jetified-firebase-installations-interop-17.1.1/AndroidManifest.xml:15:1-19:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/2273677e2614328230baf5e259d833de/transformed/jetified-customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8589271a7cb343ed84c6e8de9688d675/transformed/jetified-core-ktx-1.15.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/6fa9d3d017a4c2c0b62b207e51dea393/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/6548c13166a0acaf4a8689bdc4481966/transformed/coordinatorlayout-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.media:media:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/147286405d0f1984b0f96934e35fb6a8/transformed/media-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.5.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/dcb0deaddabdd069b74beb1328a3775e/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/113ecbe20efca13e1505d48b4f1d9b52/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c947ebb92077aa24be52c08b466ce847/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/fc081bfa0df311a57287e734e9c762fc/transformed/jetified-emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5130fc8d72b664a7b0101962960e7952/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/31ff8b64759d8ef66cb4ebb0b219af30/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c53c8f36870fa1f9b261deae20cc3a05/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/561b1c15167f6d8789c24de42af4afd2/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e7d4a2bb5379bba3320766cb252041a9/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/968d2d787fd032b809d0f8c87f823a3b/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/64af4345d0bc396656a20d86648be643/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/7a6de8f975904279158ae54a31ed2f42/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/af47c48a9631732db75cf6ad99da7654/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c0b6301f5d7c4dd80b222df603e5d9b5/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/392443473ed613552ee70c2f5555888b/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/410a08e7584ddfbd045d68cb672b32be/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/cdad511aaad3023f7975871aebcacf4b/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d7712014310b46f1e77f371c01ade72/transformed/jetified-lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/acd3722bdd4751af6f6ce679b8399aa5/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/bad0e6f4a858c461e66223183357a9db/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:16:1-26:12
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/176f980ce97b03ab54fcae4ffdb0944d/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.10.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/26607e02f1766844ef636029d09e5fb3/transformed/jetified-activity-1.10.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-viewtree:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/582637dfe783245ab357d3f20d3938f4/transformed/jetified-core-viewtree-1.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [:MPChartLib] /Users/sbinfowaves/Documents/Star/star-saathi/MPChartLib/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:2:1-16:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/0819d1be1d0823b0bde6029ca2996e72/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:17:1-55:12
+MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/107cdfaf822714f644e570ef26d38117/transformed/jetified-firebase-components-18.0.0/AndroidManifest.xml:15:1-20:12
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:15:1-31:12
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:15:1-37:12
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ddacb10f00ef4e875c769b2575b3ae68/transformed/jetified-firebase-encoders-json-18.0.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:15:1-41:12
+MERGED from [com.google.android.datatransport:transport-api:3.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5c935146eeb93ad3f118caae1160dcf0/transformed/jetified-transport-api-3.1.0/AndroidManifest.xml:15:1-20:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/939fc059a1d3da0c2fb93fa23c8807b6/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49ee1cfbe3d8fab93ad332bfc0bb0ee2/transformed/jetified-gifdecoder-4.14.2/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/94c45c8e8432772d299d5945407116c3/transformed/exifinterface-1.3.3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/42eceefd017755a6d52c028ab3d0dcf0/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/3eb5ef097f9db7c808b914e2fd53ab33/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49a6ec2b97c156167f63e3b2b3ff3c32/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/293879df65bb6c1ff36180393d7afacc/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/80bb420edf06bbf22072274b4e37a3ae/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/32fcef988422eea4416fffd0a7d30560/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e423d9ee4155a422ed34521e463b33ee/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d60d3c2bf44010d183cd4de869ead9fe/transformed/jetified-annotation-experimental-1.4.1/AndroidManifest.xml:2:1-7:12
+MERGED from [:MPChartLib_old] /Users/sbinfowaves/Documents/Star/star-saathi/MPChartLib_old/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.multidex:multidex:2.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/2ce28ab9fcfcf077d3e2c25f4ad0bac7/transformed/multidex-2.0.1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.volley:volley:1.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5fe6ab8d10bc520947fe929b8888feaa/transformed/jetified-volley-1.2.1/AndroidManifest.xml:2:1-7:12
+MERGED from [com.loopj.android:android-async-http:1.4.11] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8a6994a029b2b8b2b6ed190cdfbb6889/transformed/jetified-android-async-http-1.4.11/AndroidManifest.xml:2:1-11:12
+	package
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+	android:versionName
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:5:5-33
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:4:5-30
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+	android:installLocation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:3:5-35
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:7:22-76
+uses-permission#android.permission.INTERNET
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:8:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:25:5-67
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:25:5-67
+MERGED from [com.loopj.android:android-async-http:1.4.11] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8a6994a029b2b8b2b6ed190cdfbb6889/transformed/jetified-android-async-http-1.4.11/AndroidManifest.xml:9:5-67
+MERGED from [com.loopj.android:android-async-http:1.4.11] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8a6994a029b2b8b2b6ed190cdfbb6889/transformed/jetified-android-async-http-1.4.11/AndroidManifest.xml:9:5-67
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:8:22-64
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:9:5-77
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:23:5-77
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:23:5-77
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:9:22-74
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:10:5-76
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:10:22-73
+uses-permission#android.permission.CAMERA
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:11:5-65
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:11:22-62
+uses-feature#0x00020000
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:13:5-15:35
+	android:glEsVersion
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:14:9-41
+	android:required
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:15:9-32
+uses-feature#android.hardware.camera
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:16:5-18:36
+	android:required
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:18:9-33
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:17:9-47
+supports-screens
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:20:5-26:40
+	android:largeScreens
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:22:9-36
+	android:smallScreens
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:25:9-36
+	android:normalScreens
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:23:9-37
+	android:xlargeScreens
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:26:9-37
+	android:resizeable
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:24:9-34
+	android:anyDensity
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:21:9-34
+application
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:28:5-333:19
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:28:5-333:19
+MERGED from [com.google.android.material:material:1.12.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e92778a7d1f132f36eaa5bf95f48cdcd/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e92778a7d1f132f36eaa5bf95f48cdcd/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e9eb27d00b7b64737b14712e7ac438b6/transformed/constraintlayout-2.2.1/AndroidManifest.xml:7:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e9eb27d00b7b64737b14712e7ac438b6/transformed/constraintlayout-2.2.1/AndroidManifest.xml:7:5-20
+MERGED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:7:5-18:19
+MERGED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:7:5-18:19
+MERGED from [com.github.bumptech.glide:glide:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d295d4252d1dcff5bb5eb6f0e3e8fb36/transformed/jetified-glide-4.14.2/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:glide:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d295d4252d1dcff5bb5eb6f0e3e8fb36/transformed/jetified-glide-4.14.2/AndroidManifest.xml:9:5-20
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:28:5-64:19
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:28:5-64:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/04d2a77b590eaf97ce63f1979b0e650e/transformed/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/04d2a77b590eaf97ce63f1979b0e650e/transformed/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:11:5-22:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:8:5-16:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:22:5-39:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:22:5-39:19
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d61fe33225694014a467ccdc54ddd50/transformed/jetified-play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d61fe33225694014a467ccdc54ddd50/transformed/jetified-play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/db30d4eedca9a6252d482aa66ffc3734/transformed/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/db30d4eedca9a6252d482aa66ffc3734/transformed/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/bad0e6f4a858c461e66223183357a9db/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/bad0e6f4a858c461e66223183357a9db/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:20:5-24:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:23:5-53:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:21:5-29:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:27:5-35:19
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:27:5-35:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:25:5-39:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:25:5-39:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49ee1cfbe3d8fab93ad332bfc0bb0ee2/transformed/jetified-gifdecoder-4.14.2/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49ee1cfbe3d8fab93ad332bfc0bb0ee2/transformed/jetified-gifdecoder-4.14.2/AndroidManifest.xml:9:5-20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/80bb420edf06bbf22072274b4e37a3ae/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/80bb420edf06bbf22072274b4e37a3ae/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+	android:requestLegacyExternalStorage
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:35:9-52
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:28:18-86
+	android:label
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:31:9-41
+	android:launchMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:33:9-40
+	android:roundIcon
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:36:9-48
+	android:largeHeap
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:32:9-33
+	android:icon
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:30:9-43
+	android:theme
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:37:9-42
+	android:networkSecurityConfig
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:34:9-69
+	android:usesCleartextTraffic
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:38:9-44
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:29:9-54
+activity#org.forcepower.starcement.activity.WebViewActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:39:9-41:40
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:40:13-53
+activity#org.forcepower.starcement.activity.test.TextActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:42:9-44:40
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:44:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:43:13-55
+activity#org.forcepower.starcement.activity.dealer_lifting_allocation.DealerLiftingAllocationActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:45:9-47:40
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:46:13-95
+activity#org.forcepower.starcement.activity.kismet_ki_bori.KismetKiBoriActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:50:9-52:40
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:52:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:51:13-73
+activity#org.forcepower.starcement.activity.declaration_of_dealer.DealerDeclarationActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:53:9-55:40
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:55:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:54:13-85
+uses-library#org.apache.http.legacy
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:57:9-59:40
+	android:required
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:59:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:58:13-50
+activity#org.forcepower.starcement.aaa.SplashActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:61:9-72:20
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:65:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:66:13-74
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:64:13-36
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:63:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:62:13-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:67:13-71:29
+action#android.intent.action.MAIN
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:68:17-69
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:68:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:70:17-77
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:70:27-74
+activity#org.forcepower.starcement.aaa.LoginActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:73:9-76:77
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:75:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:76:13-74
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:74:13-46
+activity#org.forcepower.starcement.aaa.MenuActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:77:9-80:63
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:79:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:80:13-60
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:78:13-45
+activity#org.forcepower.starcement.aaa.MaterialRcvActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:81:9-84:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:83:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:84:13-67
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:82:13-52
+activity#org.forcepower.starcement.aaa.ReviewRatingActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:85:9-89:74
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:88:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:89:13-71
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:87:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:86:13-53
+activity#org.forcepower.starcement.aaa.PopOrderFeedBackActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:90:9-93:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:92:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:93:13-67
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:91:13-57
+activity#org.forcepower.starcement.aaa.InvoiceActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:94:9-97:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:96:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:97:13-67
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:95:13-48
+activity#org.forcepower.starcement.aaa.ActivityOrderFilter
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:98:9-102:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:101:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:102:13-67
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:100:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:99:13-52
+activity#org.forcepower.starcement.aaa.HelpActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:103:9-107:67
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:106:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:107:13-64
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:105:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:104:13-45
+service#org.forcepower.starcement.firebase.MyFirebaseMessagingService
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:109:9-115:19
+	android:exported
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:111:13-37
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:110:13-64
+intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:112:13-114:29
+action#com.google.firebase.MESSAGING_EVENT
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:113:17-78
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:113:25-75
+meta-data#com.google.firebase.messaging.default_notification_channel_id
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:116:9-118:71
+	android:value
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:118:13-68
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:117:13-89
+activity#org.forcepower.starcement.aaa.OtpActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:130:9-134:74
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:133:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:134:13-71
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:132:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:131:13-44
+activity#org.forcepower.starcement.aaa.DetailsActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:135:9-139:76
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:138:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:139:13-73
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:137:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:136:13-48
+activity#org.forcepower.starcement.aaa.LedgerActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:140:9-144:59
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:143:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:144:13-56
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:142:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:141:13-47
+activity#org.forcepower.starcement.aaa.SubDealerLedgerActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:145:9-149:59
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:148:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:149:13-56
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:147:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:146:13-56
+activity#org.forcepower.starcement.aaa.AgeingActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:150:9-154:59
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:153:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:154:13-56
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:152:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:151:13-47
+activity#org.forcepower.starcement.aaa.ReviewRatingListActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:155:9-159:59
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:158:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:159:13-56
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:157:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:156:13-57
+activity#org.forcepower.starcement.aaa.PopProductActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:160:9-163:68
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:162:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:163:13-65
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:161:13-51
+activity#org.forcepower.starcement.aaa.ProductWiseGraphActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:164:9-167:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:166:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:167:13-67
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:165:13-57
+activity#org.forcepower.starcement.aaa.CommonWebViewActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:168:9-172:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:171:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:172:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:170:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:169:13-54
+activity#org.forcepower.starcement.aaa.PaymentWebViewActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:173:9-177:67
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:176:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:177:13-64
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:175:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:174:13-55
+activity#org.forcepower.starcement.aaa.PopPaymentWebViewActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:178:9-182:73
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:181:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:182:13-70
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:180:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:179:13-58
+activity#org.forcepower.starcement.aaa.DealerFormWebViewActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:183:9-187:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:186:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:187:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:185:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:184:13-58
+activity#org.forcepower.starcement.aaa.PayAmountActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:188:9-192:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:191:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:192:13-67
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:190:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:189:13-50
+activity#org.forcepower.starcement.aaa.PayAmountPopActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:193:9-197:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:196:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:197:13-67
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:195:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:194:13-53
+activity#org.forcepower.starcement.aaa.PaymentSummaryActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:198:9-202:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:201:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:202:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:200:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:199:13-55
+activity#org.forcepower.starcement.aaa.PlaceOrderActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:203:9-207:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:206:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:207:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:205:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:204:13-51
+activity#org.forcepower.starcement.aaa.TrackOrderActivityNewInv
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:208:9-212:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:211:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:212:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:210:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:209:13-57
+activity#org.forcepower.starcement.aaa.SubDealerTrackOrderNewActivityNew
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:213:9-217:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:216:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:217:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:215:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:214:13-66
+activity#org.forcepower.starcement.aaa.NotificationDetailsActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:218:9-222:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:221:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:222:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:220:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:219:13-60
+activity#org.forcepower.starcement.aaa.KYCActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:223:9-227:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:226:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:227:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:225:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:224:13-44
+activity#org.forcepower.starcement.aaa.SchemePdfActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:228:9-232:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:231:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:232:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:230:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:229:13-50
+activity#org.forcepower.starcement.aaa.PdfViewerActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:233:9-237:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:236:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:237:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:235:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:234:13-50
+activity#org.forcepower.starcement.aaa.SchemeListPdfActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:238:9-242:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:241:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:242:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:240:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:239:13-54
+activity#org.forcepower.starcement.aaa.PaymentActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:243:9-247:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:246:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:247:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:245:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:244:13-48
+activity#org.forcepower.starcement.aaa.NotificationPdfActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:248:9-252:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:251:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:252:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:250:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:249:13-56
+activity#org.forcepower.starcement.aaa.NotificationListActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:253:9-257:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:256:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:257:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:255:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:254:13-57
+activity#org.forcepower.starcement.aaa.SelfAppraisalDetailsListActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:258:9-262:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:261:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:262:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:260:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:259:13-65
+activity#org.forcepower.starcement.aaa.SelfAppraisalLandingActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:263:9-267:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:266:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:267:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:265:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:264:13-61
+activity#org.forcepower.starcement.aaa.OrderFormActivityAlternateDesign
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:268:9-272:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:271:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:272:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:270:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:269:13-65
+activity#org.forcepower.starcement.aaa.ConsumerSchemeActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:273:9-277:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:276:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:277:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:275:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:274:13-55
+activity#org.forcepower.starcement.aaa.OrderConfirmationActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:278:9-282:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:281:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:282:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:280:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:279:13-58
+activity#org.forcepower.starcement.aaa.NewOrderConfirmationActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:283:9-287:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:286:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:287:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:285:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:284:13-61
+activity#org.forcepower.starcement.aaa.LedgerMonthWiseActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:288:9-292:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:291:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:292:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:290:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:289:13-56
+activity#org.forcepower.starcement.aaa.CreditLimitActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:293:9-297:55
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:296:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:297:13-52
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:295:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:294:13-52
+activity#org.forcepower.starcement.aaa.AddLiftingActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:298:9-302:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:301:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:302:13-67
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:300:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:299:13-51
+activity#org.forcepower.starcement.aaa.PlaceOrderRssdActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:303:9-307:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:306:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:307:13-67
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:305:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:304:13-55
+activity#org.forcepower.starcement.aaa.EpodActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:308:9-312:70
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:311:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:312:13-67
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:310:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:309:13-45
+activity#org.forcepower.starcement.aaa.NewSubDealerLiftingActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:313:9-317:73
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:316:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:317:13-70
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:315:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:314:13-60
+activity#org.forcepower.starcement.aaa.DealerLiftingActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:318:9-322:73
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:321:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:322:13-70
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:320:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:319:13-54
+activity#org.forcepower.starcement.aaa.SubDealerShowAllocateActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:323:9-327:73
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:326:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:327:13-70
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:325:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:324:13-62
+activity#org.forcepower.starcement.aaa.DealerLiftingAssignedAllocatedInvActivity
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:328:9-332:73
+	android:screenOrientation
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:331:13-49
+	android:windowSoftInputMode
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:332:13-70
+	android:configChanges
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:330:13-72
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:329:13-74
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:125:13-127:58
+	android:resource
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:127:17-55
+	android:name
+		ADDED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml:126:17-67
+uses-sdk
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.12.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e92778a7d1f132f36eaa5bf95f48cdcd/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e92778a7d1f132f36eaa5bf95f48cdcd/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e9eb27d00b7b64737b14712e7ac438b6/transformed/constraintlayout-2.2.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e9eb27d00b7b64737b14712e7ac438b6/transformed/constraintlayout-2.2.1/AndroidManifest.xml:5:5-44
+MERGED from [com.mikhaellopez:circularimageview:4.3.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d685b7b189c03b2c9da2465387567fe3/transformed/jetified-circularimageview-4.3.1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.mikhaellopez:circularimageview:4.3.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d685b7b189c03b2c9da2465387567fe3/transformed/jetified-circularimageview-4.3.1/AndroidManifest.xml:5:5-7:41
+MERGED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:5:5-44
+MERGED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:5:5-44
+MERGED from [com.github.yalantis:ucrop:2.2.6] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/4281e3955abd361ae071e113e0d140d2/transformed/jetified-ucrop-2.2.6/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.yalantis:ucrop:2.2.6] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/4281e3955abd361ae071e113e0d140d2/transformed/jetified-ucrop-2.2.6/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/18e803173496d3ec4edfd4594b398dd5/transformed/jetified-appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/18e803173496d3ec4edfd4594b398dd5/transformed/jetified-appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/344c199ef14d817a8994b06340d01a35/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/344c199ef14d817a8994b06340d01a35/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5b68090c04b7cbed90ed4a91f17e16ff/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5b68090c04b7cbed90ed4a91f17e16ff/transformed/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d295d4252d1dcff5bb5eb6f0e3e8fb36/transformed/jetified-glide-4.14.2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:glide:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d295d4252d1dcff5bb5eb6f0e3e8fb36/transformed/jetified-glide-4.14.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.recyclerview:recyclerview:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/17f36405097bc4073a758c151f94e047/transformed/recyclerview-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/17f36405097bc4073a758c151f94e047/transformed/recyclerview-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/47cce7261ac7d0d4175fb28cb7a092df/transformed/jetified-viewpager2-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/47cce7261ac7d0d4175fb28cb7a092df/transformed/jetified-viewpager2-1.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:18:5-43
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/04d2a77b590eaf97ce63f1979b0e650e/transformed/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/04d2a77b590eaf97ce63f1979b0e650e/transformed/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:19:5-44
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:19:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d61fe33225694014a467ccdc54ddd50/transformed/jetified-play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d61fe33225694014a467ccdc54ddd50/transformed/jetified-play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/db30d4eedca9a6252d482aa66ffc3734/transformed/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/db30d4eedca9a6252d482aa66ffc3734/transformed/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/29db7068dd39c552bbd3367af0a12744/transformed/jetified-firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/29db7068dd39c552bbd3367af0a12744/transformed/jetified-firebase-installations-interop-17.1.1/AndroidManifest.xml:17:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/2273677e2614328230baf5e259d833de/transformed/jetified-customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/2273677e2614328230baf5e259d833de/transformed/jetified-customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8589271a7cb343ed84c6e8de9688d675/transformed/jetified-core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8589271a7cb343ed84c6e8de9688d675/transformed/jetified-core-ktx-1.15.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/6fa9d3d017a4c2c0b62b207e51dea393/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/6fa9d3d017a4c2c0b62b207e51dea393/transformed/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/6548c13166a0acaf4a8689bdc4481966/transformed/coordinatorlayout-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/6548c13166a0acaf4a8689bdc4481966/transformed/coordinatorlayout-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/147286405d0f1984b0f96934e35fb6a8/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/147286405d0f1984b0f96934e35fb6a8/transformed/media-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.5.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/dcb0deaddabdd069b74beb1328a3775e/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/dcb0deaddabdd069b74beb1328a3775e/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/113ecbe20efca13e1505d48b4f1d9b52/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/113ecbe20efca13e1505d48b4f1d9b52/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c947ebb92077aa24be52c08b466ce847/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c947ebb92077aa24be52c08b466ce847/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/fc081bfa0df311a57287e734e9c762fc/transformed/jetified-emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/fc081bfa0df311a57287e734e9c762fc/transformed/jetified-emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5130fc8d72b664a7b0101962960e7952/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5130fc8d72b664a7b0101962960e7952/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/31ff8b64759d8ef66cb4ebb0b219af30/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/31ff8b64759d8ef66cb4ebb0b219af30/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c53c8f36870fa1f9b261deae20cc3a05/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c53c8f36870fa1f9b261deae20cc3a05/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/561b1c15167f6d8789c24de42af4afd2/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/561b1c15167f6d8789c24de42af4afd2/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e7d4a2bb5379bba3320766cb252041a9/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e7d4a2bb5379bba3320766cb252041a9/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/968d2d787fd032b809d0f8c87f823a3b/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/968d2d787fd032b809d0f8c87f823a3b/transformed/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/64af4345d0bc396656a20d86648be643/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/64af4345d0bc396656a20d86648be643/transformed/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/7a6de8f975904279158ae54a31ed2f42/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/7a6de8f975904279158ae54a31ed2f42/transformed/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/af47c48a9631732db75cf6ad99da7654/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/af47c48a9631732db75cf6ad99da7654/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c0b6301f5d7c4dd80b222df603e5d9b5/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c0b6301f5d7c4dd80b222df603e5d9b5/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/392443473ed613552ee70c2f5555888b/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/392443473ed613552ee70c2f5555888b/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/410a08e7584ddfbd045d68cb672b32be/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/410a08e7584ddfbd045d68cb672b32be/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/cdad511aaad3023f7975871aebcacf4b/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/cdad511aaad3023f7975871aebcacf4b/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d7712014310b46f1e77f371c01ade72/transformed/jetified-lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8d7712014310b46f1e77f371c01ade72/transformed/jetified-lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/acd3722bdd4751af6f6ce679b8399aa5/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/acd3722bdd4751af6f6ce679b8399aa5/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/bad0e6f4a858c461e66223183357a9db/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/bad0e6f4a858c461e66223183357a9db/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:18:5-43
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/176f980ce97b03ab54fcae4ffdb0944d/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/176f980ce97b03ab54fcae4ffdb0944d/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.10.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/26607e02f1766844ef636029d09e5fb3/transformed/jetified-activity-1.10.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.10.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/26607e02f1766844ef636029d09e5fb3/transformed/jetified-activity-1.10.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/582637dfe783245ab357d3f20d3938f4/transformed/jetified-core-viewtree-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/582637dfe783245ab357d3f20d3938f4/transformed/jetified-core-viewtree-1.0.0/AndroidManifest.xml:5:5-44
+MERGED from [:MPChartLib] /Users/sbinfowaves/Documents/Star/star-saathi/MPChartLib/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:14:5-44
+MERGED from [:MPChartLib] /Users/sbinfowaves/Documents/Star/star-saathi/MPChartLib/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:14:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/0819d1be1d0823b0bde6029ca2996e72/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/0819d1be1d0823b0bde6029ca2996e72/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/107cdfaf822714f644e570ef26d38117/transformed/jetified-firebase-components-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-components:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/107cdfaf822714f644e570ef26d38117/transformed/jetified-firebase-components-18.0.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ddacb10f00ef4e875c769b2575b3ae68/transformed/jetified-firebase-encoders-json-18.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ddacb10f00ef4e875c769b2575b3ae68/transformed/jetified-firebase-encoders-json-18.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:18:5-20:41
+MERGED from [com.google.android.datatransport:transport-api:3.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5c935146eeb93ad3f118caae1160dcf0/transformed/jetified-transport-api-3.1.0/AndroidManifest.xml:18:5-44
+MERGED from [com.google.android.datatransport:transport-api:3.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5c935146eeb93ad3f118caae1160dcf0/transformed/jetified-transport-api-3.1.0/AndroidManifest.xml:18:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/939fc059a1d3da0c2fb93fa23c8807b6/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/939fc059a1d3da0c2fb93fa23c8807b6/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49ee1cfbe3d8fab93ad332bfc0bb0ee2/transformed/jetified-gifdecoder-4.14.2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.14.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49ee1cfbe3d8fab93ad332bfc0bb0ee2/transformed/jetified-gifdecoder-4.14.2/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/94c45c8e8432772d299d5945407116c3/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.3] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/94c45c8e8432772d299d5945407116c3/transformed/exifinterface-1.3.3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/42eceefd017755a6d52c028ab3d0dcf0/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/42eceefd017755a6d52c028ab3d0dcf0/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/3eb5ef097f9db7c808b914e2fd53ab33/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/3eb5ef097f9db7c808b914e2fd53ab33/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49a6ec2b97c156167f63e3b2b3ff3c32/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/49a6ec2b97c156167f63e3b2b3ff3c32/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/293879df65bb6c1ff36180393d7afacc/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/293879df65bb6c1ff36180393d7afacc/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/80bb420edf06bbf22072274b4e37a3ae/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/80bb420edf06bbf22072274b4e37a3ae/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/32fcef988422eea4416fffd0a7d30560/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/32fcef988422eea4416fffd0a7d30560/transformed/jetified-tracing-1.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e423d9ee4155a422ed34521e463b33ee/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e423d9ee4155a422ed34521e463b33ee/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d60d3c2bf44010d183cd4de869ead9fe/transformed/jetified-annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d60d3c2bf44010d183cd4de869ead9fe/transformed/jetified-annotation-experimental-1.4.1/AndroidManifest.xml:5:5-44
+MERGED from [:MPChartLib_old] /Users/sbinfowaves/Documents/Star/star-saathi/MPChartLib_old/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:5:5-44
+MERGED from [:MPChartLib_old] /Users/sbinfowaves/Documents/Star/star-saathi/MPChartLib_old/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:5:5-44
+MERGED from [androidx.multidex:multidex:2.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/2ce28ab9fcfcf077d3e2c25f4ad0bac7/transformed/multidex-2.0.1/AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/2ce28ab9fcfcf077d3e2c25f4ad0bac7/transformed/multidex-2.0.1/AndroidManifest.xml:20:5-43
+MERGED from [com.android.volley:volley:1.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5fe6ab8d10bc520947fe929b8888feaa/transformed/jetified-volley-1.2.1/AndroidManifest.xml:5:5-43
+MERGED from [com.android.volley:volley:1.2.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/5fe6ab8d10bc520947fe929b8888feaa/transformed/jetified-volley-1.2.1/AndroidManifest.xml:5:5-43
+MERGED from [com.loopj.android:android-async-http:1.4.11] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8a6994a029b2b8b2b6ed190cdfbb6889/transformed/jetified-android-async-http-1.4.11/AndroidManifest.xml:5:5-7:41
+MERGED from [com.loopj.android:android-async-http:1.4.11] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/8a6994a029b2b8b2b6ed190cdfbb6889/transformed/jetified-android-async-http-1.4.11/AndroidManifest.xml:5:5-7:41
+	android:targetSdkVersion
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/sbinfowaves/Documents/Star/star-saathi/app/src/main/AndroidManifest.xml
+activity#my_crop.vola.ImagePickerActivity
+ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:8:9-12:63
+	android:screenOrientation
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:10:13-49
+	android:windowSoftInputMode
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:12:13-60
+	android:theme
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:11:13-72
+	android:name
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:9:13-60
+activity#com.yalantis.ucrop.UCropActivity
+ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:13:9-17:63
+	android:screenOrientation
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:15:13-49
+	android:windowSoftInputMode
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:17:13-60
+	android:theme
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:16:13-72
+	android:name
+		ADDED from [:my_crop] /Users/sbinfowaves/Documents/Star/star-saathi/my_crop/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml:14:13-60
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:9:5-68
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:9:5-68
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:24:22-65
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:26:5-82
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:11:5-82
+MERGED from [com.google.android.gms:play-services-cloud-messaging:17.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d816a971b91f9a4bb336817bd6bf4b49/transformed/jetified-play-services-cloud-messaging-17.2.0/AndroidManifest.xml:11:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:26:22-79
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:29:9-40:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:31:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:32:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:30:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:33:13-35:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:34:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:34:25-78
+meta-data#com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:37:13-39:40
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:39:17-37
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:38:17-92
+service#com.google.firebase.messaging.FirebaseMessagingService
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:46:9-53:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:49:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:48:13-43
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:47:13-82
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:54:9-63:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:12:9-21:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:9:9-15:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:30:9-38:19
+MERGED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:30:9-38:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:22:9-28:19
+MERGED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:22:9-28:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:56:13-37
+	tools:targetApi
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:34:13-32
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:32:13-43
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:55:13-84
+meta-data#com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:57:13-59:85
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:59:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:58:17-122
+meta-data#com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar
+ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:60:13-62:85
+	android:value
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:62:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-messaging:24.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/1f7c81c4b8617df4bd430ebfd8418b56/transformed/jetified-firebase-messaging-24.1.0/AndroidManifest.xml:61:17-119
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/506776b7c890a1849b919bc52c72f122/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+meta-data#com.google.firebase.components:com.google.firebase.iid.Registrar
+ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:21.1.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/859801d03fe74837a41876a91a8fe4b1/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar
+ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:15:13-17:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:17:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:16:17-130
+meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
+ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:18:13-20:85
+	android:value
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:20:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-installations:18.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/e730a2e32584f184d700533a18b37258/transformed/jetified-firebase-installations-18.0.0/AndroidManifest.xml:19:17-127
+meta-data#com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar
+ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:12:13-14:85
+	android:value
+		ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:14:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-common-ktx:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/c20743b4edb4622964c25fc1cdfbf6e2/transformed/jetified-firebase-common-ktx-21.0.0/AndroidManifest.xml:13:17-116
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:23:9-28:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:25:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:27:13-37
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:26:13-43
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:28:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:24:13-77
+meta-data#com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar
+ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:35:13-37:85
+	android:value
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:37:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-common:21.0.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/768c15fdc9d927e2f24cb834cc2b3e8c/transformed/jetified-firebase-common-21.0.0/AndroidManifest.xml:36:17-109
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/989bda6ae012e76b0389f26e053e075c/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/ed417aa00c0a22b761b6c11f4dcc4f4d/transformed/jetified-emoji2-1.3.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+permission#org.forcepower.starcement.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+uses-permission#org.forcepower.starcement.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.15.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/d7781e4ca2d3ab419871ce045b2b031d/transformed/core-1.15.0/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/b93896019bc239c6496f875d3628f850/transformed/jetified-lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.3.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/eb2fa12364b1b82949517d276f194335/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:22:13-58
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/209b198f76572231c539af7a7e42930e/transformed/jetified-profileinstaller-1.4.0/AndroidManifest.xml:50:25-92
+meta-data#com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar
+ADDED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:25:13-27:85
+	android:value
+		ADDED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:27:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-datatransport:18.2.0] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/87c5b17b21d4eec17ad83529467b7dfb/transformed/jetified-firebase-datatransport-18.2.0/AndroidManifest.xml:26:17-115
+service#com.google.android.datatransport.runtime.backends.TransportBackendDiscovery
+ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:28:9-34:19
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:36:9-38:40
+MERGED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:36:9-38:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:30:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:29:13-103
+meta-data#backend:com.google.android.datatransport.cct.CctBackendFactory
+ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:31:13-33:39
+	android:value
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:33:17-36
+	android:name
+		ADDED from [com.google.android.datatransport:transport-backend-cct:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/9b78833e2c0555b017dd58e857274745/transformed/jetified-transport-backend-cct-3.1.9/AndroidManifest.xml:32:17-94
+service#com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService
+ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:26:9-30:19
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:28:13-37
+	android:permission
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:29:13-69
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:27:13-117
+receiver#com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver
+ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:32:9-34:40
+	android:exported
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:34:13-37
+	android:name
+		ADDED from [com.google.android.datatransport:transport-runtime:3.1.9] /Users/sbinfowaves/.gradle/caches/8.11.1/transforms/68c6c40baf5bf35ab650cfa41a279620/transformed/jetified-transport-runtime-3.1.9/AndroidManifest.xml:33:13-132

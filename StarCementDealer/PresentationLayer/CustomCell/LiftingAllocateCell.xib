@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="144" id="lxu-RQ-lbl" customClass="LiftingAllocateCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lxu-RQ-lbl" id="hB4-sf-Oji">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WfZ-6M-5Wz">
+                        <rect key="frame" x="4" y="4" width="312" height="136"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product : STAR CEMENT PPC TRADE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdN-Xa-Uer">
+                                <rect key="frame" x="4" y="4" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="3Kh-o4-An1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allocated Qty : 1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uc0-YU-Mze">
+                                <rect key="frame" x="4" y="26" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="Udt-cm-35h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trans Date : 10-10-2024 12:12:12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUm-Cv-yWq">
+                                <rect key="frame" x="4" y="48" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="lxb-yq-mSX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Counter Name : NIRANJAN KANWAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkU-2L-fKm">
+                                <rect key="frame" x="4" y="70" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="eb5-O5-OF4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challan No : 9834783456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPc-pU-Nlg">
+                                <rect key="frame" x="4" y="92" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="SFs-Vi-hCT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Challan Date : 10-10-2024 10:20:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4w6-sD-U5p">
+                                <rect key="frame" x="4" y="114" width="304" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="rnu-YH-pwp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Uc0-YU-Mze" firstAttribute="leading" secondItem="WfZ-6M-5Wz" secondAttribute="leading" constant="4" id="7IJ-bJ-rJI"/>
+                            <constraint firstItem="NUm-Cv-yWq" firstAttribute="leading" secondItem="WfZ-6M-5Wz" secondAttribute="leading" constant="4" id="C6z-nS-MU8"/>
+                            <constraint firstItem="fPc-pU-Nlg" firstAttribute="leading" secondItem="WfZ-6M-5Wz" secondAttribute="leading" constant="4" id="C89-nk-b5h"/>
+                            <constraint firstItem="hkU-2L-fKm" firstAttribute="leading" secondItem="WfZ-6M-5Wz" secondAttribute="leading" constant="4" id="Caf-vr-Heq"/>
+                            <constraint firstItem="4w6-sD-U5p" firstAttribute="top" secondItem="fPc-pU-Nlg" secondAttribute="bottom" constant="4" id="DIe-4r-fM3"/>
+                            <constraint firstAttribute="trailing" secondItem="kdN-Xa-Uer" secondAttribute="trailing" constant="4" id="ElE-4C-4IA"/>
+                            <constraint firstItem="hkU-2L-fKm" firstAttribute="top" secondItem="NUm-Cv-yWq" secondAttribute="bottom" constant="4" id="OjM-Zh-jku"/>
+                            <constraint firstItem="fPc-pU-Nlg" firstAttribute="top" secondItem="hkU-2L-fKm" secondAttribute="bottom" constant="4" id="Pis-AN-NF7"/>
+                            <constraint firstAttribute="trailing" secondItem="NUm-Cv-yWq" secondAttribute="trailing" constant="4" id="S5v-Sl-Rvt"/>
+                            <constraint firstAttribute="trailing" secondItem="hkU-2L-fKm" secondAttribute="trailing" constant="4" id="XaL-Ew-X58"/>
+                            <constraint firstItem="NUm-Cv-yWq" firstAttribute="top" secondItem="Uc0-YU-Mze" secondAttribute="bottom" constant="4" id="Yac-X4-lK4"/>
+                            <constraint firstAttribute="trailing" secondItem="4w6-sD-U5p" secondAttribute="trailing" constant="4" id="asx-ew-3n0"/>
+                            <constraint firstAttribute="trailing" secondItem="Uc0-YU-Mze" secondAttribute="trailing" constant="4" id="bFL-pt-Dsc"/>
+                            <constraint firstItem="4w6-sD-U5p" firstAttribute="leading" secondItem="WfZ-6M-5Wz" secondAttribute="leading" constant="4" id="ivW-xg-J1s"/>
+                            <constraint firstItem="kdN-Xa-Uer" firstAttribute="top" secondItem="WfZ-6M-5Wz" secondAttribute="top" constant="4" id="kJO-fj-1Vb"/>
+                            <constraint firstItem="kdN-Xa-Uer" firstAttribute="leading" secondItem="WfZ-6M-5Wz" secondAttribute="leading" constant="4" id="sAG-Xn-YPh"/>
+                            <constraint firstAttribute="trailing" secondItem="fPc-pU-Nlg" secondAttribute="trailing" constant="4" id="skd-hB-nCP"/>
+                            <constraint firstItem="Uc0-YU-Mze" firstAttribute="top" secondItem="kdN-Xa-Uer" secondAttribute="bottom" constant="4" id="wvr-aW-fDf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="WfZ-6M-5Wz" firstAttribute="top" secondItem="hB4-sf-Oji" secondAttribute="top" constant="4" id="FY8-Eg-aC8"/>
+                    <constraint firstItem="WfZ-6M-5Wz" firstAttribute="leading" secondItem="hB4-sf-Oji" secondAttribute="leading" constant="4" id="Vif-Q1-2al"/>
+                    <constraint firstAttribute="trailing" secondItem="WfZ-6M-5Wz" secondAttribute="trailing" constant="4" id="nmi-0e-jsl"/>
+                    <constraint firstAttribute="bottom" secondItem="WfZ-6M-5Wz" secondAttribute="bottom" constant="4" id="yZa-QA-9cG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="9ws-df-k6B"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="lblChallanDate" destination="4w6-sD-U5p" id="llF-p1-dPZ"/>
+                <outlet property="lblChallanNo" destination="fPc-pU-Nlg" id="PHH-bo-IqY"/>
+                <outlet property="lblCounterName" destination="hkU-2L-fKm" id="I1a-LS-87z"/>
+                <outlet property="lblDate" destination="NUm-Cv-yWq" id="cLx-9d-9LF"/>
+                <outlet property="lblProdDesc" destination="kdN-Xa-Uer" id="muE-EW-Dwq"/>
+                <outlet property="lblQty" destination="Uc0-YU-Mze" id="wp6-aV-jwF"/>
+            </connections>
+            <point key="canvasLocation" x="51.908396946564885" y="52.816901408450704"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+    <TextView
+        android:id="@+id/tv_status_h"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:background="@color/red"
+        android:gravity="center"
+        android:textSize="12sp"
+        />
+    <ListView
+        android:layout_below="@+id/tv_status_h"
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/translucent_black"
+        android:dividerHeight="1dp"
+        android:listSelector="@android:color/transparent"
+        />
+</RelativeLayout>

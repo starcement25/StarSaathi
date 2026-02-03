@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.forcepower.starcement"
+    android:installLocation="auto"
+    android:versionCode="127"
+    android:versionName="22.026" >
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="35" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="org.forcepower.starcement.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="org.forcepower.starcement.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
+    <application
+        android:name="org.forcepower.starcement.application.ParentApplication"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:extractNativeLibs="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:launchMode="singleTask"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/myAppTheme"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name="org.forcepower.starcement.activity.WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name="org.forcepower.starcement.activity.test.TextActivity"
+            android:exported="false" />
+        <activity
+            android:name="org.forcepower.starcement.activity.dealer_lifting_allocation.DealerLiftingAllocationActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".activity.dealer_lifting_allocation.DealerLiftingAllocationActivity" -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name="org.forcepower.starcement.activity.kismet_ki_bori.KismetKiBoriActivity"
+            android:exported="false" />
+        <activity
+            android:name="org.forcepower.starcement.activity.declaration_of_dealer.DealerDeclarationActivity"
+            android:exported="false" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="org.forcepower.starcement.aaa.SplashActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.forcepower.starcement.aaa.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.MenuActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.MaterialRcvActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.ReviewRatingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PopOrderFeedBackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.InvoiceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.ActivityOrderFilter"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.HelpActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+
+        <service
+            android:name="org.forcepower.starcement.firebase.MyFirebaseMessagingService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- [START fcm_default_channel] -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="org.forcepower.starcement.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name="org.forcepower.starcement.aaa.OtpActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.DetailsActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.LedgerActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SubDealerLedgerActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.AgeingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.ReviewRatingListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PopProductActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.ProductWiseGraphActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.CommonWebViewActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PaymentWebViewActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PopPaymentWebViewActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.DealerFormWebViewActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PayAmountActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PayAmountPopActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PaymentSummaryActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PlaceOrderActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.TrackOrderActivityNewInv"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SubDealerTrackOrderNewActivityNew"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.NotificationDetailsActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.KYCActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SchemePdfActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PdfViewerActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SchemeListPdfActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PaymentActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.NotificationPdfActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.NotificationListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SelfAppraisalDetailsListActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SelfAppraisalLandingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.OrderFormActivityAlternateDesign"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.ConsumerSchemeActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.OrderConfirmationActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.NewOrderConfirmationActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.LedgerMonthWiseActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.CreditLimitActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.AddLiftingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.PlaceOrderRssdActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.EpodActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.NewSubDealerLiftingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.DealerLiftingActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.SubDealerShowAllocateActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name="org.forcepower.starcement.aaa.DealerLiftingAssignedAllocatedInvActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity
+            android:name="my_crop.vola.ImagePickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+                android:value="true" />
+        </receiver>
+        <!--
+             FirebaseMessagingService performs security checks at runtime,
+             but set to not exported to explicitly avoid allowing another app to call it.
+        -->
+        <service
+            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+            android:directBootAware="true"
+            android:exported="false" >
+            <intent-filter android:priority="-500" >
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.google.firebase.components.ComponentDiscoveryService"
+            android:directBootAware="true"
+            android:exported="false" >
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+        </service>
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="org.forcepower.starcement.firebaseinitprovider"
+            android:directBootAware="true"
+            android:exported="false"
+            android:initOrder="100" />
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="org.forcepower.starcement.androidx-startup"
+            android:exported="false" >
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+            android:directBootAware="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.DUMP" >
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+            android:exported="false" >
+            <meta-data
+                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+                android:value="cct" />
+        </service>
+        <service
+            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" >
+        </service>
+
+        <receiver
+            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+            android:exported="false" />
+    </application>
+
+</manifest>

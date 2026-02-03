@@ -1,0 +1,39 @@
+//
+//  StarCementDealer.pch
+//  StarCementDealer
+//
+//  Created by Coral  on 04/06/18.
+//  Copyright © 2018 Coral . All rights reserved.
+//
+
+#ifndef StarCementDealer_pch
+#define StarCementDealer_pch
+
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
+#endif
+
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <WebKit/WebKit.h>
+#import <Foundation/Foundation.h>
+#import "FontAndColorConstants.h"
+#import "ApplicationConstants.h"
+#import <SVProgressHUD.h>
+
+#import "NSObject+Category.h"
+#import "LogicConstants.h"
+#import "JsonParser.h"
+#import "FMDB.h"
+
+#endif /* StarCementDealer_pch */

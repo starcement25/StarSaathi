@@ -1,0 +1,108 @@
+
+Î3
+;
+android*http://schemas.android.com/apk/res/android&RelativeLayout"h
+*http://schemas.android.com/apk/res/android
+background@color/white"(Ô„2
+¶†”øcolor/white0"R
+*http://schemas.android.com/apk/res/androidorientationvertical"(Ä„2:0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"T
+*http://schemas.android.com/apk/res/androidfitsSystemWindowstrue"(İ„2:@*h
+`include"Ulayout@layout/header_common_layout"2)
+'÷€¬ølayout/header_common_layout0ÿÿ*».
+².
+ScrollView"u
+*http://schemas.android.com/apk/res/androidlayout_below@+id/header_layout"(…ƒ„2
+´‚ øid/header_layout0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ*ç+
+Ş+RelativeLayout"J
+*http://schemas.android.com/apk/res/androidpadding9dp"(Õ„2:h"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ"^
+*http://schemas.android.com/apk/res/androidlayout_gravitycenter_horizontal"(³„2:8"i
+*http://schemas.android.com/apk/res/androidid@+id/rl_sliderOne"(Ğ„2
+õ„ øid/rl_sliderOne0*‡
+şTextView"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ"L
+*http://schemas.android.com/apk/res/androidtextSize18sp"(•„2:h‚$"g
+*http://schemas.android.com/apk/res/android	textColor@color/black"(˜„2
+¡€”øcolor/black0"c
+*http://schemas.android.com/apk/res/androidid@+id/tv_rr_top"(Ğ„2
+˜‡ øid/tv_rr_top0"
+*http://schemas.android.com/apk/res/androidtextWHello,\nBased on your overall experience you had with our sales person, Please rate us (Ï‚„*á
+Ø	RatingBar"m
+*http://schemas.android.com/apk/res/androidlayout_below@+id/tv_rr_top")(…ƒ„2
+˜‡ øid/tv_rr_top0"`
+*http://schemas.android.com/apk/res/androidlayout_widthwrap_content")(ô„2:0şÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content")(õ„2:0şÿÿÿÿÿÿÿÿ"P
+*http://schemas.android.com/apk/res/androidpaddingBottom5dp")(Ù„2:h
+"N
+*http://schemas.android.com/apk/res/androidsaveEnabledtrue")(ç„2:@"H
+*http://schemas.android.com/apk/res/androidnumStars5")(Ä‚„2:0"[
+*http://schemas.android.com/apk/res/androidid
+@+id/rb_RR")(Ğ„2
+Ï„ øid/rb_RR0"N
+*http://schemas.android.com/apk/res/android
+paddingTop15dp")(×„2:h)*Ş
+ÕTextView"e
+*http://schemas.android.com/apk/res/androidlayout_below
+@+id/rb_RR"2(…ƒ„2
+Ï„ øid/rb_RR0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"2(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"2(õ„2:0şÿÿÿÿÿÿÿÿ"L
+*http://schemas.android.com/apk/res/androidtextSize18sp"2(•„2:h‚$"g
+*http://schemas.android.com/apk/res/android	textColor@color/black"2(˜„2
+¡€”øcolor/black0"c
+*http://schemas.android.com/apk/res/androidid@+id/tv_rr_two"2(Ğ„2
+™‡ øid/tv_rr_two0"€
+*http://schemas.android.com/apk/res/androidtextGIs there is any way me could improve our service? Please specify below:(Ï‚„2*§
+EditText"J
+*http://schemas.android.com/apk/res/androidpadding3dp"D(Õ„2:h"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"D(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"D(õ„2:0şÿÿÿÿÿÿÿÿ"L
+*http://schemas.android.com/apk/res/androidtextSize12sp"D(•„2:h‚"g
+*http://schemas.android.com/apk/res/android	textColor@color/black"D(˜„2
+¡€”øcolor/black0"T
+*http://schemas.android.com/apk/res/androidlayout_marginTop15dp"D(ø„2:h"G
+*http://schemas.android.com/apk/res/androidmaxEms15"D(×‚„2:0"W
+*http://schemas.android.com/apk/res/androidlayout_marginBottom15dp"D(ú„2:h"m
+*http://schemas.android.com/apk/res/androidlayout_below@+id/tv_rr_two"D(…ƒ„2
+™‡ øid/tv_rr_two0"|
+*http://schemas.android.com/apk/res/android
+background@drawable/rounded_grey"D(Ô„2!
+´‚œødrawable/rounded_grey0"I
+*http://schemas.android.com/apk/res/androidgravitytop"D(¯„2:80"O
+*http://schemas.android.com/apk/res/android	minHeight100dp"D(À‚„2:hÈ"H
+*http://schemas.android.com/apk/res/androidmaxLines9"D(Ó‚„2:0	"W
+*http://schemas.android.com/apk/res/android	inputTypetextMultiLine"D( „„2:8€"m
+*http://schemas.android.com/apk/res/androidid@+id/et_rr_comments"D(Ğ„2
+‚ øid/et_rr_comments0"7
+*http://schemas.android.com/apk/res/androidtext(Ï‚„D*ã
+ÚTextView"w
+*http://schemas.android.com/apk/res/androidlayout_below@+id/et_rr_comments"O(…ƒ„2
+‚ øid/et_rr_comments0"s
+*http://schemas.android.com/apk/res/androidlayout_above@+id/btn_continue"O(„ƒ„2
+ø€ øid/btn_continue0"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"O(ô„2:0ÿÿÿÿÿÿÿÿÿ"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"O(õ„2:0şÿÿÿÿÿÿÿÿ"L
+*http://schemas.android.com/apk/res/androidtextSize18sp"O(•„2:h‚$"g
+*http://schemas.android.com/apk/res/android	textColor@color/black"O(˜„2
+¡€”øcolor/black0"g
+*http://schemas.android.com/apk/res/androidid@+id/tv_rr_third"O(Ğ„2
+—‡ øid/tv_rr_third0"{
+*http://schemas.android.com/apk/res/androidtextBYour participation is crucial in making this initiative a success.(Ï‚„O*
+‡Button"T
+*http://schemas.android.com/apk/res/android
+background#363f45"X(Ô„2:PÅşØù"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"X(ô„2:0ÿÿÿÿÿÿÿÿÿ"Q
+*http://schemas.android.com/apk/res/androidlayout_height42dp"X(õ„2:hT"g
+*http://schemas.android.com/apk/res/android	textColor@color/white"X(˜„2
+¶†”øcolor/white0"[
+*http://schemas.android.com/apk/res/androidlayout_alignParentBottomtrue"X(ƒ„2:@"k
+*http://schemas.android.com/apk/res/androidid@+id/btn_rr_submit"X(Ğ„2
+ş€ øid/btn_rr_submit0"?
+*http://schemas.android.com/apk/res/androidtextSUBMIT(Ï‚„X
+&
