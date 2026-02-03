@@ -1,0 +1,169 @@
+DNS Customer Code	Customer Name	Emp Code	Emp Name	Order Date	Prod Group	SKU Code	SKU Name	Qty1	UOM1	Conversion Factor	Qty2	UOM2	Sale Rate	TD(%)	Order Value	Freight	Remarks	
+103391	SUMAN SALES CORPORATION	E0136	Subhra Pratim Hore	04-11-2017	CPVC	3000003092	CPVC PIPE 15MM 3M SDR11	0.02	BNDL	50	1	Pcs	174375	60	1395	FOR	Developer name-  Fort GroupPO no.-1234567Project Name- $%$$%rajarhat Newton kolkataaddress of the site- rajarhat Newton kolkata
+103391	SUMAN SALES CORPORATION	E0114	SK Imran	04-11-2017	CPVC	3000003092	CPVC PIPE 15MM 3M SDR11	0.3	BNDL	50	15	Pcs	11625	60	1395	FOR	
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000002657	CPVC PIPE 20MM 3M SDR11	1	BNDL	50	50	Pcs	18075	62.5	6778.125	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000002660	CPVC FITTINGS ELBOW 90? 20MM	1	BOX	300	300	Pcs	5100	62.5	1912.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000002663	CPVC FITTINGS TEE 20MM	1	BOX	200	200	Pcs	5500	62.5	2062.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000002999	CPVC FITTINGS TEE BRASS 20X20X15MM	1	BOX	180	180	Pcs	14400	62.5	5400	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000003363	CPVC FITTINGS MTA BRASS 20MM	1	BOX	250	250	Pcs	46250	62.5	17343.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000003845	CPVC FITTINGS END PLUG 15MM	7	BOX	300	2100	Pcs	9600	62.5	25200	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000002687	CPVC FITTINGS END PLUG 20MM	10	BOX	200	2000	Pcs	2000	62.5	7500	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000004324	EZ CPVC SOLVENT CEMENT 59ML	0.625	BOX	48	30	Pcs	6720	62.5	1575	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000004325	EZ CPVC SOLVENT CEMENT 118ML	0.833333333333	BOX	24	20	Pcs	5280	62.5	1650	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	CPVC	3000004326	EZ CPVC SOLVENT CEMENT 237ML	0.208333333333	BOX	24	5	Pcs	8736	62.5	682.5	FOR	please process this order as earliest
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	04-11-2017	PVC	3000002283	PVC PIPE NB 50MM 6M SCH40 BLUE	80	BNDL	5	400	Pcs	5715	45.5	249174	EX	Add it with his pending and despatch it on Monday 
+100074	Dharma Hardware	E0023	Santanu De	04-11-2017	PVC	3000002287	PVC PIPE NB 100MM 6M SCH40 BLUE	10	Pcs	1	10	Pcs	3276	45.5	17854.2	EX	
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	04-11-2017	PVC	3000002287	PVC PIPE NB 100MM 6M SCH40 BLUE	70	Pcs	1	70	Pcs	3276	45.5	124979.4	EX	Add it with his pending and despatch it on Monday 
+100074	Dharma Hardware	E0023	Santanu De	04-11-2017	PVC	3000002769	PVC FILTER PIPE 100MM 3M RS BLUE (0.5)	10	Pcs	1	10	Pcs	2043	45.5	11134.35	EX	
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001943	SWR PIPE 75MM TYPE-A 10'  S/S	300	Pcs	1	300	Pcs	375	52	54000	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001943	SWR PIPE 75MM TYPE-A 10'  S/S	250	Pcs	1	250	Pcs	375	52	45000	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001944	SWR PIPE 75MM TYPE-A 10'  D/S	100	Pcs	1	100	Pcs	398	52	19104	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001944	SWR PIPE 75MM TYPE-A 10'  D/S	25	Pcs	1	25	Pcs	398	52	4776	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001945	SWR PIPE 75MM TYPE-A 6'  S/S	40	Pcs	1	40	Pcs	247	52	4742.4	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001945	SWR PIPE 75MM TYPE-A 6'  S/S	25	Pcs	1	25	Pcs	247	52	2964	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001946	SWR PIPE 75MM TYPE-A 6'  D/S	25	Pcs	1	25	Pcs	268	52	3216	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001947	SWR PIPE 75MM TYPE-A 4'  D/S	35	Pcs	1	35	Pcs	185	52	3108	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001948	SWR PIPE 75MM TYPE-A 3'  D/S	25	Pcs	1	25	Pcs	154	52	1848	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001949	SWR PIPE 75MM TYPE-A 2'  D/S	25	Pcs	1	25	Pcs	114	52	1368	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001951	SWR PIPE 110MM TYPE-A 10'  S/S	200	Pcs	1	200	Pcs	657	52	63072	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001951	SWR PIPE 110MM TYPE-A 10'  S/S	200	Pcs	1	200	Pcs	657	52	63072	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001952	SWR PIPE 110MM TYPE-A 10'  D/S	100	Pcs	1	100	Pcs	695	52	33360	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001952	SWR PIPE 110MM TYPE-A 10'  D/S	25	Pcs	1	25	Pcs	695	52	8340	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001953	SWR PIPE 110MM TYPE-A 6'  S/S	40	Pcs	1	40	Pcs	432	52	8294.4	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001953	SWR PIPE 110MM TYPE-A 6'  S/S	25	Pcs	1	25	Pcs	432	52	5184	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001954	SWR PIPE 110MM TYPE-A 6'  D/S	25	Pcs	1	25	Pcs	464	52	5568	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001954	SWR PIPE 110MM TYPE-A 6'  D/S	25	Pcs	1	25	Pcs	464	52	5568	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001955	SWR PIPE 110MM TYPE-A 4'  D/S	50	Pcs	1	50	Pcs	321	52	7704	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001956	SWR PIPE 110MM TYPE-A 3'  D/S	20	Pcs	1	20	Pcs	253	52	2428.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001956	SWR PIPE 110MM TYPE-A 3'  D/S	35	Pcs	1	35	Pcs	253	52	4250.4	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001957	SWR PIPE 110MM TYPE-A 2'  D/S	40	Pcs	1	40	Pcs	184	52	3532.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001957	SWR PIPE 110MM TYPE-A 2'  D/S	25	Pcs	1	25	Pcs	184	52	2208	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001961	SWR FITTINGS 75 MM COUPLER	2	BOX	84	168	Pcs	4032	52	3870.72	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003448	SWR FITTINGS 110 MM COUPLER	2	BOX	30	60	Pcs	2460	52	2361.6	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003448	SWR FITTINGS 110 MM COUPLER	1	BOX	30	30	Pcs	2460	52	1180.8	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003474	SWR FITTINGS 75 MM PLAIN TEE	6	BOX	40	240	Pcs	3660	52	10540.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003474	SWR FITTINGS 75 MM PLAIN TEE	2	BOX	40	80	Pcs	3660	52	3513.6	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003483	SWR FITTINGS 110 MM PLAIN TEE	5	BOX	15	75	Pcs	2700	52	6480	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003483	SWR FITTINGS 110 MM PLAIN TEE	2	BOX	15	30	Pcs	2700	52	2592	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003455	SWR FITTINGS 160 MM PLAIN TEE	1	BOX	4	4	Pcs	1772	52	850.56	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003615	SWR FITTINGS 110 MM DOOR TEE	1	BOX	12	12	Pcs	2496	52	1198.08	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003497	SWR FITTINGS 75 MM PLAIN BEND (45 Deg)	1	BOX	50	50	Pcs	2700	52	1296	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001976	SWR FITTINGS 110 MM PLAIN BEND (45 Deg)	1	BOX	30	30	Pcs	3285	52	1576.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001976	SWR FITTINGS 110 MM PLAIN BEND (45 Deg)	1	BOX	30	30	Pcs	3285	52	1576.8	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001977	SWR FITTINGS 75 MM PLAIN BEND (87.5 Deg)	6	BOX	54	324	Pcs	3375	52	9720	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001977	SWR FITTINGS 75 MM PLAIN BEND (87.5 Deg)	6	BOX	54	324	Pcs	3375	52	9720	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003487	SWR FITTINGS 110 MM PLAIN BEND (87.5 Deg	10	BOX	20	200	Pcs	2570	52	12336	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003487	SWR FITTINGS 110 MM PLAIN BEND (87.5 Deg	10	BOX	20	200	Pcs	2570	52	12336	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003472	SWR FITTINGS160 MM PLAIN BEND 87.5 DEG	1	BOX	10	10	Pcs	3380	52	1622.4	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003601	SWR FITTINGS 75 MM DOOR BEND (87.5 Deg)	2	BOX	48	96	Pcs	4032	52	3870.72	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003592	SWR FITTINGS 110 MM DOOR BEND (87.5 Deg)	4	BOX	20	80	Pcs	3340	52	6412.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003470	SWR FITTINGS 75 MM PLAIN 'Y'	1	BOX	30	30	Pcs	3270	52	1569.6	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003468	SWR FITTINGS 160 MM PLAIN 'Y'	1	BOX	4	4	Pcs	2484	52	1192.32	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003446	SWR FITTINGS 75 MM DOUBLE 'Y' PLAIN	1	BOX	15	15	Pcs	2287.5	52	1098	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000001993	SWR FITTINGS 75MM NAHANI TRAP	2	BOX	35	70	Pcs	4095	52	3931.2	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000001993	SWR FITTINGS 75MM NAHANI TRAP	3	BOX	35	105	Pcs	4095	52	5896.8	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003499	SWR FITTINGS 75 MM PIPE CLIP	4	BOX	225	900	Pcs	3825	52	7344	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003501	SWR FITTINGS 110 MM PIPE CLIP	4	BOX	120	480	Pcs	2640	52	5068.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003501	SWR FITTINGS 110 MM PIPE CLIP	1	BOX	120	120	Pcs	2640	52	1267.2	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003444	SWR FITTINGS 160 MM VENT COWL	1	BOX	36	36	Pcs	2232	52	1071.36	FOR	please process this order as earliest
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003445	SWR FITTINGS 75 MM PASS OVER	20	Pcs	1	20	Pcs	324	52	3110.4	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003496	SWR FITTINGS 110 MM PASS OVER	30	Pcs	1	30	Pcs	457	52	6580.8	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003660	SWR FITTINGS P.TRAP(110mmX110)	5	BOX	10	50	Pcs	2800	52	6720	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	04-11-2017	SWR	3000003659	SWR FITTINGS P.TRAP(125mmX110) WC RING	1	BOX	10	10	Pcs	3430	52	1646.4	EX	delivery at A M Enterprise, Sirakol, 24 Pgs south
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003502	SWR FITTINGS REDUCER (110 X 75)	1	BOX	60	60	Pcs	4920	52	2361.6	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	SWR	3000003476	SWR FITTINGS REDUCER (160X110mm)	1	BOX	18	18	Pcs	3069	52	1473.12	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002135	UPVC PIPE 15MM 6M SCH40 LEAD FREE WHITE	1	BNDL	25	25	Pcs	8100	58.5	3361.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002137	UPVC PIPE 20MM 6M SCH40 LEAD FREE WHITE	1	BNDL	20	20	Pcs	8820	58.5	3660.3	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002139	UPVC PIPE 25MM 6M SCH40 LEAD FREE WHITE	2	BNDL	10	20	Pcs	6570	58.5	5453.1	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002141	UPVC PIPE 32MM 6M SCH40 LEAD FREE WHITE	1	BNDL	10	10	Pcs	8820	58.5	3660.3	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002143	UPVC PIPE 40MM 6M SCH40 LEAD FREE WHITE	1	BNDL	10	10	Pcs	10410	58.5	4320.15	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002145	UPVC PIPE 50MM 6M SCH40 LEAD FREE WHITE	2	BNDL	5	10	Pcs	7155	58.5	5938.65	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002146	UPVC PIPE 15MM 3M SCH80 LEAD FREE WHITE	1	BNDL	50	50	Pcs	10425	58.5	4326.375	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002147	UPVC PIPE 15MM 6M SCH80 LEAD FREE WHITE	2	BNDL	25	50	Pcs	10425	58.5	8652.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002148	UPVC PIPE 20MM 3M SCH80 LEAD FREE WHITE	1	BNDL	40	40	Pcs	11160	58.5	4631.4	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002149	UPVC PIPE 20MM 6M SCH80 LEAD FREE WHITE	5	BNDL	20	100	Pcs	11160	58.5	23157	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002151	UPVC PIPE 25MM 6M SCH80 LEAD FREE WHITE	5	BNDL	10	50	Pcs	8460	58.5	17554.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003345	UPVC FITTINGS ELBOW 90DEG 15MM	1	BOX	460	460	Pcs	5750	58.5	2386.25	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002631	UPVC FITTINGS ELBOW 90? 20MM	1	BOX	280	280	Pcs	4900	58.5	2033.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002632	UPVC FITTINGS ELBOW 90? 25MM	1	BOX	200	200	Pcs	5700	58.5	2365.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003346	UPVC FITTINGS ELBOW 90DEG 32MM	2	BOX	100	200	Pcs	4300	58.5	3569	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002634	UPVC FITTINGS ELBOW 90? 40MM	2	BOX	72	144	Pcs	4248	58.5	3525.84	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002892	UPVC FITTINGS ELBOW 90DEG 50MM	2	BOX	20	40	Pcs	1730	58.5	1435.9	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003819	UPVC FITTINGS ELBOW 90D REDUCER 25X20MM	1	BOX	400	400	Pcs	11400	58.5	4731	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003198	UPVC FIT.ELBOW RED.BRASS 20X15MM-SS RING	1	BOX	150	150	Pcs	16125	58.5	6691.875	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004043	UPVC FIT90°Elbow Red SSRing Br25MMX15MM	1	BOX	150	150	Pcs	20850	58.5	8652.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004044	UPVC FIT90°Elbow Red SSRing Br25MMX20MM	1	BOX	100	100	Pcs	16300	58.5	6764.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003106	UPVC FITTINGS TEE 20MM	2	BOX	180	360	Pcs	3960	58.5	3286.8	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003113	UPVC FITTINGS TEE 25MM	2	BOX	108	216	Pcs	3942	58.5	3271.86	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002636	UPVC FITTINGS TEE 32MM	1	BOX	72	72	Pcs	4320	58.5	1792.8	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002637	UPVC FITTINGS TEE 40MM	1	BOX	50	50	Pcs	3850	58.5	1597.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002893	UPVC FITTINGS TEE 50MM	1	BOX	15	15	Pcs	1762.5	58.5	731.4375	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003213	UPVC FIT.TEE BRASS 20X20X20MM-SS RING	1	BOX	80	80	Pcs	11840	58.5	4913.6	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003925	UPVC FITTINGS TEE BRASS 15X15X15MM	1	BOX	130	130	Pcs	13520	58.5	5610.8	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003214	UPVC FITTINGS TEE REDUCER 15X15X20MM	1	BOX	150	150	Pcs	3750	58.5	1556.25	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002638	UPVC FITTINGS TEE REDUCER 20X20X15MM	1	BOX	200	200	Pcs	4900	58.5	2033.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002918	UPVC FITTINGS TEE REDUCER 32X32X15MM	1	BOX	50	50	Pcs	2825	58.5	1172.375	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003215	UPVC FITTINGS TEE REDUCER 32X32X20MM	1	BOX	50	50	Pcs	2825	58.5	1172.375	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002917	UPVC FITTINGS TEE REDUCER 32X32X25MM	1	BOX	45	45	Pcs	2677.5	58.5	1111.1625	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003356	UPVC FITTINGS TEE REDUCER 40X40X15MM	1	BOX	48	48	Pcs	3360	58.5	1394.4	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003357	UPVC FITTINGS TEE REDUCER 40X40X20MM	1	BOX	36	36	Pcs	2556	58.5	1060.74	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003216	UPVC FITTINGS TEE REDUCER 40X40X25MM	1	BOX	36	36	Pcs	2610	58.5	1083.15	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002922	UPVC FITTINGS TEE REDUCER 40X40X32MM	1	BOX	24	24	Pcs	1860	58.5	771.9	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002923	UPVC FITTINGS TEE REDUCER 50X50X15MM	1	BOX	30	30	Pcs	3165	58.5	1313.475	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002924	UPVC FITTINGS TEE REDUCER 50X50X20MM	1	BOX	30	30	Pcs	3240	58.5	1344.6	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003217	UPVC FITTINGS TEE REDUCER 50X50X25MM	1	BOX	22	22	Pcs	2431	58.5	1008.865	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003218	UPVC FITTINGS TEE REDUCER 50X50X32MM	1	BOX	18	18	Pcs	2052	58.5	851.58	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003352	UPVC FITTINGS COUPLER 40MM	1	BOX	120	120	Pcs	5100	58.5	2116.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002897	UPVC FITTINGS COUPLER 50MM	1	BOX	40	40	Pcs	2340	58.5	971.1	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002898	UPVC FITTINGS COUPLER REDUCER 32X15MM	1	BOX	100	100	Pcs	2700	58.5	1120.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002900	UPVC FITTINGS COUPLER REDUCER 32X25MM	1	BOX	100	100	Pcs	2950	58.5	1224.25	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002901	UPVC FITTINGS COUPLER REDUCER 40X15MM	1	BOX	100	100	Pcs	3650	58.5	1514.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002902	UPVC FITTINGS COUPLER REDUCER 40X20MM	1	BOX	100	100	Pcs	3700	58.5	1535.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002905	UPVC FITTINGS COUPLER REDUCER 50X15MM	1	BOX	54	54	Pcs	2835	58.5	1176.525	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002906	UPVC FITTINGS COUPLER REDUCER 50X20MM	1	BOX	54	54	Pcs	2943	58.5	1221.345	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003195	UPVC FITTINGS COUPLER REDUCER 50X25MM	1	BOX	54	54	Pcs	3051	58.5	1266.165	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003196	UPVC FITTINGS COUPLER REDUCER 50X32MM	1	BOX	54	54	Pcs	3240	58.5	1344.6	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002909	UPVC FITTINGS COUPLER REDUCER 50X40MM	1	BOX	54	54	Pcs	3321	58.5	1378.215	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003203	UPVC FITTINGS FTA 20MM	1	BOX	400	400	Pcs	5000	58.5	2075	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002941	UPVC FIT.FTA BRASS 20MM-SS RING	1	BOX	150	150	Pcs	17100	58.5	7096.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002942	UPVC FIT.FTA BRASS 25MM-SS RING	1	BOX	112	112	Pcs	23968	58.5	9946.72	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003923	UPVC FITTINGS FTA BRASS 15MM	1	BOX	240	240	Pcs	19800	58.5	8217	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003205	UPVC FIT.FTA RED.BRASS 20X15MM-SS RING	1	BOX	180	180	Pcs	15210	58.5	6312.15	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004042	UPVC FIT FTA Red.SSRing Brass 25MMX15MM	1	BOX	100	100	Pcs	11400	58.5	4731	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003209	UPVC FITTINGS MTA BRASS 15MM	1	BOX	400	400	Pcs	46800	58.5	19422	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002938	UPVC FITTINGS MTA BRASS 20MM	1	BOX	250	250	Pcs	38875	58.5	16133.125	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003210	UPVC FITTINGS MTA BRASS 25MM	1	BOX	192	192	Pcs	47136	58.5	19561.44	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004013	UPVC FITTINGS MTA REDUCER 20X15MM	1	BOX	250	250	Pcs	2375	58.5	985.625	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004038	UPVC FIT MTA Reducer Brass 20MM X15MM	1	BOX	220	220	Pcs	26510	58.5	11001.65	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003826	UPVC FITTINGS TANK CONNECTOR 25MM	1	BOX	80	80	Pcs	3960	58.5	1643.4	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003827	UPVC FITTINGS TANK CONNECTOR 32MM	1	BOX	55	55	Pcs	3850	58.5	1597.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004028	UPVC FIT TankNipple 1Side Pipe Fit 25MM	1	BOX	100	100	Pcs	4650	58.5	1929.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002887	UPVC FITTINGS ELBOW 45DEG 20MM	1	BOX	160	160	Pcs	2560	58.5	1062.4	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002888	UPVC FITTINGS ELBOW 45DEG 25MM	1	BOX	110	110	Pcs	2805	58.5	1164.075	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002889	UPVC FITTINGS ELBOW 45DEG 32MM	1	BOX	72	72	Pcs	2556	58.5	1060.74	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002890	UPVC FITTINGS ELBOW 45DEG 40MM	1	BOX	40	40	Pcs	1920	58.5	796.8	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002891	UPVC FITTINGS ELBOW 45DEG 50MM	1	BOX	28	28	Pcs	2114	58.5	877.31	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002953	UPVC FITTINGS BALL VALVE 15MM	2	BOX	162	324	Pcs	8019	58.5	6655.77	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002955	UPVC FITTINGS BALL VALVE 20MM	1	BOX	80	80	Pcs	8040	58.5	3336.6	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002956	UPVC FITTINGS BALL VALVE 25MM	1	BOX	84	84	Pcs	16002	58.5	6640.83	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002957	UPVC FITTINGS BALL VALVE 32MM	1	BOX	50	50	Pcs	15225	58.5	6318.375	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002958	UPVC FITTINGS BALL VALVE 40MM	1	BOX	48	48	Pcs	22344	58.5	9272.76	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002959	UPVC FITTINGS BALL VALVE 50MM	1	BOX	24	24	Pcs	21360	58.5	8864.4	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002718	UPVC FITTINGS BUSHING REDUCER 20X15MM	1	BOX	490	490	Pcs	2450	58.5	1016.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002719	UPVC FITTINGS BUSHING REDUCER 25X15MM	1	BOX	300	300	Pcs	3450	58.5	1431.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003188	UPVC FITTINGS BUSHING REDUCER 25X20MM	1	BOX	300	300	Pcs	2100	58.5	871.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003353	UPVC FITTINGS BUSHING REDUCER 32X25MM	1	BOX	180	180	Pcs	2250	58.5	933.75	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002912	UPVC FITTINGS BUSHING REDUCER 40X25MM	1	BOX	135	135	Pcs	3172.5	58.5	1316.5875	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003354	UPVC FITTINGS BUSHING REDUCER 40X32MM	1	BOX	135	135	Pcs	1890	58.5	784.35	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000002966	UPVC FITTINGS FAUCET 15MM	30	BOX	72	2160	Pcs	3636	58.5	45268.2	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000001077	SOLVENT CEMENT 75ML	50	Pcs	1	50	Pcs	68.5	58.5	1421.375	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000001078	SOLVENT CEMENT 250ML	50	Pcs	1	50	Pcs	138.5	58.5	2873.875	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000001079	SOLVENT CEMENT 500ML	5	Pcs	1	5	Pcs	207	58.5	429.525	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000001080	SOLVENT CEMENT 1000ML	2	Pcs	1	2	Pcs	334	58.5	277.22	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000001081	SOLVENT CEMENT 5000ML	1	Pcs	1	1	Pcs	1593	58.5	661.095	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003959	UPVC Short Bend SCH80 20MM	1	BOX	120	120	Pcs	4560	58.5	1892.4	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000003960	UPVC Short Bend SCH80 25MM	1	BOX	75	75	Pcs	4987.5	58.5	2069.8125	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004023	UPVC FITTINGS PIPE CLIP 25MM	2	BOX	600	1200	Pcs	3900	58.5	3237	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004024	UPVC FITTINGS PIPE CLIP 32MM	2	BOX	500	1000	Pcs	5250	58.5	4357.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004025	UPVC FITTINGS PIPE CLIP 40MM	2	BOX	300	600	Pcs	3750	58.5	3112.5	FOR	please process this order as earliest
+103929	Gupta Hardware	E0025	Suman Sarkar	05-11-2017	UPVC	3000004026	UPVC FITTINGS PIPE CLIP 50MM	1	BOX	200	200	Pcs	3300	58.5	1369.5	FOR	please process this order as earliest

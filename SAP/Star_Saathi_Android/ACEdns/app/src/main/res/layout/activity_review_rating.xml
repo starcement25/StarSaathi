@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+    <!--Header-->
+    <include layout="@layout/header_common_layout"
+        />
+    <ScrollView
+        android:layout_below="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/rl_sliderOne"
+            android:padding="9dp"
+            >
+            <TextView
+                android:id="@+id/tv_rr_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="Hello,\nBased on your overall experience you had with our sales person, Please rate us "
+                />
+            <RatingBar
+                android:id="@+id/rb_RR"
+                android:layout_below="@+id/tv_rr_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:saveEnabled="true"
+                android:paddingTop="15dp"
+                android:paddingBottom="5dp"
+                />
+            <TextView
+                android:id="@+id/tv_rr_two"
+                android:layout_below="@+id/rb_RR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="Is there is any way me could improve our service? Please specify below:"
+                />
+            <EditText
+                android:id="@+id/et_rr_comments"
+                android:layout_below="@+id/tv_rr_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:textColor="@color/black"
+                android:padding="3dp"
+                android:background="@drawable/rounded_grey"
+                android:text=""
+                android:gravity="top"
+                android:maxLines="9"
+                android:inputType="textMultiLine"
+                android:maxEms="15"
+                android:textSize="12sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                />
+            <TextView
+                android:id="@+id/tv_rr_third"
+                android:layout_below="@+id/et_rr_comments"
+                android:layout_above="@+id/btn_continue"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:text="Your participation is crucial in making this initiative a success."
+                />
+            <Button
+                android:id="@+id/btn_rr_submit"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#363f45"
+                android:text="SUBMIT"
+                android:textColor="@color/white"
+                android:layout_alignParentBottom="true"
+                />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

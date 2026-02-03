@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+
+    >
+    <!--Header-->
+    <RelativeLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/header_dark_blue"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <ImageView
+            android:id="@+id/ivHeaderBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/v_cross"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            />
+        <TextView
+            android:id="@+id/tvHeaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NARRATION"
+            android:layout_centerInParent="true"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
+        <LinearLayout
+            android:id="@+id/llHeaderDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:id="@+id/ivHeaderForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/details"
+                android:layout_gravity="center"
+                />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+    <!--Body-->
+    <TextView
+        android:id="@+id/tvNarrationDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Narration details"
+        android:textColor="@color/black"
+        android:paddingTop="35dp"
+        android:paddingBottom="25dp"
+        android:paddingStart="9dp"
+        android:paddingEnd="9dp"
+        />
+
+
+</LinearLayout>

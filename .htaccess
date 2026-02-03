@@ -1,0 +1,21 @@
+# Enable mod_rewrite
+RewriteEngine On
+
+# Redirect any URL starting with /trump/ to /trump/ (301 permanent redirect)
+RewriteCond %{REQUEST_URI} ^/trump/.*$
+RewriteRule ^trump/.*$ /trump/ [R=301,L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php56” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php56 .php .php5 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+# Redirect www to non-www (HTTP and HTTPS)
+RewriteCond %{HTTP_HOST} ^www\.starsaathi\.com$ [NC]
+RewriteRule ^(.*)$ https://starsaathi.com/$1 [L,R=301]
+
+# If you also want to force HTTPS for non-www
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://starsaathi.com/$1 [L,R=301]

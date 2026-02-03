@@ -1,0 +1,75 @@
+DNS Customer Code	Customer Name	Emp Code	Emp Name	Order Date	Prod Group	SKU Code	SKU Name	Qty1	UOM1	Conversion Factor	Qty2	UOM2	Sale Rate	TD(%)	Order Value	Freight	Remarks	
+103222	SHIVHARE PVT.LTD	E0167	Chirag Satbadre	16-05-2018	CPVC	3000002659	3000002659 : CPVC PIPE 25MM 3M SDR13.5	1	BNDL	25	25	Pcs	8325	60	3330	FOR	demo
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002657	3000002657 : CPVC PIPE 20MM 3M SDR11	7	BNDL	50	350	Pcs	12450	52.92	41030.22	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002658	3000002658 : CPVC PIPE 25MM 3M SDR11	5	BNDL	25	125	Pcs	9712.5	52.92	22863.225	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000003084	3000003084 : CPVC PIPE 32MM 3M SDR11	1	BNDL	25	25	Pcs	15187.5	52.92	7150.275	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000003085	3000003085 : CPVC PIPE 40MM 3M SDR11	2	BNDL	20	40	Pcs	16680	52.92	15705.888	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002660	3000002660 : CPVC FITTINGS ELBOW 90? 20MM	3	BOX	300	900	Pcs	3750	52.92	5296.5	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002661	3000002661 : CPVC FITTINGS ELBOW 90? 25MM	3	BOX	160	480	Pcs	4080	52.92	5762.592	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002663	3000002663 : CPVC FITTINGS TEE 20MM	2	BOX	200	400	Pcs	4100	52.92	3860.56	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002664	3000002664 : CPVC FITTINGS TEE 25MM	3	BOX	100	300	Pcs	3200	52.92	4519.68	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002666	3000002666 : CPVC FITTINGS TEE REDUCER 25X25X20MM	1	BOX	140	140	Pcs	7770	52.92	3658.116	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002703	3000002703 : CPVC FITTINGS COUPLER 20MM	1	BOX	500	500	Pcs	5250	52.92	2471.7	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002667	3000002667 : CPVC FITTINGS COUPLER 25MM	1	BOX	250	250	Pcs	4250	52.92	2000.9	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000003171	3000003171 : CPVC FITTINGS COUPLER REDUCER 25X20MM	2	BOX	350	700	Pcs	8225	52.92	7744.66	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002709	3000002709 : CPVC FITTINGS FTA BRASS 25MM	1	BOX	120	120	Pcs	26280	52.92	12372.624	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000003185	3000003185 : CPVC FITTINGS MTA BRASS 25MM	3	BOX	120	360	Pcs	26580	52.92	37541.592	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000003362	3000003362 : CPVC FITTINGS ELBOW 45DEG 20MM	1	BOX	360	360	Pcs	6840	52.92	3220.272	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002681	3000002681 : CPVC FITTINGS ELBOW 45? 25MM	2	BOX	200	400	Pcs	6400	52.92	6026.24	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000003024	3000003024 : CPVC FITTINGS ELBOW 45DEG 40MM	1	BOX	66	66	Pcs	7425	52.92	3495.69	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	CPVC	3000003168	3000003168 : CPVC FITTINGS BALL VALVE 25MM	1	BOX	60	60	Pcs	12990	52.92	6115.692	EX	Order No-2 Dispatch planning today
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000002682	3000002682 : CPVC FITTINGS STEP OVER BEND 20MM	1	BOX	100	100	Pcs	7150	52.92	3366.22	EX	cpvc additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000004113	3000004113 : CPVC FITTINGS S/UNION BALL VALVE 25MM	1	BOX	55	55	Pcs	12375	52.92	5826.15	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	CPVC	3000004117	3000004117 : CPVC FITTINGS S/UNION BALL VALVE 50MM	1	BOX	15	15	Pcs	16500	52.92	7768.2	EX	cpvc pipes and fittings order of Madan enterprises Udaipur
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	PVC	3000003296	3000003296 : PVC PIPE 110 MMX6MTR LONG CLASS 2 GREY	90	No	1	90	Pcs	1203	47.43	56917.539	EX	Orders No-2 Dispatch planning today
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	PVC	3000003302	3000003302 : PVC PIPE 160 MMX6MTR LONG CLASS 3 GREY	15	No	1	15	Pcs	3696	47.43	29144.808	EX	Orders No-2 Dispatch planning today
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	PVC	3000003306	3000003306 : PVC PIPE 200MM 6M CLASS-2 GREY	96	No	1	96	Pcs	4023	47.43	203029.5456	EX	Order No-1 Dispatch planning today
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	PVC	3000003310	3000003310 : PVC PIPE 315 MMX6MTR LONG CLASS 1 GREY	50	No	1	50	Pcs	6690	47.43	175846.65	EX	Order No-1 Dispatch planning today
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	PVC	3000003313	3000003313 : PVC PIPE 40MM 3M CLASS-3 GREY	150	No	1	150	Pcs	124.5	47.73	9761.4225	EX	pvc order of Madan enterprises Udaipur
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	PVC	3000003316	3000003316 : PVC PIPE 75 MMX6 MTR LONG CLASS 2 GREY	200	No	1	200	Pcs	591	47.43	62137.74	EX	Orders No-2 Dispatch planning today
+103012	SHREENATHJI  AGENCIES	E0053	Mukesh Pancholi	16-05-2018	PVC	3000003318	3000003318 : PVC PIPE 90 MMX6 MTR LONG CLASS 2 GREY	600	No	1	600	Pcs	825	47.43	260221.5	EX	
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	PVC	3000004361	3000004361 : Agri fitting 40 MM ELBOW 90° (10 KG/CM2)	2	BOX	120	240	Pcs	1595	47.73	1667.413	EX	pvc order of Madan enterprises Udaipur
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	PVC	3000004384	3000004384 : PVC Agri fitting Tee 75 mm 6 kg	8	BOX	20	160	Pcs	1200	47.43	5046.72	EX	Order No-2 Dispatch planning today
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	PVC	3000004394	3000004394 : PVC Agri fitting Tee 110 mm 6 kg	10	BOX	15	150	Pcs	2490	47.43	13089.93	EX	Order No-2 Dispatch planning today
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000001943	3000001943 : SWR PIPE 75MM TYPE-A 10'  S/S	600	Pcs	1	600	Pcs	291.5	46.6	93396.6	EX	additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000001951	3000001951 : SWR PIPE 110MM TYPE-A 10'  S/S	700	Pcs	1	700	Pcs	523.5	46.6	195684.3	EX	additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000001959	3000001959 : SWR PIPE 160MM TYPE-A 10'  S/S	35	Pcs	1	35	Pcs	1188	46.6	22203.72	EX	additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003277	3000003277 : SWR PIPE 75MM TYPE-A 10' S/S PUSH	30	Pcs	1	30	Pcs	288.5	46.6	4621.77	EX	swr selfit Pipes order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003279	3000003279 : SWR PIPE 110MM TYPE-A 10' S/S PUSH	30	Pcs	1	30	Pcs	521	46.6	8346.42	EX	swr selfit Pipes order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000001995	3000001995 : SWR FITTINGS 110 MM SOCKET PLUG	3	BOX	48	144	Pcs	1752	46.6	2806.704	EX	swr  fittings order of Madan enterprises Udaipur
+102882	Satya Trading Company	E0134	Tarun Suhalka	16-05-2018	SWR	3000003658	3000003658 : SWR FITTINGS 75 MM MULTI FLOOR TRAP	1	BOX	24	24	Pcs	2424	46.6	1294.416	EX	additional order of Madan enterprises Udaipur
+102882	Satya Trading Company	E0134	Tarun Suhalka	16-05-2018	SWR	3000003499	3000003499 : SWR FITTINGS 75 MM PIPE CLIP	1	BOX	225	225	Pcs	2587.5	46.6	1381.725	EX	additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003660	3000003660 : SWR FITTINGS P.TRAP(110mmX110)	1	BOX	10	10	Pcs	1890	46.6	1009.26	EX	swr  fittings order of Madan enterprises Udaipur
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	SWR	3000003503	3000003503 : SWR LITE FITTINGS 110MM P. BEND (45 DEG)	1	BOX	30	30	Pcs	2040	46.6	1089.36	EX	Order No-2 Dispatch planning today
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003768	3000003768 : SWR M/PLUS FIT COUPLER 75 MM	2	BOX	84	168	Pcs	2688	46.6	2870.784	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003769	3000003769 : SWR M/PLUS FIT COUPLER 110 MM	6	BOX	30	180	Pcs	1710	46.6	5478.84	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003771	3000003771 : SWR M/PLUS FIT PLAIN TEE 75 MM	4	BOX	40	160	Pcs	2360	46.6	5040.96	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003772	3000003772 : SWR M/PLUS FIT PLAIN TEE 110 MM	15	BOX	15	225	Pcs	1890	46.6	15138.9	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003773	3000003773 : SWR M/PLUS FIT DOOR TEE 75 MM	4	BOX	32	128	Pcs	2240	46.6	4784.64	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003774	3000003774 : SWR M/PLUS FIT DOOR TEE 110 MM	7	BOX	12	84	Pcs	1680	46.6	6279.84	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003783	3000003783 : SWR M/PLUS FIT PLAIN BEND 45D 75MM	2	BOX	50	100	Pcs	1875	46.6	2002.5	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003784	3000003784 : SWR M/PLUS FIT PLAIN BEND 45D 110MM	6	BOX	30	180	Pcs	2220	46.6	7112.88	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003785	3000003785 : SWR M/PLUS FIT PLAIN BEND 87.5D 75MM	5	BOX	54	270	Pcs	2241	46.6	5983.47	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003788	3000003788 : SWR M/PLUS FIT PLAIN BEND 87.5D 110MM	20	BOX	20	400	Pcs	1720	46.6	18369.6	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003790	3000003790 : SWR M/PLUS FIT DOOR BEND 87.5D 110MM	1	BOX	20	20	Pcs	2260	46.6	1206.84	EX	swr  fittings order of Madan enterprises Udaipur
+102882	Satya Trading Company	E0134	Tarun Suhalka	16-05-2018	SWR	3000003795	3000003795 : SWR M/PLUS FIT PLAIN Y 75MM	1	BOX	30	30	Pcs	2175	46.6	1161.45	EX	additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003796	3000003796 : SWR M/PLUS FIT PLAIN Y 110MM	1	BOX	12	12	Pcs	1656	46.6	884.304	EX	swr  fittings order of Madan enterprises Udaipur
+102882	Satya Trading Company	E0134	Tarun Suhalka	16-05-2018	SWR	3000003796	3000003796 : SWR M/PLUS FIT PLAIN Y 110MM	1	BOX	12	12	Pcs	1656	46.6	884.304	EX	additional order of Madan enterprises Udaipur
+102882	Satya Trading Company	E0134	Tarun Suhalka	16-05-2018	SWR	3000003804	3000003804 : SWR M/PLUS FIT CLEANING PIPE 110MM	1	BOX	18	18	Pcs	2277	46.6	1215.918	EX	additional order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003805	3000003805 : SWR M/PLUS FIT REDUCER 110MMX75MM	2	BOX	60	120	Pcs	3390	46.6	3620.52	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003807	3000003807 : SWR M/PLUS FIT REDUCING TEE PLAIN 110X75	8	BOX	15	120	Pcs	1470	46.6	6279.84	EX	swr  fittings order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000003666	SWR PIPE 90MM TYPE-A 10' S/S PUSH	30	Pcs	1	30	Pcs	380	46.6	6087.6	EX	swr selfit Pipes order of Madan enterprises Udaipur
+103870	Madan Enterprise	E0134	Tarun Suhalka	16-05-2018	SWR	3000004710	3000004710 : SWR FITTINGS 75MM NAHANI TRAP OP W/O JAL	10	BOX	35	350	Pcs	2345	46.6	12522.3	EX	swr  fittings order of Madan enterprises Udaipur
+102882	Satya Trading Company	E0134	Tarun Suhalka	16-05-2018	SWR	3000004710	3000004710 : SWR FITTINGS 75MM NAHANI TRAP OP W/O JAL	2	BOX	35	70	Pcs	2345	46.6	2504.46	EX	additional order of Madan enterprises Udaipur
+102477	Shah Traders	E0039	Mukesh Patel	16-05-2018	UPVC	3000002139	3000002139 : UPVC PIPE 25MM 6M SCH40 LEAD FREE WHITE	13	BNDL	10	130	Pcs	4410	42.11	33188.337	EX	Order No-2 Dispatch planning today
+103774	SHREE GANESH TRADING	E0051	Vijay More	16-05-2018	UPVC	3000002143	3000002143 : UPVC PIPE 40MM 6M SCH40 LEAD FREE WHITE	1	BNDL	10	10	Pcs	7140	40.93	4217.598	EX	additional order
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000003197	3000003197 : UPVC FIT.ELBOW RED.BRASS 15X15MM-SS RING	1	BOX	180	180	Pcs	10800	42.11	6252.12	EX	Order No-2 Dispatch planning today
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000002969	3000002969 : UPVC FITTINGS UNION 25MM	1	BOX	120	120	Pcs	4080	42.11	2361.912	EX	Order No-2 Dispatch planning today
+103774	SHREE GANESH TRADING	E0051	Vijay More	16-05-2018	UPVC	3000002971	3000002971 : UPVC FITTINGS UNION 40MM	1	BOX	45	45	Pcs	3060	40.93	1807.542	EX	additional order
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000002972	3000002972 : UPVC FITTINGS UNION 50MM	1	BOX	24	24	Pcs	2424	42.11	1403.2536	EX	Order No-2 Dispatch planning today
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000002940	3000002940 : UPVC FIT.FTA BRASS 15MM-SS RING	1	BOX	240	240	Pcs	15240	42.11	8822.436	EX	Order No-2 Dispatch planning today
+103774	SHREE GANESH TRADING	E0051	Vijay More	16-05-2018	UPVC	3000002956	3000002956 : UPVC FITTINGS BALL VALVE 25MM	1	BOX	84	84	Pcs	14154	40.93	8360.7678	EX	additional order
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000002929	3000002929 : UPVC FITTINGS THREADED ELBOW 90DEG 20MM	2	BOX	128	256	Pcs	1152	42.11	1333.7856	EX	Order No-2 Dispatch planning today
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000002930	3000002930 : UPVC FITTINGS THREADED ELBOW 90DEG 25MM	2	BOX	90	180	Pcs	1440	42.11	1667.232	EX	Order No-2 Dispatch planning today
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000004453	3000004453 : UPVC PIPE 80MM 6M SCH40 FLOW-GOLD WHITE	4	Bundle	5	20	Pcs	10095	42.11	23375.982	EX	Order No-2 Dispatch planning today
+102955	Hilton Marketing Co.	E0039	Mukesh Patel	16-05-2018	UPVC	3000004465	3000004465 : UPVC PIPE 100MM 6M SCH40 LEAD FREE WHITE	17	BNDL	3	51	Pcs	8559	42.11	84231.6867	EX	Order No-2 Dispatch planning today

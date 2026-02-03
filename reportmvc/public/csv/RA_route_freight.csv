@@ -1,0 +1,132 @@
+Plant,route_name,Zone,Tranport mode,Truck Size,Frieght
+Haldia,Kharagpur,WB1,TRUCK,7.5,5850.00
+Haldia,Keranitola,WB1,TRUCK,7.5,5850.00
+Haldia,Belda,WB1,TRUCK,7.5,5850.00
+Haldia,Midnapur,WB1,TRUCK,7.5,5850.00
+Haldia,Contai,WB1,TRUCK,7.5,5850.00
+Haldia,Jhargram,WB1,TRUCK,7.5,5850.00
+Haldia,Tamluk,WB1,TRUCK,7.5,5850.00
+Haldia,Charabarh,WB1,TRUCK,7.5,5850.00
+Haldia,Panskura,WB1,TRUCK,7.5,5850.00
+Haldia,Nandakumar,WB1,TRUCK,7.5,5850.00
+Haldia,Ghatal,WB1,TRUCK,7.5,5850.00
+Haldia,Debra,WB1,TRUCK,7.5,5850.00
+Haldia,Daspur,WB1,TRUCK,7.5,5850.00
+Haldia,East Midnapur,WB1,TRUCK,7.5,5850.00
+Haldia,Asari,WB1,TRUCK,7.5,5850.00
+Haldia,Haldia,WB1,TRUCK,7.5,5850.00
+Haldia,Nandkumar,WB1,TRUCK,7.5,5850.00
+Haldia,Purba Mednipur,WB1,TRUCK,7.5,5850.00
+Haldia,Nasaratpur,WB2,TRUCK,7.5,8100.00
+Haldia,Sonamukhi,WB2,TRUCK,7.5,8100.00
+Haldia,Raipur,WB2,TRUCK,7.5,8100.00
+Haldia,Bishnupur,WB2,TRUCK,7.5,8100.00
+Haldia,Katwa,WB2,TRUCK,7.5,8100.00
+Haldia,Bankura,WB2,TRUCK,7.5,8100.00
+Haldia,Howrah,WB2,TRUCK,7.5,8100.00
+Haldia,Amta,WB2,TRUCK,7.5,8100.00
+Haldia,Domjur,WB2,TRUCK,7.5,8100.00
+Haldia,Uluberia,WB2,TRUCK,7.5,8100.00
+Haldia,Champadanga,WB2,TRUCK,7.5,8100.00
+Haldia,Bandel,WB2,TRUCK,7.5,8100.00
+Haldia,Baidyabati,WB2,TRUCK,7.5,8100.00
+Haldia,Tarakeswar,WB2,TRUCK,7.5,8100.00
+Haldia,Nalikul,WB2,TRUCK,7.5,8100.00
+Haldia,Kamarkundu,WB2,TRUCK,7.5,8100.00
+Haldia,Janai Road Station,WB2,TRUCK,7.5,8100.00
+Haldia,Chanditala,WB2,TRUCK,7.5,8100.00
+Haldia,Khanakul,WB2,TRUCK,7.5,8100.00
+Haldia,Hind Motor,WB2,TRUCK,7.5,8100.00
+Haldia,Pandua,WB2,TRUCK,7.5,8100.00
+Haldia,Hooghly,WB2,TRUCK,7.5,8100.00
+Haldia,Hoogley,WB2,TRUCK,7.5,8100.00
+Haldia,Arambag,WB2,TRUCK,7.5,8100.00
+Haldia,Kolkata,WB2,TRUCK,7.5,8100.00
+Haldia,Posta,WB2,TRUCK,7.5,8100.00
+Haldia,Strand Road,WB2,TRUCK,7.5,8100.00
+Haldia,Cotton Street,WB2,TRUCK,7.5,8100.00
+Haldia,Nalhati,WB3,TRUCK,7.5,9900.00
+Haldia,Kirnahar,WB3,TRUCK,7.5,9900.00
+Haldia,Birbhum,WB3,TRUCK,7.5,9900.00
+Haldia,Sainthia,WB3,TRUCK,7.5,9900.00
+Haldia,Rampurhat,WB3,TRUCK,7.5,9900.00
+Haldia,Barakar,WB3,TRUCK,7.5,9900.00
+Haldia,Niyamatpur,WB3,TRUCK,7.5,9900.00
+Haldia,Borehat,WB3,TRUCK,7.5,9900.00
+Haldia,Asansol,WB3,TRUCK,7.5,9900.00
+Haldia,Rupnarayanpur,WB3,TRUCK,7.5,9900.00
+Haldia,Burnpur,WB3,TRUCK,7.5,9900.00
+Haldia,Raniganj,WB3,TRUCK,7.5,9900.00
+Haldia,Guskara,WB3,TRUCK,7.5,9900.00
+Haldia,Durgapur,WB3,TRUCK,7.5,9900.00
+Haldia,Kalna,WB3,TRUCK,7.5,9900.00
+Haldia,Malda,WB3,TRUCK,7.5,9900.00
+Haldia,Kaliachak,WB3,TRUCK,7.5,9900.00
+Haldia,Khagra,WB3,TRUCK,7.5,9900.00
+Haldia,Murshidabad,WB3,TRUCK,7.5,9900.00
+Haldia,Beldanga,WB3,TRUCK,7.5,9900.00
+Haldia,Berhampur (WB),WB3,TRUCK,7.5,9900.00
+Haldia,Jiaganj,WB3,TRUCK,7.5,9900.00
+Haldia,Dhuliyan,WB3,TRUCK,7.5,9900.00
+Haldia,Salar,WB3,TRUCK,7.5,9900.00
+Haldia,Jangipur,WB3,TRUCK,7.5,9900.00
+Haldia,Aurangabad (WB),WB3,TRUCK,7.5,9900.00
+Haldia,Kandi,WB3,TRUCK,7.5,9900.00
+Haldia,Raghunathganj,WB3,TRUCK,7.5,9900.00
+Haldia,Khargram,WB3,TRUCK,7.5,9900.00
+Haldia,Domkol,WB3,TRUCK,7.5,9900.00
+Haldia,Plassey,WB3,TRUCK,7.5,9900.00
+Haldia,Majdia,WB3,TRUCK,7.5,9900.00
+Haldia,Karimpur,WB3,TRUCK,7.5,9900.00
+Haldia,Dhubulia,WB3,TRUCK,7.5,9900.00
+Haldia,Krishnanagar,WB3,TRUCK,7.5,9900.00
+Haldia,Shantipur,WB3,TRUCK,7.5,9900.00
+Haldia,Haringhata,WB3,TRUCK,7.5,9900.00
+Haldia,Gagnapur,WB3,TRUCK,7.5,9900.00
+Haldia,Chakdaha,WB3,TRUCK,7.5,9900.00
+Haldia,Ranaghat,WB3,TRUCK,7.5,9900.00
+Haldia,Duttapuliya,WB3,TRUCK,7.5,9900.00
+Haldia,Nadia,WB3,TRUCK,7.5,9900.00
+Haldia,Burdwan,WB3,TRUCK,7.5,9900.00
+Haldia,Dharampur,WB3,TRUCK,7.5,9900.00
+Haldia,24 Pgs (North ),WB3,TRUCK,7.5,9900.00
+Haldia,Kamarhati,WB3,TRUCK,7.5,9900.00
+Haldia,Habra,WB3,TRUCK,7.5,9900.00
+Haldia,Jagatdal,WB3,TRUCK,7.5,9900.00
+Haldia,Barasat,WB3,TRUCK,7.5,9900.00
+Haldia,Kanchrapara,WB3,TRUCK,7.5,9900.00
+Haldia,Basirhat,WB3,TRUCK,7.5,9900.00
+Haldia,Naihati,WB3,TRUCK,7.5,9900.00
+Haldia,Berachampa,WB3,TRUCK,7.5,9900.00
+Haldia,Gaighata,WB3,TRUCK,7.5,9900.00
+Haldia,Barrackpur,WB3,TRUCK,7.5,9900.00
+Haldia,Rajarhat,WB3,TRUCK,7.5,9900.00
+Haldia,Bangaon,WB3,TRUCK,7.5,9900.00
+Haldia,Gopalnagar,WB3,TRUCK,7.5,9900.00
+Haldia,Gobardanga,WB3,TRUCK,7.5,9900.00
+Haldia,Khardah,WB3,TRUCK,7.5,9900.00
+Haldia,Purulia,WB3,TRUCK,7.5,9900.00
+Haldia,Rajpur,WB3,TRUCK,7.5,9900.00
+Haldia,Baruipur,WB3,TRUCK,7.5,9900.00
+Haldia,Amtala,WB3,TRUCK,7.5,9900.00
+Haldia,Kakdwip,WB3,TRUCK,7.5,9900.00
+Haldia,North Bawali,WB3,TRUCK,7.5,9900.00
+Haldia,Batanagar,WB3,TRUCK,7.5,9900.00
+Haldia,24 Pgs (South),WB3,TRUCK,7.5,9900.00
+Haldia,Diamond Harbour,WB3,TRUCK,7.5,9900.00
+Haldia,Bhangore,WB3,TRUCK,7.5,9900.00
+Haldia,Canning,WB3,TRUCK,7.5,9900.00
+Haldia,Balurghat,WB4,TRUCK,16,30000.00
+Haldia,Gangarampur,WB4,TRUCK,16,30000.00
+Haldia,Dalkhola,WB4,TRUCK,16,30000.00
+Haldia,Uttar Dinajpur,WB4,TRUCK,16,30000.00
+Haldia,Raiganj,WB4,TRUCK,16,30000.00
+Haldia,Kaliaganj,WB4,TRUCK,16,30000.00
+Haldia,Islampur,WB4,TRUCK,16,30000.00
+Haldia,Siliguri,WB5,TRUCK,16,39000.00
+Haldia,Darjeeling,WB5,TRUCK,16,39000.00
+Haldia,Alipurduar,WB5,TRUCK,16,39000.00
+Haldia,Falakata,WB5,TRUCK,16,39000.00
+Haldia,Jalpaiguri,WB5,TRUCK,16,39000.00
+Haldia,Cooch Bihar,WB5,TRUCK,16,39000.00
+Haldia,Tufanganj,WB5,TRUCK,16,39000.00

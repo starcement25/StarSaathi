@@ -1,0 +1,15 @@
+<?php
+session_start();
+if(isset($_SESSION["sswa_user_id"])){
+unset($_SESSION["sswa_user_id"]);
+unset($_SESSION["sswa_user_type"]);
+unset($_SESSION["sswa_user_name"]);
+unset($_SESSION["sswa_user_dns_id"]);
+unset($_SESSION["sswa_selected_dealer_name"]);
+unset($_SESSION["sswa_selected_dealer_code"]);
+unset($_SESSION["sswa_selected_customer_code"]);
+header("location:index.php");
+}else{
+header("location:index.php");
+}
+?>

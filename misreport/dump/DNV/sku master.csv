@@ -1,0 +1,575 @@
+Branch code/name,Prod_Code,prod_desc,brand_code (fk)/brand_name,brand_form_code (fk)/brand_form_name,brand_sub_form_code(fk)/brand_sub_form_name,cl_stk,acends,black_list,vertical_value,UOM1,UOM2,Conversion,Pack size,UOM3,Conversion2,TD
+West Bengal,160001000250,Jam Mango 250 Gms.Rs-60/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+West Bengal,160001000500,Jam Mango 500 Gms.RS-106/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+West Bengal,160002000250,Jam Mixed Fruit 250 Gms.Rs-60/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+West Bengal,160002000500,Jam Mixed Fruit 500 Gms.Rs-106/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+West Bengal,160003000250,Jam Pineapple 250 Gms.Rs-60/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+West Bengal,160003000500,Jam Pineapple 500 Gms.Rs-106/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+West Bengal,170002000200,Pickle Mango 200 Gms.Rs-46/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,170002000400,Pickle Mango 400 Gms.Rs-84/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+West Bengal,170002001000,Pickle Mango 1000 Gms.Rs-116/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+West Bengal,170001000200,Pickle Green Chilly 200 Gms.Rs-46/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,170001000400,Pickle Green Chilly 400 Gms.Rs-84/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+West Bengal,170003000200,Pickle Mixed 200 Gms.Rs-46/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,170003000400,Pickle Mixed 400 Gms.Rs-84/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+West Bengal,170003001000,Pickle Mixed 1000 Gms.Rs-116/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+West Bengal,150002000018,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+West Bengal,150002000040,Alu Bhujia 40 Gms.Rs-10/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.04,,,,0
+West Bengal,150004000018,Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+West Bengal,150004000040,Bhujia 40 Gms.Rs-10/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.04,,,,0
+West Bengal,150004000200,Bhujia 200 Gms.Rs-50/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,150005000015,Moong Dal 15 Gms.Rs-5/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.015,,,,0
+West Bengal,150005000040,Moong Dal 40 Gms.Rs-10/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.04,,,,0
+West Bengal,150001000018,All in One 18 Gms.Rs-5/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+West Bengal,150001000040,All in One 40 Gms.Rs-10/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.04,,,,0
+West Bengal,150001000200,All in One 200 Gms.Rs-50/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,150003000018,Badam Pakori 18 Gms.Rs-5/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+West Bengal,150003000040,Badam Pakori 40 Gms.Rs-10/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.04,,,,0
+West Bengal,210001000200,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,210001000400,Soan Papdi 400 Gms.Rs-120/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+West Bengal,210003001000,Gulab Jamun 1 Kg.Rs-200/-,Food Products,Sweets,Gulab Jamun,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+West Bengal,210002001000,Rasgulla 1 Kg.Rs-200/-,Food Products,Sweets,Rasgulla,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+West Bengal,190001000350,Mustard Kasundi 350 Gms.Rs-43/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+West Bengal,190001000700,Mustard Kasundi 700 Gms.Rs-77/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+West Bengal,200001000350,Non Fruit Vinegar 350ML.Rs-33/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+West Bengal,200002000700,Non Fruit Vinegar700ML.Rs-49/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+West Bengal,140001000025,Chaat Masal 50 Gms.Rs-28/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,140002000025,Chole Masala 50 Gms.Rs-28/-,Spices,Blended Spices,Chole Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,140006000025,Sabji Masala 50 Gms.Rs-28/-,Spices,Blended Spices,Sabji Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,140003000025,Badshashi Garam Masala 25 Gms.Rs-39/-,Spices,Blended Spices,Badshashi Garam Masala,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+West Bengal,110018000025,Kasuri Methi 25 Gms.RS-23/-,Spices,Blended Spices,Kasuri Methi,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+West Bengal,110012000050,Isabgol Bhusi 50 Gms Rs-55/-,Spices,Blended Spices,Isabgol Bhusi,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,120004000025,Black Pepper Powder 25 Gms.Rs-40/-,Spices,Powder Spices,Black Pepper Powder,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+West Bengal,120006000050,Haldi Powder 50 Gms.Rs-13/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,120006000100,Haldi Powder 100 Gms.Rs-26/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,120006000200,Haldi Powder 200 Gms.Rs-50/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,120006000500,Haldi Powder 500 Gms.Rs-122/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,120003000050,Jeera Powder 50 Gms.Rs-24/-,Spices,Powder Spices,Jeera Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,120002000050,Dhaniya Powder 50 Gms.Rs-15/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,120002000500,Dhaniya Powder 500 Gms.Rs-142/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,120001000050,Chilly Powder 50 Gms.Rs-17/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,120001000100,Chilly Powder 100 Gms.Rs-34/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,120001000200,Chilly Powder 200 Gms.Rs-66/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,120005000500,Chilly Powder 500 Gms.Rs-168/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,110004000000,Black Pepper Powder Rs-15/-,Spices,Pouch,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.008,,,,0
+West Bengal,110105000000,Isabgol.Rs- 4/-,Spices,Pouch,Isabgol,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+West Bengal,110107000000,Poppy Seed(Rs.5 Per Sac),Spices,Pouch,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+West Bengal,110030000000,Soya badi Rs.10/-,Spices,Pouch,Soya badi,0,Y,N,Spices,pcs,Kgs,0.08,,,,0
+West Bengal,120103000000,Haldi Powder Rs-3/-,Spices,Pouch,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.01,,,,0
+West Bengal,120100000000,Chilly Powder Rs-4/-,Spices,Pouch,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.01,,,,0
+West Bengal,120102000000,Jeera Powder Rs-5/-,Spices,Pouch,Jeera Powder,0,Y,N,Spices,pcs,Kgs,0.01,,,,0
+West Bengal,140100000000,Garam Masala Powder Rs-5/-,Spices,Pouch,Garam Masala Powder,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+West Bengal,110106000000,Jeera Rs-2/-,Spices,Pouch,Jeera,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+West Bengal,110100000000,Ajwain Rs-2/-,Spices,Pouch,Ajwain,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+West Bengal,130100000000,Masala Papad ( small ) RS. 10,Common,Pouch,Masala Papad,0,Y,N,Common,pcs,Kgs,0.055,,,,0
+West Bengal,180003000200,Sauce Tomato 200 Gms.Rs-44/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,180003000500,Sauce Tomato 500 Gms.Rs-74/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+West Bengal,180003001000,Sauce Tomato 1000 Gms.Rs-116/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+West Bengal,180004000200,Sauce Tomato Chilly 200 Gms.Rs-44/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,180004000500,Sauce Tomato Chilly 500 Gms.Rs-74/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+West Bengal,180004001000,Sauce Tomato Chilly 1000 Gms.Rs-116/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+West Bengal,180001000200,Sauce Green Chilly 200 Gms.Rs-39/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,180001000700,Sauce Green Chilly 700 Gms.Rs-70/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+West Bengal,180002000200,Sauce Soya 200 Gms.Rs-41/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+West Bengal,180002000700,Sauce Soya 700 Gms.Rs-75/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+West Bengal,110023000050,Poppy Seed 50 Gms.Rs-48/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110023000100,Poppy Seed 100 Gms.Rs-96/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110023000200,Poppy Seed 200 Gms.Rs-190/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110032000050,Poppy (Economy) 50 Gms.Rs-43/-,Spices,Whole spices,Poppy Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110034000025,Poppy seeds Eco Rs.22/-,Spices,Whole spices,Poppy Seeds Economy,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+West Bengal,110002000050,Ajwain (Economy) 50 Gms.Rs-16/-,Spices,Whole spices,Ajwain Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110002000500,Ajwain (Economy) 500 Gms.Rs-152/-,Spices,Whole spices,Ajwain Economy,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,110001000050,Ajwain 50 Gms.Rs-22/-,Spices,Whole spices,Ajwain,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110001000100,Ajwain 100 Gms.Rs-44/-,Spices,Whole spices,Ajwain,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110020000100,Red Mustard Seed 100 Gms.Rs-17/-,Spices,Whole spices,Red Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110021000100,Yellow Mustard Seed 100 Gms.Rs-18/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110018000100,Methi 100 Gms.Rs-24/-,Spices,Whole spices,Methi,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110026000050,Souff 50 Gms.Rs-20/-,Spices,Whole spices,Souff,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110026000100,Souff 100 Gms.Rs-40/-,Spices,Whole spices,Souff,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110016000100,Kala Jeera 100 Gms.Rs-48/-,Spices,Whole spices,Kala Jeera,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110022000050,Panch Foran 50 Gms.Rs-19/-,Spices,Whole spices,Panch Foran,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110022000100,Panch Foran 100 Gms.Rs-38/-,Spices,Whole spices,Panch Foran,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110015000050,Jeera 50 Gms.Rs-24/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110015000100,Jeera 100 Gms.Rs-48/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110015000200,Jeera 200 Gms.Rs-94/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110015000500,Jeera 500 Gms.Rs-232/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,110031000050,Jeera (Economy) 50 Gms.Rs-18/-,Spices,Whole spices,Jeera (Economy),0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110031000500,Jeera (Economy) 500 Gms.Rs-172/-,Spices,Whole spices,Jeera (Economy),0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,110005000200,Churwa 200 Gms.Rs-20/-,Spices,Whole spices,Churwa,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110005000500,Churwa 500 Gms.Rs47/-,Spices,Whole spices,Churwa,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,110009000050,Dry Red Chilly (Whole) 50 Gms.Rs-20/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110009000100,Dry Red Chilly (Whole) 100 Gms.Rs-40/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110011000050,Garam Masala Whole 50 Gms. Rs-/-76/-,Spices,Whole spices,Garam Masala Whole,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110003000050,Black Pepper 50 Gms.Rs-75/-,Spices,Whole spices,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110003000100,Black Pepper 100 Gms.Rs--150/-,Spices,Whole spices,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110027000050,Tej Patta 50 Gms.Rs-17/-,Spices,Whole spices,Tej Patta,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110008000100,Dhaniya Whole 100 Gms.Rs-37/-,Spices,Whole spices,Dhaniya Whole,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+West Bengal,110007000050,Dalchini 50 Gms Rs-25/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110007000200,Dalchini 200 Gms Rs-98/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110006000200,Cloves 200 Gms Rs-260/-,Spices,Whole spices,Cloves,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110014000050,Javatri 50 Gms Rs-135/-,Spices,Whole spices,Javatri,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,110013000200,Jayphal 200 Gms Rs-225/-,Spices,Whole spices,Jayphal,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110010000200,Elaichi 200 Gms Rs-470/-,Spices,Whole spices,Elaichi,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+West Bengal,110033000500,Sabu Moti Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Moti Dana,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,110024000250,Sabu Bada Dana 250 Gms.Rs-40/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Spices,pcs,Kgs,0.25,,,,0
+West Bengal,110024000500,Sabu Bada Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+West Bengal,220001001000,Soya Badi 1000 Gms.Rs-125/-,Spices,Whole spices,Soya Badi,0,Y,N,Spices,pcs,Kgs,1,,,,0
+West Bengal,110016000050,Kala Jeera 50 Gms.Rs-24/-,Spices,Whole spices,Kala Jeera,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+West Bengal,130004000200,Masala Papad (6)MM 200 Gms.Rs-52/-,Common,Papad,Masala Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+West Bengal,130011000480,Sago Papad 480Gms.Rs-150/-,Common,Papad,Sago Papad,0,Y,N,Common,pcs,Kgs,0.48,,,,0
+West Bengal,110025000100,Sago Papad (Box) 100 GMS Rs-32/-,Common,Papad,Sago Papad,0,Y,N,Common,pcs,Kgs,0.1,,,,0
+West Bengal,130010000200,Punjabi Masala Papd 200 Gms.Rs-82/-,Common,Papad,Punjabi Masala Papd,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+West Bengal,130012000200,Sada Papad (6)MM 200 Gms.Rs-48/-,Common,Papad,Sada Papad (6)MM,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+West Bengal,130012000500,Sada Papad (9)MM 500 Gms.Rs-115/-,Common,Papad,Sada Papad (9)MM,0,Y,N,Common,pcs,Kgs,0.5,,,,0
+Guwahati,160001000250,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Guwahati,160001000500,Jam Mango 500 Gms.RS-115/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Guwahati,160002000250,Jam Mixed Fruit 250 Gms.Rs-65/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Guwahati,160002000500,Jam Mixed Fruit 500 Gms.Rs-115/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Guwahati,160003000250,Jam Pineapple 250 Gms.Rs-65/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Guwahati,160003000500,Jam Pineapple 500 Gms.Rs-106/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Guwahati,170002000200,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,170002000400,Pickle Mango 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Guwahati,170002001000,Pickle Mango 1000 Gms.Rs-130/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Guwahati,170001000200,Pickle Green Chilly 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,170001000400,Pickle Green Chilly 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Guwahati,170003000200,Pickle Mixed 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,170003000400,Pickle Mixed 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Guwahati,170003001000,Pickle Mixed 1000 Gms.Rs-130/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Guwahati,150002000018,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Guwahati,150002000040,Alu Bhujia 36 Gms.Rs-10/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Guwahati,150004000018,Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Guwahati,150004000040,Bhujia 36 Gms.Rs-10/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Guwahati,150004000200,Bhujia 200 Gms.Rs-50/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,150005000015,Moong Dal 15 Gms.Rs-5/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.015,,,,0
+Guwahati,150005000040,Moong Dal 36 Gms.Rs-10/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Guwahati,150001000018,All in One 18 Gms.Rs-5/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Guwahati,150001000040,All in One 36 Gms.Rs-10/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Guwahati,150001000200,All in One 200 Gms.Rs-50/-,Food Products,Snacks,All in One 2,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,150003000018,Badam Pakori 18 Gms.Rs-5/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Guwahati,150003000040,Badam Pakori 36 Gms.Rs-10/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Guwahati,210001000200,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,210001000400,Soan Papdi 400 Gms.Rs-120/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Guwahati,210003001000,Gulab Jamun 1 Kg.Rs-210/-,Food Products,Sweets,Gulab Jamun,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Guwahati,210002001000,Rasgulla 1 Kg.Rs-210/-,Food Products,Sweets,Rasgulla,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Guwahati,190001000350,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Guwahati,190001000700,Mustard Kasundi 700 Gms.Rs-92/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Guwahati,200001000350,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Guwahati,200002000700,Non Fruit Vinegar700ML.Rs-55/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Guwahati,180003000200,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,180003000500,Sauce Tomato 500 Gms.Rs-80/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Guwahati,180003001000,Sauce Tomato 1000 Gms.Rs-130/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Guwahati,180004000200,Sauce Tomato Chilly 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,180004000500,Sauce Tomato Chilly 500 Gms.Rs-80/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Guwahati,180004001000,Sauce Tomato Chilly 1000 Gms.Rs-130/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Guwahati,180001000200,Sauce Green Chilly 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,180001000700,Sauce Green Chilly 700 Gms.Rs-82/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Guwahati,180002000200,Sauce Soya 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Guwahati,180002000700,Sauce Soya 700 Gms.Rs-82/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Guwahati,140001000025,Chaat Masal 50 Gms.Rs-15/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,140002000025,Chole Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Chole Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,140006000025,Sabji Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Sabji Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,140003000025,Badshashi Garam Masala 25 Gms.Rs-40/-,Spices,Blended Spices,Badshashi Garam Masala,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Guwahati,110018000025,Kasuri Methi 25 Gms.RS-25/-,Spices,Blended Spices,Kasuri Methi,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Guwahati,120004000025,Black Pepper Powder 25 Gms.Rs-41/-,Spices,Powder Spices,Black Pepper Powder,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Guwahati,120006000050,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,120006000100,Haldi Powder 100 Gms.Rs-28/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,120006000200,Haldi Powder 200 Gms.Rs-54/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,120006000500,Haldi Powder 500 Gms.Rs-132/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,120003000050,Jeera Powder 50 Gms.Rs-25/-,Spices,Powder Spices,Jeera Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,120002000050,Dhaniya Powder 50 Gms.Rs-16/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,120002000500,Dhaniya Powder 500 Gms.Rs-152/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,120001000050,Chilly Powder 50 Gms.Rs-18/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,120001000100,Chilly Powder 100 Gms.Rs-36/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,120001000200,Chilly Powder 200 Gms.Rs-70/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,120005000500,Chilly Powder 500 Gms.Rs-178/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,110106000000,Jeera Rs-2/-,Spices,Pouch,Jeera,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Guwahati,110105000000,Isabgol.Rs- 5/-,Spices,Pouch,Isabgol,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Guwahati,110107000000,Poppy Seed .Rs-5/-,Spices,Pouch,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Guwahati,110030000000,Soya badi Rs.10/-,Spices,Pouch,Soya badi,0,Y,N,Spices,pcs,Kgs,0.08,,,,0
+Guwahati,120103000000,Haldi Powder Rs-2/-,Spices,Pouch,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.006,,,,0
+Guwahati,120100000000,Chilly Powder Rs-2/-,Spices,Pouch,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.006,,,,0
+Guwahati,120102000000,Jeera Powder Rs-2/-,Spices,Pouch,Jeera Powder,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Guwahati,130100000000,Masala Papad ( small ) RS. 10,Common,Pouch,Masala Papad,0,Y,N,Common,pcs,Kgs,0.055,,,,0
+Guwahati,110012000050,Isabgol 50 Gms.Rs-50/-,Spices,Whole spices,Isabgol,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110023000050,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110023000100,Poppy Seed 100 Gms.Rs-98/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110023000200,Poppy Seed 200 Gms.Rs-194/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,110032000050,Poppy (Economy) 50 Gms.Rs-40/-,Spices,Whole spices,Poppy Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110002000050,Ajwain (Economy) 50 Gms.Rs-17/-,Spices,Whole spices,Ajwain Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110002000500,Ajwain (Economy) 500 Gms.Rs-162/-,Spices,Whole spices,Ajwain Economy,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,110001000050,Ajwain 50 Gms.Rs-23/-,Spices,Whole spices,Ajwain,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110001000100,Ajwain 100 Gms.Rs-46/-,Spices,Whole spices,Ajwain,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110020000100,Red Mustard Seed 100 Gms.Rs-19/-,Spices,Whole spices,Red Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110021000100,Yellow Mustard Seed 100 Gms.Rs-20/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110018000100,Methi 100 Gms.Rs-26/-,Spices,Whole spices,Methi,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110026000050,Souff 50 Gms.Rs-21/-,Spices,Whole spices,Souff,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110026000100,Souff 100 Gms.Rs-42/-,Spices,Whole spices,Souff,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110016000050,Kala Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Kala Jeera,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110016000100,Kala Jeera 100 Gms.Rs-50/-,Spices,Whole spices,Kala Jeera,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110022000050,Panch Foran 50 Gms.Rs-20/-,Spices,Whole spices,Panch Foran,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110022000100,Panch Foran 100 Gms.Rs-40/-,Spices,Whole spices,Panch Foran,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110015000050,Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110015000100,Jeera 100 Gms.Rs-50/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110015000200,Jeera 200 Gms.Rs-90/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,110015000500,Jeera 500 Gms.Rs-242/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,110031000050,Jeera (Economy) 50 Gms.Rs-19/-,Spices,Whole spices,Jeera Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110031000500,Jeera (Economy) 500 Gms.Rs-182/-,Spices,Whole spices,Jeera Economy,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,220001001000,Soya Bari 1000 Gms.Rs-130/-,Spices,Whole spices,Soya Bari,0,Y,N,Spices,pcs,Kgs,1,,,,0
+Guwahati,110024000250,Sabu Bada Dana 250 Gms.Rs-40/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Spices,pcs,Kgs,0.25,,,,0
+Guwahati,110024000500,Sabu Bada Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,110033000500,Sabu Moti Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Moti Dana,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,110005000200,Churwa 200 Gms.Rs-24/-,Spices,Whole spices,Churwa,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,110005000500,Churwa 500 Gms.Rs-57/-,Spices,Whole spices,Churwa,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Guwahati,110009000050,Dry Red Chilly (Whole) 50 Gms.Rs-21/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110009000100,Dry Red Chilly (Whole) 100 Gms.Rs-42/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110003000050,Black Pepper 50 Gms.Rs-76/-,Spices,Whole spices,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110003000100,Black Pepper 100 Gms.Rs-152/-,Spices,Whole spices,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110027000050,Tej Patta 50 Gms.Rs-18/-,Spices,Whole spices,Tej Patta,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110008000100,Dhaniya Whole 100 Gms.Rs-39/-,Spices,Whole spices,Dhaniya Whole,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110011000050,Garam Masala Whole 50 Gms Rs-77/-,Spices,Whole spices,Garam Masala Whole,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110007000050,Dalchini 50 Gms Rs-22/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110007000100,Dalchini 100 Gms Rs-39/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Guwahati,110007000200,Dalchini 200 Gms Rs-102/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,110027000100,Telpatta 50 Gms Rs-18/-,Spices,Whole spices,Telpatta,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110006000200,Cloves 200 Gms Rs-264/-,Spices,Whole spices,Cloves,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,110014000050,Javatri 50 Gms Rs-136/-,Spices,Whole spices,Javatri,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Guwahati,110013000200,Jayphal 200 Gms Rs-229/-,Spices,Whole spices,Jayphal,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,110010000200,Elaichi 200 Gms Rs-470/-,Spices,Whole spices,Elaichi,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Guwahati,130004000200,Masala Papad 200 Gms.Rs-60/-,Common,Papad,Masala Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Guwahati,130011000480,Sago Papad 480Gms.Rs-150/-,Common,Papad,Sago Papad,0,Y,N,Common,pcs,Kgs,0.48,,,,0
+Guwahati,110025000100,Sago Papad (Box) 100 GMS Rs-35/-,Common,Papad,Sago Papad,0,Y,N,Common,pcs,Kgs,0.1,,,,0
+Guwahati,130010000200,Punjabi Masala Papd 200 Gms.Rs-100/-,Common,Papad,Punjabi Masala Papd,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Guwahati,130012000200,Plain Papad 200 Gms.Rs-55/-,Common,Papad,Plain Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Guwahati,130012000500,Plain Papad 500 Gms.Rs-120/-,Common,Papad,Plain Papad,0,Y,N,Common,pcs,Kgs,0.5,,,,0
+Guwahati,130001000200,Chana Masala Papad 200Gms. Rs-70/-,Common,Papad,Chana Masala Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Odisha,160001000250,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Odisha,160001000500,Jam Mango 500 Gms.RS-115/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Odisha,160002000250,Jam Mixed Fruit 250 Gms.Rs-65/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Odisha,160002000500,Jam Mixed Fruit 500 Gms.Rs-115/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Odisha,160003000250,Jam Pineapple 250 Gms.Rs-65/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Odisha,160003000500,Jam Pineapple 500 Gms.Rs-106/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Odisha,170002000200,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,170002000400,Pickle Mango 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Odisha,170002001000,Pickle Mango 1000 Gms.Rs-130/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Odisha,170001000200,Pickle Green Chilly 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,170001000400,Pickle Green Chilly 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Odisha,170003000200,Pickle Mixed 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,170003000400,Pickle Mixed 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Odisha,170003001000,Pickle Mixed 1000 Gms.Rs-130/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Odisha,150002000018,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Odisha,150002000040,Alu Bhujia 36 Gms.Rs-10/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Odisha,150004000018,Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Odisha,150004000040,Bhujia 36 Gms.Rs-10/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Odisha,150004000200,Bhujia 200 Gms.Rs-50/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,150005000015,Moong Dal 15 Gms.Rs-5/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.015,,,,0
+Odisha,150005000040,Moong Dal 36 Gms.Rs-10/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Odisha,150001000018,All in One 18 Gms.Rs-5/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Odisha,150001000040,All in One 36 Gms.Rs-10/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Odisha,150001000200,All in One 200 Gms.Rs-50/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,150003000018,Badam Pakori 18 Gms.Rs-5/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Odisha,150003000040,Badam Pakori 36 Gms.Rs-10/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Odisha,210001000200,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,210001000400,Soan Papdi 400 Gms.Rs-120/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Odisha,210003001000,Gulab Jamun 1 Kg.Rs-210/-,Food Products,Sweets,Gulab Jamun,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Odisha,210002001000,Rasgulla 1 Kg.Rs-210/-,Food Products,Sweets,Rasgulla,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Odisha,190001000350,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Odisha,190001000700,Mustard Kasundi 700 Gms.Rs-92/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Odisha,200001000350,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Odisha,200002000700,Non Fruit Vinegar700ML.Rs-55/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Odisha,180003000200,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,180003000500,Sauce Tomato 500 Gms.Rs-80/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Odisha,180003001000,Sauce Tomato 1000 Gms.Rs-130/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Odisha,180004000200,Sauce Tomato Chilly 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,180004000500,Sauce Tomato Chilly 500 Gms.Rs-80/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Odisha,180004001000,Sauce Tomato Chilly 1000 Gms.Rs-130/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Odisha,180001000200,Sauce Green Chilly 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,180001000700,Sauce Green Chilly 700 Gms.Rs-82/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Odisha,180002000200,Sauce Soya 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Odisha,180002000700,Sauce Soya 700 Gms.Rs-82/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Odisha,140001000025,Chaat Masal 50 Gms.Rs-15/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,140002000025,Chole Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Chole Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,140006000025,Sabji Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Sabji Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,140003000025,Badshashi Garam Masala 25 Gms.Rs-40/-,Spices,Blended Spices,Badshashi Garam Masala,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Odisha,110018000025,Kasuri Methi 25 Gms.RS-25/-,Spices,Blended Spices,Kasuri Methi,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Odisha,120004000025,Black Pepper Powder 25 Gms.Rs-41/-,Spices,Powder Spices,Black Pepper Powder,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Odisha,120006000050,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,120006000100,Haldi Powder 100 Gms.Rs-28/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,120006000200,Haldi Powder 200 Gms.Rs-54/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,120006000500,Haldi Powder 500 Gms.Rs-132/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,120003000050,Jeera Powder 50 Gms.Rs-25/-,Spices,Powder Spices,Jeera Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,120002000050,Dhaniya Powder 50 Gms.Rs-16/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,120002000500,Dhaniya Powder 500 Gms.Rs-152/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,120001000050,Chilly Powder 50 Gms.Rs-18/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,120001000100,Chilly Powder 100 Gms.Rs-36/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,120001000200,Chilly Powder 200 Gms.Rs-70/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,120005000500,Chilly Powder 500 Gms.Rs-178/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,110106000000,Jeera Rs-2/-,Spices,Pouch,Jeera,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Odisha,110105000000,Isabgol.Rs- 5/-,Spices,Pouch,Isabgol,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Odisha,110107000000,Poppy Seed .Rs-5/-,Spices,Pouch,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Odisha,110030000000,Soya badi Rs.10/-,Spices,Pouch,Soya badi,0,Y,N,Spices,pcs,Kgs,0.08,,,,0
+Odisha,120103000000,Haldi Powder Rs-2/-,Spices,Pouch,Haldi Powder,0,Y,N,Spices,pcs,Kgs,0.006,,,,0
+Odisha,120100000000,Chilly Powder Rs-2/-,Spices,Pouch,Chilly Powder,0,Y,N,Spices,pcs,Kgs,0.006,,,,0
+Odisha,120102000000,Jeera Powder Rs-2/-,Spices,Pouch,Jeera Powder,0,Y,N,Spices,pcs,Kgs,0.005,,,,0
+Odisha,130100000000,Masala Papad ( small ) RS. 10,Common,Pouch,Masala Papad,0,Y,N,Common,pcs,Kgs,0.055,,,,0
+Odisha,110012000050,Isabgol 50 Gms.Rs-50/-,Spices,Whole spices,Isabgol,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110023000050,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110023000100,Poppy Seed 100 Gms.Rs-98/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110023000200,Poppy Seed 200 Gms.Rs-194/-,Spices,Whole spices,Poppy Seed,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,110032000050,Poppy (Economy) 50 Gms.Rs-40/-,Spices,Whole spices,Poppy Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110002000050,Ajwain (Economy) 50 Gms.Rs-17/-,Spices,Whole spices,Ajwain Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110002000500,Ajwain (Economy) 500 Gms.Rs-162/-,Spices,Whole spices,Ajwain Economy,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,110001000050,Ajwain 50 Gms.Rs-23/-,Spices,Whole spices,Ajwain,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110001000100,Ajwain 100 Gms.Rs-46/-,Spices,Whole spices,Ajwain,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110020000100,Red Mustard Seed 100 Gms.Rs-19/-,Spices,Whole spices,Red Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110021000100,Yellow Mustard Seed 100 Gms.Rs-20/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110018000100,Methi 100 Gms.Rs-26/-,Spices,Whole spices,Methi,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110026000050,Souff 50 Gms.Rs-21/-,Spices,Whole spices,Souff,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110026000100,Souff 100 Gms.Rs-42/-,Spices,Whole spices,Souff,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110016000050,Kala Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Kala Jeera,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110016000100,Kala Jeera 100 Gms.Rs-50/-,Spices,Whole spices,Kala Jeera,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110022000050,Panch Foran 50 Gms.Rs-20/-,Spices,Whole spices,Panch Foran,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110022000100,Panch Foran 100 Gms.Rs-40/-,Spices,Whole spices,Panch Foran,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110015000050,Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110015000100,Jeera 100 Gms.Rs-50/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110015000200,Jeera 200 Gms.Rs-90/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,110015000500,Jeera 500 Gms.Rs-242/-,Spices,Whole spices,Jeera,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,110031000050,Jeera (Economy) 50 Gms.Rs-19/-,Spices,Whole spices,Jeera Economy,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110031000500,Jeera (Economy) 500 Gms.Rs-182/-,Spices,Whole spices,Jeera Economy,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,220001001000,Soya Bari 1000 Gms.Rs-130/-,Spices,Whole spices,Soya Bari,0,Y,N,Spices,pcs,Kgs,1,,,,0
+Odisha,110024000250,Sabu Bada Dana 250 Gms.Rs-40/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Spices,pcs,Kgs,0.25,,,,0
+Odisha,110024000500,Sabu Bada Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,110033000500,Sabu Moti Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Moti Dana,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,110005000200,Churwa 200 Gms.Rs-24/-,Spices,Whole spices,Churwa,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,110005000500,Churwa 500 Gms.Rs-57/-,Spices,Whole spices,Churwa,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Odisha,110009000050,Dry Red Chilly (Whole) 50 Gms.Rs-21/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110009000100,Dry Red Chilly (Whole) 100 Gms.Rs-42/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110003000050,Black Pepper 50 Gms.Rs-76/-,Spices,Whole spices,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110003000100,Black Pepper 100 Gms.Rs-152/-,Spices,Whole spices,Black Pepper,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110027000050,Tej Patta 50 Gms.Rs-18/-,Spices,Whole spices,Tej Patta,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110008000100,Dhaniya Whole 100 Gms.Rs-39/-,Spices,Whole spices,Dhaniya Whole,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110011000050,Garam Masala Whole 50 Gms Rs-77/-,Spices,Whole spices,Garam Masala Whole,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110007000050,Dalchini 50 Gms Rs-22/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110007000100,Dalchini 100 Gms Rs-39/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Odisha,110007000200,Dalchini 200 Gms Rs-102/-,Spices,Whole spices,Dalchini,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,110027000100,Telpatta 50 Gms Rs-18/-,Spices,Whole spices,Telpatta,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110006000200,Cloves 200 Gms Rs-264/-,Spices,Whole spices,Cloves,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,110014000050,Javatri 50 Gms Rs-136/-,Spices,Whole spices,Javatri,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Odisha,110013000200,Jayphal 200 Gms Rs-229/-,Spices,Whole spices,Jayphal,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,110010000200,Elaichi 200 Gms Rs-470/-,Spices,Whole spices,Elaichi,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Odisha,130004000200,Masala Papad 200 Gms.Rs-60/-,Common,Papad,Masala Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Odisha,130011000480,Sago Papad 480Gms.Rs-150/-,Common,Papad,Sago Papad,0,Y,N,Common,pcs,Kgs,0.48,,,,0
+Odisha,110025000100,Sago Papad (Box) 100 GMS Rs-35/-,Common,Papad,Sago Papad,0,Y,N,Common,pcs,Kgs,0.1,,,,0
+Odisha,130010000200,Punjabi Masala Papd 200 Gms.Rs-100/-,Common,Papad,Punjabi Masala Papd,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Odisha,130012000200,Plain Papad 200 Gms.Rs-55/-,Common,Papad,Plain Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+Odisha,130012000500,Plain Papad 500 Gms.Rs-120/-,Common,Papad,Plain Papad,0,Y,N,Common,pcs,Kgs,0.5,,,,0
+Odisha,130001000200,Chana Masala Papad 200Gms. Rs-70/-,Common,Papad,Chana Masala Papad,0,Y,N,Common,pcs,Kgs,0.2,,,,0
+West Bengal,110031000025,Yellow Mustard Seed 25 Gms.Rs-18/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+West Bengal,110030000025,Yellow Mustard Seed 25 Gms.Rs-5/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+West Bengal,110020000025,Red Mustard Seed 25 Gms.Rs-5/-,Spices,Whole spices,Red Mustard Seed,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Odisha,110033000250,Sabu Moti Dana250 Gms.Rs-40/-,Spices,Whole spices,Sabu dana,0,Y,N,Spices,pcs,Kgs,0.25,,,,0
+West Bengal,110033000250,Sabu Moti Dana250 Gms.Rs-40/-,Spices,Whole spices,Sabu dana,0,Y,N,Spices,pcs,Kgs,0.25,,,,0
+Guwahati,110033000250,Sabu Moti Dana250 Gms.Rs-40/-,Spices,Whole spices,Sabu dana,0,Y,N,Spices,pcs,Kgs,0.25,,,,0
+Bangalore,160001000000,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.250,,,,0
+Bangalore,160002000000,Jam Mixed Fruit 250 Gms.Rs-65/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.250,,,,0
+Bangalore,160003000000,Jam Pineapple 250 Gms.Rs-65/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.250,,,,0
+Bangalore,170002000000,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,170001000000,Pickle Green Chilly 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,170003000000,Pickle Mixed 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,150002000000,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150004000000,Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150005000000,Moong Dal 18 Gms.Rs-5/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150001000000,All in One 18 Gms.Rs-5/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150003000000,Badam Pakori 18 Gms.Rs-5/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,190001000000,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.350,,,,0
+Bangalore,200001000000,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.350,,,,0
+Bangalore,200002000000,Non Fruit Vinegar700ML.Rs-55/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.700,,,,0
+Bangalore,180003000000,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,180004000000,Sauce Tomato Chilly 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,180001000000,Sauce Green Chilly 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,180002000000,Sauce Soya 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,210001000000,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,210003000000,Gulab Jamun 1 Kg.Rs-210/-,Food Products,Sweets,Gulab,0,Y,N,Food Products,pcs,Kgs,1.000,,,,0
+Bangalore,210002000000,Rasgulla 1 Kg.Rs-210/-,Food Products,Sweets,Rasgulla,0,Y,N,Food Products,pcs,Kgs,1.000,,,,0
+Bangalore,120006000000,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,120003000000,Jeera Powder 50 Gms.Rs-25/-,Spices,Powder Spices,Jeera Powder,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,120002000000,Dhaniya Powder 50 Gms.Rs-16/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,120001000000,Chilly Powder 50 Gms.Rs-18/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110023000000,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110032000000,Poppy Seed (Economy) 50 Gms.Rs-44/-,Spices,Whole spices,Poppy Seed (Economy),0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110002000000,Ajwain (Economy) 50 Gms.Rs-17/-,Spices,Whole spices,Ajwain (Economy),0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110001000000,Ajwain 50 Gms.Rs-23/-,Spices,Whole spices,Ajwain,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110020000000,Red Mustard Seed 100 Gms.Rs-19/-,Spices,Whole spices,Red Mustard Seed,0,Y,N,Food Products,pcs,Kgs,0.100,,,,0
+Bangalore,110021000000,Yellow Mustard Seed 100 Gms.Rs-20/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Food Products,pcs,Kgs,0.100,,,,0
+Bangalore,110018000000,Methi 100 Gms.Rs-26/-,Spices,Whole spices,Methi,0,Y,N,Food Products,pcs,Kgs,0.100,,,,0
+Bangalore,110026000000,Souff 50 Gms.Rs-21/-,Spices,Whole spices,Souff,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110016000000,Kala Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Kala Jeera,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110022000000,Panch Foran 50 Gms.Rs-20/-,Spices,Whole spices,Panch Foran,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110015000000,Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Jeera,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110031000000,Jeera (Economy) 50 Gms.Rs-19/-,Spices,Whole spices,Jeera (Economy),0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110005000000,Churwa 200 Gms.Rs-24./-,Spices,Whole spices,Churwa,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,110009000000,Dry Red Chilly (Whole) 50 Gms.Rs-21/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110011000000,Garam Masala Whole 50 Gms. Rs-/-77/-,Spices,Whole spices,Garam Masala Whole,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110003000000,Black Pepper 50 Gms.Rs-76/-,Spices,Whole spices,Black Pepper,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110027000000,Tej Patta 50 Gms.Rs-18/-,Spices,Whole spices,Tej Patta,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110008000000,Dhaniya Whole 100 Gms.Rs-39/-,Spices,Whole spices,Dhaniya Whole,0,Y,N,Food Products,pcs,Kgs,0.100,,,,0
+Bangalore,110007000000,Dalchini 50 Gms Rs-25/-,Spices,Whole spices,Dalchini,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,220001000000,Soya Badi 1000 Gms.Rs-130/-,Spices,Whole spices,Soya Badi,0,Y,N,Food Products,pcs,Kgs,1.000,,,,0
+Bangalore,110105000000,Isabgol.4.5 GMS Rs- 4/-,Spices,Pouch,Isabgol,0,Y,N,Food Products,pcs,Kgs,0.005,,,,0
+Bangalore,110107000000,Poppy Seed  4.5 GmsRs-5/-,Spices,Pouch,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.005,,,,0
+Bangalore,110030000000,Soya badi 80 Gms Rs.10/-,Spices,Pouch,Soya badi,0,Y,N,Food Products,pcs,Kgs,0.080,,,,0
+Bangalore,120103000000,Haldi Powder 6 Gms Rs-2/-,Spices,Pouch,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.006,,,,0
+Bangalore,120100000000,Chilly Powder 6Gms Rs-2/-,Spices,Pouch,Chilly Powder,0,Y,N,Food Products,pcs,Kgs,0.006,,,,0
+Bangalore,120102000000,Jeera Powder 10Gms Rs-5/-,Spices,Pouch,Jeera Powder,0,Y,N,Food Products,pcs,Kgs,0.010,,,,0
+Bangalore,110012000000,Isabgol 50 Gms.Rs-53/-,Spices,Whole spices,Isabgol,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110024000000,Sabu Bada Dana 250 Gms.Rs-40/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Food Products,pcs,Kgs,0.250,,,,0
+Bangalore,110006000000,Cloves 200 Gms Rs-264/-,Spices,Whole spices,Cloves,0,Y,N,Food Products,pcs,Kgs,0.200,,,,0
+Bangalore,110014000000,Javatri 50 Gms Rs-91/-,Spices,Whole spices,Javatri,0,Y,N,Food Products,pcs,Kgs,0.050,,,,0
+Bangalore,110013000000,Jayphal 200 Gms Rs-229/-,Spices,Whole spices,Jayphal,0,Y,N,Spices,pcs,Kgs,0.200,,,,0
+Bangalore,140001000000,Chaat Masal 50 Gms.Rs-30/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.050,,,,0
+Bangalore,140002000000,Chole Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Chole Masala,0,Y,N,Spices,pcs,Kgs,0.050,,,,0
+Bangalore,140006000000,Sabji Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Sabji Masala,0,Y,N,Spices,pcs,Kgs,0.050,,,,0
+Bangalore,140003000000,Badshashi Garam Masala 25 Gms.Rs-40/-,Spices,Blended Spices,Badshashi Garam Masala,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Bangalore,120004000000,Black Pepper Powder 25 Gms.Rs-41/-,Spices,Powder Spices,Black Pepper Powder,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Bangalore,130011000000,Sago Papad 480Gms.Rs-160/-,Common,Papad,Sago Papad,0,Y,N,Spices,pcs,Kgs,0.480,,,,0
+Bangalore,110025000000,Sago Papad (Box) 100 GMS Rs-32/-,Common,Papad,Sago Papad,0,Y,N,Spices,pcs,Kgs,0.100,,,,0
+Bangalore,130012000000,Plain Papad 200 Gms.Rs-55/-,Common,Papad,Plain Papad,0,Y,N,Spices,pcs,Kgs,0.200,,,,0
+Bangalore,130100000000,Masala Papad ( small ) 55 Gms  RS. 10,Common,Papad,Masala Papad,0,Y,N,Spices,pcs,Kgs,0.055,,,,0
+Bangalore,130004000000,Masala Papad 200 Gms.Rs-60/-,Common,Papad,Masala Papad,0,Y,N,Spices,pcs,Kgs,0.200,,,,0
+Bangalore,130010000000,Punjabi Masala Papd 200 Gms.Rs-100/-,Common,Papad,Punjabi Masala Papad,0,Y,N,Spices,pcs,Kgs,0.200,,,,0
+West Bengal,120004000008,Black Pepper Powder 8gm  Rs-10/-,Spices,Black pepper,Pouch,0,Y,N,Spices,1,0.008,0.008,,,,0
+West Bengal,100100000012,Poppy Seed 12gm .Rs-10/-,Spices,Poppy Seed,Pouch,0,Y,N,Spices,1,0.012,0.012,,,,0
+Bangalore,160000000000,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Bangalore,170000000000,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,150000000000,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,190000000000,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Bangalore,200000000000,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Bangalore,180000000000,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,210000000000,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,120000000000,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110000000000,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,220000000000,Soya Badi 1000 Gms.Rs-130/-,Spices,Whole spices,Soya Badi,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,140000000000,Chaat Masal 50 Gms.Rs-30/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Bangalore,130000000000,Sago Papad 480Gms.Rs-160/-,Common,Papad,Sago Papad,0,Y,N,Spices,pcs,Kgs,0.48,,,,0
+Bangalore,160001000250,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Bangalore,160001000500,Jam Mango 500 Gms.RS-115/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,160002000250,Jam Mixed Fruit 250 Gms.Rs-65/-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Bangalore,160002000500,Jam Mixed Fruit 500 Gms.Rs-115-,Food Products,Jam,Jam Mixed Fruit,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,160003000250,Jam Pineapple 250 Gms.Rs-65/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Bangalore,160003000500,Jam Pineapple 500 Gms.Rs-115/-,Food Products,Jam,Jam Pineapple,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,170002000200,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,170002000400,Pickle Mango 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Bangalore,170002001000,Pickle Mango 1000 Gms.Rs-130/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,170001000200,Pickle Green Chilly 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,170001000400,Pickle Green Chilly 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Bangalore,170003000200,Pickle Mixed 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,170003000400,Pickle Mixed 400 Gms.Rs-95/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Bangalore,170003001000,Pickle Mixed 1000 Gms.Rs-130/-,Food Products,Pickle,Pickle Mixed,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,150002000018,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150002000040,Alu Bhujia 36 Gms.Rs-10/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Bangalore,150004000018,Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150004000040,Bhujia 36 Gms.Rs-10/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Bangalore,150004000200,Bhujia 200 Gms.Rs-50/-,Food Products,Snacks,Bhujia,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,150005000040,Moong Dal 36 Gms.Rs-10/-,Food Products,Snacks,Moong Dal,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Bangalore,150001000018,All in One 18 Gms.Rs-5/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150001000040,All in One 36 Gms.Rs-10/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Bangalore,150001000200,All in One 200 Gms.Rs-50/-,Food Products,Snacks,All in One,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,150003000018,Badam Pakori 18 Gms.Rs-5/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+Bangalore,150003000040,Badam Pakori 36 Gms.Rs-10/-,Food Products,Snacks,Badam Pakori,0,Y,N,Food Products,pcs,Kgs,0.036,,,,0
+Bangalore,190001000350,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Bangalore,190001000700,Mustard Kasundi 700 Gms.Rs-92/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Bangalore,200001000350,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+Bangalore,200002000700,Non Fruit Vinegar700ML.Rs-55/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Bangalore,180003000200,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,180003000500,Sauce Tomato 500 Gms.Rs-80/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,180003001000,Sauce Tomato 1000 Gms.Rs-130/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,180004000200,Sauce Tomato Chilly 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,180004000500,Sauce Tomato Chilly 500 Gms.Rs-80/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,180004001000,Sauce Tomato Chilly 1000 Gms.Rs-130/-,Food Products,Sauce,Sauce Tomato Chilly,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,180001000200,Sauce Green Chilly 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,180001000700,Sauce Green Chilly 700 Gms.Rs-82/-,Food Products,Sauce,Sauce Green Chilly,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Bangalore,180002000200,Sauce Soya 200 Gms.Rs-45/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,180002000700,Sauce Soya 700 Gms.Rs-55/-,Food Products,Sauce,Sauce Soya,0,Y,N,Food Products,pcs,Kgs,0.7,,,,0
+Bangalore,210001000200,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,210001000400,Soan Papdi 400 Gms.Rs-120/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.4,,,,0
+Bangalore,210003001000,Gulab Jamun 1 Kg.Rs-210/-,Food Products,Sweets,Gulab,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,210002001000,Rasgulla 1 Kg.Rs-210/-,Food Products,Sweets,Rasgulla,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+Bangalore,120006000050,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,120006000100,Haldi Powder 100 Gms.Rs-28/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,120006000200,Haldi Powder 200 Gms.Rs-54/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,120006000500,Haldi Powder 500 Gms.Rs-132/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,120003000050,Jeera Powder 50 Gms.Rs-25/-,Spices,Powder Spices,Jeera Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,120002000050,Dhaniya Powder 50 Gms.Rs-16/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,120002000500,Dhaniya Powder 500 Gms.Rs-152/-,Spices,Powder Spices,Dhaniya Powder,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,120001000050,Chilly Powder 50 Gms.Rs-18/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,120001000100,Chilly Powder 100 Gms.Rs-36/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,120001000200,Chilly Powder 200 Gms.Rs-70/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,120005000500,Chilly Powder 500 Gms.Rs-178/-,Spices,Powder Spices,Chilly Powder,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,110023000050,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110023000100,Poppy Seed 100 Gms.Rs-98/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110023000200,Poppy Seed 200 Gms.Rs-194/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,110002000050,Ajwain (Economy) 50 Gms.Rs-17/-,Spices,Whole spices,Ajwain (Economy),0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110002000500,Ajwain (Economy) 500 Gms.Rs-162/-,Spices,Whole spices,Ajwain (Economy),0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,110001000050,Ajwain 50 Gms.Rs-23/-,Spices,Whole spices,Ajwain,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110001000100,Ajwain 100 Gms.Rs-46/-,Spices,Whole spices,Ajwain,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110020000100,Red Mustard Seed 100 Gms.Rs-19/-,Spices,Whole spices,Red Mustard Seed,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110021000100,Yellow Mustard Seed 100 Gms.Rs-20/-,Spices,Whole spices,Yellow Mustard Seed,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110018000100,Methi 100 Gms.Rs-26/-,Spices,Whole spices,Methi,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110026000050,Souff 50 Gms.Rs-21/-,Spices,Whole spices,Souff,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110026000100,Souff 100 Gms.Rs-42/-,Spices,Whole spices,Souff,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110016000050,Kala Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Kala Jeera,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110016000100,Kala Jeera 100 Gms.Rs-50/-,Spices,Whole spices,Kala Jeera,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110022000050,Panch Foran 50 Gms.Rs-20/-,Spices,Whole spices,Panch Foran,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110022000100,Panch Foran 100 Gms.Rs-40/-,Spices,Whole spices,Panch Foran,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110015000050,Jeera 50 Gms.Rs-25/-,Spices,Whole spices,Jeera,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110015000100,Jeera 100 Gms.Rs-50/-,Spices,Whole spices,Jeera,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110015000200,Jeera 200 Gms.Rs-98/-,Spices,Whole spices,Jeera,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,110015000500,Jeera 500 Gms.Rs-242/-,Spices,Whole spices,Jeera,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,110031000500,Jeera (Economy) 500 Gms.Rs-182/-,Spices,Whole spices,Jeera (Economy),0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,110005000500,Churwa 500 Gms.Rs57/-,Spices,Whole spices,Churwa,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,110009000050,Dry Red Chilly (Whole) 50 Gms.Rs-21/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110009000100,Dry Red Chilly (Whole) 100 Gms.Rs-42/-,Spices,Whole spices,Dry Red Chilly (Whole),0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110003000050,Black Pepper 50 Gms.Rs-76/-,Spices,Whole spices,Black Pepper,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110003000100,Black Pepper 100 Gms.Rs--152/-,Spices,Whole spices,Black Pepper,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110027000050,Tej Patta 50 Gms.Rs-18/-,Spices,Whole spices,Tej Patta,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110008000100,Dhaniya Whole 100 Gms.Rs-39/-,Spices,Whole spices,Dhaniya Whole,0,Y,N,Food Products,pcs,Kgs,0.1,,,,0
+Bangalore,110007000050,Dalchini 50 Gms Rs-25/-,Spices,Whole spices,Dalchini,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+Bangalore,110007000200,Dalchini 200 Gms Rs-98/-,Spices,Whole spices,Dalchini,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,110024000250,Sabu Bada Dana 250 Gms.Rs-40/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+Bangalore,110024000500,Sabu Bada Dana 500 Gms.Rs-80/-,Spices,Whole spices,Sabu Bada Dana,0,Y,N,Food Products,pcs,Kgs,0.5,,,,0
+Bangalore,110006000200,Cloves 200 Gms Rs-264/-,Spices,Whole spices,Cloves,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+Bangalore,110013000200,Jayphal 200 Gms Rs-229/-,Spices,Whole spices,Jayphal,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Bangalore,140002000025,Chole Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Chole Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Bangalore,140006000025,Sabji Masala 50 Gms.Rs-30/-,Spices,Blended Spices,Sabji Masala,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+Bangalore,140003000025,Badshashi Garam Masala 25 Gms.Rs-40/-,Spices,Blended Spices,Badshashi Garam Masala,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Bangalore,110018000025,Kasuri Methi 25 Gms.RS-25/-,Spices,Blended Spices,Kasuri Methi,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Bangalore,120004000025,Black Pepper Powder 25 Gms.Rs-41/-,Spices,Powder Spices,Black Pepper Powder,0,Y,N,Spices,pcs,Kgs,0.025,,,,0
+Bangalore,110025000100,Sago Papad (Box) 100 GMS Rs-32/-,Common,Papad,Sago Papad,0,Y,N,Spices,pcs,Kgs,0.1,,,,0
+Bangalore,130012000200,Plain Papad 200 Gms.Rs-55/-,Common,Papad,Plain Papad,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Bangalore,130012000500,Plain Papad 500 Gms.Rs-120/-,Common,Papad,Plain Papad,0,Y,N,Spices,pcs,Kgs,0.5,,,,0
+Bangalore,130004000200,Masala Papad 200 Gms.Rs-60/-,Common,Papad,Masala Papad,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+Bangalore,130010000200,Punjabi Masala Papd 200 Gms.Rs-100/-,Common,Papad,Punjabi Masala Papad,0,Y,N,Spices,pcs,Kgs,0.2,,,,0
+,1.6E+11,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+,1.7E+11,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+,1.5E+11,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+,1.9E+11,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+,2E+11,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+,1.8E+11,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+,2.1E+11,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+,1.2E+11,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+,1.1E+11,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+,2.2E+11,Soya Badi 1000 Gms.Rs-130/-,Spices,Whole spices,Soya Badi,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+,1.4E+11,Chaat Masal 50 Gms.Rs-30/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+,1.3E+11,Sago Papad 480Gms.Rs-160/-,Common,Papad,Sago Papad,0,Y,N,Spices,pcs,Kgs,0.48,,,,0
+,1.60E+11,Jam Mango 250 Gms.Rs-65/-,Food Products,Jam,Jam Mango,0,Y,N,Food Products,pcs,Kgs,0.25,,,,0
+,1.70E+11,Pickle Mango 200 Gms.Rs-50/-,Food Products,Pickle,Pickle Mango,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+,1.50E+11,Alu Bhujia 18 Gms.Rs-5/-,Food Products,Snacks,Alu Bhujia,0,Y,N,Food Products,pcs,Kgs,0.018,,,,0
+,1.90E+11,Mustard Kasundi 350 Gms.Rs-50/-,Food Products,Kasundi,Mustard Kasundi,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+,2.00E+11,Non Fruit Vinegar 350ML.Rs-35/-,Food Products,Vinegar,Non Fruit Vinegar,0,Y,N,Food Products,pcs,Kgs,0.35,,,,0
+,1.80E+11,Sauce Tomato 200 Gms.Rs-50/-,Food Products,Sauce,Sauce Tomato,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+,2.10E+11,Soan Papdi 200 Gms.Rs-60/-,Food Products,Sweets,Soan Papdi,0,Y,N,Food Products,pcs,Kgs,0.2,,,,0
+,1.20E+11,Haldi Powder 50 Gms.Rs-14/-,Spices,Powder Spices,Haldi Powder,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+,1.10E+11,Poppy Seed 50 Gms.Rs-49/-,Spices,Whole spices,Poppy Seed,0,Y,N,Food Products,pcs,Kgs,0.05,,,,0
+,2.20E+11,Soya Badi 1000 Gms.Rs-130/-,Spices,Whole spices,Soya Badi,0,Y,N,Food Products,pcs,Kgs,1,,,,0
+,1.40E+11,Chaat Masal 50 Gms.Rs-30/-,Spices,Blended Spices,Chaat Masal,0,Y,N,Spices,pcs,Kgs,0.05,,,,0
+,1.30E+11,Sago Papad 480Gms.Rs-160/-,Common,Papad,Sago Papad,0,Y,N,Spices,pcs,Kgs,0.48,,,,0
+West Bengal,1600000200,Disco Papad 200 Gms.Rs-48/-,Common,Papad,Disco Papad,0,Y,N,Spices,pcs,Kgs,0.2,,,,0

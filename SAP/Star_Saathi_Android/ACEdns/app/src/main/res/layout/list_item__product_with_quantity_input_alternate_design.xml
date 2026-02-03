@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:padding="9dp"
+    android:layout_margin="9dp"
+    >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/list_details"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint=""
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:padding="3dp"
+            android:textSize="12sp"
+            />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/etProdQty_new"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/gray_border_gray_bg"
+        android:layout_weight=".75"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:inputType="numberDecimal"
+        android:maxLength="7"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        />
+    <TextView
+        android:id="@+id/tv_input_type"
+        android:layout_width="0dp"
+        android:layout_weight=".75"
+        android:layout_height="wrap_content"
+        android:text="QTY (MT)"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="9dp"
+        android:textSize="12sp"
+        />
+</LinearLayout>

@@ -1,0 +1,164 @@
+[20-Jan-2024 09:59:40 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[20-Jan-2024 09:59:40 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[20-Jan-2024 09:59:40 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[20-Jan-2024 09:59:40 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[20-Jan-2024 09:59:41 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[20-Jan-2024 09:59:41 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[20-Jan-2024 09:59:41 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[20-Jan-2024 09:59:41 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[20-Jan-2024 09:59:41 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[20-Jan-2024 10:00:46 UTC] PHP Warning:  mysql_connect(): Connection timed out in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[22-Jan-2024 13:37:10 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[22-Jan-2024 13:37:10 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[22-Jan-2024 13:37:10 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[22-Jan-2024 13:37:10 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[22-Jan-2024 13:37:12 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[22-Jan-2024 13:37:12 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[22-Jan-2024 13:37:12 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[22-Jan-2024 13:37:12 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[22-Jan-2024 13:37:14 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[22-Jan-2024 13:38:14 UTC] PHP Warning:  mysql_connect(): Connection timed out in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[22-Jan-2024 13:38:25 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[22-Jan-2024 13:39:25 UTC] PHP Warning:  mysql_connect(): Connection timed out in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[04-Feb-2024 07:13:35 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Feb-2024 07:13:35 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Feb-2024 07:13:35 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Feb-2024 07:13:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[04-Feb-2024 07:13:35 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Feb-2024 07:13:35 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Feb-2024 07:13:35 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Feb-2024 07:13:35 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[04-Feb-2024 07:13:35 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[04-Feb-2024 07:14:35 UTC] PHP Warning:  mysql_connect(): Connection timed out in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[26-Jun-2024 13:22:29 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[26-Jun-2024 13:22:29 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[26-Jun-2024 13:22:29 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[26-Jun-2024 13:22:29 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[26-Jun-2024 13:22:30 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[26-Jun-2024 13:22:30 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[26-Jun-2024 17:52:18 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[26-Jun-2024 17:52:18 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[26-Jun-2024 17:52:18 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[26-Jun-2024 17:52:18 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[26-Jun-2024 17:52:19 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[26-Jun-2024 17:52:19 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[17-Aug-2024 08:15:51 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[17-Aug-2024 08:15:51 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[17-Aug-2024 08:15:51 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[17-Aug-2024 08:15:51 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[17-Aug-2024 08:15:51 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[17-Aug-2024 08:15:51 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[17-Aug-2024 08:15:51 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[17-Aug-2024 08:15:51 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[17-Aug-2024 08:15:52 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[17-Aug-2024 08:15:53 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[17-Aug-2024 08:15:55 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[17-Aug-2024 08:15:55 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[25-Oct-2024 04:13:14 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[25-Oct-2024 04:13:14 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[25-Oct-2024 04:13:14 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[25-Oct-2024 04:13:14 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[25-Oct-2024 04:13:14 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[25-Oct-2024 04:13:14 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[25-Oct-2024 04:13:14 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[25-Oct-2024 04:13:14 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[25-Oct-2024 04:13:14 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[25-Oct-2024 04:13:15 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[25-Oct-2024 04:13:15 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[25-Oct-2024 04:13:15 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[04-Nov-2024 18:32:57 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[04-Nov-2024 18:32:57 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[04-Nov-2024 18:32:57 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[04-Nov-2024 18:32:57 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[04-Nov-2024 18:32:59 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[04-Nov-2024 18:32:59 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[11-Nov-2024 13:53:38 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[11-Nov-2024 13:53:38 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[11-Nov-2024 13:53:38 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[11-Nov-2024 13:53:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[11-Nov-2024 13:53:38 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[11-Nov-2024 13:53:38 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[11-Nov-2024 13:53:38 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[11-Nov-2024 13:53:38 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[11-Nov-2024 13:53:39 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[11-Nov-2024 13:53:39 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[11-Nov-2024 13:53:41 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[11-Nov-2024 13:53:41 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[04-Dec-2024 07:56:39 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Dec-2024 07:56:39 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Dec-2024 07:56:39 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[04-Dec-2024 07:56:39 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[04-Dec-2024 07:56:40 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Dec-2024 07:56:40 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Dec-2024 07:56:40 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[04-Dec-2024 07:56:40 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[04-Dec-2024 07:56:40 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[04-Dec-2024 07:56:40 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[04-Dec-2024 07:56:42 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[04-Dec-2024 07:56:42 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[05-Jan-2025 02:23:08 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[05-Jan-2025 02:23:08 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[05-Jan-2025 02:23:08 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[05-Jan-2025 02:23:08 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[05-Jan-2025 02:23:08 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[05-Jan-2025 02:23:08 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[05-Jan-2025 02:23:08 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[05-Jan-2025 02:23:08 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[05-Jan-2025 02:23:08 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[05-Jan-2025 02:23:11 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[05-Jan-2025 02:23:12 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[05-Jan-2025 02:23:12 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[11-Jan-2025 06:10:25 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[11-Jan-2025 06:10:25 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[11-Jan-2025 06:10:25 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[11-Jan-2025 06:10:25 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[11-Jan-2025 06:10:26 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[11-Jan-2025 06:10:26 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[11-Jan-2025 06:10:26 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[11-Jan-2025 06:10:26 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[11-Jan-2025 06:10:26 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[11-Jan-2025 06:10:26 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[11-Jan-2025 06:10:28 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[11-Jan-2025 06:10:28 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[16-Jan-2025 00:30:33 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[16-Jan-2025 00:30:33 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[16-Jan-2025 00:30:33 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[16-Jan-2025 00:30:33 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[16-Jan-2025 00:30:34 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[16-Jan-2025 00:30:34 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[16-Jan-2025 00:30:34 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[16-Jan-2025 00:30:34 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[16-Jan-2025 00:30:34 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[16-Jan-2025 00:30:34 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[16-Jan-2025 00:30:35 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[16-Jan-2025 00:30:35 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[09-May-2025 10:47:52 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[09-May-2025 10:47:52 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[09-May-2025 10:47:52 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 4
+[09-May-2025 10:47:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup-bk-up.php on line 5
+[09-May-2025 10:47:53 UTC] PHP Deprecated:  mysql_query(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[09-May-2025 10:47:53 UTC] PHP Warning:  mysql_query(): Access denied for user ''@'localhost' (using password: NO) in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[09-May-2025 10:47:53 UTC] PHP Warning:  mysql_query(): A link to the server could not be established in /home/starsaathi/public_html/include/config-email-setup.php on line 9
+[09-May-2025 10:47:53 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/starsaathi/public_html/include/config-email-setup.php on line 10
+[09-May-2025 10:47:53 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[09-May-2025 10:47:55 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/config-setup-bk-up.php on line 4
+[09-May-2025 10:47:56 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/starsaathi/public_html/include/dbcon_olds.php on line 9
+[09-May-2025 10:47:56 UTC] PHP Warning:  mysql_connect(): Host '103.87.174.95' is not allowed to connect to this MySQL server in /home/starsaathi/public_html/include/dbcon_olds.php on line 9

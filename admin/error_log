@@ -1,0 +1,10 @@
+[02-Mar-2022 15:37:54 Asia/Kolkata] PHP Fatal error:  Call to undefined function base64() in /home/starsaathi/public_html/admin/send_notification_in_background.php on line 78
+[27-Jun-2022 12:38:13 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 70319088 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[27-Jun-2022 12:38:23 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 70319088 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[18-Jul-2022 14:43:32 Asia/Kolkata] PHP Fatal error:  Call to undefined function base64() in /home/starsaathi/public_html/admin/send_notification_in_background.php on line 78
+[26-Jul-2022 16:17:44 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 74392416 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[31-Jul-2022 14:17:26 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 79850736 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[31-Jul-2022 15:25:33 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 79851072 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[01-Aug-2022 11:02:32 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 79850400 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[01-Aug-2022 11:02:41 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 79850400 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351
+[01-Aug-2022 11:07:46 Asia/Kolkata] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 79850400 bytes) in /home/starsaathi/public_html/admin/order_list.php on line 351

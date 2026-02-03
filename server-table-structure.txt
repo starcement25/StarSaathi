@@ -1,0 +1,592 @@
+--
+-- Table structure for table `access_log`
+--
+
+CREATE TABLE IF NOT EXISTS `access_log` (
+  `access_id` varchar(30) NOT NULL,
+  `access_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `access_type` varchar(255) NOT NULL,
+  `added_data` text,
+  `modified_data` text
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_master`
+--
+
+CREATE TABLE IF NOT EXISTS `admin_master` (
+  `admin_id` int(5) NOT NULL auto_increment,
+  `admin_login` varchar(255) character set latin1 collate latin1_general_ci NOT NULL default '',
+  `admin_pwd` varchar(255) character set latin1 collate latin1_general_ci NOT NULL default '',
+  `admin_email` varchar(255) character set latin1 collate latin1_general_ci NOT NULL default '',
+  PRIMARY KEY  (`admin_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_updation`
+--
+
+CREATE TABLE IF NOT EXISTS `app_updation` (
+  `device_id` varchar(255) NOT NULL,
+  `version_code` varchar(255) NOT NULL,
+  `is_update` enum('0','1') NOT NULL default '0',
+  PRIMARY KEY  (`device_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `app_version`
+--
+
+CREATE TABLE IF NOT EXISTS `app_version` (
+  `version_code` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendence`
+--
+
+CREATE TABLE IF NOT EXISTS `attendence` (
+  `emp_code` varchar(20) NOT NULL,
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `transferred` enum('YES','NO') NOT NULL default 'NO'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bank_master`
+--
+
+CREATE TABLE IF NOT EXISTS `bank_master` (
+  `bank_id` int(4) NOT NULL auto_increment,
+  `bank_name` text NOT NULL,
+  PRIMARY KEY  (`bank_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=256 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `branch_master`
+--
+
+CREATE TABLE IF NOT EXISTS `branch_master` (
+  `comp_code` varchar(20) NOT NULL,
+  `branch_code` varchar(20) NOT NULL,
+  `branch_name` varchar(255) NOT NULL,
+  `branch_location` varchar(100) NOT NULL,
+  `branch_state` varchar(20) NOT NULL,
+  `branch_email_id` varchar(100) default NULL,
+  `branch_accounts_email_id` varchar(100) default NULL,
+  `alternative_email_id` varchar(100) default '',
+  PRIMARY KEY  (`branch_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `changepassword`
+--
+
+CREATE TABLE IF NOT EXISTS `changepassword` (
+  `emp_code` varchar(20) NOT NULL,
+  `newpassword` varchar(60) NOT NULL,
+  `oldpassword` varchar(60) NOT NULL,
+  `status` enum('true','false') NOT NULL,
+  `deviceid` varchar(100) NOT NULL,
+  `is_licensed` enum('0','1') NOT NULL default '0',
+  PRIMARY KEY  (`emp_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `company_master`
+--
+
+CREATE TABLE IF NOT EXISTS `company_master` (
+  `comp_code` varchar(20) NOT NULL,
+  `comp_name` varchar(255) NOT NULL,
+  `admin_email_id` varchar(255) NOT NULL,
+  `account_email_id` varchar(255) NOT NULL,
+  `no_of_branches` int(5) NOT NULL,
+  PRIMARY KEY  (`comp_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_master`
+--
+
+CREATE TABLE IF NOT EXISTS `customer_master` (
+  `customer_code` varchar(20) NOT NULL,
+  `customer_name` varchar(60) NOT NULL,
+  `route_code` varchar(20) NOT NULL,
+  `emp_code` varchar(20) NOT NULL,
+  `current_balance` double NOT NULL,
+  `credit_limit` double NOT NULL,
+  `acedns` varchar(2) NOT NULL default '',
+  `black_list` varchar(2) NOT NULL default '',
+  PRIMARY KEY  (`customer_code`,`route_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_master_temp`
+--
+
+CREATE TABLE IF NOT EXISTS `customer_master_temp` (
+  `customer_code` varchar(20) NOT NULL,
+  `customer_name` varchar(60) NOT NULL,
+  `route_code` varchar(20) NOT NULL,
+  `emp_code` varchar(20) NOT NULL,
+  `current_balance` double NOT NULL,
+  `credit_limit` double NOT NULL,
+  `acedns` varchar(2) NOT NULL default '',
+  `black_list` varchar(2) NOT NULL default '',
+  PRIMARY KEY  (`customer_code`,`route_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dbbackupcheck`
+--
+
+CREATE TABLE IF NOT EXISTS `dbbackupcheck` (
+  `emp_code` varchar(20) NOT NULL,
+  `device_id` varchar(20) NOT NULL,
+  `is_checked` enum('0','1') NOT NULL default '0',
+  PRIMARY KEY  (`emp_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_version`
+--
+
+CREATE TABLE IF NOT EXISTS `db_version` (
+  `version_code` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_master`
+--
+
+CREATE TABLE IF NOT EXISTS `employee_master` (
+  `emp_code` varchar(20) NOT NULL,
+  `emp_name` varchar(60) NOT NULL,
+  `acedns` varchar(2) NOT NULL,
+  `branch_code` varchar(20) default '',
+  PRIMARY KEY  (`emp_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE IF NOT EXISTS `location` (
+  `emp_code` varchar(20) NOT NULL,
+  `trans_id` varchar(20) NOT NULL,
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `updatetime` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `latt` double NOT NULL,
+  `longi` double NOT NULL,
+  `transferred` enum('YES','NO') NOT NULL default 'NO',
+  PRIMARY KEY  (`trans_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mail_access`
+--
+
+CREATE TABLE IF NOT EXISTS `mail_access` (
+  `id` int(4) NOT NULL auto_increment,
+  `mail_id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `branch_code` text NOT NULL,
+  `attributes` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mrp`
+--
+
+CREATE TABLE IF NOT EXISTS `mrp` (
+  `branch_code` varchar(20) default '',
+  `product_code` varchar(20) NOT NULL,
+  `mrp_code` varchar(20) NOT NULL,
+  `mrp` double default NULL,
+  `sale_rate` double default NULL,
+  PRIMARY KEY  (`mrp_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE IF NOT EXISTS `order_details` (
+  `order_no` varchar(20) NOT NULL,
+  `sku_code` varchar(20) NOT NULL,
+  `qty` double NOT NULL,
+  `mrp_code` varchar(20) default NULL,
+  `TD` double default NULL,
+  `sale_rate` double default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_header`
+--
+
+CREATE TABLE IF NOT EXISTS `order_header` (
+  `order_no` varchar(20) NOT NULL,
+  `customer_code` varchar(20) NOT NULL,
+  `d_instruction` longtext NOT NULL,
+  `sale_type` varchar(8) NOT NULL,
+  `TD` double NOT NULL,
+  `transferred` enum('YES','NO') NOT NULL default 'NO',
+  PRIMARY KEY  (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `outstanding`
+--
+
+CREATE TABLE IF NOT EXISTS `outstanding` (
+  `customer_code` varchar(20) NOT NULL,
+  `recid` varchar(30) NOT NULL default '0',
+  `invoice_id` varchar(20) NOT NULL,
+  `date` date NOT NULL,
+  `invoice_amount` double NOT NULL,
+  `due_amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_details`
+--
+
+CREATE TABLE IF NOT EXISTS `payment_details` (
+  `receipt_id` varchar(20) NOT NULL,
+  `invoice_id` varchar(30) NOT NULL,
+  `recid` varchar(30) NOT NULL default '0',
+  `amount` double NOT NULL,
+  `discount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_header`
+--
+
+CREATE TABLE IF NOT EXISTS `payment_header` (
+  `receipt_id` varchar(20) NOT NULL,
+  `customer_code` varchar(20) NOT NULL,
+  `amount` double NOT NULL,
+  `cash_cheque` enum('CASH','CHEQUE') NOT NULL,
+  `cheque_no` double NOT NULL,
+  `date` date NOT NULL,
+  `bank` varchar(20) default NULL,
+  `rdate` date default NULL,
+  `sale_type` varchar(8) NOT NULL,
+  `p_remark` longtext NOT NULL,
+  `transferred` enum('YES','NO') NOT NULL default 'NO',
+  PRIMARY KEY  (`receipt_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_brand_master`
+--
+
+CREATE TABLE IF NOT EXISTS `product_brand_master` (
+  `product_brand_code` varchar(255) NOT NULL,
+  `product_sub_group_code` varchar(255) NOT NULL,
+  `product_brand_name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`product_brand_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_group_master`
+--
+
+CREATE TABLE IF NOT EXISTS `product_group_master` (
+  `product_group_code` varchar(255) NOT NULL,
+  `product_group_name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`product_group_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_master`
+--
+
+CREATE TABLE IF NOT EXISTS `product_master` (
+  `prod_code` varchar(20) NOT NULL,
+  `product_group_code` varchar(255) NOT NULL,
+  `product_sub_group_code` varchar(255) NOT NULL,
+  `product_brand_code` varchar(255) NOT NULL,
+  `prod_desc` text,
+  `cl_stk` double NOT NULL,
+  `acedns` varchar(2) NOT NULL default '',
+  `black_list` varchar(2) NOT NULL,
+  PRIMARY KEY  (`prod_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_master_temp`
+--
+
+CREATE TABLE IF NOT EXISTS `product_master_temp` (
+  `prod_code` varchar(20) NOT NULL,
+  `product_group_code` varchar(255) NOT NULL,
+  `product_sub_group_code` varchar(255) NOT NULL,
+  `product_brand_code` varchar(255) NOT NULL,
+  `prod_desc` text,
+  `cl_stk` double NOT NULL,
+  `acedns` varchar(2) NOT NULL default '',
+  `black_list` varchar(2) NOT NULL,
+  PRIMARY KEY  (`prod_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_sub_group_master`
+--
+
+CREATE TABLE IF NOT EXISTS `product_sub_group_master` (
+  `product_sub_group_code` varchar(255) NOT NULL,
+  `product_group_code` varchar(255) NOT NULL,
+  `product_sub_group_name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`product_sub_group_code`,`product_group_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prospective_customer_details`
+--
+
+CREATE TABLE IF NOT EXISTS `prospective_customer_details` (
+  `trans_id` varchar(30) NOT NULL,
+  `product_code` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prospective_customer_header`
+--
+
+CREATE TABLE IF NOT EXISTS `prospective_customer_header` (
+  `trans_id` varchar(30) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `pin` varchar(20) NOT NULL,
+  `area` varchar(255) NOT NULL,
+  `phone_no` varchar(20) NOT NULL,
+  `remarks` text NOT NULL,
+  `tagged_customer_code` varchar(20) default 'NULL',
+  PRIMARY KEY  (`trans_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prospective_customer_master`
+--
+
+CREATE TABLE IF NOT EXISTS `prospective_customer_master` (
+  `emp_code` varchar(20) NOT NULL,
+  `customer_code` varchar(30) NOT NULL,
+  `customer_name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `pin` varchar(20) NOT NULL,
+  `area` varchar(255) NOT NULL,
+  `phone_no` varchar(20) NOT NULL,
+  `remarks` text NOT NULL,
+  PRIMARY KEY  (`customer_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `route_master`
+--
+
+CREATE TABLE IF NOT EXISTS `route_master` (
+  `route_code` varchar(20) NOT NULL,
+  `route_name` varchar(60) NOT NULL,
+  `emp_code` varchar(20) NOT NULL,
+  PRIMARY KEY  (`route_code`,`emp_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `route_plan`
+--
+
+CREATE TABLE IF NOT EXISTS `route_plan` (
+  `route_plan_trans_id` varchar(30) NOT NULL,
+  `emp_code` varchar(30) NOT NULL,
+  `route_code` varchar(20) NOT NULL,
+  `visit_date` date NOT NULL,
+  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  `update_date` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`emp_code`,`route_code`,`visit_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `route_plan_log`
+--
+
+CREATE TABLE IF NOT EXISTS `route_plan_log` (
+  `route_plan_trans_id` varchar(30) NOT NULL,
+  `emp_code` varchar(30) NOT NULL,
+  `prev_route_code` varchar(255) NOT NULL,
+  `current_route_code` varchar(255) NOT NULL,
+  `visit_date` date NOT NULL,
+  `created_by` varchar(10) NOT NULL,
+  `create_date` timestamp NOT NULL default CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_rate`
+--
+
+CREATE TABLE IF NOT EXISTS `sale_rate` (
+  `branch_code` varchar(20) default '',
+  `product_code` varchar(20) NOT NULL,
+  `sale_rate_code` varchar(20) NOT NULL,
+  `sale_rate` double NOT NULL,
+  PRIMARY KEY  (`sale_rate_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `state_product_group_master`
+--
+
+CREATE TABLE IF NOT EXISTS `state_product_group_master` (
+  `branch_code` varchar(20) NOT NULL,
+  `product_group_code` varchar(20) NOT NULL,
+  `product_sub_group_code` varchar(20) NOT NULL,
+  `product_brand_code` varchar(20) NOT NULL,
+  `prod_code` varchar(20) NOT NULL,
+  `price_list_id` varchar(20) NOT NULL,
+  PRIMARY KEY  (`branch_code`,`product_group_code`,`product_sub_group_code`,`product_brand_code`,`prod_code`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_structure_master`
+--
+
+CREATE TABLE IF NOT EXISTS `table_structure_master` (
+  `t_structure_id` tinyint(3) NOT NULL auto_increment,
+  `table_name` varchar(255) NOT NULL,
+  `table_structure` text NOT NULL,
+  `need_update` enum('Y','N') NOT NULL default 'Y',
+  `is_transaction` enum('Y','N') NOT NULL default 'N',
+  PRIMARY KEY  (`t_structure_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_structure_updation`
+--
+
+CREATE TABLE IF NOT EXISTS `table_structure_updation` (
+  `emp_code` varchar(20) NOT NULL,
+  `device_id` varchar(255) NOT NULL,
+  `db_version_code` varchar(20) NOT NULL,
+  `is_update` enum('0','1') NOT NULL default '0',
+  PRIMARY KEY  (`emp_code`,`device_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_expenses`
+--
+
+CREATE TABLE IF NOT EXISTS `tour_expenses` (
+  `tour_exp_trans_id` varchar(30) NOT NULL,
+  `emp_code` varchar(15) NOT NULL,
+  `start_destination` varchar(255) NOT NULL,
+  `end_destination` varchar(255) NOT NULL,
+  `fare` double NOT NULL,
+  `tour_date` date NOT NULL,
+  `transport_mode_sub_cat_id` int(4) NOT NULL,
+  `supporting_attached` varchar(3) NOT NULL default '',
+  PRIMARY KEY  (`tour_exp_trans_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transport_mode_category`
+--
+
+CREATE TABLE IF NOT EXISTS `transport_mode_category` (
+  `transport_mode_cat_id` int(4) NOT NULL auto_increment,
+  `transport_mode_cat_name` varchar(50) NOT NULL,
+  PRIMARY KEY  (`transport_mode_cat_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transport_mode_sub_category`
+--
+
+CREATE TABLE IF NOT EXISTS `transport_mode_sub_category` (
+  `transport_mode_sub_cat_id` int(4) NOT NULL auto_increment,
+  `transport_mode_sub_cat_name` varchar(50) NOT NULL,
+  `transport_mode_cat_id` int(4) NOT NULL,
+  PRIMARY KEY  (`transport_mode_sub_cat_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;

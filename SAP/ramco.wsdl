@@ -1,0 +1,288 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://www.ramco.com/iris/EnterpriseServices/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" targetNamespace="http://www.ramco.com/iris/EnterpriseServices/">
+<wsp:Policy wsu:Id="UTOverTransport">
+<wsp:ExactlyOne>
+<wsp:All>
+<sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy>
+<sp:TransportToken>
+<wsp:Policy>
+<sp:HttpsToken RequireClientCertificate="false"/>
+</wsp:Policy>
+</sp:TransportToken>
+<sp:AlgorithmSuite>
+<wsp:Policy>
+<sp:Basic256/>
+</wsp:Policy>
+</sp:AlgorithmSuite>
+<sp:Layout>
+<wsp:Policy>
+<sp:Lax/>
+</wsp:Policy>
+</sp:Layout>
+<sp:IncludeTimestamp/>
+</wsp:Policy>
+</sp:TransportBinding>
+<sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy>
+<sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient"/>
+</wsp:Policy>
+</sp:SignedSupportingTokens>
+</wsp:All>
+</wsp:ExactlyOne>
+</wsp:Policy>
+<wsdl:documentation>
+Exposing API for SO , Powered by:- innovative Ramco Integration Service (iRIS) http://www.ramco.com/iris
+</wsdl:documentation>
+<wsdl:types>
+<xs:schema xmlns:ser="http://www.ramco.com/iris/Serialization/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.ramco.com/iris/EnterpriseServices/">
+<xs:element name="sOCreate_Authorize_OP">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="contextparam" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="CustomerCode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Ouinstance" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="Sessionid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Transactionid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="User" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="dms_socreateauthorize_inout" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="Add_co1" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Advancetype" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Bank_cashcode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Card_number" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Card_type" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Cardholdername" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Countrycode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Currencycode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Customer_bankname" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Excha_rate" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Expirymonthyear" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Organizationid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Receipt_amount" nillable="true" type="xs:double"/>
+<xs:element minOccurs="0" name="Receiptdate1" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="Saleorder_no" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_address1" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_countryname" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_createddate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_customercode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_customername" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_modifieddate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_orderdate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_receiptdate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_receiptmode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_receiptno" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_receiptroute" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_salespromotionno" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_userid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Soc_payterm" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Soemail" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Transactionnumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Zip_code" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="dms_socreateauthorize_ml" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="DMS_SOCreateAuthorize_ML_input" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="So_costcenter" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_deliverydate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_itemcode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_itemdesc" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_lineno" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_quantity" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_rate" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_requireddate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_shippingat" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_warehouse" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Soca_uom" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="dms_socreateauthorize_tcdml" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="DMS_SOCreateAuthorize_TCDML_input" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="So_itemlineno" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="So_tcdcharge" nillable="true" type="xs:double"/>
+<xs:element minOccurs="0" name="So_tcdcode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_tcdcostcentre" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_tcdtype" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_tcdvalue" nillable="true" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="sOCreate_Authorize_OPResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="sOCreate_Authorize_OPResult" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="dms_socreateauthorize_inout" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="Add_co1" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Add_co2" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="Add_co3" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="Advancetype" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Bank_cashcode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Card_number" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Card_type" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Cardholdername" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Chequedddate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="Chequeddnumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Countrycode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Currencycode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Customer_bankname" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Excha_rate" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Expirymonthyear" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Organizationid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Receipt_amount" nillable="true" type="xs:double"/>
+<xs:element minOccurs="0" name="Receiptdate1" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="Saleorder_no" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_address1" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_countryname" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_createddate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_customercode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_customername" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_modifieddate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_orderdate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_receiptdate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="So_receiptmode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_receiptno" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_receiptroute" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_salespromotionno" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="So_userid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Soc_payterm" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Soca_guid" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Soemail" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Tcdbydoccode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Tcdbydocvalue" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Transactionnumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Zip_code" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="message" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="Message_output" nillable="true">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="Messagecontext" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="Messagecorrectiveaction" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Messageno" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="Messageseverity" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Messagesource" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Messagetext" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="IMnt_SaleOrder_API_sOCreate_Authorize_OP">
+<wsdl:part name="parameters" element="tns:sOCreate_Authorize_OP"/>
+</wsdl:message>
+<wsdl:message name="IMnt_SaleOrder_API_sOCreate_Authorize_OPResponce">
+<wsdl:part name="parameters" element="tns:sOCreate_Authorize_OPResponse"/>
+</wsdl:message>
+<wsdl:portType name="Mnt_SaleOrder_APIPortType" wsp:PolicyURIs="#UTOverTransport">
+<wsdl:operation name="sOCreate_Authorize_OP">
+<wsdl:documentation>
+sOCreate_Authorize_OP Operation for (IMnt_SaleOrder_API) PortType
+</wsdl:documentation>
+<wsdl:input message="tns:IMnt_SaleOrder_API_sOCreate_Authorize_OP" wsaw:Action="http://www.ramco.com/iris/EnterpriseServices/IMnt_SaleOrder_API/sOCreate_Authorize_OP"/>
+<wsdl:output message="tns:IMnt_SaleOrder_API_sOCreate_Authorize_OPResponce" wsaw:Action="http://www.ramco.com/iris/EnterpriseServices/IMnt_SaleOrder_API/sOCreate_Authorize_OPResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="Mnt_SaleOrder_APISoap11Binding" type="tns:Mnt_SaleOrder_APIPortType">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="sOCreate_Authorize_OP">
+<soap:operation soapAction="http://www.ramco.com/iris/EnterpriseServices/IMnt_SaleOrder_API/sOCreate_Authorize_OP" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="Mnt_SaleOrder_APISoap12Binding" type="tns:Mnt_SaleOrder_APIPortType">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="sOCreate_Authorize_OP">
+<soap12:operation soapAction="http://www.ramco.com/iris/EnterpriseServices/IMnt_SaleOrder_API/sOCreate_Authorize_OP" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="Mnt_SaleOrder_APIHttpBinding" type="tns:Mnt_SaleOrder_APIPortType">
+<http:binding verb="POST"/>
+<wsdl:operation name="sOCreate_Authorize_OP">
+<http:operation location="sOCreate_Authorize_OP"/>
+<wsdl:input>
+<mime:content type="text/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="text/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="Mnt_SaleOrder_API">
+<wsdl:port name="Mnt_SaleOrder_APIHttpsSoap11Endpoint" binding="tns:Mnt_SaleOrder_APISoap11Binding">
+<soap:address location="https://demoiris.ramcoerp.com:8246/services/Mnt_SaleOrder_API.Mnt_SaleOrder_APIHttpsSoap11Endpoint"/>
+</wsdl:port>
+<wsdl:port name="Mnt_SaleOrder_APIHttpSoap11Endpoint" binding="tns:Mnt_SaleOrder_APISoap11Binding">
+<soap:address location="http://demoiris.ramcoerp.com:8283/services/Mnt_SaleOrder_API.Mnt_SaleOrder_APIHttpSoap11Endpoint"/>
+</wsdl:port>
+<wsdl:port name="Mnt_SaleOrder_APIHttpsSoap12Endpoint" binding="tns:Mnt_SaleOrder_APISoap12Binding">
+<soap12:address location="https://demoiris.ramcoerp.com:8246/services/Mnt_SaleOrder_API.Mnt_SaleOrder_APIHttpsSoap12Endpoint"/>
+</wsdl:port>
+<wsdl:port name="Mnt_SaleOrder_APIHttpSoap12Endpoint" binding="tns:Mnt_SaleOrder_APISoap12Binding">
+<soap12:address location="http://demoiris.ramcoerp.com:8283/services/Mnt_SaleOrder_API.Mnt_SaleOrder_APIHttpSoap12Endpoint"/>
+</wsdl:port>
+<wsdl:port name="Mnt_SaleOrder_APIHttpEndpoint" binding="tns:Mnt_SaleOrder_APIHttpBinding">
+<http:address location="http://demoiris.ramcoerp.com:8283/services/Mnt_SaleOrder_API.Mnt_SaleOrder_APIHttpEndpoint"/>
+</wsdl:port>
+<wsdl:port name="Mnt_SaleOrder_APIHttpsEndpoint" binding="tns:Mnt_SaleOrder_APIHttpBinding">
+<http:address location="https://demoiris.ramcoerp.com:8246/services/Mnt_SaleOrder_API.Mnt_SaleOrder_APIHttpsEndpoint"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

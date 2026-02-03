@@ -1,0 +1,173 @@
+Branch code/name,Prod_Code,prod_desc,brand_code (fk)/brand_name,brand_form_code (fk)/brand_form_name,brand_sub_form_code(fk)/brand_sub_form_name,cl_stk,acends,black_list,vertical_value,UOM1,UOM2,Conversion,Pack size,UOM3,Conversion2,TD,Focus,VAT,Pack Unit
+,S0685,Haldi   Powder-1KG,Spices,,,0,Y,N,SP,Bundle,Kg,2,1000,Canvas Bag,24,0,,,gm
+,S0686,Haldi   Powder-500GM,Spices,,,0,Y,N,SP,Bundle,Kg,4,500,Canvas Bag,24,0,,,gm
+,S0687,Haldi   Powder-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,24,0,,,gm
+,S0122,Haldi   Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Canvas Bag,24,0,,,gm
+,S0124,Haldi   Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Canvas Bag,24,0,,,gm
+,S0676,Dhania Powder-1KG,Spices,,,0,Y,N,SP,Bundle,Kg,2,1000,Canvas Bag,24,0,,,gm
+,S0677,Dhania Powder-500GM,Spices,,,0,Y,N,SP,Bundle,Kg,4,500,Canvas Bag,24,0,,,gm
+,S0678,Dhania Powder-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,24,0,,,gm
+,S0108,Dhania Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Canvas Bag,24,0,,,gm
+,S0110,Dhania Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Canvas Bag,24,0,,,gm
+,S0681,Mircha Powder-1KG,Spices,,,0,Y,N,SP,Bundle,Kg,2,1000,Canvas Bag,24,0,,,gm
+,S0680,Mircha Powder-500GM,Spices,,,0,Y,N,SP,Bundle,Kg,4,500,Canvas Bag,24,0,,,gm
+,S0679,Mircha Powder-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,24,0,,,gm
+,S0132,Mircha Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Canvas Bag,24,0,,,gm
+,S0135,Mircha Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Canvas Bag,24,0,,,gm
+,S0682,Teza Mircha  Powder-1KG,Spices,,,0,Y,N,SP,Bundle,Kg,2,1000,Canvas Bag,24,0,,,gm
+,S0683,Teza Mircha  Powder-500GM,Spices,,,0,Y,N,SP,Bundle,Kg,4,500,Canvas Bag,24,0,,,gm
+,S0684,Teza Mircha  Powder-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,24,0,,,gm
+,S0137,Teza Mircha  Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Canvas Bag,24,0,,,gm
+,S0139,Teza Mircha  Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Canvas Bag,24,0,,,gm
+,S0691,Amchoor  Powder-1KG,Spices,,,0,Y,N,SP,Bundle,Kg,2,1000,Canvas Bag,24,0,,,gm
+,S0692,Amchoor  Powder-500GM,Spices,,,0,Y,N,SP,Bundle,Kg,4,500,Canvas Bag,24,0,,,gm
+,S0693,Amchoor  Powder-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,24,0,,,gm
+,H0047,Heeng-8GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,8,Carton,40,0,,,gm
+,H0051,Heeng-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,15,Carton,20,0,,,gm
+,H0081,Heeng-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,6,50,Carton,15,0,,,gm
+,H0033,Heeng-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,6,100,Carton,8,0,,,gm
+,S0071,Amchur Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0070,Amchur Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0087,Kitchen King-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0085,Kitchen King-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0729,Chola Masala-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0755,Chola Masala-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0093,Kali Mirch Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0092,Kali Mirch Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0083,Jaljeera Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0082,Jaljeera Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0076,Chat Masala-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0074,Chat Masala-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0096,Kasmiri Mirch-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0094,Kasmiri Mirch-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0042,Jeera Powder-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0041,Jeera Powder-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0430,Kasuri Methi-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,6,0,,,gm
+,S0045,Kasuri Methi-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,3,0,,,gm
+,S0044,Kasuri Methi-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,3,0,,,gm
+,S0176,Meat  Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,21,0,,,gm
+,S0965,Chiken Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,21,0,,,gm
+,S0027,Garam Masala-10GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,21,0,,,gm
+,S0751,Haldi Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0467,Dhania Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0522,Mircha Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0716,Sabji Masala-12GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,12,Carton,20,0,,,gm
+,S0931,Meat Masala-10GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,20,0,,,gm
+,S0891,Garam Masala-10GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,20,0,,,gm
+,S0892,Jeera Masala-12GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,12,Carton,20,0,,,gm
+,S0893,Amchoor Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0907,Chola Masala-15GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0905,Chat  Masala-12GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,12,Carton,20,0,,,gm
+,S0933,Murga Masala-8GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,8,Carton,20,0,,,gm
+,S0912,Kali Mirch Powder-8GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,8,Carton,10,0,,,gm
+,S0069,Sabji Masala-50 gm,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0052,Meat Masala-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0034,Garam Masala-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0065,Sabji Masala-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0046,Meat Masala-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0028,Garam  Masala-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0923,Archita Sabji Masala-5KG,Spices,,,0,Y,N,SP,Bundle,Kg,1,5000,Canvas Bag,5,0,,,gm
+,S0924,Archita Meat Masala-5KG,Spices,,,0,Y,N,SP,Bundle,Kg,1,5000,Canvas Bag,5,0,,,gm
+,S0901,Archita Sabji  Masala-12GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,12,Carton,20,0,,,gm
+,S0979,Archita Haldi Powder-25GMS,Spices,,,0,Y,N,SP,Bundle,Kg,10,25,Carton,20,0,,,gm
+,S0980,Archita dhania Powder-25GMS,Spices,,,0,Y,N,SP,Bundle,Kg,10,25,Carton,20,0,,,gm
+,S0981,Archita Mircha Powder-25GMS,Spices,,,0,Y,N,SP,Bundle,Kg,10,25,Carton,20,0,,,gm
+,S0177,Archita Meat  Masala-10GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,20,0,,,gm
+,S0626,Archita Murga  Masala-10GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,20,0,,,gm
+,S0143,Archita Chola  Masala-10GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,20,0,,,gm
+,S0506,Archita Garam Masala-10GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,10,Carton,20,0,,,gm
+,S0075,Archita Chaat Masala-15GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0715,Archita Jaljeera Masala-15GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,15,Carton,20,0,,,gm
+,S0930,Archita Sabji  Masala-20GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,20,Carton,10,0,,,gm
+,S0926,Archita Meat  Masala-20GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,20,Carton,10,0,,,gm
+,S0614,Archita Garam Masala-20GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,20,Carton,10,0,,,gm
+,S0536,Archita Kasuri Methi-25GMS,Spices,,,0,Y,N,SP,Bundle,Kg,12,25,Carton,20,0,,,gm
+,S0688,Archita Sabji  Masala-200GMS,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,20,0,,,gm
+,S0056,Archita Super Meat Masala-50GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0689,Archita Meat  Masala-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,20,0,,,gm
+,S0038,Archita Super Garam Masala-50GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0690,Archita Garam Masala-200GMS,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,20,0,,,gm
+,S0959,Archita Kali Mirch Powder-200GM,Spices,,,0,Y,N,SP,Bundle,Kg,5,200,Canvas Bag,12,0,,,gm
+,S0036,Archita Super Garam Masala-1KG,Spices,,,0,Y,N,SP,Bundle,Kg,2,1000,Canvas Bag,5,0,,,gm
+,S0937,Archita Haldi Powder-14GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,14,Carton,20,0,,,gm
+,S0123,Archita Haldi Powder-50GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0121,Archita Haldi Powder-100GMS,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0109,Archita dhania Powder-50GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0107,Archita dhania Powder-100GMS,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Carton,10,0,,,gm
+,S0947,Archita dhania Powder Hanger-15GMS,Spices,,,0,Y,N,SP,Bundle,Kg,24,15,Canvas Bag,20,0,,,gm
+,S0127,Archita dhania Powder (Mala)-15GMS,Spices,,,0,Y,N,SP,Bundle,Kg,60,15,Carton,20,0,,,gm
+,S0133,Archita Mircha Powder-100GMS,Spices,,,0,Y,N,SP,Bundle,Kg,10,100,Canvas Bag,24,0,,,gm
+,S0134,Archita Mircha Powder-50GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,50,Carton,10,0,,,gm
+,S0936,Archita Mircha Powder (mala)-12GMS,Spices,,,0,Y,N,SP,Bundle,Kg,24,12,Canvas Bag,20,0,,,gm
+,H0087,Archita Jayka Heeng-7GMS,Spices,,,0,Y,N,SP,Bundle,Kg,20,7,Carton,20,0,,,gm
+,H0048,Archita Tadka Heeng-100GM,Spices,,,0,Y,N,SP,Bundle,Kg,6,100,Carton,8,0,,,gm
+,H0049,Archita Tadka Heeng-50GM,Spices,,,0,Y,N,SP,Bundle,Kg,6,50,Carton,10,0,,,gm
+,P0211,Mix Pickles-200GM,Pickles,,,0,Y,N,SP,JAR,Kg,60,200,Carton,,0,,,gm
+,P0212,Mix Pickles-500GM,Pickles,,,0,Y,N,SP,JAR,Kg,32,500,Carton,,0,,,gm
+,P0213,Mix Pickles-1KG,Pickles,,,0,Y,N,SP,JAR,Kg,18,1000,Carton,,0,,,gm
+,P0015,Mix Pickles-5KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,5000,Carton,,0,,,gm
+,P0214,Mango Pickles-200GM,Pickles,,,0,Y,N,SP,JAR,Kg,60,200,Carton,,0,,,gm
+,P0215,Mango Pickles-500GM,Pickles,,,0,Y,N,SP,JAR,Kg,32,500,Carton,,0,,,gm
+,P0216,Mango Pickles-1KG,Pickles,,,0,Y,N,SP,JAR,Kg,18,1000,Carton,,0,,,gm
+,P0012,Mango Pickles-5KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,5000,Carton,,0,,,gm
+,P0208,Bharwa Achar-200GM,Pickles,,,0,Y,N,SP,JAR,Kg,60,200,Carton,,0,,,gm
+,P0209,Bharwa Achar-500GM,Pickles,,,0,Y,N,SP,JAR,Kg,32,500,Carton,,0,,,gm
+,P0210,Bharwa Achar-1KG,Pickles,,,0,Y,N,SP,JAR,Kg,18,1000,Carton,,0,,,gm
+,P0288,Bharwa Achar-5KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,5000,Carton,,0,,,gm
+,P0269,TASTY/JAYKA 5 Kg-5KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,5000,Carton,,0,,,gm
+,P0005,Archita Chatpata Bharwa Lal Mircha with Spoon-6KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,6000,Carton,,0,,,gm
+,P0016,Archita Chatpata Mix Achar-6KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,6000,Carton,,0,,,gm
+,P0233,Archita Jayka Aam Achar-1KG,Pickles,,,0,Y,N,SP,JAR,Kg,18,1000,Carton,,0,,,gm
+,P0004,Archita Jayka Mix Achar-5KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,5000,Carton,,0,,,gm
+,P0013,Archita Mango Achar with Spoon-6KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,6000,Carton,,0,,,gm
+,P0203,Archita Jayka Mix Achar-1KG,Pickles,,,0,Y,N,SP,JAR,Kg,18,1000,Carton,,0,,,gm
+,P0228,Jaika Mango Achar-5KG,Pickles,,,0,Y,N,SP,JAR,Kg,4,5000,Carton,,0,,,gm
+,A0045,Archita Chandan Rooh (144 Pcs)-12 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,12,Carton,12,0,,,stick
+,A0046,Archita Gulab Rooh (144 Pcs)-12 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,12,Carton,12,0,,,stick
+,A0048,Arpan Flora (12 Dz)-9 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,9,Carton,12,0,,,stick
+,A0455,Arpan Poojan Big (12 Dz)-24 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,24,Carton,12,0,,,stick
+,A0456,Archita Pavitra Small (24 Dz)-10 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,10,Carton,24,0,,,stick
+,A0457,Archita Pavitra Big (12 Dz)-24 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,24,Carton,12,0,,,stick
+,A0461,Arpan Hawan Samagri (50gm) 15 Kg-50 gm,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,50,Carton,15,0,,,gm
+,A0477,Archita Guldasta Medium (540 Pcs)-10 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,10,Carton,36,0,,,stick
+,A0799,Arpan Aachman Agarbatti Pouch (20 Dz.)-24 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,24,Carton,20,0,,,stick
+,A0948,Arpan Aachman Agarbatti Pouch (40 Dz.)-12 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,12,Carton,40,0,,,stick
+,A0951,Archita Guldasta Pouch (40 Dz)-14 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,14,Carton,40,0,,,stick
+,A1010,Archita Kewda Agarbatti  (MRP 25/-)-65gms,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,65,Carton,12,0,,,gm
+,A1017,Archita Mogra 10/-  (12Dz)-24 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,24,Carton,12,0,,,stick
+,A1025,Archita Gulab 10/- (12 DZ)-24 stick,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,24,Carton,12,0,,,stick
+,A1035,Archita Gulab Pooja batti 65 Gm (25/=)-65 gms,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,65,Carton,12,0,,,gm
+,A1061,Geeta Agarbatti Glass 50/--100gm,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,100,Carton,6,0,,,gm
+,A1084,Archita Pavitra Moli 5/=-1pc,AGARBATTI,,,0,Y,N,AG,PCS,Pcs,12,1,Carton,150,0,,,Pcs
+,A1225,Archita Zara Ojas (6 DZ)-15 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,15,Carton,6,0,,,stick
+,A1281,Archita Rudra (144 Pcs)-42 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,42,Carton,12,0,,,stick
+,A1282,Archita Freedom Pouch (72 Pcs)-74 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,74,Carton,6,0,,,stick
+,A1289,Archita Bliss (72 Pcs)-74 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,74,Carton,6,0,,,stick
+,A1299,Archita Blaze (144 Pcs)-42 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,42,Carton,12,0,,,stick
+,A1305,Archita Legend (72 Pcs)-74 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,74,Carton,6,0,,,stick
+,A1332,Archita Yuvan 144Pcs-16 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,16,Carton,12,0,,,stick
+,A1333,Archita Passion 144PCS-16 sticks,AGARBATTI,,,0,Y,N,AG,Dozen,Pcs,12,16,Carton,12,0,,,stick
+,A0517,Archita Guldasta Big-24 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,24,Carton,6,0,,,stick
+,A0577,Archita Gulabrooh (288PCS)-12 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,12,Carton,12,0,,,stick
+,A0579,Archita Chandanrooh (288PCS)-12 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,12,Carton,12,0,,,stick
+,A0604,Archita Guldasta Pouch-24 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,24,Carton,20,0,,,stick
+,A0674,Archita Guldasta Pouch-64 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,64,Carton,10,0,,,stick
+,A0392,Arpan Sandal-10 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,10,Carton,30,0,,,stick
+,A0514,Arpan Pooja Big-24 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,24,Carton,6,0,,,stick
+,A0683,Arpan Flora (24DZ)-12 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,12,Carton,12,0,,,stick
+,A0940,Arpan Achman Pouch-80 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,80,Carton,10,0,,,stick
+,A0006,Archita Guldasta Small-14 sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,12,14,Carton,30,0,,,stick
+,A0504,Arpan Tulsi (720 Pcs)-5 Sticks,AGARBATTI,,,0,Y,N,AG,DOZEN,Pcs,24,5,Carton,60,0,,,stick
+,A0049,Arpan Dhoop Big (12 Dz)-4 Roll,DHOOP,,,0,Y,N,AG,Dozen,Pcs,12,4,Carton,12,0,,,Roll
+,A0052,Arpan Dhoop Small (24 Dz)-6 Roll,DHOOP,,,0,Y,N,AG,Dozen,Pcs,12,6,Carton,24,0,,,Roll
+,A0605,Archita Cone Dhoop (4 in one)12DZ-12PCS,DHOOP,,,0,Y,N,AG,DOZEN,Pcs,12,12,Carton,12,0,,,Pcs
+,A0708,Archita Cone Dhoop (4 in one) 24DZ-12PCS,DHOOP,,,0,Y,N,AG,DOZEN,Pcs,12,12,Carton,12,0,,,Pcs
+,A1318,Archita Mogra Dhoop 5/--10 sticks,DHOOP,,,0,Y,N,AG,DOZEN,Pcs,12,10,Carton,36,0,,,stick
+,A1319,Archita Pride-20 sticks,DHOOP,,,0,Y,N,AG,DOZEN,Pcs,13,20,Carton,24,0,,,stick
+,N/A,Archita Meera-20 sticks,DHOOP,,,0,Y,N,AG,DOZEN,Pcs,14,20,Carton,24,0,,,stick
+,A1294,Archita Guldasta Dhoop Zipper 25/--20 sticks,DHOOP,,,0,Y,N,AG,DOZEN,Pcs,16,20,Carton,6,0,,,stick
+,A0041,Archita Hawan Samagri-100GM,HAWAN SAMAGRI,,,0,Y,N,AG,DOZEN,Pcs,12,100,Carton,10,0,,,gm
+,A0042,Archita Hawan Samagri-200GM,HAWAN SAMAGRI,,,0,Y,N,AG,DOZEN,Pcs,12,200,Carton,10,0,,,gm
+,A0453,Archita Hawan Samagri-1KG,HAWAN SAMAGRI,,,0,Y,N,AG,DOZEN,Pcs,12,1000,Carton,15,0,,,gm
+,G0023,Archita Gulab Jamun-350GMS,Gulab Jamun,,,0,Y,N,SP,Bundle,Kg,5,350,Canvas Bag,12,0,,,gm
+,G0024,Archita Gulab Jamun-500GMS,Gulab Jamun,,,0,Y,N,SP,Bundle,Kg,4,500,Canvas Bag,10,0,,,gm

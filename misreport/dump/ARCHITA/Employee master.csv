@@ -1,0 +1,35 @@
+DNS Emp Code,Employee Name,Branch,Vertical value,Reporting to,Email,Phone no,Sale access,Designation,HQ,State,Zone,acedns,District
+9999,Vijay Kumar Gupta,Uttar Pradesh,AG;SP,,,9838200216,primary,Director Sales,,Uttar Pradesh,,Y,
+1003,J.K. Singh,Uttar Pradesh,AG;SP,4055,,9838071273,primary,RSM,,Uttar Pradesh,UP 4,Y,
+1020,B.Singh,Uttar Pradesh,AG;SP,1003,,9838071275,primary,SO,GORAKHPUR,Uttar Pradesh,UP 1,Y,
+1319,Kaushik,Uttar Pradesh,AG;SP,1055,,9918028454,primary,SR,BASTI,Uttar Pradesh,UP 1,Y,Basti Sant Kabir Nagar
+1074,Kuldeep,Uttar Pradesh,AG;SP,1020,,7052701198,primary,SR,HARNAHI,Uttar Pradesh,UP 1,Y,Gorakhpur
+1039,T.P. Gupta,Uttar Pradesh,AG;SP,1020,,9682292072,primary,SR,CHAURI CHAURA,Uttar Pradesh,UP 1,Y,Deoria
+1024,Rajesh Sharma,Uttar Pradesh,AG;SP,1055,,8808033496,primary,SR,PARTAWAL,Uttar Pradesh,UP 1,Y,Maharajganj Kushinagar
+1055,J.K. Gupta,Uttar Pradesh,AG;SP,1003,,7565892001,primary,SO,GORAKHPUR,Uttar Pradesh,UP 1,Y,
+1072,Mukesh Singh,Uttar Pradesh,AG;SP,1020,,9682794861,primary,SR,GORAKHPUR,Uttar Pradesh,UP 1,Y,Siddharth Nagar
+1227,Ajay Gupta,Uttar Pradesh,AG;SP,1020,,8115294808,primary,SR,GORAKHPUR,Uttar Pradesh,UP 1,Y,Deoria
+1002,V.K GUPTA,Uttar Pradesh,AG;SP,4055,,9838071260,primary,RSM,,Uttar Pradesh,UP-5,Y,
+1158,AVNISH SINGH,Uttar Pradesh,AG;SP,1002,,9682289309,primary,SO,GONDA,Uttar Pradesh,UP-2,Y,BALRAMPURGONDA
+1183,VARUN PANDAY,Uttar Pradesh,AG;SP,1158,,8795647571,primary,SR,GONDA,Uttar Pradesh,UP-2,Y,GONDA
+1184,ARUN TIWARI,Uttar Pradesh,AG;SP,1158,,9648803704,primary,SR,GONDA,Uttar Pradesh,UP-2,Y,GONDA
+1151,L.P VERMA,Uttar Pradesh,AG;SP,1002,,7084107798,primary,ASM,GONDA,Uttar Pradesh,UP-2,Y,GONDA
+1178,J.P GUPTA,Uttar Pradesh,AG;SP,1002,,7565892001,primary,SO,BAHRAICH,Uttar Pradesh,UP-2,Y,BAHRAICH
+1629,DEEPAK KUMAR SINGH,Uttar Pradesh,AG;SP,1627,,9682728850,primary,SR,ALLAHABAD,Uttar Pradesh,UP-5,Y,ALLAHABAD
+1627,A.K SINGH,Uttar Pradesh,AG;SP,1003,,9415638692,primary,ASM,ALLAHABAD,Uttar Pradesh,UP-5,Y,All UP5
+1523,SUNIL KUMAR SRIVASTAVA,Uttar Pradesh,AG;SP,1517,,9628687447,primary,SR,JAUNPUR,Uttar Pradesh,UP-4,Y,JAUNPURBHADOHI
+1529,SATISH SRIVASTAVA,Uttar Pradesh,AG;SP,1517,,8127164796,primary,SO,VARANASI,Uttar Pradesh,UP-4,Y,SONBHADRAMIRZAPURVARANASI
+1531,AMIT KUMAR SINGH,Uttar Pradesh,AG;SP,1517,,7317286061,primary,SR,VARANASI,Uttar Pradesh,UP-4,Y,MIRZAPURSONBHADRA
+1738,RATNESH SRIVASTAVA,Uttar Pradesh,AG;SP,1517,,7800941164,primary,SR,JAUNPUR,Uttar Pradesh,UP-4,Y,JAUNPUR
+1517,V.K SRIVASTAVA,Uttar Pradesh,AG;SP,1003,,9670704737,primary,ASM,JAUNPUR,Uttar Pradesh,UP-4,Y,ALL UP4
+2010,Anant Kumar Mishra,Bihar,AG;SP,4055,,9546521041,primary,RSM,Deoghar,Bihar,Ex-UP,Y,All Bihar
+2038,Dinkar Kashyap,Bihar,AG;SP,2010,,8051552640,primary,SR,Katihar,Bihar,Ex-UP,Y,Katihar
+2030,Laxmi Kant Rai,Bihar,AG;SP,2010,,9304619972,primary,SR,Muzaffarpur,Bihar,Ex-UP,Y,Muzaffarpur
+2018,Rakesh Kumar Dubey,Bihar,AG;SP,2010,,7280858250,primary,SR,Jamuhi,Bihar,Ex-UP,Y,Jamuhi
+1930,Satish Kumar Gupta,Bihar,AG;SP,2010,,9155149214,primary,SO,Gaya,Bihar,Ex-UP,Y,Gaya
+9998,Shivangi Gupta,Uttar Pradesh,AG;SP,9999,Shivangi@archita.in,9838071240,primary,Manager,Kanpur,Uttar Pradesh,,Y,
+1007,Suraj Chaudhary,Uttar Pradesh,AG;SP,1055,,8858335658,primary,SR,Maharajganj,Uttar Pradesh,UP1,Y,Maharajganj
+1171,ANOOP AGARWAL,Uttar Pradesh,AG;SP,1158,,8127202395,primary,SR,GONDA,Uttar Pradesh,UP-2,Y,GONDA
+1804,Arjun Singh Sengar,Uttar Pradesh,AG;SP,1002,,8887855508,primary,SO,Kanpur,Uttar Pradesh,UP-5,Y,KanpurBanda
+4013,Saurabh Gupta,Uttar Pradesh,AG;SP,9998,saurabh.gupta@archita.in,9838071265,primary,Sales Cordinator,,Uttar Pradesh,,Y,
+4055,Pawan Pandey,Uttar Pradesh,AG;SP,4013,pawan_pandey2005@yahoo.com,9161633056,primary,Asst. Sales Director,,Uttar Pradesh,,Y,

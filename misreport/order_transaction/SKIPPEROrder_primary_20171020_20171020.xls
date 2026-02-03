@@ -1,0 +1,13 @@
+DNS Customer Code	Customer Name	Emp Code	Emp Name	Order Date	Prod Group	SKU Code	SKU Name	Qty1	UOM1	Conversion Factor	Qty2	UOM2	Sale Rate	TD(%)	Order Value	Freight	Remarks	
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	20-10-2017	PVC	3000002281	PVC PIPE NB 40MM 6M SCH40 BLUE	50	BNDL	10	500	Pcs	8550	43.5	241537.5	EX	This is a special case, kindly give one truck with this material. And load it on Monday 
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	20-10-2017	PVC	3000002293	PVC PIPE NB 200MM 6M SCH40 BLUE	20	Pcs	1	20	Pcs	8751	43.5	98886.3	EX	This is a special case, kindly give one truck with this material. And load it on Monday 
+100243	Puspa Enterprise	E0023	Santanu De	20-10-2017	PVC	3000000346	PVC PIPE NB90 MMX6 MTR LONG CLASS 3 GREY	20	Pcs	1	20	Pcs	1386	43.5	15661.8	EX	add puspa order sheet
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	20-10-2017	PVC	3000002166	PVC COLUMNPIPE NB40MM SILVER W/S	12	BNDL	25	300	Pcs	10625	43.5	72037.5	EX	This is a special case, kindly give one truck with this material. And load it on Monday 
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	20-10-2017	PVC	3000002167	PVC COLUMNPIPE NB32MM SILVER W/S	20	BNDL	25	500	Pcs	9175	43.5	103677.5	EX	This is a special case, kindly give one truck with this material. And load it on Monday 
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	20-10-2017	PVC	3000002127	PVC COLUMNPIPE NB50MM GOLD W/S	25	BNDL	4	100	Pcs	2580	43.5	36442.5	EX	This is a special case, kindly give one truck with this material. And load it on Monday 
+100243	Puspa Enterprise	E0023	Santanu De	20-10-2017	PVC	3000002770	PVC FILTER PIPE 100MM 2M RS BLUE (0.5)	10	Pcs	1	10	Pcs	1362	43.5	7695.3	EX	add puspa order sheet
+100243	Puspa Enterprise	E0023	Santanu De	20-10-2017	PVC	3000002769	PVC FILTER PIPE 100MM 3M RS BLUE (0.5)	20	Pcs	1	20	Pcs	2043	43.5	23085.9	EX	add puspa order sheet
+100243	Puspa Enterprise	E0023	Santanu De	20-10-2017	PVC	3000000446	PVC REDUCER 6(40)/4 BLUE	15	Pcs	1	15	Pcs	400	43.5	3390	EX	add puspa order sheet
+100243	Puspa Enterprise	E0023	Santanu De	20-10-2017	SWR	3000001951	SWR PIPE 110MM TYPE-A 10'  S/S	30	Pcs	1	30	Pcs	657	50	9855	EX	add puspa order sheet
+100243	Puspa Enterprise	E0023	Santanu De	20-10-2017	SWR	3000001952	SWR PIPE 110MM TYPE-A 10'  D/S	30	Pcs	1	30	Pcs	695	50	10425	EX	add puspa order sheet
+100016	Annapurna Take & Tubes	E0024	Soumik Majumdar	20-10-2017	UPVC	3000002135	UPVC PIPE 15MM 6M SCH40 LEAD FREE WHITE	20	BNDL	25	500	Pcs	8100	57.5	68850	EX	Add it with pvc which I gave few minutes before and load it on. Monday 

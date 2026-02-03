@@ -1,0 +1,4 @@
+DNS Customer Code	Customer Name	Emp Code	Emp Name	Order Date	Prod Group	SKU Code	SKU Name	Qty1	UOM1	Conversion Factor	Qty2	UOM2	Sale Rate	TD(%)	Order Value	Freight	Remarks	
+101547	Kakdwip Hardware	E0028	Samik Bhowmik	22-12-2017	PVC	3000000365	PVC PIPE NB200 MMX6MTR LONG CLASS 1 GREY	20	Pcs	1	20	Pcs	2976	47.5	31248	EX	
+104228	SWASTIC ENTERPRISE	E0060	Dibyakanti Das	22-12-2017	UGD	3000004165	UGD PUSH FIT PIPE 110MM 6M SN8	10	BOX	1	10	Pcs	1260	44	7056	FOR	customer send his own vehicle
+104228	SWASTIC ENTERPRISE	E0060	Dibyakanti Das	22-12-2017	UGD	3000004169	UGD PUSH FIT PIPE 160MM 6M SN4	20	BOX	1	20	Pcs	2130	44	23856	FOR	customer send his own vehicle

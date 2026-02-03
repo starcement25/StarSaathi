@@ -1,0 +1,66 @@
+DNS Customer Code	Customer Name	Emp Code	Emp Name	Order Date	Prod Group	SKU Code	SKU Name	Qty1	UOM1	Conversion Factor	Qty2	UOM2	Sale Rate	TD(%)	Order Value	Freight	Remarks	
+103797	skipper sales corporation	E0107	A.Komuraiah	17-10-2017	CPVC	3000002656	CPVC PIPE 20MM 3M SDR13.5	2	BNDL	50	100	Pcs	16575	66	11271	FOR	delivery at Bowenpally.
+103797	skipper sales corporation	E0107	A.Komuraiah	17-10-2017	CPVC	3000002659	CPVC PIPE 25MM 3M SDR13.5	2	BNDL	25	50	Pcs	12037.5	66	8185.5	FOR	delivery at Bowenpally.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000002659	CPVC PIPE 25MM 3M SDR13.5	2	BNDL	25	50	Pcs	12037.5	62.5	9028.125	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000003083	CPVC PIPE 50MM 3M SDR13.5	12.5	BNDL	10	125	Pcs	15915	62.5	74601.5625	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000002660	CPVC FITTINGS ELBOW 90? 20MM	1	BOX	300	300	Pcs	5100	62.5	1912.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000002661	CPVC FITTINGS ELBOW 90? 25MM	1	BOX	160	160	Pcs	5680	62.5	2130	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000003066	CPVC FITTINGS ELBOW 90D REDBRASS 20X15MM	2	BOX	250	500	Pcs	16250	62.5	12187.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000003175	CPVC FITTINGS ELBOW 90D REDBRASS 25X15MM	1	BOX	180	180	Pcs	21600	62.5	8100	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000002664	CPVC FITTINGS TEE 25MM	1	BOX	100	100	Pcs	4300	62.5	1612.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000002999	CPVC FITTINGS TEE BRASS 20X20X15MM	2	BOX	180	360	Pcs	14400	62.5	10800	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000002992	CPVC FITTINGS COUPLER 50MM	3	BOX	48	144	Pcs	8496	62.5	9558	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	CPVC	3000003363	CPVC FITTINGS MTA BRASS 20MM	1	BOX	250	250	Pcs	46250	62.5	17343.75	FOR	please process the order as earliest.
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000002283	PVC PIPE NB 50MM 6M SCH40 BLUE	100	BNDL	5	500	Pcs	5715	43.5	322897.5	EX	make this in one truck and delivery it tomorrow..
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000002287	PVC PIPE NB 100MM 6M SCH40 BLUE	50	Pcs	1	50	Pcs	3276	43.5	92547	EX	make this in one truck and delivery it tomorrow..
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000002289	PVC PIPE NB 125MM 6M SCH40 BLUE	20	Pcs	1	20	Pcs	4464	43.5	50443.2	EX	make this in one truck and delivery it tomorrow..
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	PVC	3000002291	PVC PIPE NB 150MM 6M SCH40 BLUE	60	Pcs	1	60	Pcs	5802	43.5	196687.8	EX	no there item is load except this one..and 3"column pipe and 4"cm pipe is necessary in this truck.
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	PVC	3000002293	PVC PIPE NB 200MM 6M SCH40 BLUE	60	Pcs	1	60	Pcs	8751	43.5	296658.9	EX	no there item is load except this one..and 3"column pipe and 4"cm pipe is necessary in this truck.
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000002261	PVC PIPE NB 50MM 6M SCH80 BLUE	10	BNDL	5	50	Pcs	7665	43.5	43307.25	EX	make this in one truck and delivery it tomorrow..
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000002265	PVC PIPE NB 100MM 6M SCH80 BLUE	20	Pcs	1	20	Pcs	4497	43.5	50816.1	EX	make this in one truck and delivery it tomorrow..
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	PVC	3000000272	PVC PIPE NB80 MM, 6 MTR LONG CM BLUE	60	Pcs	1	60	Pcs	1695	43.5	57460.5	EX	no there item is load except this one..and 3"column pipe and 4"cm pipe is necessary in this truck.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	PVC	3000000272	PVC PIPE NB80 MM, 6 MTR LONG CM BLUE	100	Pcs	1	100	Pcs	1695	43.5	95767.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	PVC	3000000273	PVC PIPE NB80 MM, 3 MTR LONG CM BLUE	20	Pcs	1	20	Pcs	847.5	43.5	9576.75	FOR	please process the order as earliest.
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	PVC	3000002306	PVC PIPE NB 100MM 6M CM BLUE	60	Pcs	1	60	Pcs	2760	43.5	93564	EX	no there item is load except this one..and 3"column pipe and 4"cm pipe is necessary in this truck.
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	PVC	3000002306	PVC PIPE NB 100MM 6M CM BLUE	120	Pcs	1	120	Pcs	2760	43.5	187128	EX	add it with the order which I gave it on morning
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000002297	PVC PIPE NB 175MM 6M CS BLUE	20	Pcs	1	20	Pcs	6906	43.5	78037.8	EX	make this in one truck and delivery it tomorrow..
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	PVC	3000000343	PVC PIPE NB75 MMX6 MTR LONG CLASS 3 GREY	60	Pcs	1	60	Pcs	963	43.5	32645.7	EX	no there item is load except this one..and 3"column pipe and 4"cm pipe is necessary in this truck.
+103584	M.B. DISTRIBUTORS	E0024	Soumik Majumdar	17-10-2017	PVC	3000000346	PVC PIPE NB90 MMX6 MTR LONG CLASS 3 GREY	100	Pcs	1	100	Pcs	1386	43.5	78309	EX	make this in one truck and delivery it tomorrow..
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	PVC	3000000329	FILTER PIPE 80MM NBX1.8 MTR R.S. BLUE	20	Pcs	1	20	Pcs	818	43.5	9243.4	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	PVC	3000000327	FILTER PIPE 80MM NBX3 MTR R.S. BLUE	50	Pcs	1	50	Pcs	1340.5	43.5	37869.125	FOR	please process the order as earliest.
+102552	Bajrang Hardware Mart	E0037	Bhavesh Chotai	17-10-2017	PVC	3000003298	PVC PIPE 140 MMX6MTR LONG CLASS 1 GREY	125	No	1	125	Pcs	1254	40.1	93893.25	EX	collect order from sub dealer
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000001943	SWR PIPE 75MM TYPE-A 10'  S/S	150	Pcs	1	150	Pcs	375	50	28125	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000001944	SWR PIPE 75MM TYPE-A 10'  D/S	50	Pcs	1	50	Pcs	398	50	9950	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000001951	SWR PIPE 110MM TYPE-A 10'  S/S	150	Pcs	1	150	Pcs	657	50	49275	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000001952	SWR PIPE 110MM TYPE-A 10'  D/S	50	Pcs	1	50	Pcs	695	50	17375	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003483	SWR FITTINGS 110 MM PLAIN TEE	3	BOX	15	45	Pcs	2700	50	4050	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003625	SWR FITTINGS 75 MM DOOR TEE	1	BOX	32	32	Pcs	3392	50	1696	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003615	SWR FITTINGS 110 MM DOOR TEE	3	BOX	12	36	Pcs	2496	50	3744	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000001976	SWR FITTINGS 110 MM PLAIN BEND (45 Deg)	1	BOX	30	30	Pcs	3285	50	1642.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003487	SWR FITTINGS 110 MM PLAIN BEND (87.5 Deg	6	BOX	20	120	Pcs	2570	50	7710	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000001993	SWR FITTINGS 75MM NAHANI TRAP	1	BOX	35	35	Pcs	4095	50	2047.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003499	SWR FITTINGS 75 MM PIPE CLIP	2	BOX	225	450	Pcs	3825	50	3825	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003501	SWR FITTINGS 110 MM PIPE CLIP	3	BOX	120	360	Pcs	2640	50	3960	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003445	SWR FITTINGS 75 MM PASS OVER	20	Pcs	1	20	Pcs	324	50	3240	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003496	SWR FITTINGS 110 MM PASS OVER	30	Pcs	1	30	Pcs	457	50	6855	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003660	SWR FITTINGS P.TRAP(110mmX110)	3	BOX	10	30	Pcs	2800	50	4200	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003502	SWR FITTINGS REDUCER (110 X 75)	1	BOX	60	60	Pcs	4920	50	2460	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	SWR	3000003476	SWR FITTINGS REDUCER (160X110mm)	1	BOX	18	18	Pcs	3069	50	1534.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002136	UPVC PIPE 20MM 3M SCH40 LEAD FREE WHITE	5	BNDL	40	200	Pcs	8820	56.5	19183.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002138	UPVC PIPE 25MM 3M SCH40 LEAD FREE WHITE	12	BNDL	25	300	Pcs	8212.5	56.5	42869.25	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002139	UPVC PIPE 25MM 6M SCH40 LEAD FREE WHITE	4	BNDL	10	40	Pcs	6570	56.5	11431.8	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002140	UPVC PIPE 32MM 3M SCH40 LEAD FREE WHITE	4	BNDL	20	80	Pcs	8820	56.5	15346.8	FOR	please process the order as earliest.
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	UPVC	3000002141	UPVC PIPE 32MM 6M SCH40 LEAD FREE WHITE	20	BNDL	10	200	Pcs	8820	57.5	74970	EX	load it with pvc item..and make it one truck
+100197	Mishra Brothers	E0024	Soumik Majumdar	17-10-2017	UPVC	3000002143	UPVC PIPE 40MM 6M SCH40 LEAD FREE WHITE	25	BNDL	10	250	Pcs	10410	57.5	110606.25	EX	load it with pvc item..and make it one truck
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002632	UPVC FITTINGS ELBOW 90? 25MM	12	BOX	200	2400	Pcs	5700	56.5	29754	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002634	UPVC FITTINGS ELBOW 90? 40MM	2	BOX	72	144	Pcs	4248	56.5	3695.76	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000004043	UPVC FIT90°Elbow Red SSRing Br25MMX15MM	1	BOX	150	150	Pcs	20850	56.5	9069.75	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000004044	UPVC FIT90°Elbow Red SSRing Br25MMX20MM	1	BOX	100	100	Pcs	16300	56.5	7090.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000004046	UPVC FITT Tee SS Ring Brass25X25X15MM	1	BOX	100	100	Pcs	16750	56.5	7286.25	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000003216	UPVC FITTINGS TEE REDUCER 40X40X25MM	1	BOX	36	36	Pcs	2610	56.5	1135.35	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000003203	UPVC FITTINGS FTA 20MM	1	BOX	400	400	Pcs	5000	56.5	2175	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000003110	UPVC FITTINGS FTA 40MM	2	BOX	100	200	Pcs	3750	56.5	3262.5	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000003207	UPVC FITTINGS MTA 20MM	1	BOX	600	600	Pcs	6000	56.5	2610	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000003111	UPVC FITTINGS MTA 40MM	1	BOX	150	150	Pcs	4875	56.5	2120.625	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002888	UPVC FITTINGS ELBOW 45DEG 25MM	1	BOX	110	110	Pcs	2805	56.5	1220.175	FOR	please process the order as earliest.
+100295	Shree Durga Hardware	E0025	Suman Sarkar	17-10-2017	UPVC	3000002966	UPVC FITTINGS FAUCET 15MM	5	BOX	72	360	Pcs	3636	56.5	7908.3	FOR	please process the order as earliest.
