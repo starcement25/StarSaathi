@@ -1,0 +1,6 @@
+framework module react_native_aes {
+  umbrella header "react-native-aes-umbrella.h"
+
+  export *
+  module * { export * }
+}

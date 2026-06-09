@@ -1,0 +1,4 @@
+for android:
+    1.  "@react-native-async-storage/async-storage": "^2.2.0"
+for ios:
+    1.  "@react-native-async-storage/async-storage": "^3.0.1",
