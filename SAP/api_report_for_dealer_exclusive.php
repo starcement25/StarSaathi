@@ -53,7 +53,7 @@ if (!empty($allCustomerCodes)) {
 $where = [];
 if ($approval_status !== null) $where[] = "d.status = '$approval_status'";
 if ($month !== null) $where[] = "d.month = '$month'";
-if ($year !== null) $where[] = "YEAR(d.created_at) = '$year'";
+if ($year !== null) $where[] = "d.current_year = '$year'";
 if ($search !== null) {
     $where[] = "(c.customer_name LIKE '%$search%' OR d.customer_id LIKE '%$search%' OR d.customer_code LIKE '%$search%')";
 }
@@ -78,7 +78,7 @@ $where_clause
 ORDER BY d.created_at DESC
 LIMIT $limit OFFSET $offset
 ";
-// echo $sql;die;
+//  echo $sql;die;
 $result = mysql_query($sql);
 //echo"<pre>";print_r($result);die;
 
@@ -99,7 +99,7 @@ $asm_status = '';
 $rsm_status = '';
 while ($row = mysql_fetch_assoc($result)) {
     $monthNumber = $row['month'];
-    $year = date('Y', strtotime($row['created_at']));
+    $year = $row['current_year'];
     $monthName = date('F', mktime(0, 0, 0, $monthNumber, 1));
     $displayMonthYear = $monthName . ', ' . $year;
     if ($row['asm_approve_status'] == 0) {

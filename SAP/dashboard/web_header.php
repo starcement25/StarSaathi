@@ -1,8 +1,85 @@
 <?php
+//echo"<pre>";print_r($_SESSION);die;
+//24-04-26
+// Check session exists
+/*
+if (!isset($_SESSION['dealer_id']) || !isset($_SESSION['token'])) {
+    header("Location: index.php");
+    exit;
+}
+
+$dealer_id = mysql_real_escape_string($_SESSION['dealer_id']);
+$token     = mysql_real_escape_string($_SESSION['token']);
+
+// Check token in DB
+$sql = "SELECT * FROM changepassword 
+        WHERE dns_customer_code = '$dealer_id' 
+        AND token = '$token'
+        LIMIT 1";
+
+$result = mysql_query($sql);
+
+$isSessionExpired = false;
+
+if (!$result || mysql_num_rows($result) == 0) {
+    session_destroy();
+    $isSessionExpired = true;
+}
+
 $file_name = basename($_SERVER['PHP_SELF']);
 if($file_name==''){
 	$file_name = "index.php";
+}*/
+if (!isset($_SESSION['dealer_id']) || !isset($_SESSION['token'])) {
+    header("Location: index.php");
+    exit;
 }
+
+$dealer_id = mysql_real_escape_string($_SESSION['dealer_id']);
+$token     = mysql_real_escape_string($_SESSION['token']);
+
+// Get token_check
+$check_sql = "SELECT token_check 
+              FROM changepassword 
+              WHERE dns_customer_code = '$dealer_id'
+              LIMIT 1";
+
+$check_result = mysql_query($check_sql);
+
+$token_check = 1; // default
+
+if ($check_result && mysql_num_rows($check_result) > 0) {
+    $check_row = mysql_fetch_assoc($check_result);
+    $token_check = intval($check_row['token_check']);
+}
+
+$isSessionExpired = false;
+
+// =================================
+// BYPASS TOKEN CHECK IF 0
+// =================================
+if ($token_check != 0) {
+
+    // Check token in DB
+    $sql = "SELECT * FROM changepassword 
+            WHERE dns_customer_code = '$dealer_id' 
+            AND token = '$token'
+            LIMIT 1";
+
+    $result = mysql_query($sql);
+
+    if (!$result || mysql_num_rows($result) == 0) {
+        session_destroy();
+        $isSessionExpired = true;
+    }
+}
+
+$file_name = basename($_SERVER['PHP_SELF']);
+
+if ($file_name == '') {
+    $file_name = "index.php";
+}
+
 $page_curr_title = "Star Cement Customer Portal";
 /*$file_name_title_arr["star_make_order.php"] = "MAKE ORDER";
 $file_name_title_arr["track_order.php"] = "TRACK ORDER";
@@ -18,6 +95,8 @@ $customer_master='customer_master';
 $dealer_security_ledger_status='dealer_security_ledger_status';
 $sswa_selected_dealer_code = $_SESSION["sswa_selected_dealer_code"];
 $sswa_selected_customer_code = $_SESSION["sswa_selected_customer_code"];
+//echo"<pre>";print_r($_SESSION);die;
+
 $sql3 = "select `customer_id` from $customer_master where `dns_customer_code`='$sswa_selected_dealer_code'";
 $res3 = mysql_query($sql3);
 $totres3 = mysql_num_rows($res3);
@@ -109,6 +188,27 @@ else{$security_ledger_status='INACTIVE';}
 <script src="js/highchart/accessibility.js"></script>
 </head>
 <body class="theme-red">
+    <div id="sessionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+    
+            <div style="width:90%; max-width:400px; background:#fff; margin:10% auto; border-radius:10px; overflow:hidden; text-align:center;">
+                
+                <div style="background:#e60000; color:#fff; padding:25px;">
+                    <h2 style="margin:0;">Session Expired</h2>
+                </div>
+
+                <div style="padding:20px; color:#555;">
+                    <p>Your account has been signed in on another device.<br>Please log in again.</p>
+                </div>
+
+                <div style="padding:20px;">
+                    <button onclick="redirectLogin()" 
+                        style="background:#e60000; color:#fff; border:none; padding:12px 20px; width:100%; border-radius:5px; font-size:16px;">
+                        Log In Again
+                    </button>
+                </div>
+
+            </div>
+        </div>
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -477,3 +577,18 @@ else{$security_ledger_status='INACTIVE';}
         <!-- #END# Left Sidebar -->
 
     </section>
+<script>
+function redirectLogin() {
+    window.location.href = "index.php";
+}
+
+// Disable back button / interaction (optional strong lock)
+function blockUI() {
+    document.body.style.overflow = 'hidden';
+}
+
+<?php if($isSessionExpired){ ?>
+    document.getElementById("sessionModal").style.display = "block";
+    blockUI();
+<?php } ?>
+</script>

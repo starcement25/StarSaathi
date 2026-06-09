@@ -101,7 +101,22 @@ $limit = "100";
 $page = $_GET['paged'] ? $_GET['paged'] : 1;
 /*---------PAGINATION RELATED CODE END----------*/
 /*---------PAGINATION RELATED CODE START----------*/
-$pgsql = "select $customer_master.`customer_code`,$changepassword.`deviceid` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $new_whr_str";
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
+
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
+
+
+$pgsql = "select $customer_master.`customer_code`,$changepassword.`deviceid` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $new_whr_str $con";
 $pgres = mysql_query($pgsql);
 $total_pgres = mysql_num_rows($pgres);
 $start_from = (($page-1)*$limit);
@@ -187,6 +202,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>SAP&nbsp;Code</th>
                                             <th>Dealer&nbsp;Name</th>
                                             <th>Phone</th>
+											<th>DOB</th>
 											<th>Mapped Employee Code</th>
 											<th>Mapped Employee Name</th>
                                             <th>Display Balances</th>
@@ -204,6 +220,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>SAP&nbsp;Code</th>
                                             <th>Dealer&nbsp;Name</th>
                                             <th>Phone</th>
+											<th>DOB</th>
 											<th>Mapped Employee Code</th>
 											<th>Mapped Employee Name</th>
                                             <th>Display Balances</th>
@@ -216,7 +233,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                     </tfoot>
                                     <tbody>
 <?php
-$sql1 = "select $customer_master.*,$changepassword.`deviceid`,$changepassword.`app_version`,$changepassword.`device_type` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $new_whr_str order by $customer_master.`customer_name` asc limit $start_from,$limit";
+$sql1 = "select $customer_master.*,$changepassword.`deviceid`,$changepassword.`app_version`,$changepassword.`device_type` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $new_whr_str $con order by $customer_master.`customer_name` asc limit $start_from,$limit";
 $res1 = mysql_query($sql1);
 $totres1 = mysql_num_rows($res1);
 if($totres1>0){
@@ -234,6 +251,12 @@ if($totres1>0){
 		$app_version = $row1["app_version"];
 		$the_profile_image_link = "";
 		$profile_image = $row1["profile_image"] ? trim($row1["profile_image"]) : "";
+		$DOB = $row1["DOB"] ? trim($row1["DOB"]) : "";
+		$date='';
+		if($DOB !=''AND $DOB !='00000000'){
+			$date=date("Y-m-d", strtotime($DOB));
+
+		}
 		if($profile_image!=""){
 			if(file_exists($profile_image_dir.$profile_image)){
 				$the_profile_image_link = $profile_image_dir.$profile_image;
@@ -264,6 +287,7 @@ if($totres1>0){
 <td><?php echo $customer_id;?></td>
 <td><?php echo $emp_name;?></td>
 <td><?php echo $phone_no;?></td>
+<td><?php echo $date;?></td>
 	<td><?php echo $mapped_emp_code;?></td>
 	<td><?php echo $mapped_emp_name;?></td>
 <td><span class="each_mk_save_span">

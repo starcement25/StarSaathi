@@ -23,13 +23,43 @@ $in_cnt = 0;
 $upd_cnt = 0;
 
 $customer_code = $_REQUEST['customer_code'];
+/*
+function indian_number_format($num) {
+    $num = (string)$num;
+
+    $after_decimal = '';
+    if (strpos($num, '.') !== false) {
+        list($num, $after_decimal) = explode('.', $num);
+        $after_decimal = '.' . $after_decimal;
+    }
+
+    $last3 = substr($num, -3);
+    $restUnits = substr($num, 0, -3);
+
+    if ($restUnits != '') {
+        $last3 = ',' . $last3;
+    }
+
+    $restUnits = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $restUnits);
+
+    return $restUnits . $last3 . $after_decimal;
+}
+*/
+function indian_number_format($num) {
+
+    return preg_replace(
+        "/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/",
+        "$1,",
+        number_format($num, 2, '.', '')
+    );
+}
 
 $ccod_10 = '1010';
 $ccod_17 = '1017';
 $the_filter_10 = '&$filter=(Cocd eq \'' . $ccod_10 . '\'and Customer eq \'' . $customer_code . '\' and Docdt eq \'' . $curr_date . '\' and Spgl eq \'N\')';
 $the_filter_17 = '&$filter=(Cocd eq \'' . $ccod_17 . '\'and Customer eq \'' . $customer_code . '\' and Docdt eq \'' . $curr_date . '\' and Spgl eq \'N\')';
 
-$url_ck1 = 'https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZSD_CUSTOPENITEM_SRV/ZSD_CUSTOPENITEM001Set?$format=json' . str_replace(" ", "%20", $the_filter_10);
+ $url_ck1 = 'https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZSD_CUSTOPENITEM_SRV/ZSD_CUSTOPENITEM001Set?$format=json' . str_replace(" ", "%20", $the_filter_10);
 
 /*$url_ck1="https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZSD_CUSTOPENITEM_SRV/ZSD_CUSTOPENITEM001Set
 ?$filter=(Cocd eq '1010' and Customer eq '1000001384' and Docdt eq '2024-03-31' and Spgl eq 'N')&$format=json";*/
@@ -66,7 +96,7 @@ if (isJsonCk($body_for_mcode1)) {
 		}
 	}
 }
-$url_ck2 = 'https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZSD_CUSTOPENITEM_SRV/ZSD_CUSTOPENITEM001Set?$format=json' . str_replace(" ", "%20", $the_filter_17);
+ $url_ck2 = 'https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZSD_CUSTOPENITEM_SRV/ZSD_CUSTOPENITEM001Set?$format=json' . str_replace(" ", "%20", $the_filter_17);
 
 /*$url_ck2="https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZSD_CUSTOPENITEM_SRV/ZSD_CUSTOPENITEM001Set
 ?$filter=(Cocd eq '1017' and Customer eq '1000001384' and Docdt eq '2024-03-31' and Spgl eq 'N')&$format=json";*/
@@ -174,6 +204,18 @@ if (isJsonCk($body_for_mcode10)) {
 	}
 }
 // $res_data = array("process_status" => "YES", "process_message" => "Success.", "credit_limit" => number_format($credit_limit, 0), "credit_expose" => number_format($credit_expose, 0), "security_deposit" => number_format($balance, 0));
-$res_data = array("process_status" => "YES", "process_message" => "Success.", "credit_limit" => number_format($credit_limit, 0), "credit_expose" => number_format($credit_expose, 0), "security_deposit" => number_format($balance, 0), "Cocd_1010" => $ccod_10, "Lcamt_1010" => number_format($finallcamt_10, 0), "Cocd_1017" => $ccod_17, "Lcamt_1017" => number_format($finallcamt_17, 0));
+/*$res_data = array("process_status" => "YES", "process_message" => "Success.", "credit_limit" => number_format($credit_limit, 0), "credit_expose" => number_format($credit_expose, 0), "security_deposit" => number_format($balance, 0), "Cocd_1010" => $ccod_10, "Lcamt_1010" => number_format($finallcamt_10, 0), "Cocd_1017" => $ccod_17, "Lcamt_1017" => number_format($finallcamt_17, 0));*/
+
+$res_data = array(
+    "process_status"   => "YES",
+    "process_message"  => "Success.",
+    "credit_limit"     => indian_number_format($credit_limit),
+    "credit_expose"    => indian_number_format($credit_expose),
+    "security_deposit" => indian_number_format($balance),
+    "Cocd_1010"        => $ccod_10,
+    "Lcamt_1010"       => indian_number_format($finallcamt_10),
+    "Cocd_1017"        => $ccod_17,
+    "Lcamt_1017"       => indian_number_format($finallcamt_17)
+);
 
 echo json_encode($res_data);

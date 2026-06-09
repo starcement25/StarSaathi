@@ -21,7 +21,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $mail->Port = 25;
         $mail->SMTPAuth = true;
         $mail->Username = "starcement@cloudmail.up99plus.com";
-        $mail->Password = "K2TTvLxATyULV2um";
+        $mail->Password = "Nh26sjqgWk";
         $mail->SMTPSecure = false;
         $mail->SMTPAutoTLS = false;
 

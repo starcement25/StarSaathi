@@ -4,18 +4,21 @@ set_time_limit(0);
 include "star_connection.php";
 include "../cron_page_start.php";
 $allocation_details_invoicewise  = "allocation_details_invoicewise";
-$curr_date = date("Y-m-d");
+//$curr_date = date("Y-m-d");
+$curr_date_for = '2026-06-03';
+$customer_id_check = "1000003935"; // 👈 set this to correct customer_id if known
+
 $countexe = 0;
 $foundexe = 0;
-//for ($i = 0; $i <=30; $i++) 
+for ($i = 0; $i <=60; $i++) 
 	{
-   // $prev_date_3days = date('Y-m-d', strtotime("-$i days", strtotime($curr_date)));
+    $prev_date_3days = date('Y-m-d', strtotime("-$i days", strtotime($curr_date_for)));
 
 //$prev_date_3days = date('Y-m-d',strtotime("-3 days"));
-echo $prev_date_3days='2026-01-06';
+//echo $prev_date_3days='2026-03-25';
 
 //$sql2 = "SELECT inv_no,customer_id,APPORDERNO  FROM $allocation_details_invoicewise WHERE SUBSTRING(date_and_time,1,10)='".$prev_date_3days."' AND customer_id='1000000646' ORDER BY `date_and_time` ASC";
-  $sql2 = "SELECT inv_no,customer_id,APPORDERNO  FROM $allocation_details_invoicewise WHERE SUBSTRING(date_and_time,1,10)='".$prev_date_3days."'  ORDER BY `date_and_time` ASC";	
+  $sql2 = "SELECT inv_no,customer_id,APPORDERNO  FROM $allocation_details_invoicewise WHERE SUBSTRING(date_and_time,1,10)='".$prev_date_3days."' AND customer_id='$customer_id_check' ORDER BY `date_and_time` ASC";	
   echo"<pre>1";print_r($sql2);	
 $res2 = mysql_query($sql2);
 $totres2 = mysql_num_rows($res2);
@@ -64,7 +67,8 @@ $inv_no_list=substr($inv_no_list,0,-1);
 $the_filter = '&$filter=(CustCo eq \''.$the_customer_id.'\' and ( InvoiceDt ge \''.$the_start_date_invoice.'\' and InvoiceDt le \''.$the_end_date_invoice.'\') )&sap-client=900';
 $url_ck1 = 'https://starfiori.starcement.co.in:'.$starfiori_port_no.'/sap/opu/odata/sap/ZSD_CUSTOMER_BULK_INVOICE_SRV/ZSD_CUSTOMER_INVOICESet?$format=json'.str_replace(" ","%20",$the_filter);
 //echo $url_ck1;
-  //echo"<pre>3";print_r($url_ck1);	
+  echo"<pre>3";print_r($url_ck1);	
+//echo"<pre>";print_r($url_ck1);die;
 
 $body_for_mcode10 = get_data_from_cserver($url_ck1);
 if(isJsonCk($body_for_mcode10)){
@@ -211,8 +215,9 @@ foreach ($invoice_no_list_array as $invoice_no_list_val) {
         $foundexe++;
     }
 }
-	}
 ///-----end add line sk 03-11-25---------	
 echo "<br><b>$countexe Invoices Deactivated</b><br>";
 echo "<b>$foundexe Invoices Marked Active</b><br>";
+	}
+
 ?>

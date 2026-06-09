@@ -22,7 +22,7 @@ $branch_dump = "branch_dump";
 	$condition_branch=' and  `branch_code` IN ('.$branch_value_final.')';
 
 $sqlquery="SELECT `branch_code`,`dump_code`,`dump_name`,`acedns`,`is_plant`,`download_time` FROM $branch_dump
- WHERE `acedns`='Y' and `acedns`!='' and `is_plant`!='Y' and `is_plant`!='' ".$condition_branch." ORDER BY `dump_name` ASC";
+ WHERE `acedns`='Y' and `acedns`!='' and `is_plant`!='Y' and `is_plant`!='' ".$condition_branch." GROUP BY dump_name ORDER BY `dump_name` ASC";
 	
 $result = mysql_query($sqlquery);
 $count=mysql_num_rows($result);

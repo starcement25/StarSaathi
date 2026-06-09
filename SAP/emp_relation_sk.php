@@ -7,7 +7,7 @@ ini_set('memory_limit', '2G');
 include "star_connection.php";
 include "function-sfa.php";
 
-$SAP_customer_code = '1000000548';
+$SAP_customer_code = '1000002054';
 
 echo "<h2>📊 Email Hierarchy Details for Customer Code: $SAP_customer_code</h2>";
 

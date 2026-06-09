@@ -23,7 +23,7 @@ $the_pno = $_POST["the_pno"] ? trim($_POST["the_pno"]) : "1";
 		$res_colour = 2;
 	}else{
 		
-$sql8 = "select `customer_code` from $customer_master where `phone_no`='$emp_phone' and `cust_type`='Sub Dealer' and `customer_code`!='$upthe_theempid'";
+$sql8 = "select `customer_code` from $customer_master where `phone_no`='$emp_phone' and `cust_type`='RSAR ' and `customer_code`!='$upthe_theempid'";
 	$res8 = mysql_query($sql8);
 	$totres8 = mysql_num_rows($res8);
 	if($totres8>0){
@@ -98,7 +98,7 @@ jQuery(function () {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                          <h2>Edit Sub Dealer &nbsp;&nbsp;&nbsp; <?php if($submsg!=""){ echo $submsg;}?></h2>
+                          <h2>Edit RSAR  &nbsp;&nbsp;&nbsp; <?php if($submsg!=""){ echo $submsg;}?></h2>
                         </div>
                         <div class="body">
  <div class="table-responsive">
@@ -106,10 +106,10 @@ jQuery(function () {
 <div class="row clearfix" style="margin:0px;">
 <div class="col-sm-12">
     <div class="form-group">
-    <label for="dealer_id">Sub Dealer ID : <?php echo $dns_emp_id;?></label>
+    <label for="dealer_id">RSAR  ID : <?php echo $dns_emp_id;?></label>
     </div>
     <div class="form-group">
-    <label for="dealer_name">Sub Dealer Name : <?php echo $emp_name;?></label>
+    <label for="dealer_name">RSAR  Name : <?php echo $emp_name;?></label>
     </div>
      <div class="form-group">
     <label for="active_status">Active Status : <?php echo $acedns;?></label>
@@ -129,7 +129,7 @@ jQuery(function () {
     <input type="hidden" name="the_pno" value="<?php echo $page;?>" />
 	<input type="submit" class="btn bg-red waves-effect srch_btn" name="update" style="margin-bottom:10px;" value="Update" />
 	<?php } ?>
-    <a href="<?php echo $page_name."?paged=".$page;?>" class="btn bg-red waves-effect" style="margin-left: 20px;margin-bottom:10px;">Back To Sub Dealer List</a>
+    <a href="<?php echo $page_name."?paged=".$page;?>" class="btn bg-red waves-effect" style="margin-left: 20px;margin-bottom:10px;">Back To RSAR  List</a>
 </div>    
 </div>
 </div>

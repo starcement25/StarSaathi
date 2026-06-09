@@ -1,13 +1,13 @@
 <?php
+
+
 session_start();
 error_reporting(E_ALL & ~E_WARNING & E_NOTICE & E_DEPRECATED);
 ini_set('memory_limit', '999M');
 set_time_limit(0);
 include "star_connection.php";
 $start_user_type = $_SESSION["start_user_type"];
-// $sikkim_consumer_scheme = "sikkim_consumer_scheme";
-// $customer_master = "customer_master";
-// $branch_master="branch_master";
+
 $curr_date = date("jS_M_Y_h_m_s_A");
 $the_file_name = "kismat_ki_bori_consumer_scheme_report_" . $curr_date . ".csv";
 $dnsbcarr = array();
@@ -132,43 +132,49 @@ $sql_pg ="SELECT scs.*, cm.dns_customer_code, cm.customer_name, cm.customer_id, 
 $qry = $sql_pg;
 $sql = mysql_query($qry);
 
-// Get The Field Name
+
 $slno_cnt = 1;
 $output .= '"Dealer SAP code","SFA Code","Dealer name","Linked Dealer code","Linked Dealer name","Branch name","Region","Customer Type","House Owner Name","House Owner Number","Date Of Purchase","Quantity (in Bags)","Has Coupon","Coupon Numbers","Submit Date time"';
 $output .= "\n";
 
-// Get Records from the table
+
 while ($row1 = mysql_fetch_array($sql)) {
-	$rds_tag = $row['rds_tag'];
-	$cmquery = mysql_query("SELECT `customer_id`,`customer_name` FROM `customer_master` WHERE `customer_code`=$rds_tag");
-	$cmrow= mysql_fetch_assoc($cmquery);
+	$rds_tag = $row1['rds_tag']; 
+	$cmquery = mysql_query("SELECT `customer_id`,`customer_name` FROM `customer_master` WHERE `customer_code`='$rds_tag'"); // FIX: added quotes around $rds_tag
+	$cmrow = mysql_fetch_assoc($cmquery);
 
-	$coupons_details = json_decode($row1['coupons_details'], true);
-
-	// Then do your existing logic:
+	// ---------------------------------------------------------------
+	// FIXED COUPON PARSING
+	// The raw JSON may look like:
+	//   {"0":"100339"}                          → single object
+	//   [{"0":"100339"},{"1":"100402"}]         → array of objects
+	//   ["100339","100402"]                     → simple array of strings
+	//   [100339, 100402]                        → simple array of integers
+	// In all cases we want clean 6-digit strings like: 100339,100402
+	// ---------------------------------------------------------------
 	$coupon_text = '';
-	$coupon_values = [];
+	$raw_coupons = $row1['coupons_details'];
 
-	if (is_array($coupons_details)) {
-		if (array_keys($coupons_details) !== range(0, count($coupons_details) - 1)) {
-			// Object format
-			$coupon_values = array_values($coupons_details);
-		} else {
-			// Array of single-key objects
-			foreach ($coupons_details as $item) {
-				if (is_array($item)) {
-					foreach ($item as $code) {
-						$coupon_values[] = $code;
-					}
+	if (!empty($raw_coupons)) {
+		
+		$coupons_decoded = json_decode($raw_coupons, true);
+		$coupon_values = array();
+
+		if (is_array($coupons_decoded)) {
+			
+			array_walk_recursive($coupons_decoded, function($leaf) use (&$coupon_values) {
+			
+				$val = trim((string)$leaf);
+				if ($val !== '' && $val !== '0' && $val !== '00' && $val !== '000') {
+					
+					$coupon_values[] = str_pad($val, 6, '0', STR_PAD_LEFT);
 				}
-			}
+			});
 		}
+
+		$coupon_text = implode(', ', $coupon_values);
 	}
-
-	// Remove empty codes if any
-	$coupon_values = array_filter($coupon_values, function($v) { return !empty($v); });
-
-	$coupon_text = implode(',', $coupon_values);
+	
 
 
 	$customer_id = $row1["customer_id"];
@@ -192,7 +198,7 @@ while ($row1 = mysql_fetch_array($sql)) {
 	$output .= "\n";
 	$slno_cnt++;
 }
-// Download the file
+
 
 $filename = $the_file_name;
 header('Content-type: application/csv');

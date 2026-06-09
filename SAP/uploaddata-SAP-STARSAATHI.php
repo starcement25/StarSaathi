@@ -344,7 +344,10 @@ $sqlcustomerSAP="SELECT KUNNR,ALTKN,NAME1,NAME2,NAME3,STRAS,STREET1,STREET2,STRE
 				$sql .= " , zone='".$zone."'";
 				$sql .= " , rds_tag='".$rds_code."'";
 				$sql .= " , address='".addslashes($address)."'";
+				//add condition 20-05-26
+				if($region!=''){
 				$sql .= " , region='".addslashes($region)."'";
+				}
 				$sql .= " , whatsapp_no='".addslashes($whatsapp_no)."'";
 				$sql .= " , plant='".addslashes($plant)."'";
 				$sql .= " , owner_name='".addslashes($owner_name)."'";

@@ -277,7 +277,7 @@ if (!is_null($month)) {
 }
 
 if (!is_null($year)) {
-    $where[] = "YEAR(d.created_at) = $year";
+    $where[] = "d.current_year = $year";
 }
 
 if (!is_null($approval_status)) {
@@ -330,7 +330,7 @@ if (!$result) {
 $i = 0;
 while ($row = mysql_fetch_assoc($result)) {
     $monthNumber = $row['month'];
-    $yearStr = date('Y', strtotime($row['created_at']));
+    $yearStr = $row['current_year'];
     $monthName = date('F', mktime(0, 0, 0, $monthNumber, 1));
     $displayMonthYear = $monthName . ', ' . $yearStr;
 

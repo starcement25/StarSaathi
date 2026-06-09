@@ -54,6 +54,18 @@ else
 {
 	$login_condition=" AND UNIX_TIMESTAMP(download_time) > UNIX_TIMESTAMP('".$last_update_time."')";
 }
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+   
+    OR
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
+
 
 $sqlbranches="SELECT branch_code FROM branch_master WHERE 1";
 $rsbranches=mysql_query($sqlbranches);
@@ -63,7 +75,7 @@ $countbranches=mysql_num_rows($rsbranches);
 			if($tagged_cust_code_str!=''){
 		$sqlquerycustomerroute="SELECT customer_code,customer_name,emp_code,current_balance,credit_limit,black_list,acedns,TD,cust_type,rds_tag,sauda_validity_period,address,phone_no,pin,landline_no,owner_name,owner_phone,cust_class,weekly_closing_day,coverage_type,TIN,PAN,minimum_stock,branch_code,visit_day,email,sauda_limit,pending_qty,route_code,customer_id
 		FROM customer_master WHERE
-		1 ".$login_condition." AND customer_code IN('".$tagged_cust_code_str."') or customer_code IN(SELECT customer_code FROM customer_master WHERE rds_tag in('".$tagged_cust_code_str."')  AND acedns='Y') ORDER BY route_code DESC,acedns DESC";
+		1 ".$login_condition." AND customer_code IN('".$tagged_cust_code_str."') or customer_code IN(SELECT customer_code FROM customer_master WHERE rds_tag in('".$tagged_cust_code_str."')  AND acedns='Y') $con ORDER BY route_code DESC,acedns DESC";
 			}
 			else
 			{
@@ -88,7 +100,7 @@ $countbranches=mysql_num_rows($rsbranches);
 							 1 ".$login_condition." AND (
 							 customer_code='".$emp_code."'
 							 OR customer_code IN(SELECT customer_code FROM customer_master WHERE rds_tag='".$emp_code."') AND acedns='Y'
-							 ) AND cust_type!='Ship to Party-dealer' AND cust_type!='ShiptoParty-Subdeale'
+							 ) AND cust_type!='Ship to Party-dealer' AND cust_type!='ShiptoParty-Subdeale' $con
 							ORDER BY route_code DESC,acedns DESC";
 		}
 		//echo"<pre>";print_r($sqlquerycustomerroute);die;

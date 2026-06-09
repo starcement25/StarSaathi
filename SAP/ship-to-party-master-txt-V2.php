@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 include "star_connection.php";
 $emp_code=$_REQUEST['emp_code'];
 
@@ -32,7 +36,34 @@ function accent2ascii($str)
 
     return $str;
 }
-
+// function utf8ize($mixed) {
+// 				if (is_array($mixed)) {
+// 					foreach ($mixed as $key => $value) {
+// 						$mixed[$key] = utf8ize($value);
+// 					}
+// 				} elseif (is_string($mixed)) {
+// 					return mb_convert_encoding($mixed, "UTF-8", "UTF-8, ISO-8859-1, ISO-8859-15");
+// 				}
+// 				return $mixed;
+// 			}
+function utf8ize($mixed) {
+    if (is_array($mixed)) {
+        foreach ($mixed as $key => $value) {
+            $mixed[$key] = utf8ize($value);
+        }
+    } elseif (is_string($mixed)) {
+        // Step 1: Replace common NBSP bytes with regular space (fixes �)
+        $mixed = str_replace("\xC2\xA0", ' ', $mixed);
+        $mixed = str_replace("\xA0", ' ', $mixed);
+        
+        // Step 2: Safe UTF-8 conversion (detect source encoding first)
+        $encoding = mb_detect_encoding($mixed, ['UTF-8', 'ISO-8859-1', 'ISO-8859-15'], true);
+        if ($encoding && $encoding !== 'UTF-8') {
+            $mixed = mb_convert_encoding($mixed, 'UTF-8', $encoding);
+        }
+    }
+    return $mixed;
+}
 $sqlcustcode="SELECT customer_id FROM $customer_master WHERE  customer_code='".$emp_code."'";
 $rscustcode=mysql_query($sqlcustcode);
 $rowcustcode=mysql_fetch_array($rscustcode);
@@ -45,6 +76,19 @@ else
 {
 	$order_restrict_cond='';
 }
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
+
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+  
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
 
 if($user_type=="dealer"){
 	
@@ -59,7 +103,7 @@ if($user_type=="dealer"){
 	// 				AND $customer_master.rds_tag='".$emp_code."' AND $customer_master.cust_type='Ship to Party-dealer' 
 					
 	// 				$order_restrict_cond";	
-				$sqlshiptoparty = "
+				 $sqlshiptoparty = "
 					SELECT DISTINCT 
 						$customer_master.dns_customer_code,
 						$customer_master.customer_code,
@@ -87,6 +131,7 @@ if($user_type=="dealer"){
 									AND (p2.VKORG = '1010' OR p2.VKORG = '1017')
 							)
 						)
+						$con
 						$order_restrict_cond
 					";
 					//echo"<pre>";print_r($sqlshiptoparty);die;			
@@ -134,12 +179,33 @@ if($user_type=="dealer"){
 				$dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name_final,"address"=>$address,"phone_no"=>$phone_no);
 			}
 		}
+		$dealer_data = utf8ize($dealer_data);
 		$res_data = array("process_status"=>"YES","process_message"=>"Success.","dealer_data"=>$dealer_data);
 
 	}
 	else
 	{
-	$res_data = array("process_status"=>"NO","process_message"=>"No ship to party dealer data found.");
+		
+		//10-03-26
+		 $sql1 = "select `customer_name`,`address`,`phone_no`,`dns_customer_code`,`customer_code` from $customer_master where customer_code='".$emp_code."'";
+		$res1 = mysql_query($sql1);
+		$totres1 = mysql_num_rows($res1);
+		if($totres1>0){
+		$row1=mysql_fetch_assoc($res1);
+		$customer_name = trim($row1["customer_name"]);
+		$address = trim($row1["address"]);
+		$phone_no = trim($row1["phone_no"]);
+		$dns_customer_code = trim($row1["dns_customer_code"]);
+		$customer_code = trim($row1["customer_code"]);
+		$dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name,"address"=>$address,"phone_no"=>$phone_no);
+			//echo"<pre>";print_r($dealer_data);
+			$dealer_data = utf8ize($dealer_data);
+
+		$res_data = array("process_status"=>"YES","process_message"=>"Success.","dealer_data"=>$dealer_data);
+		}else{
+	 $res_data = array("process_status"=>"NO","process_message"=>"No ship to party dealer data found.");
+
+		}
 	}
 	
 }
@@ -158,7 +224,7 @@ else if($user_type=="sub dealer"){
 	// 				(SELECT $customer_master.customer_code FROM $customer_master WHERE $customer_master.rds_tag='".$emp_code."' AND cust_type IN('RSSD','Sub Dealer')))
 	// 				 AND $customer_master.cust_type='ShiptoParty-Subdeale' $order_restrict_cond";
 
-		$sqlshiptoparty = "
+		 $sqlshiptoparty = "
 				SELECT DISTINCT 
 					$customer_master.dns_customer_code,
 					$customer_master.customer_code,
@@ -195,6 +261,7 @@ else if($user_type=="sub dealer"){
 								AND (p2.VKORG = '1010' OR p2.VKORG = '1017')
 						)
 					)
+						$con
 					$order_restrict_cond
 				";
 	$rsshiptoparty=mysql_query($sqlshiptoparty);
@@ -219,6 +286,7 @@ else if($user_type=="sub dealer"){
 			}
 
 		}
+		$sub_dealer_data = utf8ize($sub_dealer_data);
 		$res_data = array("process_status"=>"YES","process_message"=>"Success.","sub_dealer_data"=>$sub_dealer_data);
 
 	}

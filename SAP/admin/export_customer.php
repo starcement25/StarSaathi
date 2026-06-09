@@ -13,6 +13,7 @@ if($get_fetch_type!=""){
 	exit;
 }
 
+
 function startCreatCustomerCsvfile($get_fetch_type){
 $customer_master = "customer_master";
 $branch_master = "branch_master";
@@ -37,6 +38,19 @@ if($get_fetch_type=="dealer"){
 }
 $output = "";
 
+/*---------PAGINATION RELATED CODE START----------*/
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+   
+    OR
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
+
 $qry = "select $customer_master.`customer_id` AS SAP_Code,$customer_master.`dns_customer_code`,$customer_master.`customer_name`,$customer_master.`address`,$customer_master.`phone_no`,$customer_master.`route_code`,$customer_master.`acedns`,$customer_master.`black_list`,$customer_master.`cust_type`,(SELECT CM.customer_id FROM customer_master CM WHERE CM.customer_code=$customer_master.`rds_tag`) AS Linked_Dealer_Code,(SELECT CM.customer_name FROM customer_master CM WHERE CM.customer_code=$customer_master.`rds_tag`) AS Linked_Dealer_Name,$customer_master.`branch_code`,$branch_master.`branch_name`,
 		$customer_master.`whatsapp_no`,$customer_master.`email`,$customer_master.region,$destination_master.dns_destination_code,$destination_master.destination_name,
 		$customer_master.`order_restriction`,$customer_master.`plant`,$customer_master.`owner_name`,$customer_master.`pin`,$customer_master.`district`,$customer_master.`appointment_date`,
@@ -45,7 +59,7 @@ $qry = "select $customer_master.`customer_id` AS SAP_Code,$customer_master.`dns_
 		from $customer_master left join $branch_master on $customer_master.`branch_code`=$branch_master.`branch_code` 
 		left JOIN  $customer_destination ON $customer_destination.customer_code=$customer_master.customer_code
 		left JOIN  $destination_master ON $destination_master.destination_code=$customer_destination.destination_code
-		$where_qry order by $customer_master.`customer_code` asc";
+		$where_qry $con order by $customer_master.`customer_code` asc";
 		
 		// $qry = "select $employee_master.dns_emp_code,$employee_master.emp_name, $customer_master.`customer_id` AS SAP_Code,$customer_master.`dns_customer_code`,$customer_master.`customer_name`,$customer_master.`address`,$customer_master.`phone_no`,$customer_master.`route_code`,$customer_master.`acedns`,$customer_master.`black_list`,$customer_master.`cust_type`,(SELECT CM.customer_id FROM customer_master CM WHERE CM.customer_code=$customer_master.`rds_tag`) AS Linked_Dealer_Code,(SELECT CM.customer_name FROM customer_master CM WHERE CM.customer_code=$customer_master.`rds_tag`) AS Linked_Dealer_Name,$customer_master.`branch_code`,$branch_master.`branch_name`,
 		// $customer_master.`whatsapp_no`,$customer_master.`email`,$customer_master.region,$destination_master.dns_destination_code,$destination_master.destination_name,
@@ -102,7 +116,8 @@ while ($row = mysql_fetch_array($sql)) {
     $output .='"'.$mapped_emp_name.'",';
     
 for ($i = 0; $i < $columns_total; $i++) {
-$output .='"'.$row["$i"].'",';
+	 $value = str_replace(array("'", '"'), ' ', $row[$i]); 
+$output .='"'.$value.'",';
 }
 
 $output .="\n";

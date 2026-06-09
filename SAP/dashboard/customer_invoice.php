@@ -19,6 +19,140 @@ function sort_by_date($a, $b) {
 	//return strtotime($a) - strtotime($b);
 }
 ob_start();
+
+
+require_once('test/dompdf/autoload.inc.php');
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+function bmp_base64_to_png_base64($bmpBase64) {
+
+    // Clean base64 header if exists
+    $bmpBase64 = preg_replace('#^data:image/\w+;base64,#i', '', $bmpBase64);
+    $bmpData   = base64_decode($bmpBase64);
+
+    if (!$bmpData) {
+        return false;
+    }
+
+    // ---- Read BMP Headers ----
+    $offset  = unpack('V', substr($bmpData, 10, 4)); $offset  = $offset[1];
+    $width   = unpack('V', substr($bmpData, 18, 4)); $width   = $width[1];
+    $height  = unpack('l', substr($bmpData, 22, 4)); $height  = $height[1]; // signed for top-down BMP
+    $bpp     = unpack('v', substr($bmpData, 28, 2)); $bpp     = $bpp[1];
+    $compression = unpack('V', substr($bmpData, 30, 4)); $compression = $compression[1];
+
+    $flipY = true;
+    if ($height < 0) {
+        $height = abs($height); // top-down BMP
+        $flipY  = false;
+    }
+
+    // ---- Create GD Image ----
+    $img   = imagecreatetruecolor($width, $height);
+    $white = imagecolorallocate($img, 255, 255, 255);
+    imagefill($img, 0, 0, $white);
+
+    $rowSize = (int)(($bpp * $width + 31) / 32) * 4;
+
+    // ---- 1-bit Monochrome (most QR codes) ----
+    if ($bpp == 1) {
+        // Read color table (2 colors: index 0 and index 1)
+        $color0_b = ord($bmpData[54]); $color0_g = ord($bmpData[55]); $color0_r = ord($bmpData[56]);
+        $color1_b = ord($bmpData[58]); $color1_g = ord($bmpData[59]); $color1_r = ord($bmpData[60]);
+
+        for ($y = 0; $y < $height; $y++) {
+            $realY    = $flipY ? ($height - 1 - $y) : $y;
+            $rowStart = $offset + $y * $rowSize;
+            for ($x = 0; $x < $width; $x++) {
+                $byteOffset = $rowStart + (int)($x / 8);
+                $bit        = (ord($bmpData[$byteOffset]) >> (7 - ($x % 8))) & 1;
+                if ($bit == 0) {
+                    $color = imagecolorallocate($img, $color0_r, $color0_g, $color0_b);
+                } else {
+                    $color = imagecolorallocate($img, $color1_r, $color1_g, $color1_b);
+                }
+                imagesetpixel($img, $x, $realY, $color);
+            }
+        }
+
+    // ---- 4-bit Color ----
+    } elseif ($bpp == 4) {
+        for ($y = 0; $y < $height; $y++) {
+            $realY    = $flipY ? ($height - 1 - $y) : $y;
+            $rowStart = $offset + $y * $rowSize;
+            for ($x = 0; $x < $width; $x++) {
+                $byteOffset = $rowStart + (int)($x / 2);
+                $nibble     = ($x % 2 == 0)
+                    ? (ord($bmpData[$byteOffset]) >> 4) & 0x0F
+                    : ord($bmpData[$byteOffset]) & 0x0F;
+                $palOffset  = 54 + $nibble * 4;
+                $b = ord($bmpData[$palOffset]);
+                $g = ord($bmpData[$palOffset + 1]);
+                $r = ord($bmpData[$palOffset + 2]);
+                $color = imagecolorallocate($img, $r, $g, $b);
+                imagesetpixel($img, $x, $realY, $color);
+            }
+        }
+
+    // ---- 8-bit Color ----
+    } elseif ($bpp == 8) {
+        for ($y = 0; $y < $height; $y++) {
+            $realY    = $flipY ? ($height - 1 - $y) : $y;
+            $rowStart = $offset + $y * $rowSize;
+            for ($x = 0; $x < $width; $x++) {
+                $index     = ord($bmpData[$rowStart + $x]);
+                $palOffset = 54 + $index * 4;
+                $b = ord($bmpData[$palOffset]);
+                $g = ord($bmpData[$palOffset + 1]);
+                $r = ord($bmpData[$palOffset + 2]);
+                $color = imagecolorallocate($img, $r, $g, $b);
+                imagesetpixel($img, $x, $realY, $color);
+            }
+        }
+
+    // ---- 24-bit True Color ----
+    } elseif ($bpp == 24) {
+        for ($y = 0; $y < $height; $y++) {
+            $realY    = $flipY ? ($height - 1 - $y) : $y;
+            $rowStart = $offset + $y * $rowSize;
+            for ($x = 0; $x < $width; $x++) {
+                $pos   = $rowStart + $x * 3;
+                $b     = ord($bmpData[$pos]);
+                $g     = ord($bmpData[$pos + 1]);
+                $r     = ord($bmpData[$pos + 2]);
+                $color = imagecolorallocate($img, $r, $g, $b);
+                imagesetpixel($img, $x, $realY, $color);
+            }
+        }
+
+    // ---- 32-bit ----
+    } elseif ($bpp == 32) {
+        for ($y = 0; $y < $height; $y++) {
+            $realY    = $flipY ? ($height - 1 - $y) : $y;
+            $rowStart = $offset + $y * $rowSize;
+            for ($x = 0; $x < $width; $x++) {
+                $pos   = $rowStart + $x * 4;
+                $b     = ord($bmpData[$pos]);
+                $g     = ord($bmpData[$pos + 1]);
+                $r     = ord($bmpData[$pos + 2]);
+                $color = imagecolorallocate($img, $r, $g, $b);
+                imagesetpixel($img, $x, $realY, $color);
+            }
+        }
+    }
+
+    // ---- Convert GD image → PNG → Base64 ----
+    ob_start();
+    imagepng($img);
+    $pngData = ob_get_clean();
+    imagedestroy($img);
+
+    return base64_encode($pngData);
+}
+
+
 $sswa_user_type = $_SESSION["sswa_user_type"];
 $sswa_selected_dealer_code = $_SESSION["sswa_selected_dealer_code"];
 $sswa_selected_customer_code = $_SESSION["sswa_selected_customer_code"];
@@ -519,10 +653,24 @@ if(count($app_results_arr)>0){
 			$FreightAmt = round($invoice_details_val["FreightAmt"],2);
 			$QrCode1 = $invoice_details_val["QrCode1"];
 		}
+
+		$pngBase64 = bmp_base64_to_png_base64($QrCode1);
+
+			if (!$pngBase64) {
+				die('Error: Could not convert BMP image.');
+			}
+
+			// Build data URI for dompdf (PNG only — dompdf does NOT support BMP)
+			$imgSrc = "data:image/png;base64," . $pngBase64;
+
+
 		/*<img src=\"images/qr.jpg\" alt=\"Star\" width=\"50px\" style=\"position: absolute; top:10px; right:10px;\"/>
 		<img src=\"https://chart.googleapis.com/chart?chs=70x70&cht=qr&chl=http%3A%2F%2Fwww.google.com%2F&choe=UTF-8\" alt=\"Star\" width=\"50px\" style=\"position: absolute; top:10px; right:10px;\"/>*/ 
 		$output .= "<html><body style=\"border:1px solid #333;\">
-<div class=\"container\" style=\"width:100%;\">
+		
+<div class=\"container\" style=\"width:100%;\"><style>
+body{font-family:DejaVu Sans;}
+</style>
 	<table style=\"width:100%; text-align:left; border:1px solid #333;\" cellpadding=\"2\">
   <tr>
    <td style=\"width:20%;text-align:left;\"><img src=\"images/star-pdf-logo.jpeg\" width=\"50px\" style=\"position: absolute; top:10px; left:10px;\" /></td>
@@ -530,7 +678,7 @@ if(count($app_results_arr)>0){
   		<p style=\"text-align:center;font-size:8px;margin: 0px; padding-top:2px;\">$CinNo</p>
   		<p style=\"text-align:center; font-size:8px;margin: 0px; padding-top:2px;\">$WorksOff</p>
   		<p style=\"text-align:center;font-size:8px;padding-bottom:10px;\"><strong>$CompName2</strong><br /></p></td>
-   	<td style=\"width:20%;text-align:right;\" ><img src=\"".BASE_URL."dashboard/images/qr.jpg\" alt=\"Star\" width=\"50px\" style=\"position: absolute; top:10px; right:10px;\"/></td>
+   	<td style=\"width:20%;text-align:right;\" ><img src=\"".$imgSrc."\" alt=\"Star\" width=\"50px\" style=\"position: absolute; top:10px; right:10px;\"/></td>
    </tr>
    </table>
   <table style=\"width:100%; text-align:left; border:1px solid #333;\" cellpadding=\"4\">
@@ -554,8 +702,8 @@ if(count($app_results_arr)>0){
   <tr><td style=\"width:50%;font-size:8px;\">State: <strong>$VendState</strong></td><td style=\"width:50%;font-size:8px;\">State Code: <strong>$VendStCode</strong></td></tr>
   <tr><td style=\"width:50%;font-size:8px;\">SO No.: <strong>$DoNo</strong></td><td style=\"width:50%;font-size:8px;\">SO Dt: <strong>$DoDate_format</strong></td></tr></table></td>
   <td style=\"width:50%;font-size:8px; border-left:1px solid #333; padding-left:10px;border-top:1px solid #333;\">Our Ref No.: <strong>$OurRefNo</strong><br/>
-  Delivery No.: <strong>$ChallanNo</strong> <span style=\"padding-left:90px\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delivery Dt: <strong>$ChallanDt_format</strong></span><br/>
-  Shipment No.: <strong>$ShipmentNo</strong> <span style=\"padding-left:90px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shipment Dt: <strong>$ShipmentDt_format</strong></span>
+  Delivery No.: <strong>$ChallanNo</strong> <span style=\"padding-left:90px\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delivery Dt: <strong>$ChallanDt_format</strong></span><br/>
+  Shipment No.: <strong>$ShipmentNo</strong> <span style=\"padding-left:90px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shipment Dt: <strong>$ShipmentDt_format</strong></span>
   </td>
   </tr>
   <tr>
@@ -570,7 +718,7 @@ if(count($app_results_arr)>0){
   </td>
   <td style=\"width:50%; padding-left:10px; border-top:1px solid #333;border-left:1px solid #333;font-size:8px;\">$ConName<br />
   <p style=\"font-size:8px; margin:0px;\">$ConAdd</p>
-  <p style=\"font-size:8px; margin:0px; margin-top:10px;\">Batch No.: $WeekNo</p>
+  <p style=\"font-size:8px; margin:0px; margin-top:10px;word-wrap: break-word;    white-space: break-spaces; word-break: break-all;\">Batch No.: $WeekNo</p>
   <p style=\"font-size:8px; margin:0px;\">Destination: $ConDest <span style=\"padding-left:70px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PIN No.: $ConPin</span></p>
   <p style=\"font-size:8px; margin:0px;\">State: $ConSt <span style=\"padding-left:70px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;State Code: $ConStCode</span></p>
   </td>
@@ -585,8 +733,8 @@ if(count($app_results_arr)>0){
   <td style=\"width:10%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>No. of Bags</strong></td>
   <td style=\"width:7%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>UOM</strong></td>
   <td style=\"width:7%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>QTY<br/>(MT)</strong></td>
-  <td style=\"width:10%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>Basic Rate /MT <br/><span style=\"font-family:dejavusans;\">&#8377;</span></strong></td>
-  <td style=\"width:10%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>Taxable Amount <br/><span style=\"font-family:dejavusans;\">&#8377;</span></strong></td>
+  <td style=\"width:10%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>Basic Rate /MT <br/>₹</strong></td>
+  <td style=\"width:10%;padding-left:8px;border-left:1px solid #333;text-align:center;font-size:8px;\"><strong>Taxable Amount <br/>₹</strong></td>
   </tr>
   <tr>
   <td style=\"width:7%;padding-left:8px; text-align:center;border-top:1px solid #333;\">1</td>
@@ -714,12 +862,16 @@ public function setLongTableFooter($html) {
 $this->longTableFooter = $html;
 }
 }
+
+
+//echo $output;die;
+
 //creditnotePDFfile($output);
 //function creditnotePDFfile($output){
 	$curr_date = date("jS_M_Y_h_m_s_A");
 $the_file_name = "invoice_".$curr_date.".pdf";
 		//define ('PDF_MARGIN_RIGHT', 4);
-$pdf=new LongTableTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+/*$pdf=new LongTableTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 //$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 $pdf->SetPrintHeader(false);
 		$pdf->SetPrintfooter(false);
@@ -734,9 +886,26 @@ $pdf->writeHTML($output);
 $_REQUEST['mode']='';
 $_REQUEST['invoice_no']='';
 ob_end_clean();
-$tcpdf=$pdf->Output($the_file_name, 'D');
+$tcpdf=$pdf->Output($the_file_name, 'D');*/
 		
 		//end 
+
+$options = new Options();
+$options->set('isRemoteEnabled', true);      // REQUIRED for data: URI images
+$options->set('isHtml5ParserEnabled', true);
+$options->set('isPhpEnabled', false);
+//$options->set('defaultFont', 'Arial');
+$options->set('defaultFont', 'DejaVu Sans');
+$dompdf = new Dompdf($options);
+$dompdf->loadHtml($output);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+
+ob_end_clean();
+
+// false = view in browser | true = force download
+$dompdf->stream($the_file_name, array('Attachment' => true));
+exit;
 	}
 }
 	else{ ?>

@@ -151,9 +151,22 @@ $brres = mysql_query($brsql);
 
 $total_brres = mysql_num_rows($brres);
 
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
+
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
 
 
-$pgsql = "SELECT $customer_master.`customer_code` FROM $customer_master left join $dealer_security_ledger_status on $customer_master.`dns_customer_code`=$dealer_security_ledger_status.`customer_code` WHERE $customer_master.cust_type='Dealer' $new_whr_str";
+$pgsql = "SELECT $customer_master.`customer_code` FROM $customer_master left join $dealer_security_ledger_status on $customer_master.`dns_customer_code`=$dealer_security_ledger_status.`customer_code` WHERE $customer_master.cust_type='Dealer' $con $new_whr_str";
 
 $pgres = mysql_query($pgsql);
 
@@ -357,7 +370,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
 
 
 
-$sql1 = "SELECT $customer_master.`customer_code`,$customer_master.`dns_customer_code`,$customer_master.`customer_name`,$dealer_security_ledger_status.`security_ledger_status` FROM $customer_master left join $dealer_security_ledger_status on $customer_master.`dns_customer_code`=$dealer_security_ledger_status.`customer_code` WHERE $customer_master.cust_type='Dealer' $new_whr_str order by $customer_master.`customer_name` asc limit $start_from,$limit";
+$sql1 = "SELECT $customer_master.`customer_code`,$customer_master.`dns_customer_code`,$customer_master.`customer_name`,$dealer_security_ledger_status.`security_ledger_status` FROM $customer_master left join $dealer_security_ledger_status on $customer_master.`dns_customer_code`=$dealer_security_ledger_status.`customer_code` WHERE $customer_master.cust_type='Dealer' $con $new_whr_str order by $customer_master.`customer_name` asc limit $start_from,$limit";
 
 $res1 = mysql_query($sql1);
 

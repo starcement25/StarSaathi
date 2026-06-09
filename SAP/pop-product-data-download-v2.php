@@ -7,6 +7,29 @@ $emp_code=$_REQUEST['emp_code'] ? strtolower(trim($_REQUEST['emp_code'])) : "";
 $user_type = $_REQUEST['user_type'] ? strtolower(trim($_REQUEST['user_type'])) : "";
 $the_customer_code=$_REQUEST['customer_code'] ? trim($_REQUEST['customer_code']) : "";
 
+
+
+	// ✅ If both user_type AND customer_code are blank
+	if ($user_type == "" && $the_customer_code == "") {
+
+		// Read raw POST JSON data
+		$rawData = file_get_contents("php://input");
+		$jsonData = json_decode($rawData, true);
+
+		if (json_last_error() === JSON_ERROR_NONE && is_array($jsonData)) {
+
+			$user_type = isset($jsonData['user_type']) ? strtolower(trim($jsonData['user_type'])) : "";
+			$the_customer_code = isset($jsonData['customer_code']) ? trim($jsonData['customer_code']) : "";
+
+		} else {
+			echo json_encode([
+				"status" => false,
+				"message" => "Invalid JSON input"
+			]);
+			exit;
+		}
+
+	}
 $app_service_track_log="app_service_track_log";
 $pop_product_master  = "pop_product_master";
 $customer_master = "customer_master";

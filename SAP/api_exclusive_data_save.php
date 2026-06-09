@@ -49,7 +49,7 @@ foreach ($required as $field) {
 
 
 $dealer_name = mysql_real_escape_string($data['dealer_name']);
-$branch = mysql_real_escape_string($data['branch']);
+//$branch = mysql_real_escape_string($data['branch']);
 $lifting_qty = mysql_real_escape_string($data['lifting_qty']);
 $month = mysql_real_escape_string($data['month']);
 $customer_id = mysql_real_escape_string($data['customer_id']);
@@ -57,8 +57,12 @@ $customer_id = mysql_real_escape_string($data['customer_id']);
 $customer_sql = "SELECT * FROM customer_master WHERE customer_id = $customer_id";
 $customer_res = mysql_query($customer_sql);
 $row = mysql_fetch_assoc($customer_res);
+$branch_code=$row['branch_code'];
 
-
+$branch_sql = "SELECT branch_name FROM branch_master WHERE branch_code = '$branch_code'";
+$branch_res = mysql_query($branch_sql);
+$branch_row = mysql_fetch_assoc($branch_res);
+$branch= $branch_row['branch_name'];
 
 // $cutoff_sql = "SELECT the_value FROM app_setting_master WHERE the_key_name = 'cuttoff_date'";
 // $cutoff_result = mysql_query($cutoff_sql);
@@ -98,8 +102,30 @@ $month = trim($data['month']);
 //     exit;
 // }
 
-list($month, $year) = explode('-', trim($data['month']));
-$month = str_pad($month, 2, '0', STR_PAD_LEFT);
+// list($month, $year) = explode('-', trim($data['month']));
+// $month = str_pad($month, 2, '0', STR_PAD_LEFT);
+$month_input = trim($data['month']);
+
+
+if (strpos($month_input, '-') !== false) {
+    list($month, $year) = explode('-', $month_input);
+    $month = str_pad($month, 2, '0', STR_PAD_LEFT);
+} else {
+    // New format: "March 2026"
+    $dateObj = DateTime::createFromFormat('F Y', $month_input);
+
+    if (!$dateObj) {
+        echo json_encode([
+            "process_status" => "No",
+            "process_message" => "Failed!",
+            "error" => "Invalid month format"
+        ]);
+        exit;
+    }
+
+    $month = $dateObj->format('m'); // 03
+    $year  = $dateObj->format('Y'); // 2026
+}
 
 $year = (int)$year;
 
@@ -165,7 +191,7 @@ if (!$row_spcl  || $current_date > $cutoff_date) {
         exit;
     }
 
-
+// echo $cutoff_global_sql;die;
     $row_global = mysql_fetch_assoc($cutoff_global_result);
     if (!$row_global) {
         $res_data = array("process_status" => "No", "process_message" => "Failed!", "error" => "No cutoff data found for selected month/year.");

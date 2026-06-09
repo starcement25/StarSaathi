@@ -7,16 +7,17 @@ date_default_timezone_set('Asia/Kolkata');
 
 $inv_no_to_check = "F21800013849";
 $apporder_no_to_check = "SS0738587";
-$customer_id = "1000000646"; // 👈 set this to correct customer_id if known
+$customer_id = "1000003935"; // 👈 set this to correct customer_id if known
 
 $curr_date = date("Y-m-d H:i:s");
-$start_date = date('Ymd', strtotime('-30 days'));
+$start_date = date('Ymd', strtotime('-60 days'));
 $end_date   = date('Ymd'); // today
 
 // 🔹 SAP API URL
 $starfiori_port_no = $GLOBALS['starfiori_port_no'];
 $the_filter = "&$filter=(CustCo eq '$customer_id' and (InvoiceDt ge '$start_date' and InvoiceDt le '$end_date'))&sap-client=900";
 $url_ck1 = "https://starfiori.starcement.co.in:$starfiori_port_no/sap/opu/odata/sap/ZSD_CUSTOMER_BULK_INVOICE_SRV/ZSD_CUSTOMER_INVOICESet?\$format=json" . str_replace(" ", "%20", $the_filter);
+echo"<pre>";print_r($url_ck1);die;
 
 // 🔹 Fetch API data
 $body_for_mcode10 = get_data_from_cserver($url_ck1);

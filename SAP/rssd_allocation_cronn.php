@@ -244,7 +244,7 @@ function send_the_mail_with_attachment($to_email, $subject, $bodyml, $file_path 
         $mail->Host = "cloudmail2.up99plus.com";
         $mail->Port = 25;
         $mail->Username = "starcement@cloudmail.up99plus.com";
-        $mail->Password = "K2TTvLxATyULV2um";
+        $mail->Password = "Nh26sjqgWk";
         $mail->setFrom('starcement@cloudmail.up99plus.com', 'Star Cement');
         $mail->Subject = $subject;
         $mail->MsgHTML($bodyml);

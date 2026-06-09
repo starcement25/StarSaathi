@@ -123,11 +123,23 @@ $page = $_GET['paged'] ? $_GET['paged'] : 1;
 /*---------PAGINATION RELATED CODE END----------*/
 
 /*---------PAGINATION RELATED CODE START----------*/
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
 
 $pgsql = "select $table_name.`customer_code` from $table_name 
 left join $branch_master on $table_name.`branch_code`=$branch_master.`branch_code`
 left JOIN  $customer_destination ON $customer_destination.customer_code=$table_name.customer_code
-left JOIN  $destination_master ON $destination_master.destination_code=$customer_destination.destination_code $new_whr_str";
+left JOIN  $destination_master ON $destination_master.destination_code=$customer_destination.destination_code $new_whr_str $con";
+
 $pgres = mysql_query($pgsql);
 $total_pgres = mysql_num_rows($pgres);
 $start_from = (($page-1)*$limit);
@@ -149,7 +161,7 @@ include "web_header.php";
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                          <h2>Customer List (<?php echo $total_pgres;?>)&nbsp; <a href="export_customer.php?get_type=all" class="btn bg-red waves-effe">Export&nbsp;all&nbsp;customer</a> &nbsp; <a href="export_customer.php?get_type=dealer" class="btn bg-red waves-effe">Export&nbsp;Dealer</a> &nbsp; <a href="export_customer.php?get_type=subdealer" class="btn bg-red waves-effe">Export&nbsp;Sub-Dealer</a></h2>
+                          <h2>Customer List (<?php echo $total_pgres;?>)&nbsp; <a href="export_customer.php?get_type=all" class="btn bg-red waves-effe">Export&nbsp;all&nbsp;customer</a> &nbsp; <a href="export_customer.php?get_type=dealer" class="btn bg-red waves-effe">Export&nbsp;Dealer</a> &nbsp; <!--<a href="export_customer.php?get_type=subdealer" class="btn bg-red waves-effe">Export&nbsp;Sub-Dealer</a>--></h2>
 
 <div class="row clearfix">
 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 add_top_bottom_padding">
@@ -175,7 +187,7 @@ if($totres22>0){
 <select class="form-control" id="sl_cust_type" style="padding-left:2px;">
 <option value="">Select Cust Type</option>
 <option value="Dealer" <?php if($sl_cust_type=="Dealer"){?> selected="selected" <?php } ?>>Dealer</option>
-<option value="Sub Dealer" <?php if($sl_cust_type=="Sub Dealer"){?> selected="selected" <?php } ?>>Sub Dealer</option>
+<!-- <option value="Sub Dealer" <?php if($sl_cust_type=="Sub Dealer"){?> selected="selected" <?php } ?>>Sub Dealer</option> -->
 <option value="RSSD" <?php if($sl_cust_type=="RSSD"){?> selected="selected" <?php } ?>>RSSD</option>
 <option value="Ship to Party-dealer" <?php if($sl_cust_type=="Ship to Party-dealer"){?> selected="selected" <?php } ?>>Ship to Party-dealer</option>
 <option value="ShiptoParty-Subdeale" <?php if($sl_cust_type=="ShiptoParty-Subdeale"){?> selected="selected" <?php } ?>>ShiptoParty-Subdeale</option>
@@ -216,7 +228,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>Branch&nbsp;Name</th>
                                             <th>Customer&nbsp;Type</th>
                                             <th>Linked&nbsp;Dealer&nbsp;Code</th>
-                                            <th>Linked&nbsp;Dealer&nbsp;Code</th>
+                                            <th>Linked&nbsp;Dealer&nbsp;Name</th>
                                             <th>Destination Code</th>
                                             <th>Destination Name</th>
                                             <th>Region</th>
@@ -240,7 +252,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>Branch&nbsp;Name</th>
                                             <th>Customer&nbsp;Type</th>
                                             <th>Linked&nbsp;Dealer&nbsp;Code</th>
-                                            <th>Linked&nbsp;Dealer&nbsp;Code</th>
+                                            <th>Linked&nbsp;Dealer&nbsp;Name</th>
                                              <th>Destination Code</th>
                                             <th>Destination Name</th>
                                             <th>Region</th>
@@ -252,11 +264,16 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                     </tfoot>
                                     <tbody>
 <?php
+
+
 $sql1 = "select $table_name.*,$branch_master.`branch_name`,$destination_master.dns_destination_code,$destination_master.destination_name from $table_name 
 		left join $branch_master on $table_name.`branch_code`=$branch_master.`branch_code`
 		left JOIN  $customer_destination ON $customer_destination.customer_code=$table_name.customer_code
 		left JOIN  $destination_master ON $destination_master.destination_code=$customer_destination.destination_code
-		$new_whr_str order by $table_name.`dns_customer_code` asc limit $start_from,$limit";
+		$new_whr_str $con order by $table_name.`dns_customer_code` asc limit $start_from,$limit";
+
+		//echo"<pre>";print_r($sql1);die;
+
 $res1 = mysql_query($sql1);
 $totres1 = mysql_num_rows($res1);
 if($totres1>0){

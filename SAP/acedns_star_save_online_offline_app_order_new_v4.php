@@ -595,7 +595,7 @@ $totres1 = mysql_num_rows($res1);
 return $the_SAP_destination;
 
 }
-
+/*
 function show_SAP_plant_from_customer_code($the_customer_code){
 
 $the_cust_code = "";
@@ -605,9 +605,9 @@ $SAP_customer_master = "ptblcustomermaster";
 $customer_master = "customer_master";
 
 if($the_customer_code!=""){
-/*
-$sql1 = "select VWERK from $SAP_customer_master where KUNNR=(select customer_id from $customer_master where `customer_code`='$the_customer_code') ORDER BY AEDAT DESC,ADDITIONAL_DATA1 DESC LIMIT 0,1";
-*/
+
+// $sql1 = "select VWERK from $SAP_customer_master where KUNNR=(select customer_id from $customer_master where `customer_code`='$the_customer_code') ORDER BY AEDAT DESC,ADDITIONAL_DATA1 DESC LIMIT 0,1";
+
 $sql1 = "select VWERK from $SAP_customer_master where KUNNR=(select customer_id from $customer_master where `customer_code`='$the_customer_code') AND (VKORG='1017' OR VKORG='1010') AND VWERK !='' ORDER BY AEDAT DESC,ADDITIONAL_DATA1 DESC LIMIT 0,1";
 $res1 = mysql_query($sql1);
 
@@ -626,7 +626,101 @@ $totres1 = mysql_num_rows($res1);
 return $the_SAP_plant;
 
 }
+*/
+function show_SAP_plant_from_customer_code($the_customer_code){
 
+    $the_cust_code = "";
+
+    $SAP_customer_master = "ptblcustomermaster";
+
+    $customer_master = "customer_master";
+
+    $the_SAP_plant = "";
+
+    if($the_customer_code != ""){
+
+        // GET CUSTOMER TYPE //22-05-26
+        $cust_type = "";
+
+        $cust_sql = "SELECT cust_type 
+                     FROM $customer_master 
+                     WHERE customer_code='$the_customer_code' 
+                     LIMIT 0,1";
+
+        $cust_res = mysql_query($cust_sql);
+
+        if(mysql_num_rows($cust_res) > 0){
+
+            $cust_row = mysql_fetch_assoc($cust_res);
+
+            $cust_type = trim($cust_row['cust_type']);
+        }
+
+        // QUERY BASED ON CUSTOMER TYPE
+        if($cust_type == 'Dealer'){
+
+            $sql1 = "SELECT VWERK 
+                     FROM $SAP_customer_master 
+                     WHERE KUNNR=(
+                            SELECT customer_id 
+                            FROM $customer_master 
+                            WHERE customer_code='$the_customer_code'
+                     ) 
+                     AND (VKORG='1017' OR VKORG='1010') 
+                     AND VWERK !='' 
+                     ORDER BY AEDAT DESC, ADDITIONAL_DATA1 DESC 
+                     LIMIT 0,1";
+
+        }else{
+
+            // $sql1 = "SELECT VWERK 
+            //          FROM $SAP_customer_master 
+            //          WHERE KUNNR=(
+            //                 SELECT customer_id 
+            //                 FROM $customer_master 
+            //                 WHERE customer_code='$the_customer_code'
+            //          ) 
+            //          AND (VKORG='1017' OR VKORG='1010') 
+            //          ORDER BY AEDAT DESC, ADDITIONAL_DATA1 DESC 
+            //          LIMIT 0,1";
+
+			$sql1 = "SELECT VWERK
+						FROM $SAP_customer_master
+						WHERE KUNNR = (
+							SELECT customer_id
+							FROM $customer_master
+							WHERE customer_code='$the_customer_code'
+						)
+						AND VKORG IN ('1017','1010')
+						AND VWERK IS NOT NULL
+						AND AEDAT = (
+							SELECT MAX(AEDAT)
+							FROM $SAP_customer_master
+							WHERE KUNNR = (
+								SELECT customer_id
+								FROM $customer_master
+								WHERE customer_code='$the_customer_code'
+							)
+							AND VKORG IN ('1017','1010')
+						)
+						ORDER BY ADDITIONAL_DATA1 DESC
+						LIMIT 1";
+        }
+
+        $res1 = mysql_query($sql1);
+
+        $totres1 = mysql_num_rows($res1);
+
+        if($totres1 > 0){
+
+            $row1 = mysql_fetch_assoc($res1);
+
+            $the_SAP_plant = $row1["VWERK"] ? addslashes(trim($row1["VWERK"])) : "";
+        }
+    }
+
+    return $the_SAP_plant;
+}
 function show_dump_name_from_dump_code($the_dump_code,$branch_code){
 
 $the_dump_name = "";
@@ -990,7 +1084,11 @@ $cur_ord_dns_prod_code = $cur_ord_prod_dtld["dns_prod_code"];
 
 $cur_ord_prod_dtld_desc = $cur_ord_prod_dtld["prod_desc"];
 
-$cur_ord_qty = addslashes(trim($order_data_val6["qty"]));
+//$cur_ord_qty = addslashes(trim($order_data_val6["qty"]));
+//$cur_ord_qty = addslashes(trim(preg_replace('/\s+/', '', $order_data_val6["qty"])));
+//add condition sk 11-03-26
+$cur_ord_qty = preg_replace('/[^0-9.]/', '', $order_data_val6["qty"]);
+$cur_ord_qty = addslashes(trim($cur_ord_qty));
 
 $cur_ord_destination_code = $order_data_val6["destination_code"] ? addslashes(trim($order_data_val6["destination_code"])) : "";
 
@@ -1112,8 +1210,31 @@ ${'dns_sub_dealer_code'.$cntslno} = $dns_sub_dealer_code ;
 $prod_code = $order_data_val["prod_code"] ? addslashes(trim($order_data_val["prod_code"])) : "";
 
 $dns_prod_code = "";
-
+//add condition sk 12-03-26
 $qty = addslashes(trim($order_data_val["qty"]));
+
+// $qty = preg_replace('/[^0-9.]/', '', $qty);
+// $qty = addslashes(trim($qty));
+//new add condition 13-03-26
+
+$qty = preg_replace('/[^0-9.]/', '', $qty); // keep only digits and dot
+
+// convert .10 → 0.10
+if (strpos($qty, '.') === 0) {
+    $qty = '0' . $qty;
+}
+
+// validate decimal format
+if (!preg_match('/^\d+(\.\d+)?$/', $qty)) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Invalid quantity format"
+    ]);
+    exit;
+}
+
+// convert to 2 decimal places
+$qty = number_format((float)$qty, 2, '.', '');
 
 $freight = $order_data_val["freight"] ? addslashes(trim($order_data_val["freight"])) : "";
 
@@ -2028,7 +2149,8 @@ $sub_dealer_name=$rowcustcode['customer_name'];
 
 		}
 
-
+		$qty = preg_replace('/[^0-9.]/', '', $qty);
+		$qty = addslashes(trim($qty));
 
 		$sqlin = "insert into $t_apperpdo (`APPORDERNO`,`ERPORDERNO`,`ERPORDERDT`,`order_date`,`order_for`,`consignee_name`,`consignee_address`,`sub_dealer_code`,`dns_sub_dealer_code`,`customer_code`,`dns_customer_code`,`prod_code`,`dns_prod_code`,`prod_display_name`,`QTY`,`freight`,`destination_code`,`destination_name`,`destination_address`,`phone_no`,`dump_status`,`dump_code`,`dump_name`,`order_from`,`order_by`,`dealer_truck`) values('$apporderno','$erporderno','$erporderdt','$order_date','$order_for_new_in','$consignee_name','$consignee_address','$sub_dealer_code','${'dns_sub_dealer_code'.$cntordata}','$customer_code','$dns_customer_code','$prod_code','$dns_prod_code','$prod_desc',
 

@@ -26,7 +26,7 @@ $the_url_fail_safe = BASE_URL . "ccavenue_pg/check_pop_order_payment_status_ccav
 $the_url = BASE_URL . "ccavenue_pg/check_pop_order_payment_status_ccavenue.php?order_id=".$mordpop_id;	
 $the_url_fail_safe = BASE_URL . "ccavenue_pg/check_pop_order_payment_status_ccavenue_ne.php?order_id=".$mordpop_id;
 }
-
+//echo $the_url_fail_safe;
 if($the_url!=""){
 
 $ch = curl_init();

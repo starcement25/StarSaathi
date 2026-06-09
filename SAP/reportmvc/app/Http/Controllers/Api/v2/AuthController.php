@@ -562,7 +562,7 @@ class AuthController extends Controller
           $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
           $deviceid=Apicommonfunction::decrypt($request->deviceid);
-
+			
           $db_name='starsaathi_'.strtoupper($nick_name);
 
           $dydb =$this->dydb($db_name);
@@ -3641,7 +3641,7 @@ public function checkloginnew_v2(Request $request){
 		$otp_for_login = rand(1,9).rand(0,9).rand(0,9).rand(1,9);
 		//$otp_for_login = "1010";
 
-		if($phonenumber=="9233974090" || $phonenumber=="9831722939" || $phonenumber=="9638307128" || $dealer_id=="WBB037"){
+		if($phonenumber=="9233974090" || $phonenumber=="9831722939" || $phonenumber=="9638307128" || $phonenumber=="9954230208" || $dealer_id=="WBB037"){
 		 $otp_for_login = "1010";
 		}
 		if (strtoupper($dealer_id) == "1000001932") {
@@ -3729,95 +3729,105 @@ public function checkloginnew_v2(Request $request){
 		$belong_dealer_code = $rds_tag ? $rds_tag : "";
 		$belong_dealer_dns_code = "";
 		$belong_dealer_name = "";
-if($belong_dealer_code!=""){
-$sqlquery_bdck = $CUTDB->table('customer_master')
-->select('customer_code','dns_customer_code','customer_name')
-->where('customer_code', '=' ,$belong_dealer_code)
-->first();
-if(count($sqlquery_bdck)>0){
-$belong_dealer_dns_code = $sqlquery_bdck->dns_customer_code ? trim($sqlquery_bdck->dns_customer_code) : "";
-$belong_dealer_name=$sqlquery_bdck->customer_name ? trim($sqlquery_bdck->customer_name) : "";
-}
-}
+			if($belong_dealer_code!=""){
+			$sqlquery_bdck = $CUTDB->table('customer_master')
+			->select('customer_code','dns_customer_code','customer_name')
+			->where('customer_code', '=' ,$belong_dealer_code)
+			->first();
+			if(count($sqlquery_bdck)>0){
+			$belong_dealer_dns_code = $sqlquery_bdck->dns_customer_code ? trim($sqlquery_bdck->dns_customer_code) : "";
+			$belong_dealer_name=$sqlquery_bdck->customer_name ? trim($sqlquery_bdck->customer_name) : "";
+			}
+			}
 
-		$acedns=$sqlquery->acedns;
-		if(strtoupper($acedns)=='Y'){
-			if($deviceid==''){
-				$res_data = array("process_status"=>"NO","process_message"=>"DEVICEID IS BLANK");
-			}else{
+					$acedns=$sqlquery->acedns;
+					if(strtoupper($acedns)=='Y'){
+						if($deviceid==''){
+							$res_data = array("process_status"=>"NO","process_message"=>"DEVICEID IS BLANK");
+						}else{
 
-			$sqlUpdate=$CUTDB->table('customer_master')
-			 ->where('customer_id', $dealer_id)
-			 ->limit(1)
-			 ->update(array('sms_otp'=>$otp_for_login));
-//$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
-$lipl_uri = "https://http.myvfirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=STARCM&text=".urlencode($otp_text)."&tempid=1707160982733435860&dlr-mask=19&dlr-url";
-/*if($phonenumber=="9233974090" || $phonenumber=="9638307128"){
+						$sqlUpdate=$CUTDB->table('customer_master')
+						->where('customer_id', $dealer_id)
+						->limit(1)
+						->update(array('sms_otp'=>$otp_for_login));
+			//$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
+			$lipl_uri = "https://http.myvfirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=STARCM&text=".urlencode($otp_text)."&tempid=1707160982733435860&dlr-mask=19&dlr-url";
+			/*if($phonenumber=="9233974090" || $phonenumber=="9638307128"){
 
-}else{*/
+			}else{*/
 
-$lipl_ch = curl_init();
-curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
-curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($lipl_ch, CURLOPT_HEADER,0);
-curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
-$lipl_return_val = curl_exec($lipl_ch);
-curl_close($lipl_ch);
-//echo"<pre>";print_r($lipl_return_val);die;
-/*}*/
+			$lipl_ch = curl_init();
+			curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
+			curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
+			curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
+			curl_setopt($lipl_ch, CURLOPT_HEADER,0);
+			curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
+			$lipl_return_val = curl_exec($lipl_ch);
+			curl_close($lipl_ch);
+			//echo"<pre>";print_r($lipl_return_val);die;
+			/*}*/
+							if($dealer_id =='1000000767'){
+									$email='manojkrberiwaltura@gmail.com';
+									$email_res= $this->send_email_otp($email,$otp_for_login);
+								}
+			$res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>$cust_type,"emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","otp_text"=>$otp_text,"belong_dealer_code"=>$belong_dealer_code,"belong_dealer_dns_code"=>$belong_dealer_dns_code,"belong_dealer_name"=>$belong_dealer_name,"is_survey_form_submitted"=>$is_survey_form_submitted);
+			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
+			$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
+			Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-$res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>$cust_type,"emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","otp_text"=>$otp_text,"belong_dealer_code"=>$belong_dealer_code,"belong_dealer_dns_code"=>$belong_dealer_dns_code,"belong_dealer_name"=>$belong_dealer_name,"is_survey_form_submitted"=>$is_survey_form_submitted);
-$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
-Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
+					}
+					}
+					else{
+					$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
+					$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&phonenumer='.$phonenumber.'&dealer_id='.$dealer_id);
+					Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
+					$res_data = array("process_status"=>"NO","process_message"=>"NOT LICENSED USER");
+					}
+					}
+					else{
 
-		}
-		}
-		else{
-		$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-		$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&phonenumer='.$phonenumber.'&dealer_id='.$dealer_id);
-		Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-		$res_data = array("process_status"=>"NO","process_message"=>"NOT LICENSED USER");
-		}
-		}
-		else{
+						$sqlquery_ckbk = $CUTDB->table('broker_master')
+						->select('broker_id','dns_broker_id','broker_name','contact_person','mail_id','phone_no','brokerage_cost','acedns','state_code')
+						->where('dns_broker_id', '=' ,$dealer_id)
+						->where('phone_no', '=' ,$phonenumber)
+						->first();
+						if(count($sqlquery_ckbk)>0){
+			$brokerage_cost = $sqlquery_ckbk->brokerage_cost ? trim($sqlquery_ckbk->brokerage_cost) : "";
+			$state_code=$sqlquery_ckbk->state_code ? trim($sqlquery_ckbk->state_code) : "";
+			if($dealer_id!='TEST012'){ //special condition for login not change password 
+			$sqlUpdate=$CUTDB->table('broker_master')
+						->where('dns_broker_id', '=' ,$dealer_id)
+						->where('phone_no', '=' ,$phonenumber)
+						->limit(1)
+						->update(array('sms_otp'=>$otp_for_login));
+			}
+			//$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
+			$lipl_uri = "https://http.myvfirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=STARCM&text=".urlencode($otp_text)."&tempid=1707160982733435860&dlr-mask=19&dlr-url";
+			/*if($phonenumber=="9233974090" || $phonenumber=="9638307128"){
 
-			$sqlquery_ckbk = $CUTDB->table('broker_master')
-			  ->select('broker_id','dns_broker_id','broker_name','contact_person','mail_id','phone_no','brokerage_cost','acedns','state_code')
-			  ->where('dns_broker_id', '=' ,$dealer_id)
-			  ->where('phone_no', '=' ,$phonenumber)
-			  ->first();
-			if(count($sqlquery_ckbk)>0){
-$brokerage_cost = $sqlquery_ckbk->brokerage_cost ? trim($sqlquery_ckbk->brokerage_cost) : "";
-$state_code=$sqlquery_ckbk->state_code ? trim($sqlquery_ckbk->state_code) : "";
-if($dealer_id!='TEST012'){ //special condition for login not change password 
-$sqlUpdate=$CUTDB->table('broker_master')
-			 ->where('dns_broker_id', '=' ,$dealer_id)
-			  ->where('phone_no', '=' ,$phonenumber)
-			 ->limit(1)
-			 ->update(array('sms_otp'=>$otp_for_login));
-}
-//$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
-$lipl_uri = "https://http.myvfirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=STARCM&text=".urlencode($otp_text)."&tempid=1707160982733435860&dlr-mask=19&dlr-url";
-/*if($phonenumber=="9233974090" || $phonenumber=="9638307128"){
+			}else{*/
+			$lipl_ch = curl_init();
+			curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
+			curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
+			curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
+			curl_setopt($lipl_ch, CURLOPT_HEADER,0);
+			curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
+			$lipl_return_val = curl_exec($lipl_ch);
+			curl_close($lipl_ch);
+			/*}*/
+			if(strtoupper($dealer_id) == 'NESPA03'){
+				$email='manojkrberiwaltura@gmail.com';
+				//$email='suman.koley@sbinfowaves.com';
+				$email_res = $this->send_email_otp($email, $otp_for_login);
+			}
 
-}else{*/
-$lipl_ch = curl_init();
-curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
-curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($lipl_ch, CURLOPT_HEADER,0);
-curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
-$lipl_return_val = curl_exec($lipl_ch);
-curl_close($lipl_ch);
-/*}*/
-$res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>"broker","emp_code"=>$sqlquery_ckbk->dns_broker_id,"customer_code"=>"","dns_emp_code"=>$sqlquery_ckbk->dns_broker_id,"emp_name"=>$sqlquery_ckbk->broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$sqlquery_ckbk->phone_no,"acedns"=>$sqlquery_ckbk->acedns,"broker_id"=>$sqlquery_ckbk->broker_id,"dns_broker_id"=>$sqlquery_ckbk->dns_broker_id,"contact_person"=>$sqlquery_ckbk->contact_person,"mail_id"=>$sqlquery_ckbk->mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"otp_text"=>$otp_text,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted);
-$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
-Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
+
+			$res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>"broker","emp_code"=>$sqlquery_ckbk->dns_broker_id,"customer_code"=>"","dns_emp_code"=>$sqlquery_ckbk->dns_broker_id,"emp_name"=>$sqlquery_ckbk->broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$sqlquery_ckbk->phone_no,"acedns"=>$sqlquery_ckbk->acedns,"broker_id"=>$sqlquery_ckbk->broker_id,"dns_broker_id"=>$sqlquery_ckbk->dns_broker_id,"contact_person"=>$sqlquery_ckbk->contact_person,"mail_id"=>$sqlquery_ckbk->mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"otp_text"=>$otp_text,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted);
+			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
+			$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
+			Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 			}else{
 
 		$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
@@ -3985,6 +3995,7 @@ public function checkloginnew_v0(Request $request){
 			$lipl_return_val = curl_exec($lipl_ch);
 			curl_close($lipl_ch);
 			/*}*/
+			
 
 			$res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>$cust_type,"emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","otp_text"=>$otp_text,"belong_dealer_code"=>$belong_dealer_code,"belong_dealer_dns_code"=>$belong_dealer_dns_code,"belong_dealer_name"=>$belong_dealer_name,"is_survey_form_submitted"=>$is_survey_form_submitted);
 			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
@@ -4030,6 +4041,7 @@ public function checkloginnew_v0(Request $request){
 		$lipl_return_val = curl_exec($lipl_ch);
 		curl_close($lipl_ch);
 		/*}*/
+		
 		$res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>"broker","emp_code"=>$sqlquery_ckbk->dns_broker_id,"customer_code"=>"","dns_emp_code"=>$sqlquery_ckbk->dns_broker_id,"emp_name"=>$sqlquery_ckbk->broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$sqlquery_ckbk->phone_no,"acedns"=>$sqlquery_ckbk->acedns,"broker_id"=>$sqlquery_ckbk->broker_id,"dns_broker_id"=>$sqlquery_ckbk->dns_broker_id,"contact_person"=>$sqlquery_ckbk->contact_person,"mail_id"=>$sqlquery_ckbk->mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"otp_text"=>$otp_text,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted);
 		$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 		$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
@@ -4087,6 +4099,12 @@ $the_otp=Apicommonfunction::decrypt($request->the_otp);
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
+$device_type=Apicommonfunction::decrypt($request->device_type);
+			$app_version=Apicommonfunction::decrypt($request->app_version);
+			if($device_type==''){
+				$device_type='0';
+				$app_version='0';
+			}
 
 //$db_name='starsaathi_'.strtoupper($nick_name);
 $db_name='starsaathi_STARS';
@@ -4230,15 +4248,34 @@ $sqlquery=$CUTDB->table('customer_master')
 		$minute=gmdate('i',strtotime('+330 minute'));
 		$second=gmdate('s',strtotime('+330 minute'));
 		$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
+		//sk add line auth token check 23-03-26
+		$token = bin2hex(random_bytes(16));
+				$datetime = date('YmdHis'); // e.g. 20260323153045
+
+				$rawToken = $emp_code . '|' . $datetime . '|' . $token;
+
+				// Final token (encoded for safety)
+				$token = hash('sha256', $rawToken);
+
 		$sqlUpdate=$CUTDB->table('changepassword')
 
 		->where('dns_customer_code', $dealer_id)
 		->limit(1)
-		->update(array('deviceid'=>$deviceid,'loggedin_date_time'=>$location_date));
+		->update(array('deviceid'=>$deviceid,'loggedin_date_time'=>$location_date,'token'=>$token,'device_type'=>$device_type,'app_version'=>$app_version));
+		//add entry in login log sk 02-04-26
+		$CUTDB->table('login_log')->insert([
+			'customer_code'        => $dealer_id,
+			'device_type'          => $device_type,
+			'app_version'          => $app_version,
+			'deviceid'          => $deviceid,
+			'token'          => $token,
+			'loggedin_date_time'   => $location_date
+		]);
+		//sk add line auth token check 23-03-26
 		$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 		$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
 		Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-		$res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>$cust_type,"emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","the_profile_image_url"=>$the_profile_image_url,"belong_dealer_code"=>$belong_dealer_code,"belong_dealer_dns_code"=>$belong_dealer_dns_code,"belong_dealer_name"=>$belong_dealer_name,"is_survey_form_submitted"=>$is_survey_form_submitted);
+		$res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>$cust_type,"emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","the_profile_image_url"=>$the_profile_image_url,"belong_dealer_code"=>$belong_dealer_code,"belong_dealer_dns_code"=>$belong_dealer_dns_code,"belong_dealer_name"=>$belong_dealer_name,"is_survey_form_submitted"=>$is_survey_form_submitted,'token'=>$token);
 	}else{
 
 		$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
@@ -4299,6 +4336,45 @@ $sqlquery=$CUTDB->table('customer_master')
 		$the_profile_image_url = $server_url1.$img_dir.$the_profile_image;
 
 	if($the_otp==$sms_otp){
+		//auth 27-04-26 
+	$token = bin2hex(random_bytes(16));
+		$datetime = date('YmdHis');
+		$date=gmdate('d',strtotime('+330 minute'));
+		$month=gmdate('m',strtotime('+330 minute'));
+		$year=gmdate('Y',strtotime('+330 minute'));
+		$hour=gmdate('H',strtotime('+330 minute'));
+		$minute=gmdate('i',strtotime('+330 minute'));
+		$second=gmdate('s',strtotime('+330 minute'));
+		$rawToken = $broker_id . '|' . $datetime . '|' . $token;
+		$token = hash('sha256', $rawToken);
+		$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
+
+		// Try UPDATE first
+		$sqlUpdate = $CUTDB->table('changepassword')
+			->where('dns_customer_code', $dns_broker_id)
+			->limit(1)
+			->update([
+				'deviceid'            => $deviceid,
+				'loggedin_date_time'  => $location_date,
+				'token'               => $token,
+				'device_type'         => $device_type,
+				'app_version'         => $app_version
+			]);
+		//echo"<pre>";print_r($sqlUpdate);die;
+
+		// 🔁 If no record updated → INSERT
+		if (!$sqlUpdate || $sqlUpdate == 0) {
+			$CUTDB->table('changepassword')->insert([
+				'customer_code'   => $broker_id,
+				'dns_customer_code'   => $dns_broker_id,
+				'deviceid'            => $deviceid,
+				'loggedin_date_time'  => $location_date,
+				'token'               => $token,
+				'device_type'         => $device_type,
+				'app_version'         => $app_version
+			]);
+		}
+	//auth 27-04-26 
 
 		$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
@@ -4306,7 +4382,7 @@ $sqlquery=$CUTDB->table('customer_master')
 
 		Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-		$res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>"broker","emp_code"=>$dns_broker_id,"customer_code"=>"","dns_emp_code"=>$dns_broker_id,"emp_name"=>$broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$phone_no,"acedns"=>$acedns,"broker_id"=>$broker_id,"dns_broker_id"=>$dns_broker_id,"contact_person"=>$contact_person,"mail_id"=>$mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"the_profile_image_url"=>$the_profile_image_url,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted);
+		$res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>"broker","emp_code"=>$dns_broker_id,"customer_code"=>"","dns_emp_code"=>$dns_broker_id,"emp_name"=>$broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$phone_no,"acedns"=>$acedns,"broker_id"=>$broker_id,"dns_broker_id"=>$dns_broker_id,"contact_person"=>$contact_person,"mail_id"=>$mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"the_profile_image_url"=>$the_profile_image_url,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted,"token"=>$token);
 	}else{
 
 	$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
@@ -4989,7 +5065,93 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	}
 
 
+public function send_email_otp($email, $otp_for_login)
+{
+    // ================= PHPMailer =================
 
+    require '/var/www/starsaathi/public_html/SAP/phpmailer_new/PHPMailer.php';
+    require '/var/www/starsaathi/public_html/SAP/phpmailer_new/SMTP.php';
+    require '/var/www/starsaathi/public_html/SAP/phpmailer_new/Exception.php';
+
+    $email_res = "EMAIL FAILED";
+
+    if ($email != "" && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+        try {
+
+            $mail = new \PHPMailer\PHPMailer\PHPMailer(false);
+
+            $mail->isSMTP();
+
+            $mail->Host = "cloudmail2.up99plus.com";
+
+            $mail->Port = 25;
+
+            $mail->SMTPAuth = true;
+
+            $mail->Username = "starcement@cloudmail.up99plus.com";
+
+            $mail->Password = "Nh26sjqgWk";
+
+            $mail->SMTPSecure = false;
+
+            $mail->SMTPAutoTLS = false;
+
+            $mail->setFrom(
+                'starcement@cloudmail.up99plus.com',
+                'Starsaathi'
+            );
+
+            // Main Recipient
+            $mail->addAddress($email);
+
+            // CC Emails
+            $mail->addCC('antarabanerjee@starcement.co.in');
+            $mail->addCC('samirdas@starcement.co.in');
+            $mail->addCC('atanu.sahoo@sbinfowaves.com');
+            $mail->addCC('pratipbhunia@starcement.co.in');
+            $mail->addCC('samirdascool@gmail.com');
+            $mail->addCC('abannerjee15@gmail.com');
+           // $mail->addCC('abannerjee15@gmail.com');
+            
+
+            $mail->isHTML(true);
+
+            $mail->Subject = "Star Saathi Login OTP";
+
+            $mail->Body = "
+            <html>
+            <body>
+
+            <p>Dear User,</p>
+
+            <p>Star Saathi Login OTP is:</p>
+
+            <h2>".$otp_for_login."</h2>
+
+            <p>Please do not share this login OTP with anyone.</p>
+
+            <br>
+
+            <p>Regards,<br>
+            Star Cement</p>
+
+            </body>
+            </html>";
+
+            @$mail->send();
+
+            $email_res = "EMAIL SENT";
+
+        } catch (Exception $e) {
+
+            //$email_res = "EMAIL FAILED : ".$mail->ErrorInfo;
+            $email_res = "EMAIL FAILED";
+        }
+    }
+
+    return $email_res;
+}
 
 
 

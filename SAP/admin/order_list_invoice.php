@@ -624,6 +624,7 @@ $sql1 = "select $t_apperpdo.APPORDERNO,$t_apperpdo.ERPORDERNO,$t_apperpdo.ERPORD
 where $t_apperpdo.`APPORDERNO`!=''  $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";*/
 //echo "<pre>"; print_r($sql1); 
 }
+//print_r($sql1); 
 $res1 = mysql_query($sql1);
 $totres1 = mysql_num_rows($res1);
 $the_sl_no = 1;

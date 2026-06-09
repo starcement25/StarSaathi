@@ -38,7 +38,20 @@ function startCreatDealerCsvfile($get_fetch_type)
 	/*$qry = "select $customer_master.`dns_customer_code`,$customer_master.customer_id AS SAP_code,$customer_master.`customer_name`,$customer_master.`acedns`,$customer_master.`phone_no`,$changepassword.`device_type`,$changepassword.`app_version`,$customer_master.`whatsapp_no`,$customer_master.`email` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $where_qry order by $customer_master.`customer_name` asc";*/
 
 //trail sql query
-$qry = "SELECT $customer_master.dns_customer_code,$customer_master.customer_id AS SAP_code,$customer_master.customer_name,$customer_master.acedns,$customer_master.phone_no,$changepassword.device_type,$changepassword.app_version,$customer_master.whatsapp_no,$customer_master.email,GROUP_CONCAT(EM.dns_emp_code SEPARATOR ';') AS mapped_emp_code,GROUP_CONCAT(EM.emp_name SEPARATOR ';')  AS mapped_emp_name FROM $customer_master LEFT JOIN $changepassword ON $customer_master.customer_code = $changepassword.customer_code LEFT JOIN customer_route_emp_relation CRR ON $customer_master.customer_id = CRR.customer_code LEFT JOIN employee_master EM ON CRR.emp_code = EM.emp_code $where_qry GROUP BY $customer_master.customer_id ORDER BY $customer_master.customer_name ASC";
+
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
+
+$qry = "SELECT $customer_master.dns_customer_code,$customer_master.customer_id AS SAP_code,$customer_master.customer_name,$customer_master.acedns,$customer_master.phone_no,$changepassword.device_type,$changepassword.app_version,$customer_master.whatsapp_no,$customer_master.email,GROUP_CONCAT(EM.dns_emp_code SEPARATOR ';') AS mapped_emp_code,GROUP_CONCAT(EM.emp_name SEPARATOR ';')  AS mapped_emp_name FROM $customer_master LEFT JOIN $changepassword ON $customer_master.customer_code = $changepassword.customer_code LEFT JOIN customer_route_emp_relation CRR ON $customer_master.customer_id = CRR.customer_code LEFT JOIN employee_master EM ON CRR.emp_code = EM.emp_code $where_qry $con GROUP BY $customer_master.customer_id ORDER BY $customer_master.customer_name ASC";
 
 	//dns_emp_code as mapped_emp_code and emp_name as mapped_emp_name
 //echo $qry;

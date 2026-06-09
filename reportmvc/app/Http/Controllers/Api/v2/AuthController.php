@@ -4,51 +4,27 @@
 
 namespace App\Http\Controllers\Api\v2;
 
-
-
 use Illuminate\Http\Request;
-
-
 
 use App\User;
 
-
-
 use App\Http\Requests;
-
-
 
 use App\Http\Requests\RegisterRequest;
 
-
-
 use App\Http\Requests\LoginRequest;
-
-
 
 use App\Http\Controllers\Controller;
 
-
-
 use App\Database\DbOnTheFly;
-
-
 
 use App\Helpers\Apicommonfunction;
 
-
-
 use Session;
-
-
 
 use DB;
 
-
-
 use Mail;
-
-
 
 class AuthController extends Controller
 
@@ -85,11 +61,7 @@ class AuthController extends Controller
 
       $otf = new DbOnTheFly(['database' => $dbname]);
 
-
-
       return $otf;
-
-
 
     }
 
@@ -121,39 +93,21 @@ class AuthController extends Controller
 
         $nick_name=$request->input('nickname');
 
-
-
         $emp_code=$request->emp_code;
-
-
 
         $newpassword=$request->newpassword;
 
-
-
         $deviceid=$request->deviceid;
-
-
 
         $db_name='starsaathi_'.strtoupper($request->input('nickname'));
 
-
-
         $dydb =$this->dydb($db_name);
-
-
 
         $CUTDB = $dydb->getConnection();
 
-
-
         $verificationtoken='';
 
-
-
         $contents = "<?xml version='1.0' encoding='UTF-8'?><recordset>";
-
-
 
         $sqlquery=$CUTDB->table('employee_master')
 
@@ -181,19 +135,13 @@ class AuthController extends Controller
 
                         ->first();
 
-
-
           if(count($sqlquery)>0){
 
 
 
                 $device_id_database=$sqlquery->deviceid;
 
-
-
           			$acedns=$sqlquery->acedns;
-
-
 
                 if(strtoupper($acedns)=='Y'){
 
@@ -204,8 +152,6 @@ class AuthController extends Controller
 
 
           					echo '6';
-
-
 
           				}
 
@@ -241,19 +187,13 @@ class AuthController extends Controller
 
                                             ->first();
 
-
-
                               if(count($sqlchkdeviceid)>0){
 
 
 
                                             $emp_name=$sqlchkdeviceid->emp_name;
 
-
-
                            							   echo '4'.'/'.$emp_name;
-
-
 
                               }
 
@@ -277,8 +217,6 @@ class AuthController extends Controller
 
                                                   ->update(array('deviceid'=>$deviceid));
 
-
-
                   								 if(count($sqlUpdate)>0){
 
 
@@ -301,8 +239,6 @@ class AuthController extends Controller
 
                                                       ->update(array('emp_code'=>$emp_code));
 
-
-
                                       $apiauthcheck=$CUTDB->table('api_verification')
 
 
@@ -313,15 +249,11 @@ class AuthController extends Controller
 
                                                       ->first();
 
-
-
                                       if(count($apiauthcheck)>0){
 
 
 
                                         $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                         $sqlupdateverficationtoken=$CUTDB->table('api_verification')
 
@@ -337,8 +269,6 @@ class AuthController extends Controller
 
                                                         ->update(array('verificationcode'=>$verificationtoken));
 
-
-
                                       }
 
 
@@ -349,11 +279,7 @@ class AuthController extends Controller
 
                                           $today=date('Y-m-d');
 
-
-
                                           $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                           $CUTDB->table('api_verification')->insert(array(
 
@@ -377,55 +303,31 @@ class AuthController extends Controller
 
                                           ));
 
-
-
                                       }
 
 
 
                     									$contents.="<data>";
 
-
-
                     									$contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->emp_code, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
                                       $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->emp_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
                                       $contents .='<sale_access><![CDATA['.mb_convert_encoding($sqlquery->sale_access, 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
                                       $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
                                       $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
                                       $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
 
-
-
                                       $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
-
-
 
                                       $contents.="</data>";
 
-
-
                     									$contents .= "</recordset>";
 
-
-
                     									echo $contents;
-
-
 
                                    }
 
@@ -436,8 +338,6 @@ class AuthController extends Controller
 
 
                      									echo '0';
-
-
 
                      							 }
 
@@ -453,8 +353,6 @@ class AuthController extends Controller
 
                 							echo '0';
 
-
-
                 						}*/
 
 
@@ -468,8 +366,6 @@ class AuthController extends Controller
 
 
                             echo '0';
-
-
 
                           }
 
@@ -501,8 +397,6 @@ class AuthController extends Controller
 
                                        ->update(array('emp_code'=>$emp_code));
 
-
-
                                        $apiauthcheck=$CUTDB->table('api_verification')
 
 
@@ -513,15 +407,11 @@ class AuthController extends Controller
 
                                                        ->first();
 
-
-
                         if(count($apiauthcheck)>0){
 
 
 
                                          $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                          $sqlupdateverficationtoken=$CUTDB->table('api_verification')
 
@@ -537,8 +427,6 @@ class AuthController extends Controller
 
                                                          ->update(array('verificationcode'=>$verificationtoken));
 
-
-
                                        }
 
 
@@ -549,11 +437,7 @@ class AuthController extends Controller
 
                                            $today=date('Y-m-d');
 
-
-
                                            $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                            $CUTDB->table('api_verification')->insert(array(
 
@@ -577,55 +461,31 @@ class AuthController extends Controller
 
                                            ));
 
-
-
                           }
 
 
 
                        $contents.="<data>";
 
-
-
                        $contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->emp_code, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
                        $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->emp_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
                        $contents .='<sale_access><![CDATA['.mb_convert_encoding($sqlquery->sale_access, 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
                        $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
                        $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
                        $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
 
-
-
                        $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
-
-
 
                        $contents.="</data>";
 
-
-
                        $contents .= "</recordset>";
 
-
-
                        echo $contents;
-
-
 
                     }
 
@@ -645,8 +505,6 @@ class AuthController extends Controller
 
           				echo 'NOT LICENSED USER';
 
-
-
           			}
 
 
@@ -661,23 +519,15 @@ class AuthController extends Controller
 
         	  echo 'NOT VALID USER';
 
-
-
         	}
 
 
 
           $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
           $url = url('/api/v1/employeelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
           Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
       }
 
@@ -709,39 +559,21 @@ class AuthController extends Controller
 
           $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
 
-
-
           $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
-
-
 
           $deviceid=Apicommonfunction::decrypt($request->deviceid);
 
-
-
           $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
           $dydb =$this->dydb($db_name);
 
-
-
           $CUTDB = $dydb->getConnection();
-
-
 
           $verificationtoken='';
 
-
-
           $emp_code='';
 
-
-
           $newpassword='';
-
-
 
           $checknickname=DB::table('user_details')
 
@@ -753,15 +585,11 @@ class AuthController extends Controller
 
                             ->first();
 
-
-
           if(count($checknickname)>0){
 
 
 
           $contents = "<?xml version='1.0' encoding='UTF-8'?><recordset>";
-
-
 
           $sqlquery=$CUTDB->table('employee_master')
 
@@ -786,11 +614,7 @@ class AuthController extends Controller
 
                           ->first();
 
-
-
            //print_r($sqlquery);
-
-
 
           /*$sqlquery=$CUTDB->SELECT("SELECT employee_master.emp_code,employee_master.emp_name,employee_master.sale_access,changepassword.newpassword,
 
@@ -810,15 +634,9 @@ class AuthController extends Controller
 
                 $emp_code=$sqlquery->emp_code;
 
-
-
                  $device_id_database=$sqlquery->deviceid;
 
-
-
           		 $acedns=$sqlquery->acedns;
-
-
 
                 if(strtoupper($acedns)=='Y'){
 
@@ -829,8 +647,6 @@ class AuthController extends Controller
 
 
           					return Apicommonfunction::encrypt('6');
-
-
 
           				}
 
@@ -866,19 +682,13 @@ class AuthController extends Controller
 
                                             ->first();
 
-
-
                              if(count($sqlchkdeviceid)>0){
 
 
 
                                             $emp_name=$sqlchkdeviceid->emp_name;
 
-
-
                            							    return Apicommonfunction::encrypt('4'.'/'.$emp_name);
-
-
 
                               }
 
@@ -890,31 +700,17 @@ class AuthController extends Controller
 
                                 $date=gmdate('d',strtotime('+330 minute'));
 
-
-
                                 $month=gmdate('m',strtotime('+330 minute'));
-
-
 
                                 $year=gmdate('Y',strtotime('+330 minute'));
 
-
-
                                 $hour=gmdate('H',strtotime('+330 minute'));
-
-
 
                                 $minute=gmdate('i',strtotime('+330 minute'));
 
-
-
                                 $second=gmdate('s',strtotime('+330 minute'));
 
-
-
                                 $location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
 
                                 $sqlUpdate=$CUTDB->table('changepassword')
 
@@ -930,15 +726,11 @@ class AuthController extends Controller
 
                                                  ->update(array('deviceid'=>$deviceid,'loggedin_date_time'=>$location_date));
 
-
-
                   								 if(count($sqlUpdate)>0){
 
 
 
                                       $today=date("Y-m-d H:m:s");
-
-
 
                                       $sqlupdatetablestructurecheck=$CUTDB->table('table_structure_updation')
 
@@ -953,8 +745,6 @@ class AuthController extends Controller
 
 
                                                       ->first();
-
-
 
                                       if(count($sqlupdatetablestructurecheck)==0) {
 
@@ -978,8 +768,6 @@ class AuthController extends Controller
 
                                                       ->update(array('emp_code'=>$emp_code));
 
-
-
                                       }
 
 
@@ -994,15 +782,11 @@ class AuthController extends Controller
 
                                                       ->first();
 
-
-
                                       if(count($apiauthcheck)>0){
 
 
 
                                         $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                       }
 
@@ -1014,11 +798,7 @@ class AuthController extends Controller
 
                                           $today=date('Y-m-d');
 
-
-
                                           $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                       }
 
@@ -1026,63 +806,33 @@ class AuthController extends Controller
 
                     									$contents.="<data>";
 
-
-
                     									$contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->emp_code, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
                                       $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->emp_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
                                       $contents .='<sale_access><![CDATA['.mb_convert_encoding($sqlquery->sale_access, 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
                                       $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
                                       $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
                                       $contents .='<phonenumber><![CDATA['.mb_convert_encoding($sqlquery->phone_no, 'UTF-8', 'UTF-8').']]></phonenumber>';
 
-
-
                                       $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
                                       $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
                                       $contents.="</data>";
-
-
 
                     									$contents .= "</recordset>";
 
-
-
                                       $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
                                       $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
                                       Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                     									return Apicommonfunction::encrypt($contents);
-
-
 
                                    }
 
@@ -1094,19 +844,11 @@ class AuthController extends Controller
 
                                      $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                                      $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
                                      Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                      									return Apicommonfunction::encrypt('0');
-
-
 
                      							 }
 
@@ -1126,19 +868,11 @@ class AuthController extends Controller
 
                             $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                             $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
                             Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                             return Apicommonfunction::encrypt(0);
-
-
 
                           }
 
@@ -1166,8 +900,6 @@ class AuthController extends Controller
 
                                        ->first();
 
-
-
                        if(count($empblankcheck)==0){
 
 
@@ -1190,8 +922,6 @@ class AuthController extends Controller
 
                                        ->update(array('emp_code'=>$emp_code));
 
-
-
                        }
 				   $apiauthcheck=$CUTDB->table('api_verification')
 								   ->where('deviceid', '=' ,$deviceid)
@@ -1208,31 +938,17 @@ class AuthController extends Controller
 
                                        $date=gmdate('d',strtotime('+330 minute'));
 
-
-
                                        $month=gmdate('m',strtotime('+330 minute'));
-
-
 
                                        $year=gmdate('Y',strtotime('+330 minute'));
 
-
-
                                        $hour=gmdate('H',strtotime('+330 minute'));
-
-
 
                                        $minute=gmdate('i',strtotime('+330 minute'));
 
-
-
                                        $second=gmdate('s',strtotime('+330 minute'));
 
-
-
                                        $location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
 
                                        $sqlUpdate=$CUTDB->table('changepassword')
 
@@ -1248,63 +964,33 @@ class AuthController extends Controller
 
                                                          ->update(array('loggedin_date_time'=>$location_date));
 
-
-
                                $contents.="<data>";
-
-
 
                                $contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->emp_code, 'UTF-8', 'UTF-8').']]></emp_code>';
 
-
-
                                $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->emp_name, 'UTF-8', 'UTF-8').']]></emp_name>';
-
-
 
                                $contents .='<sale_access><![CDATA['.mb_convert_encoding($sqlquery->sale_access, 'UTF-8', 'UTF-8').']]></sale_access>';
 
-
-
                                $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
-
-
 
                                $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
 
-
-
                                $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
                                $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
                                $contents.="</data>";
-
-
 
                                $contents .= "</recordset>";
 
-
-
                                $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
                                $url = url('/api/v1/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
                                Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                                return Apicommonfunction::encrypt($contents);
-
-
 
                         }
 
@@ -1324,19 +1010,11 @@ class AuthController extends Controller
 
                   $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                   $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
                   Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
           				return Apicommonfunction::encrypt('NOT LICENSED USER');
-
-
 
           			}
 
@@ -1352,19 +1030,11 @@ class AuthController extends Controller
 
                 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber);
-
-
 
                 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
             	  return Apicommonfunction::encrypt('NOT VALID USER');
-
-
 
             	}
 
@@ -1380,19 +1050,11 @@ class AuthController extends Controller
 
              $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
              $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber);
-
-
 
              Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
              return Apicommonfunction::encrypt('Invalid Nick Name');
-
-
 
            }
 
@@ -1433,39 +1095,21 @@ class AuthController extends Controller
 
           $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
 
-
-
           $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
-
-
 
           $deviceid=Apicommonfunction::decrypt($request->deviceid);
 
-
-
           $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
           $dydb =$this->dydb($db_name);
 
-
-
           $CUTDB = $dydb->getConnection();
-
-
 
           $verificationtoken='';
 
-
-
           $emp_code='';
 
-
-
           $newpassword='';
-
-
 
           $checknickname=DB::table('user_details')
 
@@ -1477,15 +1121,11 @@ class AuthController extends Controller
 
                             ->first();
 
-
-
           if(count($checknickname)>0){
 
 
 
           $contents = "<?xml version='1.0' encoding='UTF-8'?><recordset>";
-
-
 
           $sqlquery=$CUTDB->table('customer_master')
 
@@ -1510,11 +1150,7 @@ class AuthController extends Controller
 
                           ->first();
 
-
-
            //print_r($sqlquery);
-
-
 
           /*$sqlquery=$CUTDB->SELECT("SELECT employee_master.emp_code,employee_master.emp_name,employee_master.sale_access,changepassword.newpassword,
 
@@ -1527,19 +1163,11 @@ class AuthController extends Controller
             if(count($sqlquery)>0){
 			$dealer_id=$sqlquery->dns_customer_code;
 
-
-
                 $emp_code=$sqlquery->customer_code;
-
-
 
                  $device_id_database=$sqlquery->deviceid;
 
-
-
           		 $acedns=$sqlquery->acedns;
-
-
 
                 if(strtoupper($acedns)=='Y'){
 
@@ -1550,8 +1178,6 @@ class AuthController extends Controller
 
 
           					return Apicommonfunction::encrypt('6');
-
-
 
           				}
 
@@ -1587,19 +1213,13 @@ class AuthController extends Controller
 
                                             ->first();
 
-
-
                              if(count($sqlchkdeviceid)>0){
 
 
 
                                             $emp_name=$sqlchkdeviceid->customer_name;
 
-
-
                            							    return Apicommonfunction::encrypt('4'.'/'.$emp_name);
-
-
 
                               }
 
@@ -1611,31 +1231,17 @@ class AuthController extends Controller
 
                                 $date=gmdate('d',strtotime('+330 minute'));
 
-
-
                                 $month=gmdate('m',strtotime('+330 minute'));
-
-
 
                                 $year=gmdate('Y',strtotime('+330 minute'));
 
-
-
                                 $hour=gmdate('H',strtotime('+330 minute'));
-
-
 
                                 $minute=gmdate('i',strtotime('+330 minute'));
 
-
-
                                 $second=gmdate('s',strtotime('+330 minute'));
 
-
-
                                 $location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
 
                                 $sqlUpdate=$CUTDB->table('changepassword')
 
@@ -1651,15 +1257,11 @@ class AuthController extends Controller
 
                                                  ->update(array('deviceid'=>$deviceid,'loggedin_date_time'=>$location_date));
 
-
-
                   								 if(count($sqlUpdate)>0){
 
 
 
                                       $today=date("Y-m-d H:m:s");
-
-
 
                                       $sqlupdatetablestructurecheck=$CUTDB->table('table_structure_updation')
 
@@ -1674,8 +1276,6 @@ class AuthController extends Controller
 
 
                                                       ->first();
-
-
 
                                       if(count($sqlupdatetablestructurecheck)==0) {
 
@@ -1699,8 +1299,6 @@ class AuthController extends Controller
 
                                                       ->update(array('emp_code'=>$dealer_id));
 
-
-
                                       }
 
 
@@ -1715,15 +1313,11 @@ class AuthController extends Controller
 
                                                       ->first();
 
-
-
                                       if(count($apiauthcheck)>0){
 
 
 
                                         $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                       }
 
@@ -1735,11 +1329,7 @@ class AuthController extends Controller
 
                                           $today=date('Y-m-d');
 
-
-
                                           $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
                                       }
 
@@ -1747,63 +1337,33 @@ class AuthController extends Controller
 
                     									$contents.="<data>";
 
-
-
                     									$contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->customer_code, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
                                       $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->customer_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
                                       $contents .='<sale_access><![CDATA['.mb_convert_encoding("PRIMARY", 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
                                       $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
                                       $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
                                       $contents .='<phonenumber><![CDATA['.mb_convert_encoding($sqlquery->phone_no, 'UTF-8', 'UTF-8').']]></phonenumber>';
 
-
-
                                       $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
                                       $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
                                       $contents.="</data>";
-
-
 
                     									$contents .= "</recordset>";
 
-
-
                                       $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
                                       $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
                                       Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                     									return Apicommonfunction::encrypt($contents);
-
-
 
                                    }
 
@@ -1815,19 +1375,11 @@ class AuthController extends Controller
 
                                      $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                                      $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
                                      Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                      									return Apicommonfunction::encrypt('0');
-
-
 
                      							 }
 
@@ -1847,19 +1399,11 @@ class AuthController extends Controller
 
                             $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                             $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
                             Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                             return Apicommonfunction::encrypt(0);
-
-
 
                           }
 
@@ -1887,8 +1431,6 @@ class AuthController extends Controller
 
                                        ->first();
 
-
-
                        if(count($empblankcheck)==0){
 
 
@@ -1911,8 +1453,6 @@ class AuthController extends Controller
 
                                        ->update(array('emp_code'=>$dealer_id));
 
-
-
                        }
 				   $apiauthcheck=$CUTDB->table('api_verification')
 								   ->where('deviceid', '=' ,$deviceid)
@@ -1929,31 +1469,17 @@ class AuthController extends Controller
 
                                        $date=gmdate('d',strtotime('+330 minute'));
 
-
-
                                        $month=gmdate('m',strtotime('+330 minute'));
-
-
 
                                        $year=gmdate('Y',strtotime('+330 minute'));
 
-
-
                                        $hour=gmdate('H',strtotime('+330 minute'));
-
-
 
                                        $minute=gmdate('i',strtotime('+330 minute'));
 
-
-
                                        $second=gmdate('s',strtotime('+330 minute'));
 
-
-
                                        $location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
 
                                        $sqlUpdate=$CUTDB->table('changepassword')
 
@@ -1969,63 +1495,33 @@ class AuthController extends Controller
 
                                                          ->update(array('loggedin_date_time'=>$location_date));
 
-
-
                                $contents.="<data>";
-
-
 
                                $contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->customer_code, 'UTF-8', 'UTF-8').']]></emp_code>';
 
-
-
                                $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->customer_name, 'UTF-8', 'UTF-8').']]></emp_name>';
-
-
 
                                $contents .='<sale_access><![CDATA['.mb_convert_encoding("PRIMARY", 'UTF-8', 'UTF-8').']]></sale_access>';
 
-
-
                                $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
-
-
 
                                $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
 
-
-
                                $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
                                $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
                                $contents.="</data>";
-
-
 
                                $contents .= "</recordset>";
 
-
-
                                $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
                                $url = url('/api/v1/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
                                Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
                                return Apicommonfunction::encrypt($contents);
-
-
 
                         }
 
@@ -2045,19 +1541,11 @@ class AuthController extends Controller
 
                   $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                   $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
                   Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
           				return Apicommonfunction::encrypt('NOT LICENSED USER');
-
-
 
           			}
 
@@ -2073,19 +1561,11 @@ class AuthController extends Controller
 
                 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
                 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber);
-
-
 
                 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
             	  return Apicommonfunction::encrypt('NOT VALID USER');
-
-
 
             	}
 
@@ -2101,19 +1581,11 @@ class AuthController extends Controller
 
              $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
              $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber);
-
-
 
              Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
              return Apicommonfunction::encrypt('Invalid Nick Name');
-
-
 
            }
 
@@ -2153,53 +1625,29 @@ public function tdrealtimeloginnew_v2(Request $request){
 
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
 
-
-
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
-
-
 
 $user_type=Apicommonfunction::decrypt($request->user_type);
 
-
-
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
-
-
 
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
 
-
-
 $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
 $dydb =$this->dydb($db_name);
 
-
-
 $CUTDB = $dydb->getConnection();
-
-
 
 $verificationtoken='';
 
-
-
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $checknickname=DB::table('user_details')
 		->where('nick_name',$nick_name)
 		->first();
-
-
 
 if(count($checknickname)>0){
 
@@ -2210,8 +1658,6 @@ if(count($checknickname)>0){
 
 
 $contents = "<?xml version='1.0' encoding='UTF-8'?><recordset>";
-
-
 
 if($user_type=="broker"){
 
@@ -2235,111 +1681,59 @@ $sqlquery_ckbk = $CUTDB->table('broker_master')
 
 ->first();
 
-
-
 if(count($sqlquery_ckbk)>0){
 
 
 
 $broker_id=$sqlquery_ckbk->broker_id;
 
-
-
 $dns_broker_id=$sqlquery_ckbk->dns_broker_id;
-
-
 
 $broker_name=$sqlquery_ckbk->broker_name;
 
-
-
 $contact_person=$sqlquery_ckbk->contact_person;
-
-
 
 $mail_id=$sqlquery_ckbk->mail_id;
 
-
-
 $phone_no=$sqlquery_ckbk->phone_no;
-
-
 
 $brokerage_cost=$sqlquery_ckbk->brokerage_cost ? trim($sqlquery_ckbk->brokerage_cost) : "";
 
-
-
 $acedns=$sqlquery_ckbk->acedns;
-
-
 
 $state_code=$sqlquery_ckbk->state_code ? trim($sqlquery_ckbk->state_code) : "";
 
-
-
 $sms_otp=$sqlquery_ckbk->sms_otp;
-
-
 
 $contents.="<data>";
 
-
-
 $contents .='<emp_code><![CDATA['.mb_convert_encoding($dns_broker_id, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
 $contents .='<emp_name><![CDATA['.mb_convert_encoding($broker_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
 $contents .='<sale_access><![CDATA['.mb_convert_encoding("PRIMARY", 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
 $contents .='<newpassword><![CDATA['.mb_convert_encoding("1234", 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
 $contents .='<deviceid><![CDATA['.mb_convert_encoding($deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
 $contents .='<phonenumber><![CDATA['.mb_convert_encoding($phone_no, 'UTF-8', 'UTF-8').']]></phonenumber>';
 
-
-
 $contents .='<acedns><![CDATA['.mb_convert_encoding($acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
 $contents .='<verificationtoken><![CDATA['.mb_convert_encoding("", 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
 $contents.="</data>";
-
-
 
 $contents .= "</recordset>";
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$dns_broker_id.'&deviceid='.$deviceid.'&newpassword=1234');
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$dns_broker_id,$url);
 
-
-
 return Apicommonfunction::encrypt($contents);
-
-
 
 }else{
 
@@ -2347,19 +1741,11 @@ return Apicommonfunction::encrypt($contents);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
   return Apicommonfunction::encrypt('NOT VALID USER');
-
-
 
 }
 
@@ -2377,27 +1763,17 @@ $sqlquery=$CUTDB->table('customer_master')
 	  ->where('customer_master.acedns', '=' ,"Y")
 	  ->first();
 
-
-
 if(count($sqlquery)>0){
 
 
 
 $dealer_id=$sqlquery->dns_customer_code;
 
-
-
 $emp_code=$sqlquery->customer_code;
-
-
 
  $device_id_database=$sqlquery->deviceid;
 
-
-
  $acedns=$sqlquery->acedns;
-
-
 
 if(strtoupper($acedns)=='Y'){
 	if($deviceid==''){
@@ -2461,59 +1837,31 @@ if(strtoupper($acedns)=='Y'){
 
 $contents.="<data>";
 
-
-
 $contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->customer_code, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
 $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->customer_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
 $contents .='<sale_access><![CDATA['.mb_convert_encoding("PRIMARY", 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
 $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
 $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
 $contents .='<phonenumber><![CDATA['.mb_convert_encoding($sqlquery->phone_no, 'UTF-8', 'UTF-8').']]></phonenumber>';
 
-
-
 $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
 $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
 $contents.="</data>";
-
-
 
 $contents .= "</recordset>";
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 return Apicommonfunction::encrypt($contents);
 			   }
@@ -2547,8 +1895,6 @@ return Apicommonfunction::encrypt($contents);
 				   ->where('emp_code',$dealer_id)
 				   ->first();
 
-
-
 	   if(count($empblankcheck)==0){
 
 
@@ -2559,8 +1905,6 @@ return Apicommonfunction::encrypt($contents);
 				   ->limit(1)
 				   ->update(array('emp_code'=>$dealer_id));
 
-
-
 	   }
 
 
@@ -2569,12 +1913,8 @@ return Apicommonfunction::encrypt($contents);
 				   ->where('deviceid', '=' ,$deviceid)
 				   ->first();
 
-
-
 	 if(count($apiauthcheck)>0){
 	 $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
 	   }
 
@@ -2583,8 +1923,6 @@ return Apicommonfunction::encrypt($contents);
 	   else{
 	   $today=date('Y-m-d');
 	   $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
 	   }
 				   $date=gmdate('d',strtotime('+330 minute'));
@@ -2630,16 +1968,10 @@ else{
 
   $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
   $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
   Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	return Apicommonfunction::encrypt('NOT LICENSED USER');
-
-
 
 	}
 
@@ -2651,19 +1983,11 @@ else{
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
   return Apicommonfunction::encrypt('NOT VALID USER');
-
-
 
 }
 
@@ -2679,19 +2003,11 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 return Apicommonfunction::encrypt('Invalid Nick Name');
-
-
 
 }
 
@@ -2727,61 +2043,35 @@ public function edms_tdrealtimeloginnew_v2(Request $request){
 
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
 
-
-
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
-
-
 
 $user_type=Apicommonfunction::decrypt($request->user_type);
 
-
-
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
-
-
 
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
 
-
-
 $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
 $dydb =$this->dydb($db_name);
 
-
-
 $CUTDB = $dydb->getConnection();
-
-
 
 $verificationtoken='';
 
-
-
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $checknickname=DB::table('user_details')
 		->where('nick_name',$nick_name)
 		->first();
-
-
 
 if(count($checknickname)>0){
 
 
 
 $contents = "<?xml version='1.0' encoding='UTF-8'?><recordset>";
-
-
 
 if($user_type=="broker"){
 
@@ -2805,111 +2095,59 @@ $sqlquery_ckbk = $CUTDB->table('broker_master')
 
 ->first();
 
-
-
 if(count($sqlquery_ckbk)>0){
 
 
 
 $broker_id=$sqlquery_ckbk->broker_id;
 
-
-
 $dns_broker_id=$sqlquery_ckbk->dns_broker_id;
-
-
 
 $broker_name=$sqlquery_ckbk->broker_name;
 
-
-
 $contact_person=$sqlquery_ckbk->contact_person;
-
-
 
 $mail_id=$sqlquery_ckbk->mail_id;
 
-
-
 $phone_no=$sqlquery_ckbk->phone_no;
-
-
 
 $brokerage_cost=$sqlquery_ckbk->brokerage_cost ? trim($sqlquery_ckbk->brokerage_cost) : "";
 
-
-
 $acedns=$sqlquery_ckbk->acedns;
-
-
 
 $state_code=$sqlquery_ckbk->state_code ? trim($sqlquery_ckbk->state_code) : "";
 
-
-
 $sms_otp=$sqlquery_ckbk->sms_otp;
-
-
 
 $contents.="<data>";
 
-
-
 $contents .='<emp_code><![CDATA['.mb_convert_encoding($dns_broker_id, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
 $contents .='<emp_name><![CDATA['.mb_convert_encoding($broker_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
 $contents .='<sale_access><![CDATA['.mb_convert_encoding("PRIMARY", 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
 $contents .='<newpassword><![CDATA['.mb_convert_encoding("1234", 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
 $contents .='<deviceid><![CDATA['.mb_convert_encoding($deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
 $contents .='<phonenumber><![CDATA['.mb_convert_encoding($phone_no, 'UTF-8', 'UTF-8').']]></phonenumber>';
 
-
-
 $contents .='<acedns><![CDATA['.mb_convert_encoding($acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
 $contents .='<verificationtoken><![CDATA['.mb_convert_encoding("", 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
 $contents.="</data>";
-
-
 
 $contents .= "</recordset>";
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$dns_broker_id.'&deviceid='.$deviceid.'&newpassword=1234');
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$dns_broker_id,$url);
 
-
-
 return Apicommonfunction::encrypt($contents);
-
-
 
 }else{
 
@@ -2917,19 +2155,11 @@ return Apicommonfunction::encrypt($contents);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
   return Apicommonfunction::encrypt('NOT VALID USER');
-
-
 
 }
 
@@ -2947,27 +2177,17 @@ $sqlquery=$CUTDB->table('customer_master')
 	  ->where('customer_master.acedns', '=' ,"Y")
 	  ->first();
 
-
-
 if(count($sqlquery)>0){
 
 
 
 $dealer_id=$sqlquery->dns_customer_code;
 
-
-
 $emp_code=$sqlquery->customer_code;
-
-
 
  $device_id_database=$sqlquery->deviceid;
 
-
-
  $acedns=$sqlquery->acedns;
-
-
 
 if(strtoupper($acedns)=='Y'){
 	if($deviceid==''){
@@ -3031,59 +2251,31 @@ if(strtoupper($acedns)=='Y'){
 
 $contents.="<data>";
 
-
-
 $contents .='<emp_code><![CDATA['.mb_convert_encoding($sqlquery->customer_code, 'UTF-8', 'UTF-8').']]></emp_code>';
-
-
 
 $contents .='<emp_name><![CDATA['.mb_convert_encoding($sqlquery->customer_name, 'UTF-8', 'UTF-8').']]></emp_name>';
 
-
-
 $contents .='<sale_access><![CDATA['.mb_convert_encoding("PRIMARY", 'UTF-8', 'UTF-8').']]></sale_access>';
-
-
 
 $contents .='<newpassword><![CDATA['.mb_convert_encoding($sqlquery->newpassword, 'UTF-8', 'UTF-8').']]></newpassword>';
 
-
-
 $contents .='<deviceid><![CDATA['.mb_convert_encoding($sqlquery->deviceid, 'UTF-8', 'UTF-8').']]></deviceid>';
-
-
 
 $contents .='<phonenumber><![CDATA['.mb_convert_encoding($sqlquery->phone_no, 'UTF-8', 'UTF-8').']]></phonenumber>';
 
-
-
 $contents .='<acedns><![CDATA['.mb_convert_encoding($sqlquery->acedns, 'UTF-8', 'UTF-8').']]></acedns>';
-
-
 
 $contents .='<verificationtoken><![CDATA['.mb_convert_encoding($verificationtoken, 'UTF-8', 'UTF-8').']]></verificationtoken>';
 
-
-
 $contents.="</data>";
-
-
 
 $contents .= "</recordset>";
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 return Apicommonfunction::encrypt($contents);
 			   }
@@ -3117,8 +2309,6 @@ return Apicommonfunction::encrypt($contents);
 				   ->where('emp_code',$dealer_id)
 				   ->first();
 
-
-
 	   if(count($empblankcheck)==0){
 
 
@@ -3129,8 +2319,6 @@ return Apicommonfunction::encrypt($contents);
 				   ->limit(1)
 				   ->update(array('emp_code'=>$dealer_id));
 
-
-
 	   }
 
 
@@ -3139,12 +2327,8 @@ return Apicommonfunction::encrypt($contents);
 				   ->where('deviceid', '=' ,$deviceid)
 				   ->first();
 
-
-
 	 if(count($apiauthcheck)>0){
 	 $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
 	   }
 
@@ -3153,8 +2337,6 @@ return Apicommonfunction::encrypt($contents);
 	   else{
 	   $today=date('Y-m-d');
 	   $verificationtoken=Apicommonfunction::getVerificationCode($db_name,$nick_name,$deviceid);
-
-
 
 	   }
 				   $date=gmdate('d',strtotime('+330 minute'));
@@ -3200,16 +2382,10 @@ else{
 
   $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
   $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword);
-
-
 
   Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	return Apicommonfunction::encrypt('NOT LICENSED USER');
-
-
 
 	}
 
@@ -3221,19 +2397,11 @@ else{
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
   return Apicommonfunction::encrypt('NOT VALID USER');
-
-
 
 }
 
@@ -3249,19 +2417,11 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/tdrealtimelogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 return Apicommonfunction::encrypt('Invalid Nick Name');
-
-
 
 }
 
@@ -3328,10 +2488,6 @@ public function checklogin(Request $request){
 		  ->first();
 		if(count($sqlquery_ckcust)>0){
 			$the_customer_code = $sqlquery_ckcust->customer_code;
-
-
-
-
 		$sqlquery_ckemp = $CUTDB->table('employee_master')
 		  ->select('emp_code')
 		  ->where('dns_emp_code', '=' ,$dealer_id)
@@ -3393,10 +2549,6 @@ public function checklogin(Request $request){
 				->first();
 				if(count($sqlquery_ckemp)>0){
 				$emp_code_forchk =$sqlquery_ckemp->emp_code;
-
-
-
-
 				$sqlquery_ckch = $CUTDB->table('changepassword')
 				->select('dns_customer_code')
 				->where('dns_customer_code', '=' ,$dealer_id)
@@ -3460,24 +2612,12 @@ public function checklogin(Request $request){
 		  ->first();
 	if(count($sqlquery)>0){
 	$emp_code=$sqlquery->emp_code;
-
-
-
-
-
-
-
-
 	$dns_emp_code=$sqlquery->dns_emp_code;
 	$device_id_database=$sqlquery->deviceid;
 	$acedns=$sqlquery->acedns;
 	if(strtoupper($acedns)=='Y'){
 		if($deviceid==''){
 			$res_data = array("process_status"=>"NO","process_message"=>"DEVICEID IS BLANK");
-
-
-
-
 		}
 	else{
 	  if($deviceid!=$device_id_database){ //Checking the posted deviceid and the database existed deviceid  is same or not
@@ -3500,71 +2640,37 @@ $sqlUpdate=$CUTDB->table('employee_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
 //$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
-
-
 
 $lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
 
-
-
 //$lipl_uri = str_replace(" ", '%20', $lipl_uri);
-
-
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
-
-
 
 curl_close($lipl_ch);
 
-
-
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","emp_code"=>$sqlquery->emp_code,"dns_emp_code"=>$sqlquery->dns_emp_code,"emp_name"=>$sqlquery->emp_name,"sale_access"=>$sqlquery->sale_access,"newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"sms_response1"=>$lipl_return_val,"otp_text"=>$otp_text);
-
-
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 }
 
@@ -3578,15 +2684,9 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 $res_data = array("process_status"=>"NO","process_message"=>"Your Star Saathi LOGIN credentials has been registered to different DEVICE.Please contact your ADMIN.");
 		  }
@@ -3600,75 +2700,35 @@ $sqlUpdate=$CUTDB->table('employee_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
 //$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
-
-
 
 $lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
 
-
-
 $lipl_uri = str_replace(" ", '%20', $lipl_uri);
-
-
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
-
-
 
 curl_close($lipl_ch);
 
-
-
-
-
-
-
-
-
-
-
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","emp_code"=>$sqlquery->emp_code,"dns_emp_code"=>$sqlquery->dns_emp_code,"emp_name"=>$sqlquery->emp_name,"sale_access"=>$sqlquery->sale_access,"newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"sms_response2"=>$lipl_return_val,"otp_text"=>$otp_text);
-
-
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 		}
@@ -3726,51 +2786,27 @@ public function verifyotp(Request $request){
 
 $res_data = array();
 
-
-
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
-
-
 
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
 
-
-
 $the_otp=Apicommonfunction::decrypt($request->the_otp);
-
-
 
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
-
-
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
-
-
 
 $db_name='starsaathi_'.strtoupper($nick_name);
 
-
-
 $dydb =$this->dydb($db_name);
-
-
 
 $CUTDB = $dydb->getConnection();
 
-
-
 $verificationtoken='';
-
-
 
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $checknickname=DB::table('user_details')
 
@@ -3781,8 +2817,6 @@ $checknickname=DB::table('user_details')
 
 
 ->first();
-
-
 
 if(count($checknickname)>0){
 
@@ -3814,8 +2848,6 @@ if(count($checknickname)>0){
 
 	->first();
 
-
-
 	if(count($sqlquery)>0){
 	$emp_code=$sqlquery->emp_code;
 	$dns_emp_code=$sqlquery->dns_emp_code;
@@ -3843,18 +2875,10 @@ if(count($checknickname)>0){
 					$date=gmdate('d',strtotime('+330 minute'));
 					$month=gmdate('m',strtotime('+330 minute'));
 					$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 					$hour=gmdate('H',strtotime('+330 minute'));
 					$minute=gmdate('i',strtotime('+330 minute'));
 					$second=gmdate('s',strtotime('+330 minute'));
 					$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 					$sqlUpdate=$CUTDB->table('changepassword')
 					->where('emp_code', $emp_code)
 					->limit(1)
@@ -3918,26 +2942,14 @@ if(count($checknickname)>0){
 			$date=gmdate('d',strtotime('+330 minute'));
 			$month=gmdate('m',strtotime('+330 minute'));
 			$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 			$hour=gmdate('H',strtotime('+330 minute'));
 			$minute=gmdate('i',strtotime('+330 minute'));
 			$second=gmdate('s',strtotime('+330 minute'));
 			$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 			$sqlUpdate=$CUTDB->table('changepassword')
 			->where('emp_code', $emp_code)
 			->limit(1)
 			->update(array('loggedin_date_time'=>$location_date));
-
-
-
-
 			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 			$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
 			Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
@@ -3970,8 +2982,6 @@ if(count($checknickname)>0){
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	$res_data = array("process_status"=>"NO","process_message"=>"NOT VALID USER");
 
-
-
 	}
 
 
@@ -3986,19 +2996,11 @@ else{
 
 	$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 	$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
-
-
 
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 	$res_data = array("process_status"=>"NO","process_message"=>"Invalid Nick Name");
-
-
 
 }
 
@@ -4006,11 +3008,7 @@ else{
 
 $json_encoded = json_encode($res_data);
 
-
-
 return Apicommonfunction::encrypt($json_encoded);
-
-
 
 }
 
@@ -4057,8 +3055,6 @@ public function checkloginnew(Request $request){
 	}
 	$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
 
-
-
 $check = "";
 	$db_name='starsaathi_'.strtoupper($nick_name);
 	$dydb =$this->dydb($db_name);
@@ -4084,10 +3080,6 @@ $check = "";
 		  ->first();
 		if(count($sqlquery_ckcust)>0){
 			$the_customer_code = $sqlquery_ckcust->customer_code;
-
-
-
-
 		$sqlquery_ckemp = $CUTDB->table('employee_master')
 		  ->select('emp_code')
 		  ->where('dns_emp_code', '=' ,$dealer_id)
@@ -4139,10 +3131,6 @@ $check = "";
 				->first();
 				if(count($sqlquery_ckemp)>0){
 				$emp_code_forchk =$sqlquery_ckemp->emp_code;
-
-
-
-
 				$sqlquery_ckch = $CUTDB->table('changepassword')
 				->select('dns_customer_code')
 				->where('dns_customer_code', '=' ,$dealer_id)
@@ -4210,10 +3198,6 @@ $check = "";
 	if(strtoupper($acedns)=='Y'){
 		if($deviceid==''){
 			$res_data = array("process_status"=>"NO","process_message"=>"DEVICEID IS BLANK");
-
-
-
-
 		}
 	else{
 	  if($deviceid!=$device_id_database){ //Checking the posted deviceid and the database existed deviceid  is same or not
@@ -4236,71 +3220,37 @@ $sqlUpdate=$CUTDB->table('customer_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
 //$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
-
-
 
 $lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
 
-
-
 //$lipl_uri = str_replace(" ", '%20', $lipl_uri);
-
-
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
-
-
 
 curl_close($lipl_ch);
 
-
-
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"otp_text"=>$otp_text);
-
-
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 }
 
@@ -4314,15 +3264,9 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 $res_data = array("process_status"=>"NO","process_message"=>"Your Star Saathi LOGIN credentials has been registered to different DEVICE.Please contact your ADMIN.");
 		  }
@@ -4336,75 +3280,35 @@ $sqlUpdate=$CUTDB->table('customer_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
 //$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
-
-
 
 $lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
 
-
-
 $lipl_uri = str_replace(" ", '%20', $lipl_uri);
-
-
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
-
-
 
 curl_close($lipl_ch);
 
-
-
-
-
-
-
-
-
-
-
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"otp_text"=>$otp_text);
-
-
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 		}
@@ -4470,51 +3374,27 @@ public function verifyotpnew(Request $request){
 
 $res_data = array();
 
-
-
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
-
-
 
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
 
-
-
 $the_otp=Apicommonfunction::decrypt($request->the_otp);
-
-
 
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
-
-
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
-
-
 
 $db_name='starsaathi_'.strtoupper($nick_name);
 
-
-
 $dydb =$this->dydb($db_name);
-
-
 
 $CUTDB = $dydb->getConnection();
 
-
-
 $verificationtoken='';
-
-
 
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $checknickname=DB::table('user_details')
 
@@ -4525,8 +3405,6 @@ $checknickname=DB::table('user_details')
 
 
 ->first();
-
-
 
 if(count($checknickname)>0){
 
@@ -4558,8 +3436,6 @@ if(count($checknickname)>0){
 
 	->first();
 
-
-
 	if(count($sqlquery)>0){
 	$emp_code=$sqlquery->customer_code;
 	$dns_emp_code=$sqlquery->dns_customer_code;
@@ -4587,18 +3463,10 @@ if(count($checknickname)>0){
 					$date=gmdate('d',strtotime('+330 minute'));
 					$month=gmdate('m',strtotime('+330 minute'));
 					$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 					$hour=gmdate('H',strtotime('+330 minute'));
 					$minute=gmdate('i',strtotime('+330 minute'));
 					$second=gmdate('s',strtotime('+330 minute'));
 					$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 					$sqlUpdate=$CUTDB->table('changepassword')
 					->where('dns_customer_code', $dealer_id)
 					->limit(1)
@@ -4662,26 +3530,14 @@ if(count($checknickname)>0){
 			$date=gmdate('d',strtotime('+330 minute'));
 			$month=gmdate('m',strtotime('+330 minute'));
 			$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 			$hour=gmdate('H',strtotime('+330 minute'));
 			$minute=gmdate('i',strtotime('+330 minute'));
 			$second=gmdate('s',strtotime('+330 minute'));
 			$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 			$sqlUpdate=$CUTDB->table('changepassword')
 			->where('dns_customer_code', $dealer_id)
 			->limit(1)
 			->update(array('loggedin_date_time'=>$location_date));
-
-
-
-
 			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 			$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
 			Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
@@ -4714,8 +3570,6 @@ if(count($checknickname)>0){
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	$res_data = array("process_status"=>"NO","process_message"=>"NOT VALID USER");
 
-
-
 	}
 
 
@@ -4730,19 +3584,11 @@ else{
 
 	$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 	$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
-
-
 
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 	$res_data = array("process_status"=>"NO","process_message"=>"Invalid Nick Name");
-
-
 
 }
 
@@ -4750,11 +3596,7 @@ else{
 
 $json_encoded = json_encode($res_data);
 
-
-
 return Apicommonfunction::encrypt($json_encoded);
-
-
 
 }
 
@@ -4905,7 +3747,7 @@ $belong_dealer_name=$sqlquery_bdck->customer_name ? trim($sqlquery_bdck->custome
 			}else{
 
 			$sqlUpdate=$CUTDB->table('customer_master')
-			 ->where('dns_customer_code', $dealer_id)
+			 ->where('customer_id', $dealer_id)
 			 ->limit(1)
 			 ->update(array('sms_otp'=>$otp_for_login));
 //$otp_text = "OTP is ".$otp_for_login." for Star Saathi log in STAR CEMENT";
@@ -5232,68 +4074,36 @@ public function verifyotpnew_v2(Request $request){
 
 $server_url1 = "http://" . $_SERVER['SERVER_NAME']."/";
 
-
-
 $img_dir = "profile_image/";
-
-
 
 $res_data = array();
 
-
-
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
-
-
 
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
 
-
-
 $the_otp=Apicommonfunction::decrypt($request->the_otp);
-
-
 
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
-
-
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
-
-
 
 //$db_name='starsaathi_'.strtoupper($nick_name);
 $db_name='starsaathi_STARS';
 
-
-
 $dydb =$this->dydb($db_name);
-
-
 
 $CUTDB = $dydb->getConnection();
 
-
-
 $verificationtoken='';
-
-
 
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $the_profile_image_url = "";
 
-
-
 $is_survey_form_submitted = "NO";
-
-
 
 $checknickname=DB::table('user_details')
 
@@ -5304,8 +4114,6 @@ $checknickname=DB::table('user_details')
 
 
 ->first();
-
-
 //dd($checknickname);
 if(count($checknickname)>0){
 
@@ -5335,12 +4143,6 @@ $sqlquery=$CUTDB->table('customer_master')
 	if(count($sqlquery)>0){
 	$emp_code=$sqlquery->customer_code;
 
-
-
-
-
-
-
 	$sqlquery_survey_form = $CUTDB->table('survey_form')
 
 
@@ -5359,8 +4161,6 @@ $sqlquery=$CUTDB->table('customer_master')
 
 	if(count($sqlquery_survey_form)>0){
 	$is_survey_form_submitted = "YES";
-
-
 
 	}
 
@@ -5507,8 +4307,6 @@ $sqlquery=$CUTDB->table('customer_master')
 		Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 		$res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>"broker","emp_code"=>$dns_broker_id,"customer_code"=>"","dns_emp_code"=>$dns_broker_id,"emp_name"=>$broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$phone_no,"acedns"=>$acedns,"broker_id"=>$broker_id,"dns_broker_id"=>$dns_broker_id,"contact_person"=>$contact_person,"mail_id"=>$mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"the_profile_image_url"=>$the_profile_image_url,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted);
-
-
 	}else{
 
 	$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
@@ -5555,67 +4353,35 @@ $sqlquery=$CUTDB->table('customer_master')
 
 		$server_url1 = "http://" . $_SERVER['SERVER_NAME']."/";
 
-
-
 		$img_dir = "profile_image/";
-
-
 
 		$res_data = array();
 
-
-
 		$nick_name=($request->input('nickname'));
-
-
 
 		$dealer_id=($request->dealer_id);
 
-
-
 		$the_otp=($request->the_otp);
-
-
 
 		$phonenumber=($request->phonenumber);
 
-
-
 		$deviceid=($request->deviceid);
-
-
 
 		$db_name='starsaathi_STARS';
 
-
-
 		$dydb =$this->dydb($db_name);
-
-
 
 		$CUTDB = $dydb->getConnection();
 
-
-
 		$verificationtoken='';
-
-
 
 		$emp_code='';
 
-
-
 		$newpassword='';
-
-
 
 		$the_profile_image_url = "";
 
-
-
 		$is_survey_form_submitted = "NO";
-
-
 
 		$checknickname=DB::table('user_details')
 
@@ -5626,8 +4392,6 @@ $sqlquery=$CUTDB->table('customer_master')
 
 
 		->first();
-
-
 		//dd($checknickname);
 		if(count($checknickname)>0){
 
@@ -5657,12 +4421,6 @@ $sqlquery=$CUTDB->table('customer_master')
 			if(count($sqlquery)>0){
 			$emp_code=$sqlquery->customer_code;
 
-
-
-
-
-
-
 			$sqlquery_survey_form = $CUTDB->table('survey_form')
 
 
@@ -5681,8 +4439,6 @@ $sqlquery=$CUTDB->table('customer_master')
 
 			if(count($sqlquery_survey_form)>0){
 			$is_survey_form_submitted = "YES";
-
-
 
 			}
 
@@ -5708,7 +4464,7 @@ $sqlquery=$CUTDB->table('customer_master')
 				// ->first();
 				$sqlquery_bdck = $CUTDB->table('customer_master')
 				->select('customer_code','dns_customer_code','customer_name')
-				->where('0', '=' ,$belong_dealer_code)
+				->where('customer_code', '=' ,$belong_dealer_code)
 				->first();
 				if(count($sqlquery_bdck)>0){
 				$belong_dealer_dns_code = $sqlquery_bdck->dns_customer_code ? trim($sqlquery_bdck->dns_customer_code) : "";
@@ -5833,8 +4589,6 @@ $sqlquery=$CUTDB->table('customer_master')
 				Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 				$res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>"broker","emp_code"=>$dns_broker_id,"customer_code"=>"","dns_emp_code"=>$dns_broker_id,"emp_name"=>$broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$phone_no,"acedns"=>$acedns,"broker_id"=>$broker_id,"dns_broker_id"=>$dns_broker_id,"contact_person"=>$contact_person,"mail_id"=>$mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"the_profile_image_url"=>$the_profile_image_url,"belong_dealer_code"=>"","belong_dealer_dns_code"=>"","belong_dealer_name"=>"","is_survey_form_submitted"=>$is_survey_form_submitted);
-
-
 			}else{
 
 			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
@@ -5896,16 +4650,10 @@ public function edms_checkloginnew_v2(Request $request){
 	$phonenumber=$request->phonenumber;
 	$deviceid=$request->deviceid;*/
 	//$otp_for_login = rand(1,9).rand(0,9).rand(0,9).rand(1,9);
-
-
-
-
 	//if($phonenumber=="9832069113" || $phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="7278212381"){
 	 $otp_for_login = "1010";
 	//}
 	$otp_text = "OTP is ".$otp_for_login." for EDMS log in EDMS";
-
-
 
 $check = "";
 	$db_name='starsaathi_'.strtoupper($nick_name);
@@ -5988,10 +4736,6 @@ $check = "";
 	if(strtoupper($acedns)=='Y'){
 		if($deviceid==''){
 			$res_data = array("process_status"=>"NO","process_message"=>"DEVICEID IS BLANK");
-
-
-
-
 		}
 	else{
 	  if($deviceid!=$device_id_database){ //Checking the posted deviceid and the database existed deviceid  is same or not
@@ -6014,15 +4758,7 @@ $sqlUpdate=$CUTDB->table('customer_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
-
-
-
-
 /*$lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
-
-
 
 if($phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="7278212381"){
 
@@ -6038,39 +4774,21 @@ if($phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="72
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
 
-
-
 curl_close($lipl_ch);
-
-
 
 }*/
 
@@ -6078,19 +4796,11 @@ curl_close($lipl_ch);
 
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>"dealer","emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","otp_text"=>$otp_text);
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
-
-
 
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 }
 
@@ -6104,15 +4814,9 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
 
-
-
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
 $res_data = array("process_status"=>"NO","process_message"=>"Your EDMS LOGIN credentials has been registered to different DEVICE.Please contact your ADMIN.");
 		  }
@@ -6126,11 +4830,7 @@ $sqlUpdate=$CUTDB->table('customer_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
 /*$lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
-
-
 
 if($phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="7278212381"){
 
@@ -6146,39 +4846,21 @@ if($phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="72
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
 
-
-
 curl_close($lipl_ch);
-
-
 
 }*/
 
@@ -6190,15 +4872,9 @@ curl_close($lipl_ch);
 
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>"dealer","emp_code"=>$sqlquery->customer_code,"customer_code"=>$sqlquery->customer_code,"dns_emp_code"=>$sqlquery->dns_customer_code,"emp_name"=>$sqlquery->customer_name,"sale_access"=>"PRIMARY","newpassword"=>$sqlquery->newpassword,"deviceid"=>$sqlquery->deviceid,"phonenumber"=>$sqlquery->phone_no,"acedns"=>$sqlquery->acedns,"broker_id"=>"","dns_broker_id"=>"","contact_person"=>"","mail_id"=>"","brokerage_cost"=>"","state_code"=>"","otp_text"=>$otp_text);
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 		}
@@ -6227,11 +4903,7 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
 $brokerage_cost = $sqlquery_ckbk->brokerage_cost ? trim($sqlquery_ckbk->brokerage_cost) : "";
 
-
-
 $state_code=$sqlquery_ckbk->state_code ? trim($sqlquery_ckbk->state_code) : "";
-
-
 
 $sqlUpdate=$CUTDB->table('broker_master')
 		 ->where('dns_broker_id', '=' ,$dealer_id)
@@ -6239,15 +4911,7 @@ $sqlUpdate=$CUTDB->table('broker_master')
 		 ->limit(1)
 		 ->update(array('sms_otp'=>$otp_for_login));
 
-
-
-
-
-
-
 /*$lipl_uri = "http://www.myvaluefirst.com/smpp/sendsms?username=starhttpdealers&password=star1109&to=".$phonenumber."&from=starcm&text=".urlencode($otp_text)."&dlr-mask=19&dlr-url";
-
-
 
 if($phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="7278212381"){
 
@@ -6263,39 +4927,21 @@ if($phonenumber=="9233974090" || $phonenumber=="9638307128" || $phonenumber=="72
 
 $lipl_ch = curl_init();
 
-
-
 curl_setopt($lipl_ch, CURLOPT_URL, $lipl_uri);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_TIMEOUT, 20);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_FOLLOWLOCATION, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_HEADER,0);
 
-
-
 curl_setopt($lipl_ch, CURLOPT_RETURNTRANSFER, 1);
-
-
 
 curl_setopt($lipl_ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
 
-
-
 $lipl_return_val = curl_exec($lipl_ch);
 
-
-
 curl_close($lipl_ch);
-
-
 
 }*/
 
@@ -6303,15 +4949,9 @@ curl_close($lipl_ch);
 
 $res_data = array("process_status"=>"YES","process_message"=>"OTP has been sent to your mobile number.","user_type"=>"broker","emp_code"=>$sqlquery_ckbk->dns_broker_id,"customer_code"=>"","dns_emp_code"=>$sqlquery_ckbk->dns_broker_id,"emp_name"=>$sqlquery_ckbk->broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$sqlquery_ckbk->phone_no,"acedns"=>$sqlquery_ckbk->acedns,"broker_id"=>$sqlquery_ckbk->broker_id,"dns_broker_id"=>$sqlquery_ckbk->dns_broker_id,"contact_person"=>$sqlquery_ckbk->contact_person,"mail_id"=>$sqlquery_ckbk->mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code,"otp_text"=>$otp_text);
 
-
-
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 		}else{
@@ -6323,10 +4963,6 @@ Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	$url = url('/api/v2/checklogin?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber.'&dealer_id='.$dealer_id);
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	$res_data = array("process_status"=>"NO","process_message"=>"NOT VALID USER","check"=>$check);
-
-
-
-
 		}
 
 
@@ -6388,51 +5024,27 @@ public function edms_verifyotpnew_v2(Request $request){
 
 $res_data = array();
 
-
-
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
-
-
 
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
 
-
-
 $the_otp=Apicommonfunction::decrypt($request->the_otp);
-
-
 
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
-
-
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
-
-
 
 $db_name='starsaathi_'.strtoupper($nick_name);
 
-
-
 $dydb =$this->dydb($db_name);
-
-
 
 $CUTDB = $dydb->getConnection();
 
-
-
 $verificationtoken='';
-
-
 
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $checknickname=DB::table('user_details')
 
@@ -6443,8 +5055,6 @@ $checknickname=DB::table('user_details')
 
 
 ->first();
-
-
 
 if(count($checknickname)>0){
 
@@ -6476,8 +5086,6 @@ if(count($checknickname)>0){
 
 	->first();
 
-
-
 	if(count($sqlquery)>0){
 	$emp_code=$sqlquery->customer_code;
 	$dns_emp_code=$sqlquery->dns_customer_code;
@@ -6506,18 +5114,10 @@ if(count($checknickname)>0){
 					$date=gmdate('d',strtotime('+330 minute'));
 					$month=gmdate('m',strtotime('+330 minute'));
 					$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 					$hour=gmdate('H',strtotime('+330 minute'));
 					$minute=gmdate('i',strtotime('+330 minute'));
 					$second=gmdate('s',strtotime('+330 minute'));
 					$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 					$sqlUpdate=$CUTDB->table('changepassword')
 					->where('dns_customer_code', $dealer_id)
 					->limit(1)
@@ -6581,26 +5181,14 @@ if(count($checknickname)>0){
 			$date=gmdate('d',strtotime('+330 minute'));
 			$month=gmdate('m',strtotime('+330 minute'));
 			$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 			$hour=gmdate('H',strtotime('+330 minute'));
 			$minute=gmdate('i',strtotime('+330 minute'));
 			$second=gmdate('s',strtotime('+330 minute'));
 			$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 			$sqlUpdate=$CUTDB->table('changepassword')
 			->where('dns_customer_code', $dealer_id)
 			->limit(1)
 			->update(array('loggedin_date_time'=>$location_date));
-
-
-
-
 			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 			$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
 			Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
@@ -6646,43 +5234,23 @@ $sqlquery_ckbk = $CUTDB->table('broker_master')
 
 $broker_id=$sqlquery_ckbk->broker_id;
 
-
-
 $dns_broker_id=$sqlquery_ckbk->dns_broker_id;
-
-
 
 $broker_name=$sqlquery_ckbk->broker_name;
 
-
-
 $contact_person=$sqlquery_ckbk->contact_person;
-
-
 
 $mail_id=$sqlquery_ckbk->mail_id;
 
-
-
 $phone_no=$sqlquery_ckbk->phone_no;
-
-
 
 $brokerage_cost=$sqlquery_ckbk->brokerage_cost ? trim($sqlquery_ckbk->brokerage_cost) : "";
 
-
-
 $acedns=$sqlquery_ckbk->acedns;
-
-
 
 $state_code=$sqlquery_ckbk->state_code ? trim($sqlquery_ckbk->state_code) : "";
 
-
-
 $sms_otp=$sqlquery_ckbk->sms_otp;
-
-
 
 if($the_otp==$sms_otp){
 
@@ -6690,23 +5258,11 @@ if($the_otp==$sms_otp){
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 $res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULLY VERIFIED.","user_type"=>"broker","emp_code"=>$dns_broker_id,"customer_code"=>"","dns_emp_code"=>$dns_broker_id,"emp_name"=>$broker_name,"sale_access"=>"PRIMARY","newpassword"=>"","deviceid"=>"","phonenumber"=>$phone_no,"acedns"=>$acedns,"broker_id"=>$broker_id,"dns_broker_id"=>$dns_broker_id,"contact_person"=>$contact_person,"mail_id"=>$mail_id,"brokerage_cost"=>$brokerage_cost,"state_code"=>$state_code);
-
-
-
-
-
-
 
 }else{
 
@@ -6714,19 +5270,11 @@ $res_data = array("process_status"=>"YES","process_message"=>"OTP IS SUCCESSFULL
 
 $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 $url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
-
-
 
 Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 $res_data = array("process_status"=>"NO","process_message"=>"OTP DOESN'T MATCH. PLEASE ENTER CORRECT OTP.");
-
-
 
 }
 		}else{
@@ -6738,10 +5286,6 @@ $res_data = array("process_status"=>"NO","process_message"=>"OTP DOESN'T MATCH. 
 	$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumer='.$phonenumber.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	$res_data = array("process_status"=>"NO","process_message"=>"NOT VALID USER");
-
-
-
-
 		}
 
 
@@ -6768,19 +5312,11 @@ else{
 
 	$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 	$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
-
-
 
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 	$res_data = array("process_status"=>"NO","process_message"=>"Invalid Nick Name");
-
-
 
 }
 
@@ -6788,11 +5324,7 @@ else{
 
 $json_encoded = json_encode($res_data);
 
-
-
 return Apicommonfunction::encrypt($json_encoded);
-
-
 
 }
 
@@ -6804,55 +5336,29 @@ public function verifyotpWithRid(Request $request){
 
 $res_data = array();
 
-
-
 $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
-
-
 
 $dealer_id=Apicommonfunction::decrypt($request->dealer_id);
 
-
-
 $the_otp=Apicommonfunction::decrypt($request->the_otp);
-
-
 
 $phonenumber=Apicommonfunction::decrypt($request->phonenumber);
 
-
-
 $deviceid=Apicommonfunction::decrypt($request->deviceid);
-
-
 
 $regid=Apicommonfunction::decrypt($request->regid);
 
-
-
 $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
 $dydb =$this->dydb($db_name);
 
-
-
 $CUTDB = $dydb->getConnection();
-
-
 
 $verificationtoken='';
 
-
-
 $emp_code='';
 
-
-
 $newpassword='';
-
-
 
 $checknickname=DB::table('user_details')
 
@@ -6863,8 +5369,6 @@ $checknickname=DB::table('user_details')
 
 
 ->first();
-
-
 
 if(count($checknickname)>0){
 
@@ -6896,8 +5400,6 @@ if(count($checknickname)>0){
 
 	->first();
 
-
-
 	if(count($sqlquery)>0){
 	$emp_code=$sqlquery->emp_code;
 	$dns_emp_code=$sqlquery->dns_emp_code;
@@ -6925,18 +5427,10 @@ if(count($checknickname)>0){
 					$date=gmdate('d',strtotime('+330 minute'));
 					$month=gmdate('m',strtotime('+330 minute'));
 					$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 					$hour=gmdate('H',strtotime('+330 minute'));
 					$minute=gmdate('i',strtotime('+330 minute'));
 					$second=gmdate('s',strtotime('+330 minute'));
 					$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 					$sqlUpdate=$CUTDB->table('changepassword')
 					->where('emp_code', $emp_code)
 					->limit(1)
@@ -7000,26 +5494,14 @@ if(count($checknickname)>0){
 			$date=gmdate('d',strtotime('+330 minute'));
 			$month=gmdate('m',strtotime('+330 minute'));
 			$year=gmdate('Y',strtotime('+330 minute'));
-
-
-
-
 			$hour=gmdate('H',strtotime('+330 minute'));
 			$minute=gmdate('i',strtotime('+330 minute'));
 			$second=gmdate('s',strtotime('+330 minute'));
 			$location_date=$year.'-'.$month.'-'.$date.' '.$hour.':'.$minute.':'.$second;
-
-
-
-
 			$sqlUpdate=$CUTDB->table('changepassword')
 			->where('emp_code', $emp_code)
 			->limit(1)
 			->update(array('registrationid'=>$regid,'loggedin_date_time'=>$location_date));
-
-
-
-
 			$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 			$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&newpassword='.$newpassword.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
 			Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
@@ -7052,8 +5534,6 @@ if(count($checknickname)>0){
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 	$res_data = array("process_status"=>"NO","process_message"=>"NOT VALID USER");
 
-
-
 	}
 
 
@@ -7068,19 +5548,11 @@ else{
 
 	$datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
 	$url = url('/api/v2/verifyotp?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceid='.$deviceid.'&phonenumber='.$phonenumber.'&dealer_id='.$dealer_id.'&the_otp='.$the_otp);
-
-
 
 	Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
 
-
-
 	$res_data = array("process_status"=>"NO","process_message"=>"Invalid Nick Name");
-
-
 
 }
 
@@ -7088,11 +5560,7 @@ else{
 
 $json_encoded = json_encode($res_data);
 
-
-
 return Apicommonfunction::encrypt($json_encoded);
-
-
 
 }
 
@@ -7132,43 +5600,23 @@ return Apicommonfunction::encrypt($json_encoded);
 
           $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
 
-
-
           $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
           $deviceId=Apicommonfunction::decrypt($request->deviceId);
 
-
-
           $versionCode=Apicommonfunction::decrypt($request->versionCode);
-
-
 
           $emp_code=Apicommonfunction::decrypt($request->emp_code);
 
-
-
           $verificationcode=Apicommonfunction::decrypt($request->verificationcode);
-
-
 
           $db_name='starsaathi_'.strtoupper($nick_name);
 
-
-
           $dydb =$this->dydb($db_name);
-
-
 
           $CUTDB = $dydb->getConnection();
 
-
-
           $isverify=Apicommonfunction::verifyApikey($db_name,$verificationcode);
-
-
 
           if($isverify==1){
 
@@ -7176,15 +5624,9 @@ return Apicommonfunction::encrypt($json_encoded);
 
              $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
              $url = url('/api/v1/updateAppVersion?nick_name='.$nick_name.'&emp_code='.$emp_code.'&deviceId='.$deviceId.'&versionCode='.$versionCode);
 
-
-
              Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
              $sqlempname=$apiauthcheck=$CUTDB->table('employee_master')
 
@@ -7200,11 +5642,7 @@ return Apicommonfunction::encrypt($json_encoded);
 
                              ->first();
 
-
-
              $emp_name=$sqlempname->emp_name;
-
-
 
              $sqlappversion=$apiauthcheck=$CUTDB->table('app_version')
 
@@ -7212,15 +5650,9 @@ return Apicommonfunction::encrypt($json_encoded);
 
                              ->first();
 
-
-
              $app_version_latest=$sqlappversion->version_code;
 
-
-
              $release_date=date('d/m/Y',strtotime($sqlappversion->date));
-
-
 
              $sqlselect=$apiauthcheck=$CUTDB->table('app_updation')
 
@@ -7231,8 +5663,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
 
                              ->first();
-
-
 
               if(count($sqlselect)>0){
 
@@ -7264,15 +5694,11 @@ return Apicommonfunction::encrypt($json_encoded);
 
                        ));
 
-
-
               			if(count($sqlUpdate)>0){
 
 
 
               				return "2";
-
-
 
               			}
 
@@ -7284,59 +5710,33 @@ return Apicommonfunction::encrypt($json_encoded);
 
               				return "3";
 
-
-
               			}
 
 
 
                     $date=gmdate('d',strtotime('+329 minute'));
 
-
-
               			$month=gmdate('m',strtotime('+329 minute'));
-
-
 
               			$year=gmdate('Y',strtotime('+329 minute'));
 
-
-
               			$hour=gmdate('H',strtotime('+329 minute'));
-
-
 
               			$minute=gmdate('i',strtotime('+329 minute'));
 
-
-
               			$second=gmdate('s',strtotime('+329 minute'));
-
-
 
               			$update_date=$date.'/'.$month.'/'.$year;
 
-
-
               			$update_time=$hour.':'.$minute.':'.$second;
-
-
 
                     $db_update_mail=Apicommonfunction::getNameTable($db_name,'company_master','admin_email_id','comp_name',$nick_name);
 
-
-
                     $mailsubj="ACEdns - ".strtoupper($nick_name)." DB Version $versionCode released on $release_date has been successfully updated to $emp_name";
-
-
 
                     $bcc="acedns@coral.in";
 
-
-
                     $data = array('db_update_mail'=>$db_update_mail,'mailsubj'=>$mailsubj,'bcc'=>$bcc,'nick_name'=>strtoupper($nick_name),'versionCode'=>$versionCode,'typeversion'=>'App Version','release_date'=>$release_date,'emp_name'=>$emp_name,'emp_code'=>$emp_code,'update_date'=>$update_date,'update_time'=>$update_time);
-
-
 
                     Mail::send(['html'=>'mail'], $data, function($message) use ($data) {
 
@@ -7356,11 +5756,7 @@ return Apicommonfunction::encrypt($json_encoded);
 
                                ->subject($data['mailsubj']);
 
-
-
                     });
-
-
 
                   }
 
@@ -7372,8 +5768,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
                     return Apicommonfunction::encrypt("1-".$app_version_latest);
 
-
-
                   }
 
 
@@ -7384,8 +5778,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
               			return Apicommonfunction::encrypt("1-".$app_version_latest);
 
-
-
               		}
 
 
@@ -7395,8 +5787,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
 
               			return Apicommonfunction::encrypt("0");
-
-
 
               		}
 
@@ -7428,15 +5818,11 @@ return Apicommonfunction::encrypt($json_encoded);
 
                                  ));
 
-
-
             		if(count($sqlInsert)>0){
 
 
 
             			return Apicommonfunction::encrypt("4".'/'.$app_version_latest);
-
-
 
             		}
 
@@ -7447,8 +5833,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
 
             			return Apicommonfunction::encrypt("3");
-
-
 
             		}
 
@@ -7467,8 +5851,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
 
             return Apicommonfunction::encrypt("404");
-
-
 
           }
 
@@ -7504,39 +5886,21 @@ return Apicommonfunction::encrypt($json_encoded);
 
           $nick_name=Apicommonfunction::decrypt($request->input('nickname'));
 
-
-
           $emp_code=Apicommonfunction::decrypt($request->emp_code);
-
-
 
           $device_id=Apicommonfunction::decrypt($request->device_id);
 
-
-
           $db_version=Apicommonfunction::decrypt($request->db_version);
-
-
 
           $verificationcode=Apicommonfunction::decrypt($request->verificationcode);
 
-
-
           $db_name='starsaathi_'.strtoupper($nick_name);
-
-
 
           $dydb =$this->dydb($db_name);
 
-
-
           $CUTDB = $dydb->getConnection();
 
-
-
           $isverify=Apicommonfunction::verifyApikey($db_name,$verificationcode);
-
-
 
           if($isverify==1){
 
@@ -7552,15 +5916,9 @@ return Apicommonfunction::encrypt($json_encoded);
 
                                     ->first();
 
-
-
             $versionCode=$rowselectversion->version_code;
 
-
-
             $release_date=date('d/m/Y',strtotime($rowselectversion->date));
-
-
 
             $rowselect=$CUTDB->table('table_structure_updation')
 
@@ -7580,19 +5938,13 @@ return Apicommonfunction::encrypt($json_encoded);
 
                             ->first();
 
-
-
             if(count($rowselect)>0){
 
 
 
               $is_update=$rowselect->is_update;
 
-
-
               $existed_db_version_code=$rowselect->db_version_code;
-
-
 
                 if($is_update==1){
 
@@ -7628,59 +5980,31 @@ return Apicommonfunction::encrypt($json_encoded);
 
                                             ));
 
-
-
                       $date=gmdate('d',strtotime('+329 minute'));
-
-
 
                       $month=gmdate('m',strtotime('+329 minute'));
 
-
-
                       $year=gmdate('Y',strtotime('+329 minute'));
-
-
 
                       $hour=gmdate('H',strtotime('+329 minute'));
 
-
-
                       $minute=gmdate('i',strtotime('+329 minute'));
-
-
 
                       $second=gmdate('s',strtotime('+329 minute'));
 
-
-
                       $update_date=$date.'/'.$month.'/'.$year;
-
-
 
                       $update_time=$hour.':'.$minute.':'.$second;
 
-
-
                       $emp_name=Apicommonfunction::getNameTable($db_name,'employee_master','emp_name','emp_code',$emp_code);
-
-
 
                       $db_update_mail=Apicommonfunction::getNameTable($db_name,'company_master','admin_email_id','comp_name',$nick_name);
 
-
-
                       $mailsubj="ACEdns - ".strtoupper($nick_name)." DB Version $versionCode released on $release_date has been successfully updated to $emp_name";
-
-
 
                       $bcc="acedns@coral.in";
 
-
-
                       $data = array('db_update_mail'=>$db_update_mail,'mailsubj'=>$mailsubj,'bcc'=>$bcc,'nick_name'=>strtoupper($nick_name),'typeversion'=>'DB Version','versionCode'=>$versionCode,'release_date'=>$release_date,'emp_name'=>$emp_name,'emp_code'=>$emp_code,'update_date'=>$update_date,'update_time'=>$update_time);
-
-
 
                       Mail::send(['html'=>'mail'], $data, function($message) use ($data) {
 
@@ -7700,11 +6024,7 @@ return Apicommonfunction::encrypt($json_encoded);
 
                                  ->subject($data['mailsubj']);
 
-
-
                       });
-
-
 
                 }
 
@@ -7744,23 +6064,15 @@ return Apicommonfunction::encrypt($json_encoded);
 
                                ));
 
-
-
             }
 
 
 
             $datetime = gmdate('Y-m-d H:m:s',strtotime('+330 minute'));
 
-
-
             $url = url('/api/v1/confirmationdownloadtd?nick_name='.$nick_name.'&emp_code='.$emp_code.'&device_id='.$device_id.'&db_version='.$db_version);
 
-
-
             Apicommonfunction::insertapilog($db_name,$datetime,$emp_code,$url);
-
-
 
           }
 
@@ -7771,8 +6083,6 @@ return Apicommonfunction::encrypt($json_encoded);
 
 
             return 404;
-
-
 
           }
 

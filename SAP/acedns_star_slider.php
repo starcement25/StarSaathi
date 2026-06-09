@@ -1,6 +1,6 @@
 <?php
 include "star_connection.php";
-$server_url1 = "http://" . $_SERVER['SERVER_NAME']."/";
+$server_url1 = "https://" . $_SERVER['SERVER_NAME']."/";
 $start_slider = "start_slider";
 $slider_folder = "SAP/slider/";
 $dir_name = "slider/";

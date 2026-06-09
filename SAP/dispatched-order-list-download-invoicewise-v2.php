@@ -62,9 +62,30 @@ if ($invoice_no == "") {
 
 			$res_data = array("process_status" => "YES", "process_message" => "Success.", "dispatched_invoice_data" => $dispatched_invoice_data);
 		} else {
-			// add offline order 06_06_25
-			$offline_found=0;
+			//OFFLINE ORDER
 			$T_APPERPDO_OFFLINE="T_APPERPDO_OFFLINE";
+
+			// ✅ Check if order is cancelled
+				$sql_cancel_check = "SELECT cancel 
+									FROM $T_APPERPDO_OFFLINE 
+									WHERE ERPORDERNO='".$app_orderno."' 
+									LIMIT 1";
+
+				$res_cancel_check = mysql_query($sql_cancel_check);
+				$row_cancel_check = mysql_fetch_assoc($res_cancel_check);
+
+				if($row_cancel_check['cancel'] == 'yes')
+				{
+					$res_data = array(
+						"process_status" => "NO",
+						"process_message" => "Order Cancelled."
+					);
+
+					echo json_encode($res_data);
+					exit; // stop further execution
+				}
+				// add offline order 06_06_25
+			$offline_found=0;
 			// $sqlall2 = "select $T_APPERPDO_OFFLINE.ERPORDERNO,SUM($T_APPERPDO_OFFLINE.QTY) AS TOT_INVQTY from $T_APPERPDO_OFFLINE
 			// where $T_APPERPDO_OFFLINE.ERPORDERNO='".$app_orderno."' and $T_APPERPDO_OFFLINE.ERPORDERNO!=''  and $T_APPERPDO_OFFLINE.ERPORDERNO IS NOT NULL GROUP BY $T_APPERPDO_OFFLINE.ERPORDERNO";
 			 $sqlall2 = "select $T_DOINVOICE.INVNO,SUM($T_DOINVOICE.INVQTY) AS TOT_INVQTY from $T_DOINVOICE

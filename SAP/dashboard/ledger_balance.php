@@ -104,6 +104,11 @@ if(isJsonCk($body_for_mcode1)){
 .hide_narr{
 	display:none;
 }
+.narration {
+    white-space: normal !important;   /* allow multi-line */
+    word-break: break-word;           /* break long words */
+    max-width: 250px;                /* optional width */
+}
 </style>
 
 <section class="content">
@@ -196,8 +201,9 @@ if(count($app_results_arr)>0){
 	<td><?php echo number_format($Menge,2);?> MT</td>
 	<td>&#8377; <?php echo number_format($DrAmount,2);?></td>
 	<td>&#8377; <?php echo number_format($CrAmount,2);?></td>
-	<td><img src="images/info.png" style="margin:0 auto" class="img-responsive lb_img_btn" the_lgr_id="<?php echo $VoucherNo;?>"  >
-	<span class="hide_narr" id="hide_narr_<?php echo $VoucherNo;?>"><?php echo $BalText;?></span>
+	<td class="narration"><?php echo $BalText;?>
+		<!-- <img src="images/info.png" style="margin:0 auto" class="img-responsive lb_img_btn" the_lgr_id="<?php echo $VoucherNo;?>"  >
+	<span class="hide_narr" id="hide_narr_<?php echo $VoucherNo;?>"><?php echo $BalText;?></span> -->
 	</td>
 	</tr>
 	<?php

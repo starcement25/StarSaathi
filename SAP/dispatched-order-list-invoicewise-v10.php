@@ -115,7 +115,9 @@ if ($the_customer_code == "") {
 						//sk190525
 						/* $sqlallocationqty = "select SUM(allocation_qty) tot_allocation_qty from $allocation_details where `customer_id`='$the_customer_code' and `prod_desc`='$prod_display_name_chtl' AND  	inv_date='$INVDT_formatted' and inv_no='$INVNO' GROUP BY prod_desc,inv_date";*/
 
-						$sqlallocationqty = "select SUM(allocation_qty) tot_allocation_qty from $allocation_details where `customer_id`='$the_customer_code' and  	inv_date='$INVDT_formatted' and inv_no='$INVNO' and delete_at='0' GROUP BY prod_desc,inv_date";
+						//$sqlallocationqty = "select SUM(allocation_qty) tot_allocation_qty from $allocation_details where `customer_id`='$the_customer_code' and  	inv_date='$INVDT_formatted' and inv_no='$INVNO' and delete_at='0' GROUP BY prod_desc,inv_date";
+
+						$sqlallocationqty = "select SUM(allocation_qty) tot_allocation_qty from $allocation_details where  inv_no='$INVNO' and APPORDERNO='".$apporder_no_chtl."' and delete_at='0' GROUP BY inv_no";
 
 						$resallocationqty = mysql_query($sqlallocationqty);
 						//$current_db = mysql_result(mysql_query("SELECT DATABASE()"), 0);
@@ -135,8 +137,13 @@ if ($the_customer_code == "") {
 							}
 						}*/
 						$available_allocation_qty=$INVQTY-$totresallocationqty;
+						//add flag sk 11-03-26
+						$allocation_complete="NO";
+						if($available_allocation_qty=='0' OR $available_allocation_qty=='0.0'){
+						$allocation_complete="YES";
 
-						$dispatched_invoice_data[] = array("ch_uid"=>$ch_uid,"apporderno"=>$apporder_no_chtl,"erporderno"=>$erporder_no_chtl,"challanno"=>$challanno_chtl,"invno"=>$INVNO,"invdt"=>$INVDT_formatted,"prod_display_name"=>$prod_display_name_chtl,"invqty"=>$INVQTY,"customer_code"=>$customer_code,"truckno"=>$TRUCKNO,"destination"=>$destination,"available_allocation_qty" => $available_allocation_qty);
+						}
+						$dispatched_invoice_data[] = array("ch_uid"=>$ch_uid,"apporderno"=>$apporder_no_chtl,"erporderno"=>$erporder_no_chtl,"challanno"=>$challanno_chtl,"invno"=>$INVNO,"invdt"=>$INVDT_formatted,"prod_display_name"=>$prod_display_name_chtl,"invqty"=>$INVQTY,"customer_code"=>$customer_code,"truckno"=>$TRUCKNO,"destination"=>$destination,"available_allocation_qty" => $available_allocation_qty,"allocation_complete" =>$allocation_complete);
 
 					}
 					$dispatched_order_data[] = array(

@@ -284,11 +284,24 @@ header("location:".$page_name."?ordr_sts_type=".$ordr_sts_type."&ordr_sts_msg=".
 
 }
 
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
 
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    (customer_master.`cust_type` = 'Sub Dealer' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
 
 
 $sqlsd = "select `customer_code`,`customer_name` from $customer_master where `rds_tag` = '$sswa_selected_customer_code'
-			and `acedns`='Y' AND cust_type IN('Sub Dealer','RSSD') order by `customer_name` asc";
+			and `acedns`='Y' AND cust_type IN('Sub Dealer','RSSD') $con order by `customer_name` asc";
 $ressd = mysql_query($sqlsd);
 $totressd = mysql_num_rows($ressd);
 
@@ -325,8 +338,8 @@ WHERE DM.destination_code=BDF.destination_code and DM.ex_for_type ='FOR' and BDF
 $res_dst_for = mysql_query($sql_dst_for);
 $totres_dst_for = mysql_num_rows($res_dst_for);*/
 
-$sql_dmp="SELECT `dump_code`,`dump_name` FROM $branch_dump
- WHERE `acedns`='Y' and `acedns`!='' and `is_plant`!='Y' and `is_plant`!='' and `branch_code` IN ('".$tagged_cust_branch_arr_str."') ORDER BY `dump_name` ASC";
+ $sql_dmp="SELECT `dump_code`,`dump_name` FROM $branch_dump
+ WHERE `acedns`='Y' and `acedns`!='' and `is_plant`!='Y' and `is_plant`!='' and `branch_code` IN ('".$tagged_cust_branch_arr_str."') GROUP BY dump_name ORDER BY `dump_name` ASC";
 $res_dmp = mysql_query($sql_dmp);
 $totres_dmp=mysql_num_rows($res_dmp);
 

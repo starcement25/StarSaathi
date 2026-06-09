@@ -165,7 +165,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
 $the_PDF_file_name_arr = array();
 $the_PDF_file_link_arr = array();
 $file_dir = "../schemes/";
-$file_url_prefix = "http://starsaathi.com/SAP/schemes/";
+$file_url_prefix = "https://starsaathi.com/SAP/schemes/";
 $sql1 = "select $branch_schemes_pdf.*,$branch_master.`branch_name` from $branch_schemes_pdf left join $branch_master on $branch_schemes_pdf.`branch_code`=$branch_master.`branch_code` $new_whr_str order by $branch_schemes_pdf.`download_time` desc limit $start_from,$limit";
 $res1 = mysql_query($sql1);
 $totres1 = mysql_num_rows($res1);

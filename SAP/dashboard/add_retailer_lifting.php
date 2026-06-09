@@ -57,6 +57,21 @@ if($incremental_download=='no'){
     $login_condition=" AND UNIX_TIMESTAMP(download_time) > UNIX_TIMESTAMP('".$last_update_time."')";
 }
 
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
+
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    (customer_master.`cust_type` = 'Sub Dealer' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
+
 // ================= FINAL QUERY =================
 if($user_type=="broker" && $tagged_cust_code_str!=''){
     $sqlquerycustomerroute="
@@ -71,6 +86,7 @@ if($user_type=="broker" && $tagged_cust_code_str!=''){
                 WHERE rds_tag IN('".$tagged_cust_code_str."') AND acedns='Y'
             )
           )
+           $con 
         ORDER BY customer_name ,acedns DESC
     ";
 } else {
@@ -89,6 +105,7 @@ if($user_type=="broker" && $tagged_cust_code_str!=''){
           AND cust_type!='Ship to Party-dealer' 
           AND cust_type!='ShiptoParty-Subdeale'
           AND cust_type='RSSD'
+          $con
         ORDER BY customer_name ,acedns DESC
     ";
 }

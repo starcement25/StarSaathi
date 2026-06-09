@@ -518,6 +518,8 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>qty&nbsp;(MT)</th>
                                             <th>Dump&nbsp;Name</th>
                                             <th>Status</th>
+                                            <th>Invoice Cancel</th>
+
 											<th>Show&nbsp;Challan&nbsp;Details</th>
                                         </tr>
                                     </thead>
@@ -541,6 +543,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>qty&nbsp;(MT)</th>
                                             <th>Dump&nbsp;Name</th>
                                             <th>Status</th>
+                                            <th>Invoice Cancel</th>
 										  <th>Show&nbsp;Challan&nbsp;Details</th>
                                         </tr>
                                     </tfoot>
@@ -601,6 +604,8 @@ if($totres1>0){
 		//$phone_no = $row1["phone_no"];
 		//$dump_status = $row1["dump_status"];
 		$dump_name = $row1["dump_name"];
+		$cancel = $row1["cancel"];
+
 
 
 $the_SAP_code=$row1["customer_id"] ? trim($row1["customer_id"]) : "";
@@ -667,6 +672,7 @@ if($order_status=="Order authorized" || $order_status=="Order received"){ ?>
 <td><?php echo $dump_name;?></td>
 
 <td><?php echo $order_status;?></td>
+<td><?php echo $cancel;?></td>
 	<td>
 <?php if($order_status=="Dispatched"){ ?>
 	<a href="ajax_show_challan_details_by_app_erp_id.php?apporder_no=&erporder_no=<?php echo $erporder_no;?>" class="btn bg-red vuChnlDtlsLink">Show&nbsp;Challan</a>

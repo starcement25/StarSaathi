@@ -45,15 +45,27 @@ $sqlin_tl = "insert into `webservice_track_log` (`customer_code`,`webservice_nam
 $resin_tl = mysql_query($sqlin_tl);
 /*----Tracklog Code End-----*/
 }
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
 
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
 
 if($sswa_user_type=="SP"){
 	if ($sswa_selected_customer_type == "Sub Dealer" || $sswa_selected_customer_type == "RSSD") {
-        $sql_dlr = "select $customer_master.`dns_customer_code`,$customer_master.`cust_type`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_master.`cust_type`='$sswa_selected_customer_type' and $customer_broker_relation.`acedns`='Y' order by $customer_master.`customer_name` asc";
+        $sql_dlr = "select $customer_master.`dns_customer_code`,$customer_master.`cust_type`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_master.`cust_type`='$sswa_selected_customer_type' and $customer_broker_relation.`acedns`='Y' $con order by $customer_master.`customer_name` asc";
     }else{
-        $sql_dlr = "select $customer_master.`dns_customer_code`,$customer_master.`cust_type`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_broker_relation.`broker_code`='$sswa_the_broker_id' and $customer_master.`cust_type`='dealer' and $customer_broker_relation.`acedns`='Y' order by $customer_master.`customer_name` asc";
+        $sql_dlr = "select $customer_master.`dns_customer_code`,$customer_master.`cust_type`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_broker_relation.`broker_code`='$sswa_the_broker_id' and $customer_master.`cust_type`='dealer' and $customer_broker_relation.`acedns`='Y' $con order by $customer_master.`customer_name` asc";
     }
-    //echo"<pre>";print_r($sql_dlr);die;
+   // echo"<pre>";print_r($sql_dlr);die;
 
 $res_dlr = mysql_query($sql_dlr);
 $totres_dlr = mysql_num_rows($res_dlr);
@@ -280,11 +292,11 @@ include "web_header.php";
 DEALER
 </label>
 
-<label style="margin-right: 15px;">
+<!-- <label style="margin-right: 15px;">
 <input type="radio" name="customer_type" class="customer_type" value="subdealer"
         style="position: static !important; left: 0 !important; opacity: 1 !important; display: inline-block !important;">
 SUB DEALER
-</label>
+</label> -->
 
 <label>
 <input type="radio" name="customer_type" class="customer_type" value="rssd"
@@ -335,7 +347,7 @@ if($res_subdlr){
     <option value="">Select Now</option>
 
 <?php
-$sql_rssd = "select $customer_master.`dns_customer_code`,$customer_master.`cust_type`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_master.`cust_type`='rssd' and $customer_broker_relation.`acedns`='Y' order by $customer_master.`customer_name` asc";
+echo $sql_rssd = "select $customer_master.`dns_customer_code`,$customer_master.`cust_type`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_master.`cust_type`='rssd' and $customer_broker_relation.`acedns`='Y' order by $customer_master.`customer_name` asc";
 $res_rssd = mysql_query($sql_rssd);
 if($res_rssd){
 	while($row_rssd=mysql_fetch_assoc($res_rssd)){

@@ -372,7 +372,7 @@ $sql = mysql_query($qry);
 $columns_total = mysql_num_fields($sql);
 // Get The Field Name
 $slno_cnt = 1;
-$output .= '"SL_No","Sale Order No","DATE","Branch_Name","Dealer SAP Code","Cust_Code","Customer_Name","Consignee SAP Code","Consignee_Name","Freight","Destination Code","Destination","Product_Name","qty(MT)","Dump_Name","STATUS"';
+$output .= '"SL_No","Sale Order No","DATE","Branch_Name","Dealer SAP Code","Cust_Code","Customer_Name","Consignee SAP Code","Consignee_Name","Freight","Destination Code","Destination","Product_Name","qty(MT)","Dump_Name","STATUS","Invoice Cancel"';
 $output .="\n";
 // Get Records from the table
 while ($row1 = mysql_fetch_array($sql)) {
@@ -408,13 +408,14 @@ while ($row1 = mysql_fetch_array($sql)) {
 		//$phone_no = $row1["phone_no"];
 		//$dump_status = $row1["dump_status"];
 		$dump_name = $row1["dump_name"];
+		$cancel = $row1["cancel"];
 		
 		
 $the_SAP_code=$row1["customer_id"] ? trim($row1["customer_id"]) : "";
 
 
 
-$output .= '"'.$sl_no.'","'.$erporder_no.'","'.$erporder_date.'","'.$customer_branch_name.'","'.$the_SAP_code.'","'.$dns_customer_code.'","'.$customer_name.'","'.$the_consignee_code.'","'.$consignee_name.'","'.$freight.'","'.$the_destination_code.'","'.$destination_name.'","'.$prod_display_name.'","'.$prod_qty.'","'.$dump_name.'","'.$order_status.'"';
+$output .= '"'.$sl_no.'","'.$erporder_no.'","'.$erporder_date.'","'.$customer_branch_name.'","'.$the_SAP_code.'","'.$dns_customer_code.'","'.$customer_name.'","'.$the_consignee_code.'","'.$consignee_name.'","'.$freight.'","'.$the_destination_code.'","'.$destination_name.'","'.$prod_display_name.'","'.$prod_qty.'","'.$dump_name.'","'.$order_status.'","'.$cancel.'"';
 $output .="\n";
 $slno_cnt++;
 }

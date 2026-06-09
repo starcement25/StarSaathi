@@ -30,7 +30,7 @@ $customer_name = trim($row1["customer_name"]);
 $address = trim($row1["address"]);
 $phone_no = trim($row1["phone_no"]);
 
-$sql_dst="SELECT DM.destination_code,DM.destination_name FROM $destination_master DM,$customer_destination CD		
+ $sql_dst="SELECT DM.destination_code,DM.destination_name FROM $destination_master DM,$customer_destination CD		
 		WHERE DM.destination_code=CD.destination_code AND CD.customer_code='".$dealer_id."'";
 $res_dst= mysql_query($sql_dst);
 $totres_ds = mysql_num_rows($res_dst);

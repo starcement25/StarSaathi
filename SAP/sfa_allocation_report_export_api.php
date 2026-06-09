@@ -1,6 +1,14 @@
 <?php
-include "web_check.php";
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+//include "web_check.php";
 include "star_connection.php";
+
+ini_set('memory_limit', '512M');
+set_time_limit(1000);
 // Sanitize input
 function getParam($key) {
     return isset($_REQUEST[$key]) ? addslashes(trim($_REQUEST[$key])) : "";
@@ -205,7 +213,7 @@ $sql = "SELECT
             $allocation_details.date_and_time ASC
 
         ";
-    //echo"<pre>";print_r($sql);die;
+    //echo"<pre>";print_r($sql);
     $result = mysql_query($sql);
     if (!$result) {
         echo json_encode(['status' => 'error', 'message' => 'Query failed', 'query' => $sql]);
@@ -213,8 +221,11 @@ $sql = "SELECT
     }
 
     $data = [];
-
+    //$c=1;
+    //echo"<pre>";print_r(mysql_fetch_assoc($result));die;
     while ($row1 = mysql_fetch_assoc($result)) {
+    //echo "s1 $c <br>";
+
         $APPORDERNO = isset($row1["APPORDERNO"]) ? trim($row1["APPORDERNO"]) : "";
         $date_and_time = isset($row1["date_and_time"]) ? trim($row1["date_and_time"]) : "";
         $linked_dealer_code = isset($row1["dns_customer_code"]) ? trim($row1["dns_customer_code"]) : "";
@@ -223,10 +234,12 @@ $sql = "SELECT
         $sub_dealer_rssd_sap_code = isset($row1["sub_dealer_id"]) ? trim($row1["sub_dealer_id"]) : "";
         $allocation_qty = isset($row1["allocation_qty"]) ? trim($row1["allocation_qty"]) : "";
         // Get sub-dealer details
+    //echo "s2 $c <br>";
+        
         $sub_dealer_rssd_code = "";
         $sub_dealer_rssd_name = "";
         if ($sub_dealer_rssd_sap_code != "") {
-            $sub_dealer_details = "SELECT dns_customer_code, customer_name FROM $customer_master WHERE customer_id = '$sub_dealer_rssd_sap_code'";
+             $sub_dealer_details = "SELECT dns_customer_code, customer_name FROM $customer_master WHERE customer_id = '$sub_dealer_rssd_sap_code'";
             $res_sub_dealer_details = mysql_query($sub_dealer_details);
             $row_sub_dealer_details = mysql_fetch_array($res_sub_dealer_details);
             $sub_dealer_rssd_code = isset($row_sub_dealer_details["dns_customer_code"]) ? trim($row_sub_dealer_details["dns_customer_code"]) : "";
@@ -240,6 +253,7 @@ $sql = "SELECT
         $total_inv_qty = isset($row1["inv_qty"]) ? trim($row1["inv_qty"]) : "";
         $inv_date = isset($row1["inv_date"]) ? trim($row1["inv_date"]) : "";
         $inv_no = isset($row1["inv_no"]) ? trim($row1["inv_no"]) : "";
+    //echo "s3 $c <br>";
 
         // Construct dynamic variable name
         $varKey = 'total_allocation_qty' . $linked_dealer_code . $APPORDERNO . $inv_no;
@@ -257,6 +271,29 @@ $sql = "SELECT
             $month_display = date("M-y", strtotime($inv_date));
         }
         // Append result // sk "total_allocation_qty" => $$varKey,
+        // echo"<pre>";print_r($APPORDERNO);
+        // echo"<pre>";print_r($sub_dealer_rssd_sap_code);
+        // echo"<br>";
+    // echo $APPORDERNO."<br>";
+    // echo $date_and_time."<br>";
+    // echo $linked_dealer_code."<br>";
+    // echo $linked_dealer_sap_code."<br>";
+    // echo $linked_dealer_name."<br>";
+    // echo $sub_dealer_rssd_sap_code."<br>";
+    // echo $sub_dealer_rssd_code."<br>";
+    // echo $sub_dealer_rssd_name."<br>";
+    // echo $branch."<br>";
+    // echo $dns_prod_code."<br>";
+    // echo $prod_display_name."<br>";
+    // echo $inv_cancl."<br>";
+    // echo $inv_date."<br>";
+    // echo $inv_no."<br>";
+    // echo $month_display."<br>";
+    // echo $total_inv_qty."<br>";
+    // echo $allocation_qty."<br>";
+    // echo $remaining_allocation_qty."<br>";
+    // echo "-----------------------------------<br>";
+    //echo "s4 $c <br>";
         $data[] = [
             "APPORDERNO" => $APPORDERNO,
             "date_and_time" => $date_and_time,
@@ -277,16 +314,46 @@ $sql = "SELECT
             "total_allocation_qty" => $allocation_qty,
             "remaining_allocation_qty" => $remaining_allocation_qty
         ];
+       // 
+        //echo"<pre>";print_r($data);
+       // echo "s5 $c <br>";
+        //$c++;
+     //echo "-----------------------------------<br>";
+
     }
+    //echo"<pre>";print_r($data);die;
+
    /* echo json_encode([
         'status' => 'success',
         'data' => $data
     ]);*/
-    echo json_encode([
+function utf8ize($mixed) {
+    if (is_array($mixed)) {
+        foreach ($mixed as $key => $value) {
+            $mixed[$key] = utf8ize($value);
+        }
+    } elseif (is_string($mixed)) {
+        return mb_convert_encoding($mixed, "UTF-8", "UTF-8, ISO-8859-1, ISO-8859-15");
+    }
+    return $mixed;
+}
+$data = utf8ize($data);
+$json = json_encode([
+    'status' => 'success',
+    'total_records' => $total_records,
+    'data' => $data
+], JSON_PRETTY_PRINT);
+
+if ($json === false) {
+    echo "JSON Error: " . json_last_error_msg();
+} else {
+    echo $json;
+}
+   /*echo json_encode([
         'status' => 'success',
         'total_records' => $total_records,
         'data' => $data
-    ]);
+    ]); die;*/
 }else{
 
     echo json_encode([

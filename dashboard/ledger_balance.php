@@ -196,8 +196,9 @@ if(count($app_results_arr)>0){
 	<td><?php echo number_format($Menge,2);?> MT</td>
 	<td>&#8377; <?php echo number_format($DrAmount,2);?></td>
 	<td>&#8377; <?php echo number_format($CrAmount,2);?></td>
-	<td><img src="images/info.png" style="margin:0 auto" class="img-responsive lb_img_btn" the_lgr_id="<?php echo $VoucherNo;?>"  >
-	<span class="hide_narr" id="hide_narr_<?php echo $VoucherNo;?>"><?php echo $BalText;?></span>
+	 <td> <?php echo $BalText;?>
+	<!-- <img src="images/info.png" style="margin:0 auto" class="img-responsive lb_img_btn" the_lgr_id="<?php echo $VoucherNo;?>"  >
+	<span class="hide_narr" id="hide_narr_<?php echo $VoucherNo;?>"><?php echo $BalText;?></span> -->
 	</td>
 	</tr>
 	<?php

@@ -49,7 +49,7 @@ if($user_type=="dealer"){
 					AND $destination_master.destination_code=$customer_destination.destination_code   
 					AND $customer_master.rds_tag='".$emp_code."' AND $customer_master.cust_type='Ship to Party-dealer' AND $customer_master.order_restriction='no'";*/	
 					//sk add
-					$sqlshiptoparty="SELECT DISTINCT $customer_master.dns_customer_code,$customer_master.customer_code,$customer_master.customer_name,
+					 $sqlshiptoparty="SELECT DISTINCT $customer_master.dns_customer_code,$customer_master.customer_code,$customer_master.customer_name,
 					$customer_master.address,$customer_master.phone_no,$destination_master.destination_name 
 					FROM $customer_master,$customer_destination,$destination_master  WHERE $customer_master.customer_code=$customer_destination.customer_code 
 					AND $destination_master.destination_code=$customer_destination.destination_code   

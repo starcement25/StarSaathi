@@ -64,6 +64,7 @@ foreach ($allocations as $customer_code => $qty) {
         $row = mysql_fetch_assoc($qry);
         $cust_id = $row['customer_id'];
     }
+   
       //  Fetch dealer as customer_id from customer_master
     $dealer_cust_id = "";
     $sswa_selected_customer_code=$_SESSION['sswa_selected_customer_code'];
@@ -72,6 +73,16 @@ foreach ($allocations as $customer_code => $qty) {
         $row = mysql_fetch_assoc($qry);
         $dealer_cust_id = $row['customer_id'];
     }
+    //sk add condition 11-05-26
+    if (
+        empty($customer_code) ||
+        empty($cust_id) ||
+        empty($sswa_selected_customer_code) ||
+        empty($dealer_cust_id)
+    ) {
+        continue;
+    }
+    //sk add end condition 11-05-26
     //  Generate order_id using customer_id
     $micro_time = microtime(true);
     $micro = sprintf("%06d", ($micro_time - floor($micro_time)) * 1000000);

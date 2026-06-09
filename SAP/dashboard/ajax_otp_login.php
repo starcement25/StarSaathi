@@ -1,7 +1,43 @@
 <?php
 session_start();
 set_time_limit(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 include "star_connection.php";
+if (!function_exists('random_bytes')) {
+    function random_bytes($length) {
+        if ($length <= 0) return false;
+
+        // Best option (Linux/Unix)
+        if (is_readable('/dev/urandom')) {
+            $file = fopen('/dev/urandom', 'rb');
+            $bytes = fread($file, $length);
+            fclose($file);
+            if ($bytes !== false) {
+                return $bytes;
+            }
+        }
+
+        // OpenSSL fallback
+        if (function_exists('openssl_random_pseudo_bytes')) {
+            $bytes = openssl_random_pseudo_bytes($length, $strong);
+            if ($bytes !== false && $strong === true) {
+                return $bytes;
+            }
+        }
+
+        // Last fallback (not secure)
+        $bytes = '';
+        for ($i = 0; $i < $length; $i++) {
+            $bytes .= chr(mt_rand(0, 255));
+        }
+
+        return $bytes;
+    }
+}
+
 $res_msg			= array();
 $customer_master = "customer_master";
 $broker_master = "broker_master";
@@ -34,6 +70,29 @@ $customer_name = trim($row1["customer_name"]);
 $sms_otp = trim($row1["sms_otp"]);
 if($sms_otp==$dealer_otp){
 $user_type = "DEALER";
+	//auth  add 23-04-26
+		$token = bin2hex(random_bytes(16));
+		$datetime = date('YmdHis');
+
+		$rawToken = $dealer_id . '|' . $datetime . '|' . $token;
+		$token = hash('sha256', $rawToken);
+
+		// Escape values
+		$dealer_id     = mysql_real_escape_string($dealer_id);
+		$deviceid      = "web";
+		$location_date = date('Y-m-d H:i');
+		$token         = mysql_real_escape_string($token);
+
+		// FIXED SQL (removed extra comma)
+		$sql = "UPDATE changepassword 
+				SET deviceid = '$deviceid',
+					loggedin_date_time = '$location_date',
+					token = '$token'
+				WHERE dns_customer_code = '$dealer_id'
+				LIMIT 1";
+
+		$result = mysql_query($sql);
+//auth end 23-04-26
 
 $_SESSION["sswa_user_type"]= $user_type;
 $_SESSION["sswa_user_name"]= $customer_name;
@@ -42,6 +101,8 @@ $_SESSION["sswa_user_dns_id"]= $dns_customer_code;
 $_SESSION["sswa_selected_dealer_name"]= $customer_name;
 $_SESSION["sswa_selected_dealer_code"]= $dns_customer_code;
 $_SESSION["sswa_selected_customer_code"]= $customer_code;
+$_SESSION["token"]= $token;
+$_SESSION["dealer_id"]= $dealer_id;
 
 $res_msg = array("process_sts"=>"YES","process_msg"=>"OTP has been sent to your mobile number.");
 }else{
@@ -69,6 +130,51 @@ $selected_customer_name = trim($row24["customer_name"]);
 $selected_customer_code = trim($row24["customer_code"]);
 $selected_dns_customer_code = trim($row24["dns_customer_code"]);
 
+//auth  add 23-04-26
+		// Generate token
+		// $dealer_id=$dns_broker_id;//
+		$token = bin2hex(random_bytes(16));
+		$datetime = date('YmdHis');
+
+		$rawToken = $dealer_id . '|' . $datetime . '|' . $token;
+		$token = hash('sha256', $rawToken);
+
+		// Escape
+		$dealer_id     = mysql_real_escape_string($dealer_id);
+		$deviceid      = "web";
+		$location_date = date('Y-m-d H:i');
+		$token         = mysql_real_escape_string($token);
+
+		// Check if record exists
+		$checkSql = "SELECT 1 FROM changepassword 
+					WHERE customer_code = '$broker_id' 
+					LIMIT 1";
+
+		$checkRes = mysql_query($checkSql);
+
+		if ($checkRes && mysql_num_rows($checkRes) > 0) {
+
+			// ✅ UPDATE
+			$sql = "UPDATE changepassword 
+					SET deviceid = '$deviceid',
+						loggedin_date_time = '$location_date',
+						token = '$token'
+					WHERE customer_code = '$broker_id'
+					LIMIT 1";
+
+		} else {
+
+			// ✅ INSERT
+			$sql = "INSERT INTO changepassword 
+					(customer_code,dns_customer_code, deviceid, loggedin_date_time, token)
+					VALUES 
+					('$dealer_id','$dns_broker_id', '$deviceid', '$location_date', '$token')";
+		}
+	//echo"<pre>";print_r($sql);die;
+
+		$result = mysql_query($sql);
+//auth end 23-04-26
+
 $user_type = "SP";
 $_SESSION["sswa_user_type"]= $user_type;
 $_SESSION["sswa_user_name"]= $broker_name;
@@ -78,6 +184,8 @@ $_SESSION["sswa_selected_dealer_name"]= $selected_customer_name;
 $_SESSION["sswa_selected_cust_type"]= "Dealer";
 $_SESSION["sswa_selected_dealer_code"]= $selected_dns_customer_code;
 $_SESSION["sswa_selected_customer_code"]= $selected_customer_code;
+$_SESSION["token"]= $token;
+$_SESSION["dealer_id"]= $dns_broker_id;
 
 $res_msg = array("process_sts"=>"YES","process_msg"=>"OTP has been sent to your mobile number.");
 

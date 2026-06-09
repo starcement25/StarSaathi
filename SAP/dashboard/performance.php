@@ -1,833 +1,453 @@
 <?php
 include "web_check.php";
 include "star_connection.php";
-$t_apperpdo = "T_APPERPDO";
-$employee_master = "employee_master";
-$customer_master = "customer_master";
-$branch_master = "branch_master";
-$broker_master = "broker_master";
+
+$t_apperpdo               = "T_APPERPDO";
+$employee_master          = "employee_master";
+$customer_master          = "customer_master";
+$branch_master            = "branch_master";
+$broker_master            = "broker_master";
 $customer_broker_relation = "customer_broker_relation";
-$ledger_balance = "ledger_balance";
-$branch_schemes_PDF = "branch_schemes_PDF";
-$notification_message = "notification_message";
-$self_appraisal_product_wise = "self_appraisal_product_wise";
-$page_name = "performance.php";
-$curr_yer_target_arr = array();
-$curr_yer_achievement_arr = array();
-$prev_yer_target_arr = array();
-$prev_yer_achievement_arr = array();
+$ledger_balance           = "ledger_balance";
+$branch_schemes_PDF       = "branch_schemes_PDF";
+$notification_message     = "notification_message";
+$month_wise_achievement   = "month_wise_achievement_new";   // ← NEW TABLE
+$page_name                = "performance.php";
 
-$current_date = date('Y-m-d');
-$month_date = date('Y-m');
-$current_month = date('m');
+/* ------------------------------------------------------------------ */
+/*  DATE / FINANCIAL YEAR SETUP                                        */
+/* ------------------------------------------------------------------ */
+$current_date  = date('Y-m-d');
+$current_month = (int) date('n');   // 1–12, no leading zero
+$current_year  = (int) date('Y');
 
-if($current_month == '01' || $current_month == '02' || $current_month == '03'){
-	$previous_year = date('Y', strtotime('-1 year'));
-	$current_fin_year= $previous_year.'-'.date('Y');
-	$prev_fin_year= ($previous_year-1).'-'.$previous_year;
-}
-else{
-	$previous_year = date('Y', strtotime('-1 year'));
-	$current_fin_year= date('Y').'-'.(date('Y')+1);
-	$prev_fin_year= $previous_year.'-'.date('Y');
-}
+// Financial year start (April = month 4)
+$fy = ($current_month >= 4) ? $current_year : $current_year - 1;
 
-if(isset($_GET["sel_sdvl"]) && @$_GET["sel_sdvl"]!=""){
-$sel_sdvl = trim($_GET["sel_sdvl"]);
-}else{
-$sel_sdvl = "";	
-}
+$current_fin_year = $fy       . '-' . ($fy + 1);   // e.g. 2026-2027
+$prev_fin_year    = ($fy - 1) . '-' . $fy;          // e.g. 2025-2026
 
-$sswa_user_type = $_SESSION["sswa_user_type"];
-$sswa_the_broker_id = $_SESSION["sswa_user_id"];
-$sswa_the_dns_broker_id = $_SESSION["sswa_user_dns_id"];
-$sswa_selected_dealer_code = $_SESSION["sswa_selected_dealer_code"];
-$sswa_selected_customer_code = $_SESSION["sswa_selected_customer_code"];
-$sql3 = "select `customer_id` from $customer_master where `customer_code`='$sswa_selected_customer_code'";
-$res3 = mysql_query($sql3);
-$totres3 = mysql_num_rows($res3);
-$row3 = mysql_fetch_assoc($res3);
+/* ------------------------------------------------------------------ */
+/*  SESSION VARIABLES                                                  */
+/* ------------------------------------------------------------------ */
+$sswa_user_type             = $_SESSION["sswa_user_type"];
+$sswa_the_broker_id         = $_SESSION["sswa_user_id"];
+$sswa_the_dns_broker_id     = $_SESSION["sswa_user_dns_id"];
+$sswa_selected_dealer_code  = $_SESSION["sswa_selected_dealer_code"];
+ $sswa_selected_customer_code= $_SESSION["sswa_selected_customer_code"];
+
+/* ------------------------------------------------------------------ */
+/*  sel_sdvl (sub-dealer filter from GET)                              */
+/* ------------------------------------------------------------------ */
+$sel_sdvl = (isset($_GET["sel_sdvl"]) && trim($_GET["sel_sdvl"]) != "")
+            ? trim($_GET["sel_sdvl"]) : "";
+
+/* ------------------------------------------------------------------ */
+/*  CUSTOMER ID (for track-log)                                        */
+/* ------------------------------------------------------------------ */
+$sql3    = "SELECT `customer_id` FROM $customer_master WHERE `customer_code`='$sswa_selected_customer_code'";
+$res3    = mysql_query($sql3);
+$row3    = mysql_fetch_assoc($res3);
 $the_customer_id = trim($row3["customer_id"]);
 
-if(strtoupper($sswa_user_type)=='DEALER'){
-/*----Tracklog Code Start-----*/
-$curr_date_time = date("Y-m-d H:i:s");
-$webservice_name = "PERFORMANCE";
-$sqlin_tl = "insert into `webservice_track_log` (`customer_code`,`webservice_name`,`details`,`datetime`) values ('$the_customer_id','$webservice_name','','$curr_date_time')";
-$resin_tl = mysql_query($sqlin_tl);
-/*----Tracklog Code End-----*/
+if (strtoupper($sswa_user_type) == 'DEALER') {
+    $curr_date_time  = date("Y-m-d H:i:s");
+    $webservice_name = "PERFORMANCE";
+    $sqlin_tl = "INSERT INTO `webservice_track_log`
+                 (`customer_code`,`webservice_name`,`details`,`datetime`)
+                 VALUES ('$the_customer_id','$webservice_name','','$curr_date_time')";
+    mysql_query($sqlin_tl);
 }
 
-if($sswa_user_type=="SP"){
-$brsql = "select $customer_master.`dns_customer_code`,$customer_master.`customer_name` from $customer_broker_relation left join $customer_master on $customer_broker_relation.`customer_code`=$customer_master.`customer_code` where $customer_broker_relation.`broker_code`='$sswa_the_broker_id' and $customer_broker_relation.`acedns`='Y' order by $customer_master.`customer_name` asc";	
-}else{
-$brsql = "select `dns_customer_code`,`customer_name` from $customer_master where `rds_tag` = '$sswa_selected_customer_code' 
-		and `acedns`='Y' AND cust_type IN('Sub Dealer','RSSD')  order by `customer_name` asc";
+/* ------------------------------------------------------------------ */
+/*  SUB-DEALER DROPDOWN                                                */
+/* ------------------------------------------------------------------ */
+if ($sswa_user_type == "SP") {
+    // $brsql = "SELECT $customer_master.`dns_customer_code`,$customer_master.`customer_code`, $customer_master.`customer_name`
+    //           FROM $customer_broker_relation
+    //           LEFT JOIN $customer_master
+    //             ON $customer_broker_relation.`customer_code` = $customer_master.`customer_code`
+    //           WHERE $customer_broker_relation.`broker_code` = '$sswa_the_broker_id'
+    //             AND $customer_broker_relation.`acedns` = 'Y'
+    //           ORDER BY $customer_master.`customer_name` ASC";
+
+     $brsql = "SELECT $customer_master.`dns_customer_code`,$customer_master.`customer_code`, $customer_master.`customer_name`
+              FROM $customer_broker_relation
+              LEFT JOIN $customer_master
+                ON $customer_broker_relation.`customer_code` = $customer_master.`customer_code`
+              WHERE $customer_broker_relation.`broker_code` = '$sswa_the_broker_id'
+                AND $customer_broker_relation.`acedns` = 'Y'
+              ORDER BY $customer_master.`customer_name` ASC";
+
+} else {
+     $brsql = "SELECT `dns_customer_code`, `customer_code`,`customer_name`
+              FROM $customer_master
+              WHERE `rds_tag` = '$sswa_selected_customer_code'
+                AND `acedns` = 'Y'
+                AND cust_type IN ('Sub Dealer','RSSD')
+              ORDER BY `customer_name` ASC";
 }
-$brres = mysql_query($brsql);
+$brres       = mysql_query($brsql);
 $total_brres = mysql_num_rows($brres);
 
+/* ------------------------------------------------------------------ */
+/*  DETERMINE WHICH customer_code TO QUERY                            */
+/* ------------------------------------------------------------------ */
+$query_customer_code = ($sel_sdvl != "") ? $sel_sdvl : $sswa_selected_customer_code;
+$query_customer_code = strtoupper($query_customer_code);
 
-if($sel_sdvl!=""){
-	$sql_perfrm = "select `jan_31_target`,`jan_31_achievement`,`feb_28_target`,`feb_28_achievement`,`mar_31_target`,`mar_31_achievement`,`apr_30_target`,`apr_30_achievement`,`may_31_target`,`may_31_achievement`,`jun_30_target`,`jun_30_achievement`,`jul_31_target`,`jul_31_achievement`,`aug_31_target`,`aug_31_achievement`,`sep_30_target`,`sep_30_achievement`,`oct_31_target`,`oct_31_achievement`,`nov_30_target`,`nov_30_achievement`,`dec_31_target`,`dec_31_achievement`,`jan_prev_y_target`,`jan_prev_y_achievement`,`feb_prev_y_target`,`feb_prev_y_achievement`,`mar_prev_y_target`,`mar_prev_y_achievement`,`apr_prev_y_target`,`apr_prev_y_achievement`,`may_prev_y_target`,`may_prev_y_achievement`,`jun_prev_y_target`,`jun_prev_y_achievement`,`jul_prev_y_target`,`jul_prev_y_achievement`,`aug_prev_y_target`,`aug_prev_y_achievement`,`sep_prev_y_target`,`sep_prev_y_achievement`,`oct_prev_y_target`,`oct_prev_y_achievement`,`nov_prev_y_target`,`nov_prev_y_achievement`,`dec_prev_y_target`,`dec_prev_y_achievement` from $self_appraisal_product_wise where `customer_code`='$sel_sdvl'";
-}else{
-	$sql_perfrm = "select `jan_31_target`,`jan_31_achievement`,`feb_28_target`,`feb_28_achievement`,`mar_31_target`,`mar_31_achievement`,`apr_30_target`,`apr_30_achievement`,`may_31_target`,`may_31_achievement`,`jun_30_target`,`jun_30_achievement`,`jul_31_target`,`jul_31_achievement`,`aug_31_target`,`aug_31_achievement`,`sep_30_target`,`sep_30_achievement`,`oct_31_target`,`oct_31_achievement`,`nov_30_target`,`nov_30_achievement`,`dec_31_target`,`dec_31_achievement`,`jan_prev_y_target`,`jan_prev_y_achievement`,`feb_prev_y_target`,`feb_prev_y_achievement`,`mar_prev_y_target`,`mar_prev_y_achievement`,`apr_prev_y_target`,`apr_prev_y_achievement`,`may_prev_y_target`,`may_prev_y_achievement`,`jun_prev_y_target`,`jun_prev_y_achievement`,`jul_prev_y_target`,`jul_prev_y_achievement`,`aug_prev_y_target`,`aug_prev_y_achievement`,`sep_prev_y_target`,`sep_prev_y_achievement`,`oct_prev_y_target`,`oct_prev_y_achievement`,`nov_prev_y_target`,`nov_prev_y_achievement`,`dec_prev_y_target`,`dec_prev_y_achievement` from $self_appraisal_product_wise where `customer_code`='$the_customer_id'";
+/* ------------------------------------------------------------------ */
+/*  FETCH ALL ROWS FROM month_wise_achievement_new                     */
+/* ------------------------------------------------------------------ */
+  $sql_mwa = "SELECT `month`, `year`, `target_qty`, `achievement_qty`
+            FROM $month_wise_achievement
+            WHERE `customer_code` = '$query_customer_code'";
+$res_mwa = mysql_query($sql_mwa);
+
+$raw_data = array();
+while ($row_mwa = mysql_fetch_assoc($res_mwa)) {
+    $m = (int) $row_mwa['month'];
+    $y = (int) $row_mwa['year'];
+    $raw_data[$m][$y] = array(
+        'target' => $row_mwa['target_qty'],
+        'ach'    => $row_mwa['achievement_qty']
+    );
 }
-//echo"<pre>";print_r($sql_perfrm);die;
-$res_perfrm = mysql_query($sql_perfrm);
-$totres_perfrm = mysql_num_rows($res_perfrm);
-if($totres_perfrm>0){
-	$row_perfrm = mysql_fetch_assoc($res_perfrm);
 
+/* ------------------------------------------------------------------ */
+/*  BUILD ARRAYS FOR 12 MONTHS (Apr→Mar order)                        */
+/*  Financial-year month mapping:                                      */
+/*    Jan–Mar  → current FY year = fy+1,  prev FY year = fy           */
+/*    Apr–Dec  → current FY year = fy,    prev FY year = fy-1         */
+/* ------------------------------------------------------------------ */
+// Month order for a financial year: Apr(4)…Dec(12), Jan(1)…Mar(3)
+$fy_month_order = array(4,5,6,7,8,9,10,11,12,1,2,3);
+$month_labels   = array(
+    1=>'Jan', 2=>'Feb', 3=>'Mar', 4=>'Apr', 5=>'May', 6=>'Jun',
+    7=>'Jul', 8=>'Aug', 9=>'Sep', 10=>'Oct', 11=>'Nov', 12=>'Dec'
+);
+$month_labels_full = array(
+    1=>'January',2=>'February',3=>'March',4=>'April',5=>'May',6=>'June',
+    7=>'July',8=>'August',9=>'September',10=>'October',11=>'November',12=>'December'
+);
 
-$apr_30_target = $row_perfrm["apr_30_target"] ? floatval($row_perfrm["apr_30_target"]) : 0;
-$apr_30_achievement = $row_perfrm["apr_30_achievement"] ? floatval($row_perfrm["apr_30_achievement"]) : 0;
-$curr_yer_target_arr[] = $apr_30_target;
-$curr_yer_achievement_arr[] = $apr_30_achievement;
+// Arrays for chart / table (12 slots, Apr→Mar)
+$curr_yer_target_arr      = array();
+$curr_yer_achievement_arr = array();
+$prev_yer_target_arr      = array();
+$prev_yer_achievement_arr = array();
+$ordered_month_labels     = array();
+$ordered_month_labels_full= array();
 
-$may_31_target = $row_perfrm["may_31_target"] ? floatval($row_perfrm["may_31_target"]) : 0;
-$may_31_achievement = $row_perfrm["may_31_achievement"] ? floatval($row_perfrm["may_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $may_31_target;
-$curr_yer_achievement_arr[] = $may_31_achievement;
+foreach ($fy_month_order as $m) {
+    // Determine calendar year for this month in current/previous FY
+    if ($m >= 1 && $m <= 3) {
+        $cur_year_m = $fy + 1;
+        $pre_year_m = $fy;
+    } else {
+        $cur_year_m = $fy;
+        $pre_year_m = $fy - 1;
+    }
 
-$jun_30_target = $row_perfrm["jun_30_target"] ? floatval($row_perfrm["jun_30_target"]) : 0;
-$jun_30_achievement = $row_perfrm["jun_30_achievement"] ? floatval($row_perfrm["jun_30_achievement"]) : 0;
-$curr_yer_target_arr[] = $jun_30_target;
-$curr_yer_achievement_arr[] = $jun_30_achievement;
+    $cur_target = isset($raw_data[$m][$cur_year_m]) ? (float)$raw_data[$m][$cur_year_m]['target'] : 0;
+    $cur_ach    = isset($raw_data[$m][$cur_year_m]) ? (float)$raw_data[$m][$cur_year_m]['ach']    : 0;
+    $pre_target = isset($raw_data[$m][$pre_year_m]) ? (float)$raw_data[$m][$pre_year_m]['target'] : 0;
+    $pre_ach    = isset($raw_data[$m][$pre_year_m]) ? (float)$raw_data[$m][$pre_year_m]['ach']    : 0;
 
-$jul_31_target = $row_perfrm["jul_31_target"] ? floatval($row_perfrm["jul_31_target"]) : 0;
-$jul_31_achievement = $row_perfrm["jul_31_achievement"] ? floatval($row_perfrm["jul_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $jul_31_target;
-$curr_yer_achievement_arr[] = $jul_31_achievement;
-
-$aug_31_target = $row_perfrm["aug_31_target"] ? floatval($row_perfrm["aug_31_target"]) : 0;
-$aug_31_achievement = $row_perfrm["aug_31_achievement"] ? floatval($row_perfrm["aug_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $aug_31_target;
-$curr_yer_achievement_arr[] = $aug_31_achievement;
-
-$sep_30_target = $row_perfrm["sep_30_target"] ? floatval($row_perfrm["sep_30_target"]) : 0;
-$sep_30_achievement = $row_perfrm["sep_30_achievement"] ? floatval($row_perfrm["sep_30_achievement"]) : 0;
-$curr_yer_target_arr[] = $sep_30_target;
-$curr_yer_achievement_arr[] = $sep_30_achievement;
-
-$oct_31_target = $row_perfrm["oct_31_target"] ? floatval($row_perfrm["oct_31_target"]) : 0;
-$oct_31_achievement = $row_perfrm["oct_31_achievement"] ? floatval($row_perfrm["oct_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $oct_31_target;
-$curr_yer_achievement_arr[] = $oct_31_achievement;
-
-$nov_30_target = $row_perfrm["nov_30_target"] ? floatval($row_perfrm["nov_30_target"]) : 0;
-$nov_30_achievement = $row_perfrm["nov_30_achievement"] ? floatval($row_perfrm["nov_30_achievement"]) : 0;
-$curr_yer_target_arr[] = $nov_30_target;
-$curr_yer_achievement_arr[] = $nov_30_achievement;
-
-$dec_31_target = $row_perfrm["dec_31_target"] ? floatval($row_perfrm["dec_31_target"]) : 0;
-$dec_31_achievement = $row_perfrm["dec_31_achievement"] ? floatval($row_perfrm["dec_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $dec_31_target;
-$curr_yer_achievement_arr[] = $dec_31_achievement;
-
-$jan_31_target = $row_perfrm["jan_31_target"] ? floatval($row_perfrm["jan_31_target"]) : 0;
-$jan_31_achievement = $row_perfrm["jan_31_achievement"] ? floatval($row_perfrm["jan_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $jan_31_target;
-$curr_yer_achievement_arr[] = $jan_31_achievement;
-
-$feb_28_target = $row_perfrm["feb_28_target"] ? floatval($row_perfrm["feb_28_target"]) : 0;
-$feb_28_achievement = $row_perfrm["feb_28_achievement"] ? floatval($row_perfrm["feb_28_achievement"]) : 0;
-$curr_yer_target_arr[] = $feb_28_target;
-$curr_yer_achievement_arr[] = $feb_28_achievement;
-
-$mar_31_target = $row_perfrm["mar_31_target"] ? floatval($row_perfrm["mar_31_target"]) : 0;
-$mar_31_achievement = $row_perfrm["mar_31_achievement"] ? floatval($row_perfrm["mar_31_achievement"]) : 0;
-$curr_yer_target_arr[] = $mar_31_target;
-$curr_yer_achievement_arr[] = $mar_31_achievement;
-
-$apr_prev_y_target = $row_perfrm["apr_prev_y_target"] ? floatval($row_perfrm["apr_prev_y_target"]) : 0;
-$apr_prev_y_achievement = $row_perfrm["apr_prev_y_achievement"] ? floatval($row_perfrm["apr_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $apr_prev_y_target;
-$prev_yer_achievement_arr[] = $apr_prev_y_achievement;
-
-$may_prev_y_target = $row_perfrm["may_prev_y_target"] ? floatval($row_perfrm["may_prev_y_target"]) : 0;
-$may_prev_y_achievement = $row_perfrm["may_prev_y_achievement"] ? floatval($row_perfrm["may_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $may_prev_y_target;
-$prev_yer_achievement_arr[] = $may_prev_y_achievement;
-
-$jun_prev_y_target = $row_perfrm["jun_prev_y_target"] ? floatval($row_perfrm["jun_prev_y_target"]) : 0;
-$jun_prev_y_achievement = $row_perfrm["jun_prev_y_achievement"] ? floatval($row_perfrm["jun_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $jun_prev_y_target;
-$prev_yer_achievement_arr[] = $jun_prev_y_achievement;
-
-$jul_prev_y_target = $row_perfrm["jul_prev_y_target"] ? floatval($row_perfrm["jul_prev_y_target"]) : 0;
-$jul_prev_y_achievement = $row_perfrm["jul_prev_y_achievement"] ? floatval($row_perfrm["jul_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $jul_prev_y_target;
-$prev_yer_achievement_arr[] = $jul_prev_y_achievement;
-
-$aug_prev_y_target = $row_perfrm["aug_prev_y_target"] ? floatval($row_perfrm["aug_prev_y_target"]) : 0;
-$aug_prev_y_achievement = $row_perfrm["aug_prev_y_achievement"] ? floatval($row_perfrm["aug_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $aug_prev_y_target;
-$prev_yer_achievement_arr[] = $aug_prev_y_achievement;
-
-$sep_prev_y_target = $row_perfrm["sep_prev_y_target"] ? floatval($row_perfrm["sep_prev_y_target"]) : 0;
-$sep_prev_y_achievement = $row_perfrm["sep_prev_y_achievement"] ? floatval($row_perfrm["sep_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $sep_prev_y_target;
-$prev_yer_achievement_arr[] = $sep_prev_y_achievement;
-
-$oct_prev_y_target = $row_perfrm["oct_prev_y_target"] ? floatval($row_perfrm["oct_prev_y_target"]) : 0;
-$oct_prev_y_achievement = $row_perfrm["oct_prev_y_achievement"] ? floatval($row_perfrm["oct_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $oct_prev_y_target;
-$prev_yer_achievement_arr[] = $oct_prev_y_achievement;
-
-$nov_prev_y_target = $row_perfrm["nov_prev_y_target"] ? floatval($row_perfrm["nov_prev_y_target"]) : 0;
-$nov_prev_y_achievement = $row_perfrm["nov_prev_y_achievement"] ? floatval($row_perfrm["nov_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $nov_prev_y_target;
-$prev_yer_achievement_arr[] = $nov_prev_y_achievement;
-
-$dec_prev_y_target = $row_perfrm["dec_prev_y_target"] ? floatval($row_perfrm["dec_prev_y_target"]) : 0;
-$dec_prev_y_achievement = $row_perfrm["dec_prev_y_achievement"] ? floatval($row_perfrm["dec_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $dec_prev_y_target;
-$prev_yer_achievement_arr[] = $dec_prev_y_achievement;
-
-$jan_prev_y_target = $row_perfrm["jan_prev_y_target"] ? floatval($row_perfrm["jan_prev_y_target"]) : 0;
-$jan_prev_y_achievement = $row_perfrm["jan_prev_y_achievement"] ? floatval($row_perfrm["jan_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $jan_prev_y_target;
-$prev_yer_achievement_arr[] = $jan_prev_y_achievement;
-
-$feb_prev_y_target = $row_perfrm["feb_prev_y_target"] ? floatval($row_perfrm["feb_prev_y_target"]) : 0;
-$feb_prev_y_achievement = $row_perfrm["feb_prev_y_achievement"] ? floatval($row_perfrm["feb_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $feb_prev_y_target;
-$prev_yer_achievement_arr[] = $feb_prev_y_achievement;
-
-$mar_prev_y_target = $row_perfrm["mar_prev_y_target"] ? floatval($row_perfrm["mar_prev_y_target"]) : 0;
-$mar_prev_y_achievement = $row_perfrm["mar_prev_y_achievement"] ? floatval($row_perfrm["mar_prev_y_achievement"]) : 0;
-$prev_yer_target_arr[] = $mar_prev_y_target;
-$prev_yer_achievement_arr[] = $mar_prev_y_achievement;
-
-}else{
-$apr_30_target = 0;
-$apr_30_achievement = 0;
-$may_31_target = 0;
-$may_31_achievement = 0;
-$jun_30_target = 0;
-$jun_30_achievement = 0;
-$jul_31_target = 0;
-$jul_31_achievement = 0;
-$aug_31_target = 0;
-$aug_31_achievement = 0;
-$sep_30_target = 0;
-$sep_30_achievement = 0;
-$oct_31_target = 0;
-$oct_31_achievement = 0;
-$nov_30_target = 0;
-$nov_30_achievement = 0;
-$dec_31_target = 0;
-$dec_31_achievement = 0;
-$jan_31_target = 0;
-$jan_31_achievement = 0;
-$feb_28_target = 0;
-$feb_28_achievement = 0;
-$mar_31_target = 0;
-$mar_31_achievement = 0;
-
-$apr_prev_y_target = 0;
-$apr_prev_y_achievement = 0;
-$may_prev_y_target = 0;
-$may_prev_y_achievement = 0;
-$jun_prev_y_target = 0;
-$jun_prev_y_achievement = 0;
-$jul_prev_y_target = 0;
-$jul_prev_y_achievement = 0;
-$aug_prev_y_target = 0;
-$aug_prev_y_achievement = 0;
-$sep_prev_y_target = 0;
-$sep_prev_y_achievement = 0;
-$oct_prev_y_target = 0;
-$oct_prev_y_achievement = 0;
-$nov_prev_y_target = 0;
-$nov_prev_y_achievement = 0;
-$dec_prev_y_target = 0;
-$dec_prev_y_achievement = 0;
-$jan_prev_y_target = 0;
-$jan_prev_y_achievement = 0;
-$feb_prev_y_target = 0;
-$feb_prev_y_achievement = 0;
-$mar_prev_y_target = 0;
-$mar_prev_y_achievement = 0;
+    $curr_yer_target_arr[]      = number_format($cur_target, 2, '.', '');
+    $curr_yer_achievement_arr[] = number_format($cur_ach,    2, '.', '');
+    $prev_yer_target_arr[]      = number_format($pre_target, 2, '.', '');
+    $prev_yer_achievement_arr[] = number_format($pre_ach,    2, '.', '');
+    $ordered_month_labels[]     = $month_labels[$m];
+    $ordered_month_labels_full[]= $month_labels_full[$m];
 }
+
+/* ------------------------------------------------------------------ */
+/*  TOTALS                                                             */
+/* ------------------------------------------------------------------ */
+$curr_total_target      = number_format(array_sum($curr_yer_target_arr),      2, '.', '');
+$curr_total_achievement = number_format(array_sum($curr_yer_achievement_arr), 2, '.', '');
+$prev_total_target      = number_format(array_sum($prev_yer_target_arr),      2, '.', '');
+$prev_total_achievement = number_format(array_sum($prev_yer_achievement_arr), 2, '.', '');
 
 include "web_header.php";
-
 ?>
 <style>
-#container {
-  height: 400px;
-}
-#container2 {
-    height: 400px;
-}
+#container  { height: 400px; }
+#container2 { height: 400px; }
 
 .highcharts-figure, .highcharts-data-table table {
-  min-width: 310px;
-  max-width: 800px;
-  margin: 1em auto;
+    min-width: 310px;
+    max-width: 800px;
+    margin: 1em auto;
 }
 
-#datatable1 {
-  font-family: Verdana, sans-serif;
-  border-collapse: collapse;
-  border: 1px solid #EBEBEB;
-  margin: 10px auto;
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-  display:none;
+/* Hidden data tables used by Highcharts */
+#datatable1, #datatable2 {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #EBEBEB;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    display: none;
 }
-#datatable1 caption {
-  padding: 1em 0;
-  font-size: 1.2em;
-  color: #555;
-}
-#datatable1 th {
-	font-weight: 600;
-  padding: 0.5em;
-}
-#datatable1 td, #datatable1 th, #datatable1 caption {
-  padding: 0.5em;
-}
-#datatable1 thead tr, #datatable1 tr:nth-child(even) {
-  background: #f8f8f8;
-}
-#datatable1 tr:hover {
-  background: #f1f7ff;
-}
+#datatable1 caption, #datatable2 caption { padding: 1em 0; font-size: 1.2em; color: #555; }
+#datatable1 th, #datatable2 th { font-weight: 600; padding: 0.5em; }
+#datatable1 td, #datatable1 th, #datatable1 caption,
+#datatable2 td, #datatable2 th, #datatable2 caption { padding: 0.5em; }
+#datatable1 thead tr, #datatable1 tr:nth-child(even),
+#datatable2 thead tr, #datatable2 tr:nth-child(even) { background: #f8f8f8; }
+#datatable1 tr:hover, #datatable2 tr:hover { background: #f1f7ff; }
 
-#datatable2 {
-  font-family: Verdana, sans-serif;
-  border-collapse: collapse;
-  border: 1px solid #EBEBEB;
-  margin: 10px auto;
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-  display:none;
-}
-#datatable2 caption {
-  padding: 1em 0;
-  font-size: 1.2em;
-  color: #555;
-}
-#datatable2 th {
-	font-weight: 600;
-  padding: 0.5em;
-}
-#datatable2 td, #datatable1 th, #datatable2 caption {
-  padding: 0.5em;
-}
-#datatable2 thead tr, #datatable2 tr:nth-child(even) {
-  background: #f8f8f8;
-}
-#datatable2 tr:hover {
-  background: #f1f7ff;
-}
-
-
-.mn_lft{
-	text-align:left;
-	font-weight:bold;
-}
-.ta_right{
-	text-align:right;
-	font-weight:bold;
-}
-#ta_table_view{
-	 display:none;
-}
-
-
+.mn_lft  { text-align: left;  font-weight: bold; }
+.ta_right{ text-align: right; font-weight: bold; }
+#ta_table_view { display: none; }
 </style>
 
 <section class="content">
     <div class="container-fluid" style="position:relative;">
 
-<div class="row clearfix">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-<select class="form-control" id="astn_dlsbdl_code" name="astn_dlsbdl_code" style="padding-left:2px;">
-<?php
-if($sswa_user_type=="SP"){
-	
-}else{
-?>
-<option value="">Total Performance</option>
-<?php
-}
-if($total_brres>0){
-	while($brrow=mysql_fetch_assoc($brres)){
-		$the_br_dns_customer_code = $brrow["dns_customer_code"];
-		$the_br_customer_name = $brrow["customer_name"];?>
-        <option value="<?php echo $the_br_dns_customer_code;?>" <?php if(($the_br_dns_customer_code==$sel_sdvl) || ($the_br_dns_customer_code==$sswa_selected_dealer_code)){ ?> selected="selected" <?php } ?>><?php echo $the_br_customer_name;?></option>
-		<?php
-	}
-	
-}
-?>
+        <!-- Dropdown row -->
+        <div class="row clearfix">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <select class="form-control" id="astn_dlsbdl_code" name="astn_dlsbdl_code" style="padding-left:2px;">
+                    <?php if ($sswa_user_type != "SP"): ?>
+                        <option value="">Total Performance</option>
+                    <?php endif; ?>
 
-</select>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <?php
+                    if ($total_brres > 0) {
+                        while ($brrow = mysql_fetch_assoc($brres)) {
+                            $the_br_dns  = $brrow["customer_code"];
+                            $the_br_name = $brrow["customer_name"];
+                            $selected    = ($the_br_dns == $sel_sdvl || $the_br_dns == $sswa_selected_dealer_code)
+                                           ? 'selected="selected"' : '';
+                            echo "<option value=\"{$the_br_dns}\" {$selected}>{$the_br_name}</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+        </div>
 
-</div>
-</div>
+        <!-- Graph / Table toggle -->
+        <div style="text-align:right; padding-top:10px;">
+            <input name="the_gt_view" id="the_graph_view" value="Graph View" checked="checked" type="radio">
+            <label for="the_graph_view">Graph View</label>
+            <input name="the_gt_view" id="the_table_view" value="Table View" type="radio">
+            <label for="the_table_view">Table View</label>
+        </div>
 
-<div style="text-align:right;padding-top:10px;">
-<input name="the_gt_view" id="the_graph_view" value="Graph View" checked="checked" type="radio">
-<label for="the_graph_view">Graph View</label>
-<input name="the_gt_view" id="the_table_view" value="Table View" type="radio">
-<label for="the_table_view">Table View</label>
-</div>
-
+        <!-- ===== GRAPH VIEW ===== -->
         <div class="row clearfix" id="ta_graph_view">
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">    
+            <!-- Current FY chart -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
-                 <figure class="highcharts-figure">
-  <div id="container"></div>
-  <table id="datatable1">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Target(MT)</th>
-        <th>Achivement(MT)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Apr</th>
-        <td><?php echo $apr_30_target; ?></td>
-        <td><?php echo $apr_30_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>May</th>
-        <td><?php echo $may_31_target ; ?></td>
-        <td><?php echo $may_31_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Jun</th>
-        <td><?php echo $jun_30_target ; ?></td>
-        <td><?php echo $jun_30_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Jul</th>
-        <td><?php echo $jul_31_target ; ?></td>
-        <td><?php echo $jul_31_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Aug</th>
-        <td><?php echo $aug_31_target ; ?></td>
-        <td><?php echo $aug_31_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Sep</th>
-        <td><?php echo $sep_30_target ; ?></td>
-        <td><?php echo $sep_30_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Oct</th>
-        <td><?php echo $oct_31_target ; ?></td>
-        <td><?php echo $oct_31_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Nov</th>
-        <td><?php echo $nov_30_target ; ?></td>
-        <td><?php echo $nov_30_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Dec</th>
-        <td><?php echo $dec_31_target ; ?></td>
-        <td><?php echo $dec_31_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Jan</th>
-        <td><?php echo $jan_31_target ; ?></td>
-        <td><?php echo $jan_31_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Feb</th>
-        <td><?php echo $feb_28_target ; ?></td>
-        <td><?php echo $feb_28_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Mar</th>
-        <td><?php echo $mar_31_target ; ?></td>
-        <td><?php echo $mar_31_achievement ; ?></td>
-      </tr>
-    </tbody>
-  </table>
-</figure>   
-                    
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                        <table id="datatable1">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Target(MT)</th>
+                                    <th>Achievement(MT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < 12; $i++): ?>
+                                <tr>
+                                    <th><?php echo $ordered_month_labels[$i]; ?></th>
+                                    <td><?php echo $curr_yer_target_arr[$i]; ?></td>
+                                    <td><?php echo $curr_yer_achievement_arr[$i]; ?></td>
+                                </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </figure>
                 </div>
             </div>
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+            <!-- Previous FY chart -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
-                 <figure class="highcharts-figure">
-  <div id="container2"></div>
-  <table id="datatable2">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Target(MT)</th>
-        <th>Achivement(MT)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th>Apr</th>
-        <td><?php echo $apr_prev_y_target; ?></td>
-        <td><?php echo $apr_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>May</th>
-        <td><?php echo $may_prev_y_target ; ?></td>
-        <td><?php echo $may_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Jun</th>
-        <td><?php echo $jun_prev_y_target ; ?></td>
-        <td><?php echo $jun_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Jul</th>
-        <td><?php echo $jul_prev_y_target ; ?></td>
-        <td><?php echo $jul_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Aug</th>
-        <td><?php echo $aug_prev_y_target ; ?></td>
-        <td><?php echo $aug_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Sep</th>
-        <td><?php echo $sep_prev_y_target ; ?></td>
-        <td><?php echo $sep_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Oct</th>
-        <td><?php echo $oct_prev_y_target ; ?></td>
-        <td><?php echo $oct_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Nov</th>
-        <td><?php echo $nov_prev_y_target ; ?></td>
-        <td><?php echo $nov_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Dec</th>
-        <td><?php echo $dec_prev_y_target ; ?></td>
-        <td><?php echo $dec_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Jan</th>
-        <td><?php echo $jan_prev_y_target ; ?></td>
-        <td><?php echo $jan_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Feb</th>
-        <td><?php echo $feb_prev_y_target ; ?></td>
-        <td><?php echo $feb_prev_y_achievement ; ?></td>
-      </tr>
-      <tr>
-        <th>Mar</th>
-        <td><?php echo $mar_prev_y_target ; ?></td>
-        <td><?php echo $mar_prev_y_achievement ; ?></td>
-      </tr>
-    </tbody>
-  </table>
-</figure>  
+                    <figure class="highcharts-figure">
+                        <div id="container2"></div>
+                        <table id="datatable2">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Target(MT)</th>
+                                    <th>Achievement(MT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < 12; $i++): ?>
+                                <tr>
+                                    <th><?php echo $ordered_month_labels[$i]; ?></th>
+                                    <td><?php echo $prev_yer_target_arr[$i]; ?></td>
+                                    <td><?php echo $prev_yer_achievement_arr[$i]; ?></td>
+                                </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </figure>
                 </div>
             </div>
-        </div>
-        
+        </div><!-- /ta_graph_view -->
+
+        <!-- ===== TABLE VIEW ===== -->
         <div class="row clearfix" id="ta_table_view">
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">    
+            <!-- Current FY table -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
-<div class="table-responsive">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th colspan="3" style="text-align:center;">For Year <?php echo $current_fin_year;?></th>
-</tr>
-<tr>
-<th>Month</th>
-<th style="text-align:right;">Target(MT)</th>
-<th style="text-align:right;">Achv.(MT)</th>
-</tr>
-</thead>
-<tbody>
-                 
-<tr>
-<td class="mn_lft">April</td>
-<td class="ta_right"><?php echo $apr_30_target;?></td>
-<td class="ta_right"><?php echo $apr_30_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">May</td>
-<td class="ta_right"><?php echo $may_31_target;?></td>
-<td class="ta_right"><?php echo $may_31_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">June</td>
-<td class="ta_right"><?php echo $jun_30_target;?></td>
-<td class="ta_right"><?php echo $jun_30_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">July</td>
-<td class="ta_right"><?php echo $jul_31_target;?></td>
-<td class="ta_right"><?php echo $jul_31_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">August</td>
-<td class="ta_right"><?php echo $aug_31_target;?></td>
-<td class="ta_right"><?php echo $aug_31_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">September</td>
-<td class="ta_right"><?php echo $sep_30_target;?></td>
-<td class="ta_right"><?php echo $sep_30_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">October</td>
-<td class="ta_right"><?php echo $oct_31_target;?></td>
-<td class="ta_right"><?php echo $oct_31_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">November</td>
-<td class="ta_right"><?php echo $nov_30_target;?></td>
-<td class="ta_right"><?php echo $nov_30_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">December</td>
-<td class="ta_right"><?php echo $dec_31_target;?></td>
-<td class="ta_right"><?php echo $dec_31_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">January</td>
-<td class="ta_right"><?php echo $jan_31_target;?></td>
-<td class="ta_right"><?php echo $jan_31_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">February</td>
-<td class="ta_right"><?php echo $feb_28_target;?></td>
-<td class="ta_right"><?php echo $feb_28_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">March</td>
-<td class="ta_right"><?php echo $mar_31_target;?></td>
-<td class="ta_right"><?php echo $mar_31_achievement;?></td>
-</tr>
-<tr>
-<td class="mn_lft">Total</td>
-<td class="ta_right"><?php echo ($apr_30_target+$may_31_target+$jun_30_target+$jul_31_target+$aug_31_target+$sep_30_target+$oct_31_target+$nov_30_target+$dec_31_target+$jan_31_target+$feb_28_target+$mar_31_target);?></td>
-<td class="ta_right"><?php echo ($apr_30_achievement+$may_31_achievement+$jun_30_achievement+$jul_31_achievement+$aug_31_achievement+$sep_30_achievement+$oct_31_achievement+$nov_30_achievement+$dec_31_achievement+$jan_31_achievement+$feb_28_achievement+$mar_31_achievement);?></td>
-</tr>
-</tbody>
-</table>
-</div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align:center;">
+                                        For Year <?php echo $current_fin_year; ?>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Month</th>
+                                    <th style="text-align:right;">Target(MT)</th>
+                                    <th style="text-align:right;">Achv.(MT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < 12; $i++): ?>
+                                <tr>
+                                    <td class="mn_lft"><?php echo $ordered_month_labels_full[$i]; ?></td>
+                                    <td class="ta_right"><?php echo $curr_yer_target_arr[$i]; ?></td>
+                                    <td class="ta_right"><?php echo $curr_yer_achievement_arr[$i]; ?></td>
+                                </tr>
+                                <?php endfor; ?>
+                                <tr>
+                                    <td class="mn_lft">Total</td>
+                                    <td class="ta_right"><?php echo $curr_total_target; ?></td>
+                                    <td class="ta_right"><?php echo $curr_total_achievement; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+            <!-- Previous FY table -->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
-<div class="table-responsive">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th colspan="3" style="text-align:center;">For Year <?php echo $prev_fin_year;?></th>
-</tr>
-<tr>
-<th>Month</th>
-<th style="text-align:right;">Target(MT)</th>
-<th style="text-align:right;">Achv.(MT)</th>
-</tr>
-</thead>
-<tbody>
-                 
-<tr>
-<td class="mn_lft">April</td>
-<td class="ta_right"><?php echo $apr_prev_y_target;?></td>
-<td class="ta_right"><?php echo $apr_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">May</td>
-<td class="ta_right"><?php echo $may_prev_y_target;?></td>
-<td class="ta_right"><?php echo $may_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">June</td>
-<td class="ta_right"><?php echo $jun_prev_y_target;?></td>
-<td class="ta_right"><?php echo $jun_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">July</td>
-<td class="ta_right"><?php echo $jul_prev_y_target;?></td>
-<td class="ta_right"><?php echo $jul_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">August</td>
-<td class="ta_right"><?php echo $aug_prev_y_target;?></td>
-<td class="ta_right"><?php echo $aug_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">September</td>
-<td class="ta_right"><?php echo $sep_prev_y_target;?></td>
-<td class="ta_right"><?php echo $sep_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">October</td>
-<td class="ta_right"><?php echo $oct_prev_y_target;?></td>
-<td class="ta_right"><?php echo $oct_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">November</td>
-<td class="ta_right"><?php echo $nov_prev_y_target;?></td>
-<td class="ta_right"><?php echo $nov_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">December</td>
-<td class="ta_right"><?php echo $dec_prev_y_target;?></td>
-<td class="ta_right"><?php echo $dec_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">January</td>
-<td class="ta_right"><?php echo $jan_prev_y_target;?></td>
-<td class="ta_right"><?php echo $jan_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">February</td>
-<td class="ta_right"><?php echo $feb_prev_y_target;?></td>
-<td class="ta_right"><?php echo $feb_prev_y_achievement;?></td>
-</tr>
-
-<tr>
-<td class="mn_lft">March</td>
-<td class="ta_right"><?php echo $mar_prev_y_target;?></td>
-<td class="ta_right"><?php echo $mar_prev_y_achievement;?></td>
-</tr>
-<tr>
-<td class="mn_lft">Total</td>
-<td class="ta_right"><?php echo ($apr_prev_y_target+$may_prev_y_target+$jun_prev_y_target+$jul_prev_y_target+$aug_prev_y_target+$sep_prev_y_target+$oct_prev_y_target+$nov_prev_y_target+$dec_prev_y_target+$jan_prev_y_target+$feb_prev_y_target+$mar_prev_y_target);?></td>
-<td class="ta_right"><?php echo ($apr_prev_y_achievement+$may_prev_y_achievement+$jun_prev_y_achievement+$jul_prev_y_achievement+$aug_prev_y_achievement+$sep_prev_y_achievement+$oct_prev_y_achievement+$nov_prev_y_achievement+$dec_prev_y_achievement+$jan_prev_y_achievement+$feb_prev_y_achievement+$mar_prev_y_achievement);?></td>
-</tr>	
-
-</tbody>
-</table>
-</div>                   
-                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align:center;">
+                                        For Year <?php echo $prev_fin_year; ?>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Month</th>
+                                    <th style="text-align:right;">Target(MT)</th>
+                                    <th style="text-align:right;">Achv.(MT)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < 12; $i++): ?>
+                                <tr>
+                                    <td class="mn_lft"><?php echo $ordered_month_labels_full[$i]; ?></td>
+                                    <td class="ta_right"><?php echo $prev_yer_target_arr[$i]; ?></td>
+                                    <td class="ta_right"><?php echo $prev_yer_achievement_arr[$i]; ?></td>
+                                </tr>
+                                <?php endfor; ?>
+                                <tr>
+                                    <td class="mn_lft">Total</td>
+                                    <td class="ta_right"><?php echo $prev_total_target; ?></td>
+                                    <td class="ta_right"><?php echo $prev_total_achievement; ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        
+        </div><!-- /ta_table_view -->
+
     </div>
 </section>
-   
 
+<!-- ===== HIGHCHARTS ===== -->
 <script type="text/javascript">
 
 Highcharts.chart('container', {
-  data: {
-    table: 'datatable1'
-  },
-  chart: {
-    type: 'column'
-  },
-  title: {
-    text: 'For Year <?php echo $current_fin_year;?>'
-  },
-  yAxis: {
-    allowDecimals: true,
-    title: {
-      text: 'Values'
+    data: { table: 'datatable1' },
+    chart: { type: 'column' },
+    title: { text: 'For Year <?php echo $current_fin_year; ?>' },
+    yAxis: {
+        allowDecimals: true,
+        title: { text: 'Values' }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + '</b><br/>' +
+                   this.point.y + ' ' + this.point.name.toLowerCase();
+        }
     }
-  },
-  tooltip: {
-    formatter: function () {
-      return '<b>' + this.series.name + '</b><br/>' +
-        this.point.y + ' ' + this.point.name.toLowerCase();
-    }
-  }
 });
 
 Highcharts.chart('container2', {
-  data: {
-    table: 'datatable2'
-  },
-  chart: {
-    type: 'column'
-  },
-  title: {
-    text: 'For Year <?php echo $prev_fin_year;?>'
-  },
-  yAxis: {
-    allowDecimals: true,
-    title: {
-      text: 'Values'
+    data: { table: 'datatable2' },
+    chart: { type: 'column' },
+    title: { text: 'For Year <?php echo $prev_fin_year; ?>' },
+    yAxis: {
+        allowDecimals: true,
+        title: { text: 'Values' }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + '</b><br/>' +
+                   this.point.y + ' ' + this.point.name.toLowerCase();
+        }
     }
-  },
-  tooltip: {
-    formatter: function () {
-      return '<b>' + this.series.name + '</b><br/>' +
-        this.point.y + ' ' + this.point.name.toLowerCase();
-    }
-  }
 });
 
 </script>
 
+<!-- ===== JQUERY ===== -->
 <script type="text/javascript">
-jQuery(document).ready(function(){
+jQuery(document).ready(function () {
 
-jQuery('#astn_dlsbdl_code').chosen({width:"100%",no_results_text:'Oops, no sub dealer found!',search_contains: true}).change(function() {
-    var sel_sdvl = jQuery(this).val();
-	if(sel_sdvl!=""){
-		window.location = "<?php echo $page_name;?>?sel_sdvl="+sel_sdvl;
-	}else{
-		window.location = "<?php echo $page_name;?>";
-	}
+    /* Chosen dropdown – navigate on change */
+    jQuery('#astn_dlsbdl_code').chosen({
+        width: "100%",
+        no_results_text: 'Oops, no sub dealer found!',
+        search_contains: true
+    }).change(function () {
+        var sel_sdvl = jQuery(this).val();
+        if (sel_sdvl !== "") {
+            window.location = "<?php echo $page_name; ?>?sel_sdvl=" + sel_sdvl;
+        } else {
+            window.location = "<?php echo $page_name; ?>";
+        }
+    });
+
+    /* Graph / Table toggle */
+    jQuery('input[name="the_gt_view"]').change(function () {
+        var sl_gt_view = jQuery(this).val();
+        if (sl_gt_view === "Graph View") {
+            jQuery("#ta_graph_view").show();
+            jQuery("#ta_table_view").hide();
+        } else if (sl_gt_view === "Table View") {
+            jQuery("#ta_table_view").show();
+            jQuery("#ta_graph_view").hide();
+        } else {
+            jQuery("#ta_graph_view").show();
+            jQuery("#ta_table_view").hide();
+        }
+    });
 
 });
-	
-	jQuery('input[name="the_gt_view"]').change(function(){
-	var sl_gt_view = jQuery(this).val();
-	if(sl_gt_view=="Graph View"){
-	jQuery("#ta_graph_view").show();
-	jQuery("#ta_table_view").hide();
-	}else if(sl_gt_view=="Table View"){
-	jQuery("#ta_table_view").show();
-	jQuery("#ta_graph_view").hide();
-	}else{
-	jQuery("#ta_graph_view").show();
-	jQuery("#ta_table_view").hide();
-	}
-	});
-	
-});
-
-</script> 
+</script>
 
 <?php
 include "web_footer.php";

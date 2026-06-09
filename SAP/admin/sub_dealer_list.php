@@ -11,7 +11,7 @@ $sl_dlr_actdat = $_GET["sl_dlr_actdat"] ? addslashes(trim($_GET["sl_dlr_actdat"]
 $sl_dlr_alocated_type = $_GET["sl_dlr_alocated_type"] ? addslashes(trim($_GET["sl_dlr_alocated_type"])) : "";
 $sl_dlr_logedin_type = $_GET["sl_dlr_logedin_type"] ? addslashes(trim($_GET["sl_dlr_logedin_type"])) : "";
 $whr_str = "";
-$search_array = array("srch_dlr_dtls"=>$srch_dlr_dtls,"sl_dlr_actdat"=>"Y","sl_cust_type"=>"Sub Dealer","sl_dlr_alocated_type"=>$sl_dlr_alocated_type,"sl_dlr_logedin_type"=>$sl_dlr_logedin_type);
+$search_array = array("srch_dlr_dtls"=>$srch_dlr_dtls,"sl_dlr_actdat"=>"Y","sl_cust_type"=>"RSAR ","sl_dlr_alocated_type"=>$sl_dlr_alocated_type,"sl_dlr_logedin_type"=>$sl_dlr_logedin_type);
 foreach($search_array as $search_array_key=>$search_array_val){
 	if($search_array_key=="srch_dlr_dtls"){
 		if($search_array_val!=''){
@@ -40,7 +40,7 @@ $whr_str .= "$aand ($customer_master.`dns_customer_code` like '%$search_array_va
 			}else{
 				$aand = "";
 			}
-			$whr_str .= "$aand $customer_master.`cust_type` IN('Sub Dealer','RSSD')";	
+			$whr_str .= "$aand $customer_master.`cust_type` IN('RSAR ','RSSD')";	
 			$new_qry_string_filtered .= "&sl_cust_type=".$search_array_val;		
 		}		
 	}else if($search_array_key=="sl_dlr_alocated_type"){
@@ -96,6 +96,7 @@ $page = $_GET['paged'] ? $_GET['paged'] : 1;
 /*---------PAGINATION RELATED CODE START----------*/
 
 $pgsql = "select $customer_master.`customer_code`,$changepassword.`deviceid` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $new_whr_str";
+
 $pgres = mysql_query($pgsql);
 $total_pgres = mysql_num_rows($pgres);
 $start_from = (($page-1)*$limit);
@@ -175,12 +176,12 @@ jQuery(function () {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                          <h2>Sub Dealer List (<?php echo $total_pgres;?>)&nbsp;&nbsp;
-                          <a href="export_sub_dealer.php?get_type=loggedin" class="btn bg-red waves-effe">Export&nbsp;loggedin&nbsp;sub dealer</a> &nbsp; <a href="export_sub_dealer.php?get_type=notloggedin" class="btn bg-red waves-effe">Export&nbsp;not&nbsp;loggedin&nbsp;sub dealer</a>
+                          <h2>RSAR List (<?php echo $total_pgres;?>)&nbsp;&nbsp;
+                          <a href="export_sub_dealer.php?get_type=loggedin" class="btn bg-red waves-effe">Export&nbsp;loggedin&nbsp;RSAR </a> &nbsp; <a href="export_sub_dealer.php?get_type=notloggedin" class="btn bg-red waves-effe">Export&nbsp;not&nbsp;loggedin&nbsp;RSAR </a>
                           </h2>
                             <div class="row clearfix">
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 add_top_bottom_padding">
-<input type="text" class="form-control" id="srch_dlr_dtls" value="<?php echo $srch_dlr_dtls;?>" placeholder="Search Sub Dealer Details">
+<input type="text" class="form-control" id="srch_dlr_dtls" value="<?php echo $srch_dlr_dtls;?>" placeholder="Search RSAR  Details">
     </div>
     <?php /*?><div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 add_top_bottom_padding">
     <select class="form-control" id="sl_dlr_actdat">
@@ -223,10 +224,10 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                 <table class="table table-bordered table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Sub Dealer&nbsp;Image</th>
-                                            <th>Sub Dealer&nbsp;ID</th>
+                                            <th>RSAR &nbsp;Image</th>
+                                            <th>RSAR &nbsp;ID</th>
                                             <th>SAP&nbsp;Code</th>
-                                            <th>Sub Dealer&nbsp;Name</th>
+                                            <th>RSAR &nbsp;Name</th>
                                             <th>Phone</th>
                                             <th>Device&nbsp;type</th>
                                             <th>App&nbsp;Version</th>
@@ -236,10 +237,10 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Sub Dealer&nbsp;Image</th>
-                                            <th>Sub Dealer&nbsp;ID</th>
+                                            <th>RSAR &nbsp;Image</th>
+                                            <th>RSAR &nbsp;ID</th>
                                              <th>SAP&nbsp;Code</th>
-                                            <th>Sub Dealer&nbsp;Name</th>
+                                            <th>RSAR &nbsp;Name</th>
                                             <th>Phone</th>
                                             <th>Device&nbsp;type</th>
                                             <th>App&nbsp;Version</th>
@@ -250,6 +251,8 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                     <tbody>
 <?php
 $sql1 = "select $customer_master.*,$changepassword.`deviceid`,$changepassword.`app_version`,$changepassword.`device_type` from $customer_master left join $changepassword on $customer_master.`customer_code`=$changepassword.`customer_code` $new_whr_str order by $customer_master.`customer_name` asc limit $start_from,$limit";
+//echo"<pre>";print_r($sql1);die;
+
 $res1 = mysql_query($sql1);
 $totres1 = mysql_num_rows($res1);
 if($totres1>0){
@@ -285,8 +288,15 @@ if($totres1>0){
 <td><?php echo $app_version;?></td>
 <td style="text-align:center;"><?php
 if($deviceid!=""){
-?>
-<a href="javascript:void(0);" class="clemply" clemplyid="<?php echo $emp_code;?>" the_dns_emp_code="<?php echo $dns_emp_code;?>">Clear Allocation</a>
+?><?php
+	if (isset($_SESSION["start_user_type"]) && $_SESSION["start_user_type"] !== "AUDIT") {
+		?>
+<a href="javascript:void(0);" class="clemply" clemplyid="<?php echo $emp_code;?>" the_dns_emp_code="<?php echo $dns_emp_code;?>">Clear Allocation</a><?php
+	
+}else{
+	echo "----";
+}
+?> 
 <span class="os_ldr" id="ca_ldr_<?php echo $dns_emp_code;?>"></span>
 <?php
 }else{

@@ -224,14 +224,14 @@ if($file_name==''){
                      <li <?php if($file_name=="sub_dealer_list.php"){ echo 'class="active"';}?>>
                         <a href="sub_dealer_list.php">
                             <i class="material-icons">view_list</i>
-                            <span>Sub Dealer List</span>
+                            <span>RSAR  List</span>
                         </a>
 
                     </li>
                     <li <?php if($file_name=="edit_sub_dealer_list.php"){ echo 'class="active"';}?> style="display:none;">
                         <a href="edit_sub_dealer_list.php">
                             <i class="material-icons">view_list</i>
-                            <span>Edit Sub Dealer</span>
+                            <span>Edit RSAR </span>
                         </a>
 
                     </li>
@@ -569,6 +569,12 @@ if($file_name==''){
                         <a href="LiftingFinalFileUpload.php" class="toggled waves-effect waves-block">
                             <i class="material-icons">layers</i>
                             <span>Approved RSSD Lifting </span>
+                        </a>
+                    </li>
+                     <li <?php if($file_name=="update_birthday_master.php"){ echo 'class="active"';}?>>
+                        <a href="update_birthday_master.php" class="toggled waves-effect waves-block">
+                            <i class="material-icons">layers</i>
+                            <span>Birthday Master </span>
                         </a>
                     </li>
                   <?php

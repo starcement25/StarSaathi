@@ -2,6 +2,21 @@
 include "web_check.php";
 include "star_connection.php";
 
+//sk add condition Dealers will start with 10, RSSD will start with 15, shiptopartydealer will start with 14 & shiptopartysubdealer will start with 14
+
+$con="AND
+(
+    (customer_master.`cust_type` = 'Dealer' AND customer_master.`customer_id` LIKE '10%')
+    OR
+    (customer_master.`cust_type` = 'RSSD' AND customer_master.`customer_id` LIKE '15%')
+    OR
+    
+    (customer_master.`cust_type` = 'Ship to Party-dealer' AND customer_master.`customer_id` LIKE '14%')
+    OR
+    (customer_master.`cust_type` = 'ShiptoParty-Subdeale' AND customer_master.`customer_id` LIKE '14%')
+)  ";
+
+
 $branch_master = "branch_master";
 $customer_master = "customer_master";
 $dealer_tour_status = "dealer_tour_status";
@@ -172,7 +187,7 @@ include "web_header.php";
                                                 FROM $customer_master 
                                                 LEFT JOIN $dealer_reward_status 
                                                 ON $customer_master.`customer_id` = $dealer_reward_status.`emp_code` 
-                                                WHERE $customer_master.`cust_type`='$cust_type' $new_whr_str 
+                                                WHERE $customer_master.`cust_type`='$cust_type' $new_whr_str $con
                                                 ORDER BY $customer_master.`customer_name` ASC 
                                                 LIMIT $start_from, $limit";
 

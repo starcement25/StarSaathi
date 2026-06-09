@@ -33,6 +33,8 @@ if($_GET['month']){
 }
 $the_customer_code=$_SESSION['sswa_selected_customer_code'];
 $sqlckdays = "select `allocation_days` from $branch_rssd_allocation_days where `branch_code`=(SELECT `branch_code` FROM customer_master WHERE customer_code='".$the_customer_code."')";
+//echo"<pre>";print_r($sqlckdays);die;
+
 	$resckdays = mysql_query($sqlckdays);
 	$totckdays = mysql_num_rows($resckdays);
 	if($totckdays>0){
@@ -199,7 +201,7 @@ include "web_header.php";
 					if($month!='') $date_condition.=" AND SUBSTRING($T_DOINVOICE.INVDT,5,2)='".$month."'";
 					if($year!='') $date_condition.=" AND SUBSTRING($T_DOINVOICE.INVDT,1,4)='".$year."'";
 					
-					$sqlinv = "select * from $T_DOINVOICE where `APPORDERNO`='$apporderno' 
+					 $sqlinv = "select * from $T_DOINVOICE where `APPORDERNO`='$apporderno' 
 								AND INVNO NOT IN(SELECT DISTINCT inv_no FROM $allocation_details WHERE `inv_cancl`='yes' ) 
 								$date_condition";
 					$resinv = mysql_query($sqlinv);
