@@ -39,6 +39,10 @@ let DataStorage = {
     web_page_title: '',
     isSbsRegister: false,
     isCementRegister: false,
-    image_url: ''
+    image_url: '',
+
+    ageingObj:{},
+    dayWiseAgeingList:[],
+    type:''
 }
 export default DataStorage

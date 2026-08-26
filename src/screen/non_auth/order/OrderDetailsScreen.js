@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react'
-import { Image, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native'
+import { Image, Modal, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { pick, types, isErrorWithCode, errorCodes } from '@react-native-documents/picker'
 import SafeView from '../../../helper/SafeView'
 import { Colors } from '../../../assets/Colors'
 import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView'
@@ -21,6 +22,145 @@ import { insertDataIn_destination_master } from '../../../storage/database/Inser
 import { AuthCheckingApi } from '../../../auth/AuthCheckingApi'
 import AuthNotVerifyPopupView from '../../../auth/AuthNotVerifyPopupView'
 
+const checkCustomerGSTStatus = async (customerCode) => {
+    try {
+        const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}/check_customer_gst_document.php?customer_id=${customerCode}`
+        const response = await fetch(url)
+        const result = await response.json()
+
+        console.log(result);
+
+
+        return {
+            success: result?.status === 'YES',
+            hasGST: result?.is_present === 'YES',
+            gstNumber: result?.gst_no || '',
+            uploadDoc: result?.upload_doc || ''
+        }
+    } catch (error) {
+        return { success: false, hasGST: false }
+    }
+}
+
+const uploadGSTDetails = async ({ customerCode, gstNumber, document }) => {
+    try {
+        const formData = new FormData()
+        formData.append('customer_id', customerCode)
+        formData.append('gst_no', gstNumber)
+
+        if (document) {
+            formData.append('upload_doc', {
+                uri: document.uri,
+                type: document.type || 'application/octet-stream',
+                name: document.name || `gst_doc_${Date.now()}`
+            })
+        }
+
+        const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}/upload_customer_gst_document.php`
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+        const result = await response.json()
+
+        return {
+            success: result?.status === 'YES' || result?.success === true
+        }
+    } catch (error) {
+        return { success: false }
+    }
+}
+
+const GST_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/
+
+// Valid GSTIN state codes (as per CBIC)
+const VALID_STATE_CODES = [
+    '01', '02', '03', '04', '05', '06', '07', '08', '09', '10',
+    '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+    '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
+    '31', '32', '33', '34', '35', '36', '37'//, '38', '97', '99'
+    // 01-37 standard states/UTs, 38 = Ladakh, 97 = Other Territory, 99 = Centre Jurisdiction
+]
+
+// 4th character of PAN indicates holder type
+const VALID_PAN_HOLDER_TYPES = ['P', 'C', 'H', 'F', 'A', 'T', 'B', 'L', 'J', 'G']
+
+const GST_CHECKSUM_CODEPOINTS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+const computeGSTChecksum = (gstinFirst14) => {
+    let factor = 2
+    let sum = 0
+    const len = GST_CHECKSUM_CODEPOINTS.length
+
+    for (let i = gstinFirst14.length - 1; i >= 0; i--) {
+        const code = GST_CHECKSUM_CODEPOINTS.indexOf(gstinFirst14[i])
+        let digit = factor * code
+        digit = Math.floor(digit / len) + (digit % len)
+        sum += digit
+        factor = factor === 2 ? 1 : 2
+    }
+
+    const checksum = (len - (sum % len)) % len
+    return GST_CHECKSUM_CODEPOINTS[checksum]
+}
+
+const validateGSTNumber = (value) => {
+    if (!value || value.trim().length === 0) {
+        return 'GSTIN number is required'
+    }
+
+    const gst = value.trim().toUpperCase()
+
+    if (gst.length !== 15) {
+        return 'GSTIN number must be 15 characters'
+    }
+
+    if (/\s/.test(value)) {
+        return 'GSTIN number must not contain spaces'
+    }
+
+    if (!GST_REGEX.test(gst)) {
+        return 'Please enter a valid GSTIN number'
+    }
+
+    // State code check (first 2 digits)
+    const stateCode = gst.substring(0, 2)
+    if (!VALID_STATE_CODES.includes(stateCode)) {
+        return 'Invalid state code in GSTIN number'
+    }
+
+    // PAN embedded in GSTIN (characters 3-12)
+    const pan = gst.substring(2, 12)
+    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/
+    if (!panRegex.test(pan)) {
+        return 'Invalid PAN structure within GSTIN number'
+    }
+
+    // 4th character of PAN = holder type, must be a known category
+    // const holderType = pan[3]
+    // if (!VALID_PAN_HOLDER_TYPES.includes(holderType)) {
+    //     return 'Invalid PAN holder type in GSTIN number'
+    // }
+
+    // 14th character must always be 'Z'
+    if (gst[13] !== 'Z') {
+        return '14th character of GSTIN number must be Z'
+    }
+
+    // 13th character = entity/registration number, must be 1-9 or A-Z
+    // if (!/[1-9A-Z]/.test(gst[12])) {
+    //     return 'Invalid entity code in GSTIN number'
+    // }
+
+    // Checksum validation (15th character)
+    // const expectedChecksum = computeGSTChecksum(gst.substring(0, 14))
+    // if (gst[14] !== expectedChecksum) {
+    //     return 'GSTIN number checksum is invalid'
+    // }
+
+    return ''
+}
+
 // Memoized Radio Button Component
 const RadioButton = React.memo(({ selected, color }) => (
     <View style={[styles.radioOuter, { borderColor: selected ? color : "#d9d9d9" }]}>
@@ -34,6 +174,167 @@ const FormField = React.memo(({ label, children }) => (
         <Text style={styles.label}>{label}</Text>
         {children}
     </View>
+))
+
+// ============================================================
+// GSTIN POPUPS
+// ============================================================
+
+// Popup 1 - GSTIN question (non-dismissible)
+const GSTQuestionPopup = React.memo(({ visible, primaryColor, onYes, onNo, onBackPress, selected, cust_type, onYesDealer }) => (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }} >
+        <View style={styles.modalOverlay}>
+            <TouchableOpacity style={StyleSheet.absoluteFill} activeOpacity={1} onPress={onBackPress} />
+            <View style={styles.modalCard}>
+                <Text style={styles.modalTitle}>GSTIN Verification</Text>
+                {/* <Text style={styles.modalMessage}>
+                    {selected == 1 ? "Is the GSTIN of (APOB) additional place of business  same?" : cust_type == null ? "Is the Sub-Dealer/RSAR GSTIN registered?" : 'Is the Ship-to-Party RSAR GSTIN registered?'}
+                </Text> */}
+                <Text style={styles.modalMessage}>
+                    {selected == 1 ? "Is Additional Place of business the same as per GSTIN certificate?" : cust_type == null ? "Is the Sub-Dealer/RSAR GSTIN registered?" : 'Is the Ship-to-Party RSAR GSTIN registered?'}
+                </Text>
+                {/* <Text style={styles.modalMessage}>
+                    {selected == 1 ? "Is the GSTIN of Additional Place of Business (APOB) same?" : cust_type == null ? "Is the Sub-Dealer/RSAR GSTIN registered?" : 'Is the Ship-to-Party RSAR GSTIN registered?'}
+                </Text> */}
+                <View style={styles.modalButtonRow}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={() => {
+                        if (selected == 1)
+                            onYes()
+                        else
+                            onNo()
+                    }}>
+                        <Text style={styles.modalButtonSecondaryText}>NO</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => {
+                        if (selected == 1)
+                            onYesDealer()
+                        else
+                            onYes()
+                    }}>
+                        <Text style={styles.modalButtonPrimaryText}>YES</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    </Modal>
+))
+
+// Popup 2 - Enter GSTIN details (YES flow)
+const GSTEntryPopup = React.memo(({
+    visible,
+    primaryColor,
+    gstNumber,
+    gstNumberError,
+    gstDocument,
+    submitting,
+    onChangeGSTNumber,
+    onPickDocument,
+    onSubmit,
+    onBackPress
+}) => (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }}>
+        <View style={styles.modalOverlay}>
+            <View style={styles.modalCard}>
+                <Text style={styles.modalTitle}>Enter your GSTIN Details</Text>
+
+                <View style={{ width: '100%', marginTop: moderateScale(12) }}>
+                    <Text style={styles.label}>GSTIN Number</Text>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            placeholder="e.g. 22AAAAA0000A1Z5"
+                            placeholderTextColor="#A7A7A7"
+                            value={gstNumber}
+                            autoCapitalize="characters"
+                            maxLength={15}
+                            style={styles.input}
+                            onChangeText={onChangeGSTNumber}
+                        />
+                    </View>
+                    {!!gstNumberError && <Text style={styles.errorText}>{gstNumberError}</Text>}
+                </View>
+
+                <View style={{ width: '100%', marginTop: moderateScale(16) }}>
+                    <Text style={styles.label}>Upload GSTIN Document</Text>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.dropdownContainer} onPress={onPickDocument}>
+                        <Text style={[styles.dropdownText, !gstDocument && styles.placeholderText]} numberOfLines={1}>
+                            {gstDocument?.name || "Select PDF / JPG / PNG"}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.modalButtonRow}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={onBackPress}>
+                        <Text style={styles.modalButtonSecondaryText}>Back</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={onSubmit} disabled={submitting}>
+                        <Text style={styles.modalButtonPrimaryText}>Submit</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    </Modal>
+))
+
+// Popup - GSTIN turnover declaration (NO flow)
+const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBackPress }) => (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }}>
+        <View style={styles.modalOverlay}>
+            <View style={styles.modalCard}>
+                <Text style={styles.modalTitle}>Declaration</Text>
+                <Text style={styles.modalMessage}>
+                    I confirm that turnover is below the taxable limit as specified under GSTIN, 2017.
+                </Text>
+                <View style={styles.modalButtonRow}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={onBackPress}>
+                        <Text style={styles.modalButtonSecondaryText}>Back</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={onConfirm}>
+                        <Text style={styles.modalButtonPrimaryText}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    </Modal>
+))
+
+
+// Popup - GSTIN turnover declaration (NO flow)
+const GSTNotDeclarationForRSARPopup = React.memo(({ visible, primaryColor, onConfirm, onClose }) => (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+
+        <TouchableOpacity activeOpacity={1} style={styles.modalOverlay} onPress={onClose}>
+            <TouchableOpacity activeOpacity={1} style={styles.modalCard} onPress={() => { }}>
+
+                <Text style={styles.modalTitle}>GSTIN Declaration Pending</Text>
+                <Text style={styles.modalMessage}>
+                    The GSTIN declaration for selected (Ship-to Party) has not yet submitted. Please ask the RSAR to complete the declaration in the App. Order placement will be enabled once the declaration is submitted.
+                </Text>
+                <View style={styles.modalButtonRow}>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={onConfirm}>
+                        <Text style={styles.modalButtonPrimaryText}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>
+
+            </TouchableOpacity>
+        </TouchableOpacity>
+
+    </Modal>
+))
+const GSTNotDeclarationForSeflPopup = React.memo(({ visible, primaryColor, onConfirm, onClose }) => (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+        <TouchableOpacity activeOpacity={1} style={styles.modalOverlay} onPress={onClose}>
+            <TouchableOpacity activeOpacity={1} style={styles.modalCard} onPress={() => { }}>
+                <Text style={styles.modalTitle}>GSTIN Declaration Pending</Text>
+                <Text style={styles.modalMessage}>
+                    The GSTIN declaration for selected business or godown has not yet submitted. Please complete the GSTIN declaration in the App. Order placement will be enabled once the declaration is submitted.
+                </Text>
+                <View style={styles.modalButtonRow}>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={onConfirm}>
+                        <Text style={styles.modalButtonPrimaryText}>Confirm</Text>
+                    </TouchableOpacity>
+                </View>
+            </TouchableOpacity>
+        </TouchableOpacity>
+    </Modal>
 ))
 
 const OrderDetailsScreen = ({ route, navigation }) => {
@@ -80,9 +381,21 @@ const OrderDetailsScreen = ({ route, navigation }) => {
     const [shipItem, setShipItem] = useState({})
     const [code, setCode] = useState(UrlStorage.ParameterList.BasicData.emp_code)
 
+    const pendingGSTItemRef = useRef(null)
+    const [showGSTQuestionPopup, setShowGSTQuestionPopup] = useState(false)
+    const [showGSTEntryPopup, setShowGSTEntryPopup] = useState(false)
+    const [showGSTDeclarationPopup, setShowGSTDeclarationPopup] = useState(false)
+    const [gstNumber, setGstNumber] = useState('')
+    const [gstNumberError, setGstNumberError] = useState('')
+    const [gstDocument, setGstDocument] = useState(null)
+    const [isGSTINRequired, setIsGSTINRequired] = useState(false)
+    const [showGSTNotDeclarationForRSARPopup, setShowGSTNotDeclarationForRSARPopup] = useState(false)
+    const [showGSTNotDeclarationForDealerPopup, setShowGSTNotDeclarationForDealerPopup] = useState(false)
+
     // Memoized constants
     const forTypeList = useMemo(() => {
         const baseList = [{ id: 1, title: 'Multiple' }, { id: 2, title: 'Single' },]
+        console.log(truckList);
 
         // Only add DOT if truck list is available
         if (truckList.length > 0) {
@@ -125,13 +438,19 @@ const OrderDetailsScreen = ({ route, navigation }) => {
                 await requestForSbsShippingToSubDealer()
                 await requestForSbsTruckList(shipItem?.customer_code || UrlStorage.ParameterList.BasicData.selectedCustomerCode)
             } else {
+                console.log(UrlStorage.ParameterList.BasicData);
+                console.log('3');
                 await requestForCementShippingToSubDealer()
+                if (UrlStorage.ParameterList.BasicData.user_type == 'broker') {
+                    await requestForCementTruckList(shipItem?.SAP_code || UrlStorage.ParameterList.BasicData.customerDetails.SAP_code)
+                } else {
+                    await requestForCementTruckList(shipItem?.SAP_code || UrlStorage.ParameterList.BasicData.emp_id)
+                }
             }
         }
         fetchInitialData()
     }, [isSBS])
 
-    // Freight change handler
     useEffect(() => {
         const handleFreightChange = async () => {
             setDumpName('')
@@ -141,6 +460,14 @@ const OrderDetailsScreen = ({ route, navigation }) => {
                 setPopupStates(prev => ({ ...prev, forType: true }))
                 if (isSBS) {
                     await requestForSbsTruckList(shipItem?.customer_code || UrlStorage.ParameterList.BasicData.selectedCustomerCode)
+                } else {
+                    console.log('2', shipItem);
+                    console.log('2', UrlStorage.ParameterList.BasicData);
+                    if (UrlStorage.ParameterList.BasicData.user_type == 'broker') {
+                        await requestForCementTruckList(shipItem?.SAP_code || UrlStorage.ParameterList.BasicData.customerDetails.SAP_code)
+                    } else {
+                        await requestForCementTruckList(shipItem?.SAP_code || UrlStorage.ParameterList.BasicData.emp_id)
+                    }
                 }
             } else if (freight === 2) {
                 const customerCode = UrlStorage.ParameterList.BasicData.selectedCustomerCode
@@ -156,6 +483,24 @@ const OrderDetailsScreen = ({ route, navigation }) => {
             handleFreightChange()
         }
     }, [freight, isSBS])
+
+    useEffect(() => {
+        requestForCheckGSTIN()
+    }, [])
+
+    const requestForCheckGSTIN = () => {
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch("https://starsaathi.com/SAP/static_response_v1.php", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                setIsGSTINRequired(result.process_message)
+            })
+            .catch((error) => console.error(error));
+    }
 
     // Callbacks
     const clickOnShipToSelf = useCallback(async () => {
@@ -204,14 +549,15 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         return filtered;
     };
 
-    const selectShipToSelfItem = useCallback(async (item) => {
-        setDealerSubDealerId(item.customer_code)
-        setConsigneeName(item.customer_name)
-        setConsigneeAddress(item.address)
-        setPhoneNumber(item.phone_no)
-        setShipItem(item)
-        setCode(item.customer_code)
+    const continueOrderFlow = useCallback(async (item) => {
         await requestForSbsTruckList(shipItem?.customer_code || UrlStorage.ParameterList.BasicData.selectedCustomerCode)
+        console.log('1');
+
+          if (UrlStorage.ParameterList.BasicData.user_type == 'broker') {
+                    await requestForCementTruckList(shipItem?.SAP_code || UrlStorage.ParameterList.BasicData.customerDetails.SAP_code)
+                } else {
+                    await requestForCementTruckList(shipItem?.SAP_code || UrlStorage.ParameterList.BasicData.emp_id)
+                }
 
         if (isSBS) {
             const singleDest = [{
@@ -237,11 +583,11 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         try {
             setLoading(true)
             var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+            if (!a) {
+                setAuthChecker(true)
+                setLoading(false)
+                return false
+            }
             await clearDestinationMaster()
             const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}` + `${UrlStorage.NonAuthURL.Saathi.DownloadDatabaseAPI.destination_master_TXT_download_API}` + `?nick_name=START` + `&emp_code=${item.customer_code}` + `&incremental_download=no`
             const response = await fetch(url)
@@ -265,7 +611,143 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         } catch (err) { } finally {
             setLoading(false)
         }
-    }, [isSBS])
+    }, [isSBS, shipItem, closeAllPopups])
+
+    const checkGSTStatus = useCallback(async (item) => {
+        pendingGSTItemRef.current = item
+        closeAllPopups()
+
+        try {
+            setLoading(true)
+            const response = await checkCustomerGSTStatus(item.customer_code)
+            setLoading(false)
+
+            if (!response?.success) {
+                Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Unable to verify GSTIN status. Please try again.' })
+                return
+            }
+
+            if (response.hasGST) {
+                await continueOrderFlow(item)
+            } else {
+                if (item.cust_type != 'Dealer')
+                    setShowGSTQuestionPopup(true)
+            }
+        } catch (error) {
+            setLoading(false)
+            Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Unable to verify GSTIN status. Please try again.' })
+        }
+    }, [continueOrderFlow, closeAllPopups])
+
+    const handleGSTYes = useCallback(() => {
+        setShowGSTQuestionPopup(false)
+        setShowGSTEntryPopup(true)
+    }, [])
+
+    const handleGSTNo = useCallback(() => {
+        setShowGSTQuestionPopup(false)
+        setShowGSTDeclarationPopup(true)
+    }, [])
+
+    const handleChangeGSTNumber = useCallback((value) => {
+        setGstNumber(value.toUpperCase())
+        if (gstNumberError) setGstNumberError('')
+    }, [gstNumberError])
+
+    const handlePickGSTDocument = useCallback(async () => {
+        try {
+            Keyboard.dismiss();
+            const [result] = await pick({
+                type: [types.pdf, types.images],
+            })
+            setGstDocument(result)
+        } catch (err) {
+            if (isErrorWithCode(err) && err.code === errorCodes.OPERATION_CANCELED) {
+                return
+            }
+            console.log('GSTIN document pick error:', err)
+            Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Unable to select document' })
+        }
+    }, [])
+
+    const handleSubmitGSTDetails = useCallback(async () => {
+        const error = validateGSTNumber(gstNumber)
+        if (error) {
+            setGstNumberError(error)
+            return
+        }
+        if (!gstDocument) {
+            Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Please upload your GSTIN document' })
+            return
+        }
+
+        try {
+            setLoading(true)
+            const response = await uploadGSTDetails({
+                customerCode: pendingGSTItemRef.current?.customer_code,
+                gstNumber,
+                document: gstDocument
+            })
+
+            if (response?.success) {
+                setShowGSTEntryPopup(false)
+                setGstNumber('')
+                setGstNumberError('')
+                setGstDocument(null)
+                Toast.show({ type: 'success', text1: 'Success...', text2: 'GSTIN number and document update successfully' })
+                await continueOrderFlow(pendingGSTItemRef.current)
+            } else {
+                Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Unable to upload GSTIN details. Please try again.' })
+            }
+        } catch (error) {
+            Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Unable to upload GSTIN details. Please try again.' })
+        } finally {
+            setLoading(false)
+        }
+    }, [gstNumber, gstDocument, continueOrderFlow])
+
+    const handleGSTDeclarationConfirm = useCallback(async () => {
+        setShowGSTDeclarationPopup(false)
+        setShowGSTQuestionPopup(false)
+        Toast.show({ type: 'success', text1: 'Success...', text2: 'GSTIN number and document update successfully' })
+        await continueOrderFlow(pendingGSTItemRef.current)
+    }, [continueOrderFlow])
+
+    // ============================================================
+    // selectShipToSelfItem now only populates customer info,
+    // then hands off to the GSTIN layer, which hands off to continueOrderFlow
+    // ============================================================
+    const selectShipToSelfItem = useCallback(async (item) => {
+        console.log(item);
+        if (item.is_any == '' && isGSTINRequired) {
+            closeAllPopups()
+            if (selected == 1) {
+                // Dealer
+                setShowGSTNotDeclarationForDealerPopup(true)
+            } else {
+                // RSSD
+                setShowGSTNotDeclarationForRSARPopup(true)
+            }
+        } else {
+            setDealerSubDealerId(item.customer_code)
+            setConsigneeName(item.customer_name)
+            setConsigneeAddress(item.address)
+            setPhoneNumber(item.phone_no)
+            setShipItem(item)
+            setCode(item.customer_code)
+            closeAllPopups()
+            continueOrderFlow(item)
+        }
+    }, [checkGSTStatus])
+    const closePopupAndOpenSubDealer = () => {
+        closeAllPopups()
+        setShowGSTNotDeclarationForRSARPopup(false)
+    }
+    const closePopupAndOpenDealer = () => {
+        closeAllPopups()
+        setShowGSTNotDeclarationForDealerPopup(false)
+        navigation.navigate('GSTScreen')
+    }
 
     const selectDestinationAddressItem = useCallback((item) => {
         setDestinationAddress(item.destination_name || item.name)
@@ -311,7 +793,6 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         setPopupStates(prev => ({ ...prev, destinationAddress: true }))
     }, [destinationAddressList, freight])
 
-
     const openDumpPopup = useCallback(() => {
         setDataSet(dumpDataList)
         setPopupStates(prev => ({ ...prev, dump: true }))
@@ -319,9 +800,15 @@ const OrderDetailsScreen = ({ route, navigation }) => {
 
     const openTruckPopup = useCallback(() => {
         setDataSet(truckList)
-        setTimeout(() => {
-            setPopupStates(prev => ({ ...prev, truck: true }))
-        }, 100)
+        try {
+            setTimeout(() => {
+                setPopupStates(prev => ({ ...prev, truck: true }))
+            }, 100)
+        } catch (error) {
+            console.log(error);
+
+        }
+
     }, [truckList])
 
     const requestForCementShippingToSelf = async () => {
@@ -334,13 +821,14 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         }
         try {
             const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}${UrlStorage.NonAuthURL.Saathi.OrderURL1.dealer_data_list_url}?emp_code=${UrlStorage.ParameterList.BasicData.user_type != 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.customerDetails.customer_code}&user_type=Dealer&login_type=${UrlStorage.ParameterList.BasicData.user_type}`
+            console.log(url);
+
             const response = await fetch(url)
             const result = await response.json()
             if (result.process_status === 'YES') {
                 setShippingToList(result.dealer_data)
                 setDataSet(result.dealer_data)
-                console.log("self",result?.dealer_data[0]);
-                
+                console.log("self", result?.dealer_data[0]);
                 setPopupStates(prev => ({ ...prev, shipToSelf: true }))
             } else {
                 setShippingToList([])
@@ -363,6 +851,8 @@ const OrderDetailsScreen = ({ route, navigation }) => {
             const sortedData1 = [...result1].sort((a, b) => a.customer_name.trim().toLowerCase().localeCompare(b.customer_name.trim().toLowerCase()));
 
             const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}${UrlStorage.NonAuthURL.Saathi.OrderURL1.dealer_data_list_url}?emp_code=${UrlStorage.ParameterList.BasicData.user_type != 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.customerDetails.customer_code}&user_type=sub dealer&login_type=${UrlStorage.ParameterList.BasicData.user_type}`
+            console.log('The url is : ' + url);
+
             const response = await fetch(url)
             const result = await response.json()
 
@@ -370,49 +860,52 @@ const OrderDetailsScreen = ({ route, navigation }) => {
                 const sortedData = [...result.sub_dealer_data, ...sortedData1].sort((a, b) => a.customer_name.trim().toLowerCase().localeCompare(b.customer_name.trim().toLowerCase()));
                 setShippingToList(sortedData)
                 setDataSet(sortedData)
-                console.log(sortedData[0]);
-                
                 setSubDealersAvailable(true)
             } else {
-                try {
-                    const localSubDealers = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.customerDetails.customer_code)
-
-                    if (localSubDealers.length > 0) {
-                        setShippingToList(localSubDealers)
-                        setDataSet(localSubDealers)
-                        setSubDealersAvailable(true)
-                    } else {
-                        setShippingToList([])
-                        setDataSet([])
-                        setSubDealersAvailable(false)
-                        Toast.show({ type: 'info', text1: 'No Sub Dealers', text2: 'No sub dealers available' })
-                    }
-                } catch (dbError) {
-                    setShippingToList([])
-                    setDataSet([])
-                    setSubDealersAvailable(false)
-                }
-            }
-        } catch (error) {
-
-            // ⚠️ If API fails, also try local database as fallback
-            try {
-                const localSubDealers = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.selectedCustomerCode)
-
-                if (localSubDealers.length > 0) {
-                    setShippingToList(localSubDealers)
-                    setDataSet(localSubDealers)
-                    setSubDealersAvailable(true)
-                } else {
-                    setShippingToList([])
-                    setDataSet([])
-                    setSubDealersAvailable(false)
-                }
-            } catch (dbError) {
                 setShippingToList([])
                 setDataSet([])
-                setSubDealersAvailable(false)
+                Toast.show({ type: 'info', text1: 'No Sub Dealers', text2: 'No sub dealers available' })
+                // try {
+                //     const localSubDealers = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.customerDetails.customer_code)
+
+                //     if (localSubDealers.length > 0) {
+                //         setShippingToList(localSubDealers)
+                //         setDataSet(localSubDealers)
+                //         setSubDealersAvailable(true)
+                //     } else {
+                //         setShippingToList([])
+                //         setDataSet([])
+                //         setSubDealersAvailable(false)
+                //         Toast.show({ type: 'info', text1: 'No Sub Dealers', text2: 'No sub dealers available' })
+                //     }
+                // } catch (dbError) {
+                //     setShippingToList([])
+                //     setDataSet([])
+                //     setSubDealersAvailable(false)
+                // }
             }
+        } catch (error) {
+            setShippingToList([])
+            setDataSet([])
+            Toast.show({ type: 'info', text1: 'No Sub Dealers', text2: 'No sub dealers available' })
+            // ⚠️ If API fails, also try local database as fallback
+            // try {
+            //     const localSubDealers = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.selectedCustomerCode)
+
+            //     if (localSubDealers.length > 0) {
+            //         setShippingToList(localSubDealers)
+            //         setDataSet(localSubDealers)
+            //         setSubDealersAvailable(true)
+            //     } else {
+            //         setShippingToList([])
+            //         setDataSet([])
+            //         setSubDealersAvailable(false)
+            //     }
+            // } catch (dbError) {
+            //     setShippingToList([])
+            //     setDataSet([])
+            //     setSubDealersAvailable(false)
+            // }
         } finally {
             setLoading(false)
         }
@@ -426,10 +919,16 @@ const OrderDetailsScreen = ({ route, navigation }) => {
             return false
         }
         try {
-            const url = `${UrlStorage.BaseUrlList.SBS.base_url_sbs}${UrlStorage.NonAuthURL.SBS.order.ship_to}?cust_code=${UrlStorage.ParameterList.BasicData.selectedCustomerCode}&user_type=Dealer`
+            var url;
+            if (UrlStorage.ParameterList.BasicData.user_type == 'broker') {
+                url = `${UrlStorage.BaseUrlList.SBS.base_url_sbs}${UrlStorage.NonAuthURL.SBS.order.ship_to}?cust_code=${UrlStorage.ParameterList.BasicData.customerDetails.customer_code}&user_type=${UrlStorage.ParameterList.BasicData.selectedCustomerType}`
+            } else {
+                url = `${UrlStorage.BaseUrlList.SBS.base_url_sbs}${UrlStorage.NonAuthURL.SBS.order.ship_to}?cust_code=${UrlStorage.ParameterList.BasicData.selectedCustomerCode}&user_type=Dealer`
+            }
+            console.log('SBS DATA URL: ' + url);
             const response = await fetch(url)
             const result = await response.json()
-
+            console.log(result);
             if (result.length > 0) {
                 setShippingToList(result)
                 setDataSet(result)
@@ -453,12 +952,14 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         }
         try {
             const url = `${UrlStorage.BaseUrlList.SBS.base_url_sbs}${UrlStorage.NonAuthURL.SBS.order.ship_to}?cust_code=${UrlStorage.ParameterList.BasicData.selectedCustomerCode}&user_type=Sub Dealer`
+            console.log('SBS DATA URL: ' + url);
             const response = await fetch(url)
             const result = await response.json()
-
+            console.log(result);
             if (result.length > 0) {
                 setShippingToList(result)
                 setDataSet(result)
+                console.log('SBS DATA : ' + result[0]);
                 //setSubDealersAvailable(true)
             }
         } catch (error) {
@@ -525,6 +1026,8 @@ const OrderDetailsScreen = ({ route, navigation }) => {
         setLoading(true)
         try {
             const url = `${UrlStorage.BaseUrlList.SBS.base_url_sbs}${UrlStorage.NonAuthURL.SBS.order.check_truck_list}?cust_code=${UrlStorage.ParameterList.BasicData.user_type != 'broker' ? emp_code : UrlStorage.ParameterList.BasicData.customerDetails.customer_code}`
+            console.log(url);
+
             const response = await fetch(url)
             const result = await response.json()
 
@@ -533,6 +1036,41 @@ const OrderDetailsScreen = ({ route, navigation }) => {
             } else {
                 setTruckList([])
             }
+        } catch (error) {
+        } finally {
+            setLoading(false)
+        }
+    }
+    const requestForCementTruckList = async (emp_code) => {
+        setLoading(true)
+        try {
+            console.log(emp_code);
+
+            const formdata = new FormData();
+            formdata.append("customer_code", emp_code);
+
+            const requestOptions = {
+                method: "POST",
+                body: formdata,
+                redirect: "follow"
+            };
+
+            fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.OrderURL1.truck_data_list_url, requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result);
+
+                    if (result?.truck_data?.length > 0) {
+                        var arr = []
+                        result.truck_data.map(item => {
+                            arr.push(item.truck_no)
+                        })
+                        setTruckList(arr)
+                    } else {
+                        setTruckList([])
+                    }
+                })
+                .catch((error) => console.error(error));
         } catch (error) {
         } finally {
             setLoading(false)
@@ -636,6 +1174,23 @@ const OrderDetailsScreen = ({ route, navigation }) => {
 
         navigation.navigate("OrderConfirmScreen", { selectedProducts: products })
     }, [selected, consigneeName, consigneeAddress, destinationAddress, phoneNo, freight, dumpName, truckName, deliveryRemarks, dealerSubDealerId, destinationAddressCode, destinationAddressType, forType, shipItem, dumpObj, selectedProducts, navigation])
+
+    const handleBackPress = () => {
+        setShowGSTDeclarationPopup(false)
+        setShowGSTEntryPopup(false)
+        setShowGSTQuestionPopup(true)
+    }
+    const handleMainBackPress = () => {
+        setShowGSTQuestionPopup(false)
+        if (selected === 1)
+            clickOnShipToSelf()
+        if (selected === 2)
+            clickOnShipToSbuDealer()
+    }
+    const onClosePopup = () => {
+        setShowGSTNotDeclarationForDealerPopup(false)
+        setShowGSTNotDeclarationForRSARPopup(false)
+    }
 
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
@@ -794,11 +1349,56 @@ const OrderDetailsScreen = ({ route, navigation }) => {
             <View style={styles.bottomSpacer} />
 
             {/* Popups */}
-            <ShipToSelfListPopupView isVisible={popupStates.shipToSelf} dataList={dataSet} closePopup={closeAllPopups} selectItem={selectShipToSelfItem} isDealer={selected === 1} />
+            <ShipToSelfListPopupView isVisible={popupStates.shipToSelf} dataList={dataSet} closePopup={closeAllPopups} selectItem={selectShipToSelfItem} isDealer={selected === 1} gotoGSTPage={closePopupAndOpenDealer} />
             <ForTypeListPopupView isVisible={popupStates.forType} dataList={forTypeList} closePopup={closeAllPopups} selectItem={selectForTypeItem} />
             <DumpListPopupView isSBS={isSBS} isVisible={popupStates.dump} dataList={dataSet} closePopup={closeAllPopups} selectItem={selectDumpListItem} />
             <TruckListPopupView isSBS={isSBS} isVisible={popupStates.truck} dataList={dataSet} closePopup={closeAllPopups} selectItem={selectTruckListItem} />
             <DestinationAddressListPopupView isVisible={popupStates.destinationAddress} dataList={dataSet} closePopup={closeAllPopups} selectItem={selectDestinationAddressItem} />
+
+            {/* GSTIN Verification Popups */}
+            <GSTQuestionPopup
+                visible={showGSTQuestionPopup}
+                primaryColor={primaryColor}
+                selected={selected}
+                cust_type={shipItem.cust_type}
+                onYes={handleGSTYes}
+                onNo={handleGSTNo}
+                onBackPress={handleMainBackPress}
+                onYesDealer={handleGSTDeclarationConfirm}
+            />
+            <GSTEntryPopup
+                visible={showGSTEntryPopup}
+                primaryColor={primaryColor}
+                gstNumber={gstNumber}
+                gstNumberError={gstNumberError}
+                gstDocument={gstDocument}
+                submitting={loading}
+                onChangeGSTNumber={handleChangeGSTNumber}
+                onPickDocument={handlePickGSTDocument}
+                onSubmit={handleSubmitGSTDetails}
+                onBackPress={handleBackPress}
+            />
+            <GSTDeclarationPopup
+                visible={showGSTDeclarationPopup}
+                primaryColor={primaryColor}
+                onConfirm={handleGSTDeclarationConfirm}
+                onBackPress={handleBackPress}
+            />
+
+            <GSTNotDeclarationForRSARPopup
+                visible={showGSTNotDeclarationForRSARPopup}
+                primaryColor={primaryColor}
+                onConfirm={closePopupAndOpenSubDealer}
+                onClose={onClosePopup}
+            />
+
+            <GSTNotDeclarationForSeflPopup
+                visible={showGSTNotDeclarationForDealerPopup}
+                primaryColor={primaryColor}
+                onConfirm={closePopupAndOpenDealer}
+                onClose={onClosePopup}
+            />
+
             <Toast config={toastConfig} />
             {loading && <Loader />}
             <AuthNotVerifyPopupView isVisible={authChecker} onClose={() => setAuthChecker(false)} />
@@ -830,7 +1430,19 @@ const styles = StyleSheet.create({
     buttonWrapper: { width: "100%", paddingHorizontal: moderateScale(20), paddingTop: moderateScale(10) },
     button: { width: "100%", height: moderateScale(48), borderRadius: moderateScale(10), alignItems: "center", justifyContent: "center" },
     buttonText: { color: Colors.white, fontSize: moderateScale(16), fontWeight: '600' },
-    bottomSpacer: { height: moderateScale(16) }
+    bottomSpacer: { height: moderateScale(16) },
+
+    // GSTIN modal styles
+    modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: moderateScale(24) },
+    modalCard: { width: '100%', backgroundColor: Colors.white, borderRadius: moderateScale(14), padding: moderateScale(20) },
+    modalTitle: { color: Colors.text, fontSize: moderateScale(16), fontWeight: '700', marginBottom: moderateScale(10) },
+    modalMessage: { color: Colors.text, fontSize: moderateScale(14), lineHeight: moderateScale(20) },
+    modalButtonRow: { flexDirection: 'row', gap: moderateScale(12), marginTop: moderateScale(20) },
+    modalButtonPrimary: { flex: 1, height: moderateScale(44), borderRadius: moderateScale(10), alignItems: 'center', justifyContent: 'center' },
+    modalButtonPrimaryText: { color: Colors.white, fontSize: moderateScale(14), fontWeight: '600' },
+    modalButtonSecondary: { flex: 1, height: moderateScale(44), borderRadius: moderateScale(10), alignItems: 'center', justifyContent: 'center', borderWidth: moderateScale(1), borderColor: "#DCDDDF" },
+    modalButtonSecondaryText: { color: Colors.text, fontSize: moderateScale(14), fontWeight: '600' },
+    errorText: { color: '#D32F2F', fontSize: moderateScale(12), marginTop: moderateScale(6) },
 })
 
 export default OrderDetailsScreen

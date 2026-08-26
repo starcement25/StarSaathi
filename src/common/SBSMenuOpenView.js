@@ -417,6 +417,14 @@ const SBSMenuOpenView = (props) => {
                   props.navigation.navigate("DealerDeclarationScreen");
                 }}
               />}
+              {UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'dealer' && <MenuItem
+                icon={Icons.DealerIcon}
+                label="Exclusive Declaration History"
+                onPress={() => {
+                  props.handleOpenSBSMenu();
+                  props.navigation.navigate("DealerDeclarationHistoryScreen");
+                }}
+              />}
               {DataStorage.typeOfUse != 1 && (
                 <MenuItem
                   icon={Icons.SchemeIcon}

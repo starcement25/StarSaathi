@@ -1,7 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-
+apply plugin: 'com.google.gms.google-services'
 react {
     autolinkLibrariesWithApp()
 }
@@ -18,8 +18,8 @@ android {
         applicationId "org.forcepower.starcement"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 159
-        versionName "22.056"
+        versionCode 169
+        versionName "22.069"
     }
     signingConfigs {
         debug {

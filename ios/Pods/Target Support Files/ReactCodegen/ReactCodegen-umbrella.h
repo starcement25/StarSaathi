@@ -64,6 +64,8 @@
 #import "RNCWebViewSpecJSI.h"
 #import "RNDateTimePickerCGen/RNDateTimePickerCGen.h"
 #import "RNDateTimePickerCGenJSI.h"
+#import "rndocumentpickerCGen/rndocumentpickerCGen.h"
+#import "rndocumentpickerCGenJSI.h"
 #import "RNImagePickerSpec/RNImagePickerSpec.h"
 #import "RNImagePickerSpecJSI.h"
 #import "RNPermissionsSpec/RNPermissionsSpec.h"

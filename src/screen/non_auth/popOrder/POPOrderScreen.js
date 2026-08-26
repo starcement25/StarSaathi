@@ -60,7 +60,15 @@ const POPOrderScreen = (props) => {
     const requestForProductList = async () => {
         const requestOptions = { method: 'GET', redirect: 'follow' }
         let url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.ProductURL.pop_product_list_url
-        url += '?customer_code=' + UrlStorage.ParameterList.BasicData.emp_id + '&user_type=' + UrlStorage.ParameterList.BasicData.user_type
+        if(UrlStorage.ParameterList.BasicData.user_type.toLowerCase()=='broker'){
+url += '?customer_code=' + UrlStorage.ParameterList.BasicData.selectedCustomerCode + '&user_type=' + UrlStorage.ParameterList.BasicData.selectedCustomerType
+        }else{
+url += '?customer_code=' + UrlStorage.ParameterList.BasicData.emp_id + '&user_type=' + UrlStorage.ParameterList.BasicData.user_type
+        }
+        
+        
+        console.log(url);
+        
         setLoading(true)
         var a = await AuthCheckingApi();
         if (!a) {
@@ -94,8 +102,15 @@ const POPOrderScreen = (props) => {
             setLoading(false)
             return false
         }
+        console.log('HIT3');
         try {
-            const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.ProductURL.show_pop_order_list + "?customer_code=" + UrlStorage.ParameterList.BasicData.emp_code + "&page_no=" + page + "&year_month=" + year_month
+            var url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.ProductURL.show_pop_order_list
+             if(UrlStorage.ParameterList.BasicData.user_type.toLowerCase()=='broker'){
+                url = url + "?customer_code=" + UrlStorage.ParameterList.BasicData.selectedCustomerCode + "&page_no=" + page + "&year_month=" + year_month
+            }else{
+                url = url + "?customer_code=" + UrlStorage.ParameterList.BasicData.emp_code + "&page_no=" + page + "&year_month=" + year_month
+            }
+            
             const res = await axios.get(url)
 
             const result = res.data

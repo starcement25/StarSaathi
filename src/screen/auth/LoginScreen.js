@@ -14,6 +14,7 @@ import UrlStorage from '../../storage/UrlStorage';
 import Loader from '../../common/Loader';
 import { encryptToHex } from '../../helper/Crypto';
 import { httpPostCallWithXmlResponseDecrypted } from '../../helper/HttpCalling';
+import AlertForDuplicateNumber from '../../auth/AlertForDuplicateNumber';
 
 const LoginScreen = (props) => {
     const backPressCount = useRef(0);
@@ -22,6 +23,10 @@ const LoginScreen = (props) => {
     const [dealerId, setDealerId] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const [isWarningShow, setIsWarningShow] = useState(false);
+    const [count, setCount] = useState(0);
+
 
     useFocusEffect(
         useCallback(() => {
@@ -64,8 +69,42 @@ const LoginScreen = (props) => {
             return;
         }
 
-        requestForLogin();
+        requestForCheckNumber();
     };
+
+    const requestForCheckNumber = async () => {
+        try {
+            setIsLoading(true);
+            const requestOptions = {
+                method: "GET",
+                redirect: "follow"
+            };
+
+            fetch("https://starsaathi.com/SAP/duplicate_phone_alert.php?customer_id=" + dealerId, requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    if (result.status) {
+                        if (result.duplicate) {
+                            setIsLoading(false);
+                            setCount(result.total_records)
+                            setIsWarningShow(true)
+                        } else {
+                            requestForLogin();
+                        }
+                    } else {
+                        setIsLoading(false);
+                        Toast.show({ type: 'error', text1: 'Sorry', text2: result.sms_alert || 'Try again..', });
+                    }
+                })
+                .catch((error) => {
+                    setIsLoading(false);
+                    Toast.show({ type: 'error', text1: 'Network Error', text2: 'Please try again later', });
+                });
+        } catch (error) {
+            setIsLoading(false);
+            Toast.show({ type: 'error', text1: 'Network Error', text2: 'Please try again later', });
+        }
+    }
 
     const requestForLogin = async () => {
         try {
@@ -80,10 +119,10 @@ const LoginScreen = (props) => {
             };
 
             console.log(encryptedPayload);
-            
+
 
             const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.AuthURL.login_url;
-console.log(url);
+            console.log(url);
 
             const decryptedResponseString = await httpPostCallWithXmlResponseDecrypted(url, JSON.stringify(encryptedPayload));
 
@@ -93,7 +132,7 @@ console.log(url);
 
             let cleanResponse = decryptedResponseString;
             console.log(cleanResponse);
-            
+
 
             cleanResponse = cleanResponse.trim();
 
@@ -108,7 +147,7 @@ console.log(url);
 
             const response = JSON.parse(cleanResponse);
             console.log(response);
-            
+
 
             if (response.process_status && response.process_status.toLowerCase() === 'yes') {
                 UrlStorage.ParameterList.BasicData.nick_name = 'star';
@@ -192,6 +231,10 @@ console.log(url);
             </View>
 
             <Toast config={toastConfig} />
+            <AlertForDuplicateNumber isVisible={isWarningShow} onClose={() => setIsWarningShow(false)} count={count} loginPress={() => {
+                setIsWarningShow(false)
+                requestForLogin()
+            }} />
             {isLoading && <Loader />}
         </SafeView>
     );

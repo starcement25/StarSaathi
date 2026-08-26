@@ -153,11 +153,11 @@ const OrderScreen = (props) => {
   const requestForCementProductList = async (emp_code) => {
     setLoading(true)
     var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+    if (!a) {
+      setAuthChecker(true)
+      setLoading(false)
+      return false
+    }
     try {
       const requestOptions = {
         method: "GET",
@@ -194,13 +194,20 @@ const OrderScreen = (props) => {
   const requestSbsProductList = async (customer_code) => {
     setLoading(true)
     var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+    if (!a) {
+      setAuthChecker(true)
+      setLoading(false)
+      return false
+    }
     try {
-      const url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.user_product_list + '?cust_code=' + customer_code
+      var url = '';
+      if (UrlStorage.ParameterList.BasicData.user_type == "broker") {
+        url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.user_product_list + '?cust_code=' + UrlStorage.ParameterList.BasicData.customerDetails.customer_code
+      } else {
+        url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.user_product_list + '?cust_code=' + customer_code
+      }
+
+      console.log(url);
 
       const res = await fetch(url)
       const json = await res.json()

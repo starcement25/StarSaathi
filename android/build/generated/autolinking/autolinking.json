@@ -103,6 +103,31 @@
         }
       }
     },
+    "@react-native-documents/picker": {
+      "root": "/Users/sbinfowaves/Documents/Star/react-app-star-SBS/node_modules/@react-native-documents/picker",
+      "name": "@react-native-documents/picker",
+      "platforms": {
+        "ios": {
+          "podspecPath": "/Users/sbinfowaves/Documents/Star/react-app-star-SBS/node_modules/@react-native-documents/picker/react-native-document-picker.podspec",
+          "version": "12.0.1",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "/Users/sbinfowaves/Documents/Star/react-app-star-SBS/node_modules/@react-native-documents/picker/android",
+          "packageImportPath": "import com.reactnativedocumentpicker.RNDocumentPickerPackage;",
+          "packageInstance": "new RNDocumentPickerPackage()",
+          "buildTypes": [],
+          "libraryName": "rndocumentpickerCGen",
+          "componentDescriptors": [],
+          "cmakeListsPath": "/Users/sbinfowaves/Documents/Star/react-app-star-SBS/node_modules/@react-native-documents/picker/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
     "@react-native-firebase/app": {
       "root": "/Users/sbinfowaves/Documents/Star/react-app-star-SBS/node_modules/@react-native-firebase/app",
       "name": "@react-native-firebase/app",

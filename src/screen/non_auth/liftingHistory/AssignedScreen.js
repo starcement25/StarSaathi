@@ -37,7 +37,7 @@ const avatarColor = (name = '') => AVATAR_COLORS[name.charCodeAt(0) % AVATAR_COL
 // ═══════════════════════════════════════════════════════════════════════════════
 // AllocationBottomSheet
 // ═══════════════════════════════════════════════════════════════════════════════
-const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem, assignedInvoiceItem, available_allocation_qty, onConfirm, isSubmitting}) => {
+const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem, assignedInvoiceItem, available_allocation_qty, onConfirm, isSubmitting }) => {
     const translateY = useRef(new Animated.Value(600)).current
     const backdropOpacity = useRef(new Animated.Value(0)).current
     const keyboardOffset = useRef(new Animated.Value(0)).current
@@ -283,24 +283,143 @@ const AssignedScreen = (props) => {
         }
     }
 
+    // const getAssignedHistoryForCement = async () => {
+    //     setLoading(true)
+    //     var a = await AuthCheckingApi();
+    //     if (!a) {
+    //         setAuthChecker(true)
+    //         setLoading(false)
+    //         return false
+    //     }
+    //     try {
+    //         const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_url + '?month_year=' + selectedDate + '&customer_code=' + (UrlStorage.ParameterList.BasicData.user_type == 'broker' ?UrlStorage.ParameterList.BasicData.selectedCustomerCode:  UrlStorage.ParameterList.BasicData.emp_id)
+    //         console.log(url);
+
+    //         const r = await fetch(url, { method: 'GET' })
+    //         const result = await r.json()
+    //         setAssignedList( result.process_status === 'YES' ? result.dispatched_order_data.map(i => { const allInvoices = i.dispatched_invoice_data?.flat() || []; const canAllocate = allInvoices.length > 0 && allInvoices.every(item => item.allocation_complete === 'YES'); return { ...i, isOpen: false, canAllocate: canAllocate, }; }) : [] );
+
+    //         //setAssignedList(result.process_status === 'YES' ? result.dispatched_order_data.map(i => ({ ...i, isOpen: false })) : [])
+    //     } catch (e) { }
+    //     setLoading(false)
+    // }
     const getAssignedHistoryForCement = async () => {
-        setLoading(true)
+        setLoading(true);
+
         var a = await AuthCheckingApi();
+
         if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
+            setAuthChecker(true);
+            setLoading(false);
+            return false;
         }
+
         try {
-            const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_url + '?month_year=' + selectedDate + '&customer_code=' + (UrlStorage.ParameterList.BasicData.user_type == 'broker' ?UrlStorage.ParameterList.BasicData.selectedCustomerCode:  UrlStorage.ParameterList.BasicData.emp_id)
-            const r = await fetch(url, { method: 'GET' })
-            const result = await r.json()
-            setAssignedList( result.process_status === 'YES' ? result.dispatched_order_data.map(i => { const allInvoices = i.dispatched_invoice_data?.flat() || []; const canAllocate = allInvoices.length > 0 && allInvoices.every(item => item.allocation_complete === 'YES'); return { ...i, isOpen: false, canAllocate: canAllocate, }; }) : [] );
-            
-            //setAssignedList(result.process_status === 'YES' ? result.dispatched_order_data.map(i => ({ ...i, isOpen: false })) : [])
-        } catch (e) { }
-        setLoading(false)
-    }
+            var a = ''
+            if (UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() == 'RSSD'.toLocaleLowerCase()) {
+                console.log('RSSD');
+                a = UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_RSSD_url
+            } else {
+                console.log('not RSSD. ' + UrlStorage.ParameterList.BasicData.user_type);
+                a = UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_url
+            }
+            var url =
+                UrlStorage.BaseUrlList.Saathi.base_url_saathi +
+                a +
+                '?month_year=' +
+                selectedDate +
+                '&customer_code=' +
+                (
+                    UrlStorage.ParameterList.BasicData.user_type == 'broker'
+                        ? UrlStorage.ParameterList.BasicData.selectedCustomerCode
+                        : UrlStorage.ParameterList.BasicData.emp_id
+                );
+
+            console.log(url);
+
+            const r = await fetch(url, { method: 'GET' });
+            const result = await r.json();
+
+            if (result.process_status === 'YES') {
+
+                const rssdAllocationDays = parseInt(
+                    result.rssd_allocation_days,
+                    10
+                ) || 0;
+
+                // Today - use only date, not time
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                // For 11 days, valid dates are today and previous 10 days.
+                // Example:
+                // Today = 11-Aug
+                // Valid from = 01-Aug
+                const allocationStartDate = new Date(today);
+                allocationStartDate.setDate(
+                    allocationStartDate.getDate() - (rssdAllocationDays - 1)
+                );
+
+                const assignedData = result.dispatched_order_data.map(i => {
+
+                    const allInvoices =
+                        i.dispatched_invoice_data?.flat() || [];
+
+                    // Existing allocation check
+                    const canAllocate =
+                        allInvoices.length > 0 &&
+                        allInvoices.every(
+                            item => item.allocation_complete === 'YES'
+                        );
+
+                    // New allocation date check
+                    const canAllocate2 =
+                        allInvoices.length > 0 &&
+                        allInvoices.every(item => {
+
+                            if (!item.invdt) {
+                                return false;
+                            }
+
+                            // invdt format: YYYY-MM-DD
+                            const [year, month, day] =
+                                item.invdt.split('-').map(Number);
+
+                            const invoiceDate = new Date(
+                                year,
+                                month - 1,
+                                day
+                            );
+
+                            invoiceDate.setHours(0, 0, 0, 0);
+
+                            return (
+                                invoiceDate >= allocationStartDate &&
+                                invoiceDate <= today
+                            );
+                        });
+
+                    return {
+                        ...i,
+                        isOpen: false,
+                        canAllocate: canAllocate,
+                        canAllocate2: canAllocate2,
+                    };
+                });
+
+                setAssignedList(assignedData);
+
+            } else {
+                setAssignedList([]);
+            }
+
+        } catch (e) {
+            console.log('getAssignedHistoryForCement error:', e);
+            setAssignedList([]);
+        }
+
+        setLoading(false);
+    };
 
     const getAllocatedHistoryForCement = async () => {
         setLoading(true)
@@ -312,6 +431,8 @@ const AssignedScreen = (props) => {
         }
         try {
             const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.allocation_data_invoice_url + '?year_month=' + selectedDate + '&customer_id=' + UrlStorage.ParameterList.BasicData.emp_id + '&user_type=' + UrlStorage.ParameterList.BasicData.user_type
+            console.log(url);
+
             const r = await fetch(url)
             const result = await r.json()
             if (result.process_status === 'YES') {
@@ -332,18 +453,18 @@ const AssignedScreen = (props) => {
             return false
         }
         try {
-            
+
             //const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}${UrlStorage.NonAuthURL.Saathi.OrderURL1.dealer_data_list_url}?emp_code=${UrlStorage.ParameterList.BasicData.user_type != 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.customerDetails.customer_code}&user_type=sub dealer&login_type=${UrlStorage.ParameterList.BasicData.user_type}`
 
             // const result = await (await fetch(url)).json()
             const local = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.selectedCustomerCode, true)
-                
-                setSubDealerData(local)
+
+            setSubDealerData(local)
 
             // if (result.process_status === 'YES' && result.sub_dealer_data?.length > 0) {
             //     setSubDealerData([...result.sub_dealer_data].sort((a, b) => a.customer_name.trim().toLowerCase().localeCompare(b.customer_name.trim().toLowerCase())))
             // } else {
-                
+
             // }
         } catch (e) {
             try {
@@ -358,14 +479,14 @@ const AssignedScreen = (props) => {
 
     const confirmOrder = async (orderDetails, quantities) => {
         if (isSubmitting) return
-        setIsSubmitting(true) 
+        setIsSubmitting(true)
         try {
             var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+            if (!a) {
+                setAuthChecker(true)
+                setLoading(false)
+                return false
+            }
             const fd = new FormData()
             for (var i = 0; i < selectedSubDealers.length; i++) {
                 const key = getDealerKey(selectedSubDealers[i])
@@ -382,6 +503,8 @@ const AssignedScreen = (props) => {
             }
 
             const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.lifting_approve_url
+            console.log(url)
+            console.log('fd', fd)
 
             const result = await (await fetch(url, { method: 'POST', body: fd })).json()
 
@@ -392,8 +515,8 @@ const AssignedScreen = (props) => {
                 getAssignedHistoryForCement()
             } else Alert.alert('Error', result?.process_message || 'Unknown error')
         } catch (e) { Alert.alert('Error', 'Please contact admin.') }
-        finally{
-            setIsSubmitting(false) 
+        finally {
+            setIsSubmitting(false)
         }
     }
 
@@ -401,11 +524,11 @@ const AssignedScreen = (props) => {
 
         try {
             var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+            if (!a) {
+                setAuthChecker(true)
+                setLoading(false)
+                return false
+            }
             const fd = new FormData()
             fd.append('invoice_no', invoiceInfo.invno)
             fd.append('app_orderno', orderInfo.order_id)
@@ -609,7 +732,7 @@ const AssignedScreen = (props) => {
                                             <View style={s.cardInner}>
                                                 <View style={s.cardLeft}>
                                                     <View style={s.orderIdRow}>
-                                                        <Text style={[s.orderId, {color: item.canAllocate ? '#10B981' : '#1A1A2E', }]}>{item?.order_id}</Text>
+                                                        <Text style={[s.orderId, { color: item.canAllocate ? '#10B981' : '#1A1A2E', }]}>{item?.order_id}</Text>
                                                         <View style={s.statusBadge}>
                                                             <View style={s.statusDot} />
                                                             <Text style={s.statusText}>{item?.STATUS || 'Active'}</Text>
@@ -660,9 +783,9 @@ const AssignedScreen = (props) => {
                                                                 <Text style={s.invoiceQtyLabel}>Qty</Text>
                                                                 <Text style={s.invoiceQtyVal}>{sub.invqty} MT</Text>
                                                             </View>
-                                                            <TouchableOpacity style={s.allocateBtn} onPress={() => handleAllocatePress(item, sub)}>
+                                                            {item.canAllocate2 && <TouchableOpacity style={s.allocateBtn} onPress={() => handleAllocatePress(item, sub)}>
                                                                 <Text style={s.allocateBtnText}>Allocate →</Text>
-                                                            </TouchableOpacity>
+                                                            </TouchableOpacity>}
                                                         </View>
                                                     </View>
                                                 ))}

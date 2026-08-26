@@ -20,7 +20,7 @@ const ShipToSelfListPopupView = (props) => {
             setFilteredData(filtered)
         }
         console.log(props?.dataList[0]);
-        
+
     }, [searchText, props.dataList])
 
     const close = () => {
@@ -63,10 +63,20 @@ const ShipToSelfListPopupView = (props) => {
                             renderItem={({ item, index }) => {
                                 return (
                                     <TouchableOpacity activeOpacity={0.95} onPress={() => { props.selectItem(item) }} >
-                                        <View style={{ width: "100%", paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(13), flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: (index % 2 !== 0 ? DataStorage.transColorCode : "#FFFFFF") }}>
+                                        <View style={{ width: "100%", paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(13), flexDirection: "column", justifyContent: "space-between", backgroundColor: (index % 2 !== 0 ? DataStorage.transColorCode : "#FFFFFF") }}>
                                             <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}>
-                                                {item.customer_name?.replaceAll("&amp;", '&') + (item?.SAP_code ?" - " + item?.SAP_code : "")}
+                                                {item.customer_name?.replaceAll("&amp;", '&') + (item?.SAP_code ? " - " + item?.SAP_code : "")}
                                             </Text>
+                                            {item.is_any == '' ? <View style={{ width: '100%', flexDirection: 'row',marginTop:moderateScale(3) }}>
+                                                <Text style={{flex:1,fontSize:moderateScale(12),color:'#666'}}>
+                                                    GSTIN Declaration Not Submited yet
+                                                </Text>
+                                                {props.isDealer ? <TouchableOpacity onPress={() => { props.gotoGSTPage()}}>
+                                                    <Text style={{flex:1,fontSize:moderateScale(12),color:'#E41B14'}}>
+                                                        Update GSTIN
+                                                    </Text>
+                                                </TouchableOpacity> : null}
+                                            </View> : null}
                                         </View>
                                     </TouchableOpacity>
                                 )

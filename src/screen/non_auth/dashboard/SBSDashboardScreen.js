@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Alert, FlatList, Image, Linking, Modal, Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View, } from "react-native";
+import { Alert, Dimensions, FlatList, Image, Linking, Modal, Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View, } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { parseString } from "react-native-xml2js";
 import Toast from "react-native-toast-message";
 import DeviceInfo from "react-native-device-info";
@@ -17,7 +17,7 @@ import UrlStorage from "../../../storage/UrlStorage";
 import { createTable } from "../../../storage/database/DataBase";
 import { insertDataIn_branch_dump, insertDataIn_branch_master, insertDataIn_branch_schemes_PDF, insertDataIn_customer_master, insertDataIn_destination_master, insertDataIn_self_appraisal_product_wise, } from "../../../storage/database/InsertDataInTable";
 import toastConfig from "../../../helper/ToastConfig";
-import ShipToSelfListPopupView from "../order/popup/ShipToSelfListPopupView";
+import ShipToSelfListPopupViewNew from "../../../common/ShipToSelfListPopupViewNew";
 import Loader from "../../../common/Loader";
 import { getAllDataFrom_customer_master } from "../../../storage/database/GetDataFromTable";
 import LoadingWithText from "../../../common/LoadingWithText";
@@ -27,12 +27,15 @@ import moment from "moment";
 import { AuthCheckingApi } from "../../../auth/AuthCheckingApi";
 import AuthNotVerifyPopupView from "../../../auth/AuthNotVerifyPopupView";
 
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+
 // ---------------------------------------------------------------------------
 // STATIC DATA
 // ---------------------------------------------------------------------------
 
 const DASHBOARD_LIST_FOR_SBS = [
   // { id: "order", title: "Order", icon: Icons.SbsOrder, screen: "OrderScreen" }, //new add
+  { id: "gst_menu", title: "GSTIN Update Confirmation", icon: Icons.SBSGST, screen: "GSTScreen" },
   { id: "track_order", title: "Track Order", icon: Icons.SbsTrackOrder, screen: "TrackOrderScreen" },
   { id: "ledger", title: "Last 50 Transaction", icon: Icons.SbsLedger, screen: "LedgerScreen" },
   { id: "performance", title: "Performance", icon: Icons.SbsPerformance, screen: "SBSPerformanceGraphScreen" },
@@ -47,6 +50,7 @@ const DASHBOARD_LIST_FOR_SBS = [
 ];
 
 const BROKER_DEALER_DASHBOARD_LIST_FOR_SBS = [
+  { id: "gst_menu", title: "GSTIN Update Confirmation", icon: Icons.SBSGST, screen: "GSTScreen" },
   { id: "order", title: "Order", icon: Icons.SbsOrder, screen: "OrderScreen" },
   { id: "track_order", title: "Track Order", icon: Icons.SbsTrackOrder, screen: "TrackOrderScreen" },
   { id: "ledger", title: "Last 50 Transaction", icon: Icons.SbsLedger, screen: "LedgerScreen" },
@@ -63,19 +67,19 @@ const BROKER_DASHBOARD_LIST = [
   { id: "scheme", title: "Scheme", icon: Icons.CementScheme, screen: "SchemeScreen" },
   { id: "performance", title: "Performance\n(Month Wise)", icon: Icons.CementPerformance, screen: "PerformanceGraphScreen" },
   { id: "performance_product_wise", title: "Performance\n(Product Wise)", icon: Icons.CementProductPerformance, screen: "ProductWiseProductScreen" },
-  // { id: "PerformanceGraphSLCT", title: "Performance Graph SLCT", icon: Icons.SlctIcon, screen: "PerformanceGraphSLCT" },
   { id: "tour", title: "Tour", icon: Icons.CementTour, screen: "" },
   { id: "engagements", title: "Engagements", icon: Icons.CementEngagement, screen: "" },
   { id: "pop_order", title: "Pop Order", icon: Icons.CementPop, screen: "POPOrderScreen" },
   { id: "mason_lifting_approval", title: "Mason Lifting Approval", icon: Icons.CementMasonLifting, screen: "" },
   { id: "pending_invoices", title: "Pending Invoices", icon: Icons.CementPendingInvoice, screen: "PendingInvoicesScreen" },
-  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "AgeingScreen" },
+  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "OutstandingSummaryScreen" },
   { id: "order_enquiry", title: "Order Enquiry", icon: Icons.CementOrderEnquiry, screen: "OrderEnquiryScreen" },
   { id: "rewards", title: "Rewards", icon: Icons.CementRewards, screen: "" },
   { id: "greetings", title: "Greetings", icon: Icons.CementGreetings, screen: "" },
   { id: "sales_visit_feedback", title: "Sales Visit Feedback", icon: Icons.CementFeedback, screen: "FeedbackListScreen" },
 ];
 const DEALER_DASHBOARD_LIST = [
+  { id: "gst_menu", title: "GSTIN Update Confirmation", icon: Icons.GST, screen: "GSTScreen" },
   { id: "order", title: "Order", icon: Icons.CementOrder, screen: "OrderScreen" },
   { id: "track_order", title: "Track Order", icon: Icons.CementTrackOrder, screen: "TrackOrderScreen" },
   // { id: "outstanding_summary", title: "Outstanding\nSummary", icon: Icons.OutstandingSummaryIcon, screen: "OutstandingSummaryScreen" },
@@ -90,14 +94,17 @@ const DEALER_DASHBOARD_LIST = [
   { id: "pop_order", title: "Pop Order", icon: Icons.CementPop, screen: "POPOrderScreen" },
   { id: "mason_lifting_approval", title: "Mason Lifting Approval", icon: Icons.CementMasonLifting, screen: "" },
   { id: "pending_invoices", title: "Pending Invoices", icon: Icons.CementPendingInvoice, screen: "PendingInvoicesScreen" },
-  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "AgeingScreen" },
+  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "OutstandingSummaryScreen" },
   { id: "order_enquiry", title: "Order Enquiry", icon: Icons.CementOrderEnquiry, screen: "OrderEnquiryScreen" },
   { id: "rewards", title: "Rewards", icon: Icons.CementRewards, screen: "" },
   { id: "greetings", title: "Greetings", icon: Icons.CementGreetings, screen: "" },
   { id: "sales_visit_feedback", title: "Sales Visit Feedback", icon: Icons.CementFeedback, screen: "FeedbackListScreen" },
+  // { id: "delivery_track_order", title: "Delivery Track Order", icon: Icons.DeliveryTrackOrderIcon, screen: "DeliveryTrackOrderScreen" },
+  // { id: "delivery_complain", title: "Delivery Complain", icon: Icons.TrackOrderComplainIcon, screen: "DeliveryComplainScreen" },
 ];
 
 const OTHER_DASHBOARD_LIST = [
+  { id: "gst_menu", title: "GSTIN Update Confirmation", icon: Icons.GST, screen: "GSTScreen" },
   { id: "track_order", title: "Track Order", icon: Icons.CementTrackOrder, screen: "TrackOrderScreen" },
   { id: "ledger", title: "Ledger", icon: Icons.CementLedger, screen: "LedgerScreen" },
   { id: "performance", title: "Performance\n(Month Wise)", icon: Icons.CementPerformance, screen: "PerformanceGraphScreen" },
@@ -160,6 +167,8 @@ const SBSDashboardScreen = (props) => {
 
   const [bannerList, setBannerList] = useState([]);
   const [ledgerData, setLedgerdata] = useState(null);
+  const [categoryList, setCategoryList] = useState([]);
+  const [showCreditLimit, setShowCreditLimit] = useState(false);
 
   // Birth Day Popup
   const [isShowBirthDayCollectPopup, setIsShowBirthDayCollectPopup] = useState(false);
@@ -169,11 +178,26 @@ const SBSDashboardScreen = (props) => {
   const [birthDayWishObject, setBirthDayWishObject] = useState(false);
   const [authChecker, setAuthChecker] = useState(false);
   const [creditLimit, setCreditLimit] = useState(false);
+  const [selectedCustomerType, setSelectedCustomerType] = useState(UrlStorage.ParameterList.BasicData.selectedCustomerType);
+
+  const [soNameList, setSoNameList] = useState([]);
+  const [isSoNameListShow, setIsSoNameListShow] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   const dashboardList = useMemo(() => {
-    if (DataStorage.typeOfUse === 1) return isBrokerOrDealer() ? BROKER_DEALER_DASHBOARD_LIST_FOR_SBS : DASHBOARD_LIST_FOR_SBS;
-    return UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'broker' ? BROKER_DASHBOARD_LIST : UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'dealer' ? DEALER_DASHBOARD_LIST : OTHER_DASHBOARD_LIST;
-  }, []);
+    if (DataStorage.typeOfUse === 1) {
+      return UrlStorage.ParameterList.BasicData.user_type?.toLowerCase() === 'broker' && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'rssd'
+        ? DASHBOARD_LIST_FOR_SBS : BROKER_DEALER_DASHBOARD_LIST_FOR_SBS
+    } else {
+      return UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'broker' ?
+        UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'rssd' ? OTHER_DASHBOARD_LIST : BROKER_DASHBOARD_LIST
+        : UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'dealer' ? DEALER_DASHBOARD_LIST
+          : OTHER_DASHBOARD_LIST;
+    }
+  }, [selectedCustomerType]);
+
+
+
   useEffect(() => {
     const init = async () => {
       const requestOptions = {
@@ -191,38 +215,36 @@ const SBSDashboardScreen = (props) => {
       fetch("https://starsaathi.com/SAP/acedns_star_slider.php", requestOptions)
         .then((response) => response.json())
         .then((result) => {
+          console.log(result);
+
           setBannerList(result.start_slider_data);
         })
         .catch(() => { });
       fetchCustomerCredit()
     };
-
     init();
+    checkNotificationCount()
   }, []);
+  useFocusEffect(
+    useCallback(() => {
+      checkNotificationCount();
+    }, [])
+  );
 
-  // useEffect(() => {
-  //   const requestOptions = {
-  //     method: "GET",
-  //     redirect: "follow"
-  //   };
+  const checkNotificationCount = async () => {
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow"
+    };
+    fetch("https://starsaathi.com/SAP/pending_notification_count_v3.php?the_id=" + UrlStorage.ParameterList.BasicData.customer_code, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log('hit Notificaion');
 
-  //   fetch("https://starsaathi.com/SAP/acedns_star_slider.php", requestOptions)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       setBannerList(result.start_slider_data)
-  //     })
-  //     .catch((error) => { });
-  //   // fetchAuth()
-  // }, []);
-
-  const fetchAuth = async () => {
-    var a = await AuthCheckingApi();
-    if (!a) {
-      setAuthChecker(false)
-      setLoading(false)
-    }
+        setNotificationCount(result.pending_count);
+      })
+      .catch(() => { });
   }
-
 
   // -------------------------------------------------------------------------
   // Stable callbacks
@@ -245,6 +267,8 @@ const SBSDashboardScreen = (props) => {
   // -------------------------------------------------------------------------
 
   const requestForCheckRewardForDealerFromSP = async (item) => {
+    console.log('dasdadsasdasdasda', item);
+
     const rewardsForm = new FormData();
     rewardsForm.append("user_type", item.cust_type);
     rewardsForm.append("emp_code", item.SAP_code);
@@ -273,6 +297,8 @@ const SBSDashboardScreen = (props) => {
     if (rewardsRes.status === "fulfilled") {
       const r = rewardsRes.value;
       DashboardDataStorage.requestForDealerWiseRewards = r;
+      console.log('dasdadsasdasdasda', r);
+
       if (r?.process_status !== "NO") {
         setIsDealerWiseReward(true);
         setDealerWiseRewardLink(r?.reward_data?.[0]?.reward_link ?? "");
@@ -311,35 +337,7 @@ const SBSDashboardScreen = (props) => {
       });
   }, []);
 
-  // const requestLedgerListForCement = useCallback(async (isFromSelected = false) => {
-  //   setLoadingMessage("Download Data...40%\nPlease wait for a while");
-  //   const customerCode =
-  //     UrlStorage.ParameterList.BasicData.user_type === "broker"
-  //       ? UrlStorage.ParameterList.BasicData.selectedCustomerCode
-  //       : UrlStorage.ParameterList.BasicData.emp_code;
-  //   const url =
-  //     UrlStorage.BaseUrlList.Saathi.base_url_saathi +
-  //     UrlStorage.NonAuthURL.Saathi.LedgerURL.other_ledger_list_url +
-  //     "?the_id=" +
-  //     customerCode;
-
-  //   try {
-  //     const response = await fetch(url);
-  //     const result = await response.json();
-  //     DashboardDataStorage.requestLedgerListForCement = result;
-  //     if (result.process_status === "YES") {
-  //       UrlStorage.ParameterList.BasicData.ledger_balance_data = result.ledger_balance_data;
-  //       setLedgerdata(result.ledger_balance_data);
-  //     } else {
-  //       Toast.show({ type: "error", text1: "Sorry", text2: result.process_message });
-  //     }
-  //   } catch (e) {
-  //   } finally {
-  //     if (!isFromSelected) requestForDatabaseStructure();
-  //   }
-  // }, []);
-
-  const requestLedgerListForCement = useCallback(async (isFromSelected = false ) => {
+  const requestLedgerListForCement = useCallback(async (isFromSelected = false) => {
     setLoadingMessage("Download Data...40%\nPlease wait for a while");
 
     const customerCode = UrlStorage.ParameterList.BasicData.user_type === "broker" ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.emp_id;
@@ -544,15 +542,26 @@ const SBSDashboardScreen = (props) => {
     setLoadingMessage("Download Data...70%\nPlease wait for a while");
     const { emp_code, user_type } = UrlStorage.ParameterList.BasicData;
     const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DownloadDatabaseAPI.branch_master_TXT_download_API + `?nick_name=star&emp_code=${emp_code}&user_type=${user_type}`;
+    console.log(url);
 
     try {
       const text = await (await fetch(url)).text();
-      const arraySet = text.split("\n").slice(2).map((line) => {
-        const a = line.split("^");
-        return { company_code: a[0], branch_code: a[1], branch_name: a[2], Hq: a[3], plant_name: a[4] };
-      });
+      const arraySet = text.split("\n")
+        .slice(2)
+        .map((line) => line.split("^"))
+        .filter((a) => a.length === 5)
+        .map((a) => ({
+          company_code: a[0],
+          branch_code: a[1],
+          branch_name: a[2],
+          Hq: a[3],
+          plant_name: a[4]
+        }));
+
       insertDataIn_branch_master(arraySet);
     } catch (e) {
+      console.log('error : ' + e);
+
     } finally {
       requestForProductWiseTargetAchievementList();
     }
@@ -667,23 +676,77 @@ const SBSDashboardScreen = (props) => {
       insertDataIn_branch_dump(arraySet);
     } catch (e) {
     } finally {
-      checkUserType();
+      if (UrlStorage.ParameterList.BasicData.user_type === "broker") {
+        if (DataStorage.typeOfUse === 1)
+          requestForUserPermissionSBS()
+        else
+          requestForUserPermission()
+      } else {
+        checkUserType();
+      }
     }
   }, []);
 
   const getUserListForSBS = useCallback(async () => {
     const url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.dealer_list;
+    console.log('getUserListForSBS : ' + url);
+
     try {
       const result = await (
         await fetch(url, {
           headers: { Authorization: "SAP_SP", "Content-Type": "application/json" },
         })
       ).json();
+      console.log(result);
+
       setDealerList(result);
       openCloseDropDownPopup();
     } catch (e) {
     }
   }, [openCloseDropDownPopup]);
+
+  const requestForUserPermission = useCallback(async () => {
+    setLoadingMessage("Download Data...99%\nPlease wait for a while");
+    const { emp_code, user_type } = UrlStorage.ParameterList.BasicData;
+    console.log(emp_code);
+
+    const url = 'https://starsaathi.com/SAP/api_get_sp_broker_permision.php?broker_code=' + emp_code;
+
+    try {
+      const text = await (
+        await fetch(url,)
+      ).json();
+      setCategoryList(text.permision_list)
+    } catch (e) {
+    } finally {
+      checkUserType();
+    }
+  }, []);
+
+  const requestForUserPermissionSBS = useCallback(async () => {
+    setLoadingMessage("Download Data...99%\nPlease wait for a while");
+    const { emp_code, user_type } = UrlStorage.ParameterList.BasicData;
+    console.log(emp_code);
+
+    const url = 'https://sbs.starsaathi.com/api/api/authentication/permission-list/';
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", "SAP_SP " + emp_code);
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+    try {
+      const text = await (
+        await fetch(url, requestOptions)
+      ).json();
+      setCategoryList(text)
+    } catch (e) {
+    } finally {
+      checkUserType();
+    }
+  }, []);
 
   const checkUserType = useCallback(async () => {
     setLoadingMessage("Download Data...100%\nPlease wait for a while");
@@ -692,8 +755,8 @@ const SBSDashboardScreen = (props) => {
         if (DataStorage.typeOfUse === 1) {
           await getUserListForSBS();
         } else {
-          const arr = await getAllDataFrom_customer_master();
-          setDealerList(arr);
+          // const arr = await getAllDataFrom_customer_master();
+          // setDealerList(arr);
           openCloseDropDownPopup();
         }
       } catch (err) {
@@ -738,7 +801,9 @@ const SBSDashboardScreen = (props) => {
       console.log(item);
       requestForCheckRewardForDealerFromSP(item)
       setCustomerDetails(item);
-      UrlStorage.ParameterList.BasicData.selectedCustomerCode = item?.SAP_code;
+      setSelectedCustomerType(item?.cust_type)
+      UrlStorage.ParameterList.BasicData.selectedCustomerCode = DataStorage.typeOfUse === 1 ? item?.customer_id : item?.SAP_code;
+      UrlStorage.ParameterList.BasicData.selectedCustomerType = item?.cust_type;
       UrlStorage.ParameterList.BasicData.customerDetails = item;
       DataStorage.typeOfUse !== 1 ? requestLedgerListForCement(true) : requestLedgerListForSBS(true);
       DataStorage.typeOfUse !== 1 ? fetchCustomerCredit(true) : null;
@@ -775,7 +840,10 @@ const SBSDashboardScreen = (props) => {
           break;
         case "mason_lifting_approval":
           DataStorage.web_page_title = "Mason Lifting Approval";
-          DataStorage.web_link = UrlStorage.BaseUrlList.Saathi.mason_link + UrlStorage.ParameterList.BasicData.emp_id;
+          if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker')
+            DataStorage.web_link = UrlStorage.BaseUrlList.Saathi.mason_link + UrlStorage.ParameterList.BasicData.selectedCustomerCode;
+          else
+            DataStorage.web_link = UrlStorage.BaseUrlList.Saathi.mason_link + UrlStorage.ParameterList.BasicData.emp_id;
           props.navigation.navigate("WebLinkScreen");
           break;
         case "rewards":
@@ -825,9 +893,9 @@ const SBSDashboardScreen = (props) => {
         <View style={styles.gridItemInner}>
           {item.id == 'PerformanceGraphSLCT' ? <View style={{ height: moderateScale(80), width: moderateScale(80), alignItems: 'center', justifyContent: 'center' }}>
             <Image source={item.icon} style={{ width: moderateScale(60), height: moderateScale(60), resizeMode: 'contain', marginBottom: moderateScale(4), }} />
-          </View> : item.id=='outstanding_summary'?<View style={{ height: moderateScale(80), width: moderateScale(80), alignItems: 'center', justifyContent: 'center' }}>
+          </View> : item.id == 'outstanding_summary' ? <View style={{ height: moderateScale(80), width: moderateScale(80), alignItems: 'center', justifyContent: 'center' }}>
             <Image source={item.icon} style={{ width: moderateScale(50), height: moderateScale(50), resizeMode: 'contain', marginBottom: moderateScale(4), }} />
-          </View>: <Image source={item.icon} style={styles.gridIcon} />}
+          </View> : <Image source={item.icon} style={styles.gridIcon} />}
 
           <Text numberOfLines={2} style={styles.gridLabel}>
             {item.title}
@@ -898,7 +966,7 @@ const SBSDashboardScreen = (props) => {
       .then((result) => { })
       .catch((error) => { });
   }
-  const [showCreditLimit, setShowCreditLimit] = useState(false);
+
   const fetchCustomerCredit = async (isFromSelected = false) => {
     setShowCreditLimit(false)
     const requestOptions = {
@@ -907,7 +975,7 @@ const SBSDashboardScreen = (props) => {
     };
 
     console.log("code----------", UrlStorage.ParameterList.BasicData);
-    
+
 
     const customerCode = UrlStorage.ParameterList.BasicData.user_type === "broker" ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code;
 
@@ -929,8 +997,32 @@ const SBSDashboardScreen = (props) => {
     setDateOfBirth(moment(selectedDate).format('DD-MM-YYYY'))
   }
 
-  const showLedgerCard = UrlStorage.ParameterList.BasicData.user_type === "dealer" || UrlStorage.ParameterList.BasicData.user_type === "broker";
-console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData.credit_details?.credit_expose ?? 0);
+  const handleContactPerson = () => {
+    setLoading(true)
+    setLoadingMessage('Check your related SO')
+    requestForLinkSo()
+  }
+  const requestForLinkSo = () => {
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow"
+    };
+
+    fetch("https://starsaathi.com/SAP/get_l2_employee_by_customer_v1.php?customer_id=" + UrlStorage.ParameterList.BasicData.emp_id, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setSoNameList(result.data)
+        setLoading(false)
+        setIsSoNameListShow(true)
+      })
+      .catch((error) => console.error(error));
+  }
+
+  const handleCall = (number) => {
+    Linking.openURL(`tel:${number}`).catch(err => console.log('Dialer error:', err));
+  };
+
+  const showLedgerCard = UrlStorage.ParameterList.BasicData.user_type === "dealer" || (UrlStorage.ParameterList.BasicData.user_type === "broker" && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'dealer');
   return (
     <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
       <StatusBar backgroundColor={DataStorage.primaryColorCode} />
@@ -943,6 +1035,8 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
           handleRefresh={handleRefresh}
           customerDetails={UrlStorage.ParameterList.BasicData.customerDetails}
           navigateToNotification={navigateToNotification}
+          handleContactPerson={handleContactPerson}
+          notificationCount={notificationCount}
         />
 
         {/*
@@ -969,11 +1063,11 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
 
                 {showLedgerCard && (
                   <View style={DataStorage.typeOfUse == 1 ? styles.ledgerGradient : {}}>
-                    {DataStorage.typeOfUse == 1&&<View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: DataStorage.gradientColorCode?.[0], }} />}
-                    {DataStorage.typeOfUse == 1&&<View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: DataStorage.gradientColorCode?.[1], opacity: 0.3, }} />}
+                    {DataStorage.typeOfUse == 1 && <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: DataStorage.gradientColorCode?.[0], }} />}
+                    {DataStorage.typeOfUse == 1 && <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: DataStorage.gradientColorCode?.[1], opacity: 0.3, }} />}
                     {DataStorage.typeOfUse !== 1 ? (
                       /* ── Cement / Other ── */
-                      <View style={{ flexDirection: "column", width: "100%",padding:moderateScale(5), width: "100%",backgroundColor: DataStorage.gradientColorCode?.[0], overflow: 'hidden', borderRadius: moderateScale(10) }}>
+                      <View style={{ flexDirection: "column", width: "100%", padding: moderateScale(5), width: "100%", backgroundColor: DataStorage.gradientColorCode?.[0], overflow: 'hidden', borderRadius: moderateScale(10) }}>
                         <View style={{ flexDirection: "row", width: "100%", }}>
                           <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(2), }}>
                             <View style={{ width: "100%", paddingHorizontal: moderateScale(10), paddingVertical: moderateScale(10), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,.2)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
@@ -986,9 +1080,9 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
                           <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(2), }}>
                             <View style={{ width: "100%", paddingHorizontal: moderateScale(10), paddingVertical: moderateScale(10), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,.2)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
                               <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                                <Text style={{ color: Colors.white, fontSize:moderateScale(9), fontWeight: "600", }}>
+                                <Text style={{ color: Colors.white, fontSize: moderateScale(9), fontWeight: "600", }}>
                                   {"SCL "}
-                                  <Text style={{ color: Colors.white, fontSize:moderateScale(11), fontWeight: "600", }}>
+                                  <Text style={{ color: Colors.white, fontSize: moderateScale(11), fontWeight: "600", }}>
                                     {"₹" + (UrlStorage.ParameterList.BasicData.credit_details?.SCL ?? 0)}
                                   </Text>
                                 </Text>
@@ -1014,7 +1108,7 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
                           <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(2), }}>
                             <View style={{ width: "100%", paddingHorizontal: moderateScale(10), paddingVertical: moderateScale(10), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,.2)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
                               <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                                <Text style={{ color: Colors.white, fontSize:moderateScale(9), fontWeight: "600", }}>
+                                <Text style={{ color: Colors.white, fontSize: moderateScale(9), fontWeight: "600", }}>
                                   {"Utilized CL "}
                                   <Text style={{ color: Colors.white, fontSize: moderateScale(11), fontWeight: "600", }}>
                                     {" ₹ "}{Number(parseInt(creditLimit?.CREXP ?? 0)).toLocaleString('en-IN')}
@@ -1033,7 +1127,7 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
                           </View>
                         </View>
                         <View style={{ width: '100%' }}>
-                          {showCreditLimit&&<View style={{ width: '100%', paddingHorizontal: moderateScale(3), alignItems: 'center', flexDirection: 'row', }} >
+                          {showCreditLimit && <View style={{ width: '100%', paddingHorizontal: moderateScale(3), alignItems: 'center', flexDirection: 'row', }} >
                             {(() => {
                               const consumed = Number(creditLimit?.utilized ?? 0);
                               const limit = Number(creditLimit?.CL ?? 0);
@@ -1064,7 +1158,7 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
                             })()}
                           </View>}
                         </View>
-                        <View style={{height:5}}/>
+                        <View style={{ height: 5 }} />
 
                         {/* <View style={{ flexDirection: "row", width: "100%", }}>
                           <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
@@ -1196,13 +1290,13 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
         <SBSMenuOpenView isVisible={openSBSMenu} handleOpenSBSMenu={handleOpenSBSMenu} {...props} />
       </View>
 
-      <ShipToSelfListPopupView
-        isDealer
+      {!loading && <ShipToSelfListPopupViewNew
         isVisible={dealerListPopUpOpen}
-        dataList={dealerList}
+        categoryList={categoryList}
+        dealerList={dealerList}
         closePopup={openCloseDropDownPopup}
         selectItem={selectShipToSelfItem}
-      />
+      />}
       <Toast config={toastConfig} />
       <ReactNativeModal
         isVisible={isShowBirthDayCollectPopup}
@@ -1266,6 +1360,58 @@ console.log('dasdasdasdada  :    ====   :   '+UrlStorage.ParameterList.BasicData
             <View style={{ height: moderateScale(35) }} />
             <Text style={{ color: '#FFF', fontSize: moderateScale(14) }}>~ Star Cement Family</Text>
           </View>
+        </View>
+      </ReactNativeModal>
+      <ReactNativeModal
+        isVisible={isSoNameListShow}
+        customBackdrop={
+          <TouchableWithoutFeedback onPress={() => { setIsSoNameListShow(false) }}>
+            <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.4)" }} />
+          </TouchableWithoutFeedback>
+        }
+      >
+        <View style={{ width: '100%', minHeight: moderateScale(50), maxHeight: SCREEN_HEIGHT - 200, backgroundColor: '#FFF', borderRadius: moderateScale(10) }}>
+          <FlatList
+            data={soNameList}
+            keyExtractor={(item, index) => index.toString()}
+            contentContainerStyle={{ padding: moderateScale(12) }}
+            ItemSeparatorComponent={() => (
+              <View style={{ height: 1, backgroundColor: '#EEE' }} />
+            )}
+            ListHeaderComponent={
+              <View style={{ flexDirection: 'column' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: moderateScale(4) }}>
+                  <Text style={{ fontSize: moderateScale(15), fontWeight: '600', color: Colors.main }}>
+                    Linked SO
+                  </Text>
+                  <Text style={{ fontSize: moderateScale(15), fontWeight: '600', color: Colors.main }}>
+                    Contact No
+                  </Text>
+                </View>
+                <View style={{ width: '100%', height: moderateScale(1), backgroundColor: Colors.main, marginTop: moderateScale(5) }} />
+              </View>
+            }
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() => handleCall(item.phone_no)}
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingVertical: moderateScale(12),
+                  paddingHorizontal: moderateScale(4)
+                }}
+              >
+                <Text style={{ fontSize: moderateScale(14), color: '#222' }}>
+                  {item.emp_name}
+                </Text>
+                <Text style={{ fontSize: moderateScale(14), color: '#007AFF' }}>
+                  +91-{item.phone_no}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
         </View>
       </ReactNativeModal>
       {loading && <LoadingWithText message={loadingMessage} />}

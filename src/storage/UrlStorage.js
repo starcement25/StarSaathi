@@ -16,7 +16,7 @@ let UrlStorage = {
     login_url: "/reportmvc/api/v2/checkloginnew_v2",
     otp_verification_url: "/reportmvc/api/v2/verifyotpnew_v2",
     logout_url: "/acedns_star_clear_allocation_by_id", //the_id
-    check_auth:'/check_token_valid.php',
+    check_auth: '/check_token_valid.php',
   },
 
   // Non-Auth URL
@@ -34,7 +34,7 @@ let UrlStorage = {
         update_profile_image_url: "/acedns_update_profile_image.php",
         dealer_wise_credit_limit_url: "/dealerwise-credit-limit-s-deposit-v2.php",
         update_image: "/acedns_update_profile_image.php",
-        customer_credit_api : "/customer_credit_api.php"
+        customer_credit_api: "/customer_credit_api.php"
       },
 
       // Download Database API
@@ -130,7 +130,7 @@ let UrlStorage = {
 
       // Order URL
       OrderURL1: {
-        dealer_data_list_url: "/ship-to-party-master-txt-V2.php", //emp_code, user_type, login_type
+        dealer_data_list_url: "/ship-to-party-master-txt-V3.php", //emp_code, user_type, login_type
         truck_data_list_url: "/fpx-delaer-truck-list.php", //customer_code
         epod_details_url: "/save_epod_details.php", //customer_id, epod_data[0][challan_no], epod_data[0][date_and_time], epod_data[0][challan_date], epod_data[0][is_delivered]
         update_matirial_rcv_url: "/acedns_star_update_material_receive_confirmation_v2.php", //the_id, ch_quantity_no_of_bags, ch_quality_no_of_damaged_bags, ch_uid, challanno, quantity_checking, quality_checking
@@ -142,6 +142,7 @@ let UrlStorage = {
         accept_lifting_history_list_for_sub_dealer_url: "/acedns_star_show_approve_lifting_history_for_sub_dealer.php", //sub_dealer_cust_code, year_month
         pending_lifting_history_list_for_sub_dealer_url: "/acedns_star_show_pending_lifting_history_for_sub_dealer.php", //sub_dealer_cust_code, year_month
         dispatched_order_data_list_url: "/dispatched-order-list-invoicewise-v10.php", //month_year, customer_code
+        dispatched_order_data_list_RSSD_url: "/dispatched-order-list-invoicewise-v10_rssd.php", //month_year, customer_code
         allocation_data_invoice_url: "/ajax_allocation_lifting_invoicewise_v10.php", //customer_id, year_month, user_type
         add_lifting_url: "acedns_star_add_lifting.php",
         lifting_validation_url: "/lifting_date_validation_data.php", //customer_code, user_type
@@ -195,7 +196,7 @@ let UrlStorage = {
         update_user_sbs: '/api/authentication/save-device-info/'
       },
       order: {
-        dealer_list: "api/orders/user-list",
+        dealer_list: "api/orders/user-list-all",
         user_product_list: "api/orders/user-product-list",
         plant_details: "api/orders/plant-details",
         ship_to: "api/orders/ship-to",
@@ -204,6 +205,7 @@ let UrlStorage = {
         dealer_details: "api/authentication/dealers-by-id/",
         check_truck_list: "api/orders/check-dot",
         order_history: "api/orders/order-details",
+        order_history_offline: "api/orders/offline-order-details",
       },
       performance: {
         item_wise_performance: "api/analytics/item_wise_target_achievement_SAP_data"
@@ -232,6 +234,7 @@ let UrlStorage = {
       emp_id: "",
       emp_mobile_number: "",
       selectedCustomerCode: "",
+      selectedCustomerType: "",
       ledger_balance_data: "",
       credit_details: "",
       belong_dealer_name: "",

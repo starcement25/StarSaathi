@@ -1542,7 +1542,7 @@ export const getDestiList = () => {
 
 //                     for (let i = 0; i < len; i++) {
 //                         const row = res.rows.item(i);
-                        
+
 //                         rows.push({
 //                             customer_code: row.customer_code,
 //                             customer_name: row.customer_name,
@@ -1574,25 +1574,25 @@ export const getDestiList = () => {
 export const getMySubDealerList = (userType, selectedCustomerCode, isRssd = false) => {
     return new Promise((resolve, reject) => {
 
-// Run this ONCE to inspect your actual customer_master schema
-db.transaction(txn => {
-    txn.executeSql(
-        `PRAGMA table_info(customer_master)`,
-        [],
-        (sqlTnx, res) => {
-            //console.log('=== customer_master COLUMNS ===');
-            for (let i = 0; i < res.rows.length; i++) {
-                const row = res.rows.item(i);
-                console.log(`col[${i}]: "${row.name}" | type: ${row.type}`);
-            }
-        },
-        error => console.log('PRAGMA error:', error)
-    );
-});
+        // Run this ONCE to inspect your actual customer_master schema
+        db.transaction(txn => {
+            txn.executeSql(
+                `PRAGMA table_info(customer_master)`,
+                [],
+                (sqlTnx, res) => {
+                    //console.log('=== customer_master COLUMNS ===');
+                    for (let i = 0; i < res.rows.length; i++) {
+                        const row = res.rows.item(i);
+                        console.log(`col[${i}]: "${row.name}" | type: ${row.type}`);
+                    }
+                },
+                error => console.log('PRAGMA error:', error)
+            );
+        });
 
 
 
-        
+
         let query = '';
 
         // console.log('=== getMySubDealerList DEBUG ===');
@@ -2336,12 +2336,71 @@ export const getAllDataFrom_customer_master = () => {
         });
     });
 }
+export const getAllDataFrom_customer_master1 = (type, typeBranch) => {
+    console.log('hit');
+    var sql = ''
+    if (typeBranch == '')
+        sql = `SELECT c.*, b.branch_name FROM customer_master c LEFT JOIN branch_master b ON TRIM(c.branch_code) = TRIM(b.branch_code) WHERE  c.cust_type = '${type}' ORDER BY c.customer_name ASC`
+    else
+        sql = `SELECT c.*, b.branch_name FROM customer_master c LEFT JOIN branch_master b ON TRIM(c.branch_code) = TRIM(b.branch_code) WHERE  c.cust_type = '${type}' AND b.branch_code = '${typeBranch}' ORDER BY c.customer_name ASC`
+    return new Promise((resolve, reject) => {
+        db.transaction(txn => {
+            txn.executeSql(
+                sql,
+                [],
+                (sqlTnx, res) => {
+                    let rows = [];
+                    const len = res.rows.length;
+
+                    for (let i = 0; i < len; i++) {
+                        rows.push(res.rows.item(i));
+                    }
+                    resolve(rows); // ✅ return rows AFTER query completes
+                },
+                error => {
+                    reject(error);
+                }
+            );
+        });
+    });
+}
+
+export const getAllBranchCodeAndName = () => {
+    console.log('hi');
+
+    return new Promise((resolve, reject) => {
+        db.transaction(txn => {
+            txn.executeSql(
+                `SELECT branch_code, branch_name FROM branch_master`,
+                [],
+                (sqlTxn, res) => {
+                    let rows = [];
+                    const len = res.rows.length;
+                    console.log(len);
+
+
+                    for (let i = 0; i < len; i++) {
+                        rows.push(res.rows.item(i));
+                    }
+
+                    rows.forEach(r => console.log(`branch_code: "${r.branch_code}" | branch_name: "${r.branch_name}"`));
+
+                    resolve(rows);
+                },
+                error => {
+                    console.log('getAllBranchCodeAndName error:', error);
+                    reject(error);
+                }
+            );
+        });
+    });
+}
 
 
 export const getAllDataFrom_customer_masterSubDealer = () => {
     return new Promise((resolve, reject) => {
         db.transaction(txn => {
-            var emp_code = UrlStorage.ParameterList.BasicData.user_type != 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.customerDetails.customer_code 
+            var emp_code = UrlStorage.ParameterList.BasicData.user_type != 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.customerDetails.customer_code
             txn.executeSql(
                 "SELECT address, customer_name, customer_code, phone_no, SAP_code FROM customer_master WHERE  cust_type IN( 'Sub Dealer','RSSD') AND rds_tag =  '" + emp_code + "' ORDER BY customer_name ASC",
                 [],

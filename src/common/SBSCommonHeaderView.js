@@ -58,7 +58,7 @@ const SBSCommonHeaderView = (props) => {
         ) : null}
         {Add ? (
           <>
-            {UrlStorage.ParameterList.BasicData.user_type === "broker" ||
+            {(UrlStorage.ParameterList.BasicData.user_type === "broker"&&UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'dealer') ||
               UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() === "dealer" ? (
               <TouchableOpacity activeOpacity={0.95} onPress={() => navigation.navigate("AssignedScreen")}>
                 <Image source={Icons.Add} style={{ width: moderateScale(20), height: moderateScale(20), tintColor: "#FFFFFF" }} />

@@ -72,13 +72,16 @@ const TrackOrderScreen = (props) => {
             if (DataStorage.typeOfUse == 1) {
                 url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.order_history + `?page=${page}&page_size=${PAGE_SIZE}`;
                 const params = [];
-
-                if (startDateParam && startDateParam !== '') {
+                if (startDateParam && startDateParam !== '')
                     params.push('order_date_after=' + startDateParam);
-                }
-                if (endDateParam && endDateParam !== '') {
+                if (endDateParam && endDateParam !== '')
                     params.push('order_date_before=' + endDateParam);
-                }
+
+                if (UrlStorage.ParameterList.BasicData.user_type?.toLowerCase() === 'broker')
+                    params.push('customer_SAP_code=' + UrlStorage.ParameterList.BasicData.selectedCustomerCode);
+                else
+                    params.push('customer_SAP_code=' + UrlStorage.ParameterList.BasicData.emp_id);
+
 
                 if (params.length > 0) {
                     url += '&' + params.join('&');
@@ -87,18 +90,38 @@ const TrackOrderScreen = (props) => {
                 url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.TrackOrderURL.other_order_list_url;
                 url = url + "?the_id=" + (UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code) + "&user_type=" + UrlStorage.ParameterList.BasicData.user_type + '&start_date=' + startDateParam + '&end_date=' + endDateParam;
             }
+            console.log(url);
+
             requestForAppOrderList(url, page);
         } else {
+            let url;
             if (DataStorage.typeOfUse == 1) {
                 setOrderList([]);
                 setCurrentPage(1);
                 setTotalPages(1);
                 setHasMore(false);
+                url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.order_history_offline + `?page=${page}&page_size=${PAGE_SIZE}`;
+                const params = [];
+                if (startDateParam && startDateParam !== '')
+                    params.push('filter_erporderdt_from=' + startDateParam);
+                if (endDateParam && endDateParam !== '')
+                    params.push('filter_erporderdt_to=' + endDateParam);
+
+                if (UrlStorage.ParameterList.BasicData.user_type?.toLowerCase() === 'broker')
+                    params.push('customer_SAP_code=1000001052' );//+ UrlStorage.ParameterList.BasicData.selectedCustomerCode
+                else
+                    params.push('customer_SAP_code=' + UrlStorage.ParameterList.BasicData.emp_id);
+
+
+                if (params.length > 0) {
+                    url += '&' + params.join('&');
+                }
+
             } else {
                 let url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.TrackOrderURL.other_offline_order_list_url;
                 url = url + "?the_id=" + (UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.SAP_code : UrlStorage.ParameterList.BasicData.emp_code) + "&user_type=" + UrlStorage.ParameterList.BasicData.user_type + '&start_date=' + startDateParam + '&end_date=' + endDateParam;
-                requestForAppOrderList(url, page);
             }
+            requestForAppOrderList(url, page);
         }
     };
 
@@ -120,80 +143,145 @@ const TrackOrderScreen = (props) => {
                 headers: DataStorage.typeOfUse == 1 ? myHeaders : undefined
             };
             var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+            if (!a) {
+                setAuthChecker(true)
+                setLoading(false)
+                return false
+            }
+console.log(url);
 
             const response = await fetch(url, requestOptions);
             const result = await response.json();
             if (DataStorage.typeOfUse == 1) {
-                if (result && Array.isArray(result.results) && result.results.length > 0) {
-                    const transformedData = result.results.map((item) => {
-                        const invDetail = item.inv_details && item.inv_details.length > 0 ? item.inv_details[0] : {};
+                if (appOrder) {
+                    if (result && Array.isArray(result.results) && result.results.length > 0) {
+                        const transformedData = result.results.map((item) => {
+                            const invDetail = item.inv_details && item.inv_details.length > 0 ? item.inv_details[0] : {};
 
-                        const orderDetail = item.zorderdetailsp_sbs && item.zorderdetailsp_sbs.length > 0 ? item.zorderdetailsp_sbs[0] : {};
+                            const orderDetail = item.zorderdetailsp_sbs && item.zorderdetailsp_sbs.length > 0 ? item.zorderdetailsp_sbs[0] : {};
 
-                        return {
-                            ...item,
-                            APPORDERNO: item.APPORDERNO || '',
-                            ERPORDERNO: item.ERPORDERNO || '',
-                            STATUS: item.STATUS || '',
-                            order_date: item.order_date || '',
-                            QTY: item.QTY || '',
-                            UOM1: item.UOM1 || '',
-                            prod_display_name: item.prod_display_name || '',
-                            destination_address: item.destination_address || '',
-                            freight: item.freight || '',
-                            plant: orderDetail.plant_name || '',
+                            return {
+                                ...item,
+                                APPORDERNO: item.APPORDERNO || '',
+                                ERPORDERNO: item.ERPORDERNO || '',
+                                STATUS: item.STATUS || '',
+                                order_date: item.order_date || '',
+                                QTY: item.QTY || '',
+                                UOM1: item.UOM1 || '',
+                                prod_display_name: item.prod_display_name || '',
+                                destination_address: item.destination_address || '',
+                                freight: item.freight || '',
+                                plant: orderDetail.plant_name || '',
+                                order_invoice_data: item.zorderdetailsp_sbs ? item.zorderdetailsp_sbs.map(detail => ({
+                                    invno: invDetail.INVNO || '-',
+                                    invdt: invDetail.INVDT ? moment(invDetail.INVDT, 'YYYYMMDD').format('DD MMM YYYY') : '-',
+                                    invQty: invDetail.INVQTY || '-',
+                                    Unit: invDetail.UOM || '-',
+                                    zOrder_unit: detail?.Unit || '',
+                                    prod_display_name: item.prod_display_name || '-',
+                                    Qty: detail.Qty || '-',
+                                    truckno: invDetail.TRUCKNO || '-',
+                                    driverno: invDetail.DRIVERNO || '-',
+                                    plant_name: detail.plant_name || '-',
+                                    sales_group: detail.sales_group || '-',
+                                    company_code: detail.company_code || '-',
 
-                            order_invoice_data: item.zorderdetailsp_sbs ? item.zorderdetailsp_sbs.map(detail => ({
+                                    DATE: detail.DATE || '',
+                                    mail_sent_date_time: item.mail_sent_date_time || '',
+                                    order_date: item.order_date || ''
+                                })) : [],
 
-                                invno: invDetail.INVNO || '-',
-                                invdt: invDetail.INVDT ? moment(invDetail.INVDT, 'YYYYMMDD').format('DD MMM YYYY') : '-',
-                                invQty: invDetail.INVQTY || '-',
-                                Unit: invDetail.UOM || '-',
-                                zOrder_unit: detail?.Unit || '',
+                                isShowDetails: false
+                            };
+                        });
 
-                                prod_display_name: item.prod_display_name || '-',
-                                Qty: detail.Qty || '-',
+                        if (page === 1) {
+                            setOrderList(transformedData);
+                        } else {
+                            setOrderList(prevList => [...prevList, ...transformedData]);
+                        }
 
-                                truckno: invDetail.TRUCKNO || '-',
-                                driverno: invDetail.DRIVERNO || '-',
-
-                                plant_name: detail.plant_name || '-',
-                                sales_group: detail.sales_group || '-',
-                                company_code: detail.company_code || '-',
-
-                                DATE: detail.DATE || '',
-                                mail_sent_date_time: item.mail_sent_date_time || '',
-                                order_date: item.order_date || ''
-                            })) : [],
-
-                            isShowDetails: false
-                        };
-                    });
-
-                    if (page === 1) {
-                        setOrderList(transformedData);
+                        const totalCount = result.count || 0;
+                        const calculatedTotalPages = Math.ceil(totalCount / PAGE_SIZE);
+                        setTotalPages(calculatedTotalPages);
+                        setCurrentPage(page);
+                        setHasMore(page < calculatedTotalPages);
                     } else {
-                        setOrderList(prevList => [...prevList, ...transformedData]);
+                        if (page === 1) {
+                            setOrderList([]);
+                        }
+                        setCurrentPage(page);
+                        setTotalPages(1);
+                        setHasMore(false);
                     }
-
-                    const totalCount = result.count || 0;
-                    const calculatedTotalPages = Math.ceil(totalCount / PAGE_SIZE);
-                    setTotalPages(calculatedTotalPages);
-                    setCurrentPage(page);
-                    setHasMore(page < calculatedTotalPages);
                 } else {
-                    if (page === 1) {
-                        setOrderList([]);
+                    console.log(result.results.length);
+                    console.log(result.count);
+                    
+                    if (result && Array.isArray(result.results) && result.results.length > 0) {
+                        console.log(result.results.length);
+                        const transformedData = result.results.map((item) => {
+                            const invDetail = item.inv_details && item.inv_details.length > 0 ? item.inv_details[0] : {};
+                            return {
+                                ...item,
+                                APPORDERNO: item.id || '',
+                                ERPORDERNO: item.challan_details?.ERPORDERNO || '',
+                                STATUS: item.STATUS || '',
+                                order_date: item.ERPORDERDT || '',
+                                QTY: item.QTY || '',
+                                UOM1: item.product_details?.UOM1 || '',
+                                prod_display_name: item.prod_display_name || '',
+                                destination_address: item.destination_name || '',
+                                freight: item.freight || '',
+                                plant: item.dump_plant_name || '',
+                                truckNo:item.challan_details?.TRUCKNO||'',
+                                order_invoice_data: item.zorderdetailsp_sbs ? item.zorderdetailsp_sbs.map(detail => ({
+                                    invno: invDetail.INVNO || '-',
+                                    invdt: invDetail.INVDT ? moment(invDetail.INVDT, 'YYYYMMDD').format('DD MMM YYYY') : '-',
+                                    invQty: invDetail.INVQTY || '-',
+                                    Unit: invDetail.UOM || '-',
+                                    zOrder_unit: detail?.Unit || '',
+                                    prod_display_name: item.prod_display_name || '-',
+                                    Qty: detail.Qty || '-',
+                                    truckno: invDetail.TRUCKNO || '-',
+                                    driverno: invDetail.DRIVERNO || '-',
+                                    plant_name: detail.plant_name || '-',
+                                    sales_group: detail.sales_group || '-',
+                                    company_code: detail.company_code || '-',
+
+                                    DATE: detail.DATE || '',
+                                    mail_sent_date_time: item.mail_sent_date_time || '',
+                                    order_date: item.order_date || ''
+                                })) : [],
+
+                                isShowDetails: false
+                            };
+                        });
+
+                        console.log(transformedData.length);
+                        
+
+                        if (page === 1) {
+                            setOrderList(transformedData);
+                        } else {
+                            setOrderList(prevList => [...prevList, ...transformedData]);
+                        }
+
+                        const totalCount = result.count || 0;
+                        const calculatedTotalPages = Math.ceil(totalCount / PAGE_SIZE);
+                        setTotalPages(calculatedTotalPages);
+                        setCurrentPage(page);
+                        setHasMore(page < calculatedTotalPages);
+                    } else {
+                        if (page === 1) {
+                            setOrderList([]);
+                        }
+                        setCurrentPage(page);
+                        setTotalPages(1);
+                        setHasMore(false);
                     }
-                    setCurrentPage(page);
-                    setTotalPages(1);
-                    setHasMore(false);
                 }
+
             } else {
                 if (result.process_status === "YES" && Array.isArray(result.order_data) && result.order_data.length > 0) {
                     const orderData = result.order_data.map((item) => ({ ...item, isShowDetails: false }));
@@ -418,6 +506,25 @@ const TrackOrderScreen = (props) => {
         );
     };
 
+    const setColorCode = (item) => {
+        if (DataStorage.typeOfUse == 1) {
+            return "#8FC031"
+        } else {
+            if (item.status.toLowerCase() == 'Dispatched'.toLowerCase())
+                return "#2E7D32"
+            else if (item.status.toLowerCase() == 'DO approved'.toLowerCase())
+                return "#afb40fff"
+            else if (item.status.toLowerCase() == 'Order canceled'.toLowerCase())
+                return "#C62828"
+            else if (item.status.toLowerCase() == 'CREDIT CHECK FAILED'.toLowerCase())
+                return "#E65100"
+            else if (item.status.toLowerCase() == 'Order received'.toLowerCase())
+                return "#999"
+            else
+                return "#8FC031"
+        }
+    }
+
     const renderOrderItem = ({ item, index }) => {
         const canShowDetails = item?.order_invoice_data?.length > 0 ? true : false
 
@@ -439,7 +546,7 @@ const TrackOrderScreen = (props) => {
                                 <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
                                     X {DataStorage.typeOfUse == 1 ? `${item.QTY || ''} ${item.UOM1 || ''}` : `${item.qty || ''} `}
                                 </Text>
-                                <View style={{ paddingVertical: moderateScale(3), paddingHorizontal: moderateScale(10), borderRadius: moderateScale(10), backgroundColor: "#8FC031" }}>
+                                <View style={{ paddingVertical: moderateScale(3), paddingHorizontal: moderateScale(10), borderRadius: moderateScale(10), backgroundColor: setColorCode(item) }}>
                                     <Text style={{ color: Colors.white, fontSize: moderateScale(12), textTransform: 'capitalize' }}>
                                         {DataStorage.typeOfUse == 1 ? (item.STATUS || '') : (item.status || '')}
                                     </Text>
@@ -477,17 +584,17 @@ const TrackOrderScreen = (props) => {
                             {DataStorage.typeOfUse == 1 ? formatOrderDate(item.order_date) : (item.erporderdt || '')}
                         </Text>}
                         {appOrder ? <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Destination</Text> : {item.destination_address || ''}
+                            <Text style={{ fontWeight: '600' }}>Destination</Text> : {item.destination_address || ''}
                         </Text> : <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Destination</Text> : {item.destination_name || ''}
+                            <Text style={{ fontWeight: '600' }}>Destination</Text> : {item.destination_name || ''}
                         </Text>}
                         <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Freight</Text> : {item.freight || ''}
+                            <Text style={{ fontWeight: '600' }}>Freight</Text> : {item.freight || ''}
                         </Text>
-                        {item.freight=='FOR'?<Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Plant Name</Text> : {item.plant || ''}
-                        </Text>:<Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Dump Name</Text> : {item.plant || ''}
+                        {item.freight == 'FOR' ? <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
+                            <Text style={{ fontWeight: '600' }}>Plant Name</Text> : {item.plant || ''}
+                        </Text> : <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
+                            <Text style={{ fontWeight: '600' }}>Dump Name</Text> : {item.plant || ''}
                         </Text>}
                     </TouchableOpacity>
 
@@ -511,7 +618,7 @@ const TrackOrderScreen = (props) => {
                     <TouchableOpacity activeOpacity={0.95} onPress={() => openCloseDetails(item, index)} style={{ width: "100%", padding: moderateScale(10), gap: moderateScale(3) }} >
                         <View style={{ width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                             <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500" }}>
-                                {item?.APPORDERNO || ''}
+                                {appOrder?item?.APPORDERNO || '':'Sales order no : '+item.ERPORDERNO}
                             </Text>
 
                             <View style={{ flexDirection: "row", alignItems: "center", gap: moderateScale(10) }}>
@@ -520,15 +627,14 @@ const TrackOrderScreen = (props) => {
                                         {item?.STATUS || item?.status || ''}
                                     </Text>
                                 </View>
-
+                                {DataStorage.typeOfUse == 1&&!appOrder?null:
                                 <View style={{ width: moderateScale(20), height: moderateScale(20), borderWidth: moderateScale(1), borderColor: DataStorage.primaryColorCode, alignItems: "center", justifyContent: "center" }}>
                                     <Image source={(item && item.isShowDetails) ? Icons.UpArrow : Icons.DownArrow} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: DataStorage.primaryColorCode }} />
-                                </View>
-
+                                </View>}
                             </View>
                         </View>
 
-                        {item?.ERPORDERNO ? (
+                        {appOrder&item?.ERPORDERNO ? (
                             <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
                                 {item.ERPORDERNO}
                             </Text>
@@ -539,17 +645,21 @@ const TrackOrderScreen = (props) => {
                         </Text>
 
                         <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Destination</Text> : {item?.destination_address || ''}
+                            <Text style={{ fontWeight: '600' }}>Destination</Text> : {item?.destination_address || ''}
                         </Text>
                         <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>
-                            <Text style={{fontWeight:'600'}}>Freight</Text> : {item?.freight || ''}
+                            <Text style={{ fontWeight: '600' }}>Freight</Text> : {item?.freight || ''}
                         </Text>
 
-                        {item?.freight=='FOR'?<Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Plant Name</Text> : {item?.plant || ''}
-                        </Text>:<Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
-                            <Text style={{fontWeight:'600'}}>Dump Name</Text> : {item?.plant || ''}
+                        {item?.freight == 'FOR' ? <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
+                            <Text style={{ fontWeight: '600' }}>Plant Name</Text> : {item?.plant || ''}
+                        </Text> : <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
+                            <Text style={{ fontWeight: '600' }}>Dump Name</Text> : {item?.plant || ''}
                         </Text>}
+
+                        {!appOrder&&item.STATUS.toLowerCase()=='dispatched' ? <Text style={{ color: Colors.text, fontSize: moderateScale(13) }}>
+                            <Text style={{ fontWeight: '600' }}>Truck No.</Text> : {item?.truckNo || ''}
+                        </Text> : null}
                     </TouchableOpacity>
 
                     {(item && item.isShowDetails) && item?.order_invoice_data.length > 0 && (

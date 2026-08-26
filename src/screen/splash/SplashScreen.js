@@ -30,9 +30,9 @@ const SplashScreen = () => {
       redirect: "follow"
     };
     var url = '';
-     url = UrlStorage.BaseUrlList.Saathi.base_url_saathi+"/show_latest_app_version_v2.php"
-     console.log(url);
-     
+    url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/show_latest_app_version_v2.php"
+    console.log(url);
+
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -41,8 +41,11 @@ const SplashScreen = () => {
             if (DeviceInfo.getVersion() == result.ios_app_version) {
               DataStorage.isFirstOpen = true
               checkLogin()
+            } else if (DeviceInfo.getVersion() == result.ios_app_old_version) {
+              DataStorage.isFirstOpen = true
+              checkLogin()
             } else {
-             setIsUpdate(true)
+              setIsUpdate(true)
             }
           } else {
             if (DeviceInfo.getVersion() == result.android_app_version) {

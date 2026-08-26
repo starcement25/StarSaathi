@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Image, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, Platform, Text, TextInput, TouchableOpacity, View, PermissionsAndroid } from "react-native";
 import DeviceInfo from "react-native-device-info";
 import Toast from "react-native-toast-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,12 +14,72 @@ import DataStorage from "../../storage/DataStorage";
 import { encryptToHex } from '../../helper/Crypto';
 import { httpPostCallWithXmlResponseDecrypted } from '../../helper/HttpCalling';
 import axios from 'axios';
-
+import messaging from '@react-native-firebase/messaging'
 const OTPScreen = (props) => {
     const [otp, setOtp] = useState(["", "", "", ""]);
     const [isFocused, setIsFocused] = useState(Array(otp.length).fill(false));
     const inputRefs = [];
     const [isLoading, setIsLoading] = useState(false);
+    const [registrationid, setregistrationid] = useState('');
+
+    useEffect(() => {
+        const setupNotifications = async () => {
+            if (Platform.OS === 'android' && Platform.Version >= 33) {
+                await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
+                );
+            }
+
+            const authStatus = await messaging().requestPermission();
+            const enabled =
+                authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+                authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+            if (enabled) {
+                try {
+                    const fcmToken = await messaging().getToken();
+                    setregistrationid(fcmToken)
+                    console.log('[FCM] Token:', fcmToken);
+                    // save/send fcmToken to your backend or state here
+                } catch (e) {
+                    console.log('[FCM] getToken error:', e);
+                }
+            } else {
+                console.log('[FCM] Permission denied by user.');
+            }
+        };
+
+        setupNotifications();
+
+        const unsubscribeForeground = messaging().onMessage(async remoteMessage => {
+            console.log('[FCM] Foreground message:', remoteMessage);
+        });
+
+        const unsubscribeOpen = messaging().onNotificationOpenedApp(remoteMessage => {
+            console.log('[FCM] Opened from background:', remoteMessage);
+        });
+
+        messaging()
+            .getInitialNotification()
+            .then(remoteMessage => {
+                if (remoteMessage) {
+                    console.log('[FCM] Opened from quit state:', remoteMessage);
+                }
+            });
+
+        // Optional: listen for token refresh (tokens can rotate)
+        const unsubscribeTokenRefresh = messaging().onTokenRefresh(newToken => {
+            console.log('[FCM] Token refreshed:', newToken);
+            // update backend with newToken
+        });
+
+        return () => {
+            unsubscribeForeground();
+            unsubscribeOpen();
+            unsubscribeTokenRefresh();
+        };
+    }, []);
+
 
     const handleInputChange = (text, index) => {
         const newOtp = [...otp];
@@ -83,11 +143,12 @@ const OTPScreen = (props) => {
             const formBody = new URLSearchParams();
             formBody.append('deviceId', DeviceInfo.getModel() + ":" + DeviceInfo.getDeviceId());
             formBody.append('emp_code', UrlStorage.ParameterList.BasicData.emp_code);
-            formBody.append('registrationid', '');
+            formBody.append('registrationid', registrationid);
             formBody.append('device_type', Platform.OS === 'ios' ? "iOS" : "ANDROID");
             formBody.append('app_version', DeviceInfo.getVersion());
             formBody.append('dealer_id', UrlStorage.ParameterList.BasicData.emp_id);
             formBody.append('customer_code', UrlStorage.ParameterList.BasicData.emp_code);
+            console.log(registrationid);
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -106,6 +167,37 @@ const OTPScreen = (props) => {
         }
     };
 
+     const updateRegistration1 = async () => {
+        try {
+            const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}${UrlStorage.NonAuthURL.Saathi.DashboardURL.update_firebase_token_url}`;
+            const formBody = new URLSearchParams();
+            formBody.append('deviceId', DeviceInfo.getModel() + ":" + DeviceInfo.getDeviceId());
+            formBody.append('emp_code', UrlStorage.ParameterList.BasicData.emp_code);
+            formBody.append('registrationid', registrationid);
+            formBody.append('device_type', Platform.OS === 'ios' ? "iOS" : "ANDROID");
+            formBody.append('app_version', DeviceInfo.getVersion());
+            formBody.append('dealer_id', UrlStorage.ParameterList.BasicData.emp_id);
+            formBody.append('customer_code', UrlStorage.ParameterList.BasicData.emp_code);
+            console.log(registrationid);
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': UrlStorage.ParameterList.BasicData.user_type == 'broker' ? `SAP_SP` : `SAP_DEALER` + `${UrlStorage.ParameterList.BasicData.emp_id}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formBody.toString(),
+            });
+
+            const json = await response.json();
+
+            return json;
+        } catch (e) {
+            return null;
+        }
+    };
+
+
     const requestForOtpVerification = async () => {
         try {
             setIsLoading(true);
@@ -115,8 +207,8 @@ const OTPScreen = (props) => {
                 nickname: encryptToHex(UrlStorage.ParameterList.BasicData.nick_name),
                 phonenumber: encryptToHex(UrlStorage.ParameterList.BasicData.emp_mobile_number),
                 deviceid: encryptToHex(deviceId),
-                device_type:encryptToHex(Platform.OS === 'ios' ? "iOS" : "ANDROID"),
-                app_version:encryptToHex(DeviceInfo.getVersion()),
+                device_type: encryptToHex(Platform.OS === 'ios' ? "iOS" : "ANDROID"),
+                app_version: encryptToHex(DeviceInfo.getVersion()),
                 dealer_id: encryptToHex(UrlStorage.ParameterList.BasicData.emp_id),
                 the_otp: encryptToHex(otp.join('')),
             };
@@ -125,7 +217,7 @@ const OTPScreen = (props) => {
             const decryptedResponseString = await httpPostCallWithXmlResponseDecrypted(url, JSON.stringify(encryptedPayload));
             console.log("repponse===", decryptedResponseString);
             console.log("repponse===", encryptedPayload);
-            
+
 
             if (!decryptedResponseString || decryptedResponseString === 'Network Failure') {
                 throw new Error('Network Failure');
@@ -163,6 +255,7 @@ const OTPScreen = (props) => {
 
                 setIsLoading(false);
                 updateRegistration()
+                updateRegistration1()
                 props.navigation.reset({
                     index: 0,
                     routes: [{ name: 'HomeScreen' }],
@@ -190,11 +283,11 @@ const OTPScreen = (props) => {
                 dealer_id: encryptToHex(UrlStorage.ParameterList.BasicData.emp_id),
             };
             console.log(encryptedPayload);
-            
+
 
             const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.AuthURL.login_url;
             console.log(url);
-            
+
 
             const decryptedResponseString = await httpPostCallWithXmlResponseDecrypted(url, JSON.stringify(encryptedPayload));
 
@@ -204,7 +297,7 @@ const OTPScreen = (props) => {
 
             let cleanResponse = decryptedResponseString;
             console.log(cleanResponse);
-            
+
 
             cleanResponse = cleanResponse.trim();
 
@@ -219,7 +312,7 @@ const OTPScreen = (props) => {
 
             const response = JSON.parse(cleanResponse);
             console.log(response);
-            
+
 
             setIsLoading(false);
 
@@ -230,7 +323,7 @@ const OTPScreen = (props) => {
             }
         } catch (e) {
             console.log(e);
-            
+
             setIsLoading(false);
             Toast.show({ type: 'error', text1: 'Network Error', text2: 'Please try again later', });
         }

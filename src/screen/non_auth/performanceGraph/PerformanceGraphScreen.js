@@ -166,7 +166,7 @@ const PerformanceGraphScreen = (props) => {
     }
 
     const fetchAndParseData = async (emp_code) => {
-        setLoading(true)
+        setLoading(true) 
         var a = await AuthCheckingApi();
         if (!a) {
             setAuthChecker(true)
@@ -175,7 +175,7 @@ const PerformanceGraphScreen = (props) => {
         }
         try {
             let url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DownloadDatabaseAPI.product_wise_target_achievement_TXT_download_API
-            url += `?nick_name=start&user_type=${UrlStorage.ParameterList.BasicData.user_type == 'broker' ? 'dealer' : UrlStorage.ParameterList.BasicData.user_type}&emp_code=${UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code}`
+            url += `?nick_name=start&user_type=${UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerType : UrlStorage.ParameterList.BasicData.user_type}&emp_code=${UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code}`
 
             const response = await fetch(url)
             const text = await response.text()

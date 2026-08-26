@@ -83,12 +83,12 @@ const AnimatedBar = ({ tgtValue, achValue, maxValue, barWidth, chartHeight, inde
     const safeMax = maxValue > 0 ? maxValue : 1;
 
     const tgtBarH = Math.max(0, (tgtValue / safeMax) * chartHeight);
-    const achBarH = Math.max(0, (achValue / safeMax) * chartHeight);
+    const achBarH = Math.max(0, (achValue / safeMax) * chartHeight)+10;
 
     const tgtPx = tgtAnim.interpolate({
         inputRange: [0, 1], outputRange: [0, tgtBarH],
     });
-    const achPx = achAnim.interpolate({
+    const achPx = achAnim.interpolate({ 
         inputRange: [0, 1], outputRange: [0, achBarH],
     });
 
@@ -101,7 +101,7 @@ const AnimatedBar = ({ tgtValue, achValue, maxValue, barWidth, chartHeight, inde
                     {tgtValue > 0 ? (
                         <Animated.View style={{ marginBottom: tgtPx, height: LABEL_H, justifyContent: 'flex-end', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', }}>
                             <Text style={{ width: 30, fontSize: 8, color: '#222', lineHeight: 9, textAlign: 'center' }}>
-                                {formatVal(tgtValue)}
+                                {tgtValue}
                             </Text>
                         </Animated.View>
                     ) : null}
@@ -111,12 +111,12 @@ const AnimatedBar = ({ tgtValue, achValue, maxValue, barWidth, chartHeight, inde
 
             <View style={{ width: 2 }} />
 
-            <View style={{ alignItems: 'center', width: barWidth }}>
+            <View style={{ alignItems: 'center', width: barWidth+10 }}>
                 <View style={{ height: chartHeight + LABEL_H, justifyContent: 'flex-end' }}>
                     {achValue > 0 ? (
-                        <Animated.View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', marginBottom: achPx, height: LABEL_H, justifyContent: 'flex-end', }}>
+                        <Animated.View style={{ width:'100%',marginLeft:-5,position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', marginBottom: achPx, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 8, color: '#222', lineHeight: 9 }}>
-                                {formatVal(achValue)}
+                                {achValue}
                             </Text>
                         </Animated.View>
                     ) : null}
@@ -312,6 +312,8 @@ const NewProductWiseProductScreen = (props) => {
     }
 
     const dataSetShow = (result) => {
+        console.log(result);
+        
         if (result?.target_ach_data?.length > 0) {
             const filtered = result.target_ach_data.filter(
                 item => {

@@ -51,11 +51,11 @@ const LedgerScreen = (props) => {
   const requestForLedgerList = async () => {
     //setLoading(true)
     var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+    if (!a) {
+      setAuthChecker(true)
+      setLoading(false)
+      return false
+    }
     const requestOptions = {
       method: "GET",
       redirect: "follow"
@@ -63,12 +63,19 @@ const LedgerScreen = (props) => {
     var url = ""
 
     if (UrlStorage.ParameterList.BasicData.user_type == "broker") {
-      url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LedgerURL.other_ledger_list_url + "?the_id=" + UrlStorage.ParameterList.BasicData.customerDetails.customer_code
+      if (UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'dealer') {
+        url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LedgerURL.other_ledger_list_url + "?the_id=" + UrlStorage.ParameterList.BasicData.customerDetails.customer_code
+      } else {
+        url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LedgerURL.dealer_ledger_list_url + "?the_id=" + UrlStorage.ParameterList.BasicData.customerDetails.customer_code + "&user_type=" + UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase()
+      }
     } else if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer") {
       url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LedgerURL.other_ledger_list_url + "?the_id=" + UrlStorage.ParameterList.BasicData.emp_code
     } else {
       url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LedgerURL.dealer_ledger_list_url + "?the_id=" + UrlStorage.ParameterList.BasicData.emp_code + "&user_type=rssd"
     }
+
+    console.log(url);
+
 
     try {
       const response = await fetch(url, requestOptions)
@@ -82,24 +89,39 @@ const LedgerScreen = (props) => {
       const result = JSON.parse(rawText)
 
       if (result.process_status == 'YES') {
-
-        if (UrlStorage.ParameterList.BasicData.user_type == "broker" || UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer") {
+        if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer") {
           setLedgerList(result.ledger_data)
           setLedgerBalanceData(result.ledger_balance_data)
-        } else {
-          const sorted = result.ledger_data.sort((a, b) => {
-            const [monthA, dayA, yearA] = a.voucher_date.split("/").map(Number);
-            const [monthB, dayB, yearB] = b.voucher_date.split("/").map(Number);
+        } else if (UrlStorage.ParameterList.BasicData.user_type == "broker") {
+          if (UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == "dealer") {
+            setLedgerList(result.ledger_data)
+            setLedgerBalanceData(result.ledger_balance_data)
+          } else {
+            const sorted = result.ledger_data.sort((a, b) => {
+              const [monthA, dayA, yearA] = a.voucher_date.split("/").map(Number);
+              const [monthB, dayB, yearB] = b.voucher_date.split("/").map(Number);
 
-            const dateA = new Date(yearA, monthA - 1, dayA);
-            const dateB = new Date(yearB, monthB - 1, dayB);
+              const dateA = new Date(yearA, monthA - 1, dayA);
+              const dateB = new Date(yearB, monthB - 1, dayB);
 
-            return dateB - dateA; // newest first
-          });
+              return dateB - dateA; // newest first
+            });
+            setLedgerList(sorted)
+            setLedgerBalanceData(result.ledger_balance_data)
+          }
+        }else {
+            const sorted = result.ledger_data.sort((a, b) => {
+              const [monthA, dayA, yearA] = a.voucher_date.split("/").map(Number);
+              const [monthB, dayB, yearB] = b.voucher_date.split("/").map(Number);
 
-          setLedgerList(sorted)
-          setLedgerBalanceData(result.ledger_balance_data)
-        }
+              const dateA = new Date(yearA, monthA - 1, dayA);
+              const dateB = new Date(yearB, monthB - 1, dayB);
+
+              return dateB - dateA; // newest first
+            });
+            setLedgerList(sorted)
+            setLedgerBalanceData(result.ledger_balance_data)
+          }
       } else {
         Toast.show({ type: 'error', text1: 'Sorry', text2: result.process_message })
       }
@@ -120,11 +142,11 @@ const LedgerScreen = (props) => {
   //=======SBS Ledger ======
   const requestForLedgerListSBS = async () => {
     var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+    if (!a) {
+      setAuthChecker(true)
+      setLoading(false)
+      return false
+    }
     const requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -347,7 +369,7 @@ const LedgerScreen = (props) => {
       <View style={{ width: "100%", height: "100%", backgroundColor: Colors.white }}>
         <SBSCommonHeaderView title={DataStorage.typeOfUse === 1 ? "Last 50 Transaction" : "Ledger Balance"} backPath=" " Information={true} gotoLink={gotoLink} />
         <View style={{ width: "100%", flex: 1 }}>
-          <View style={{ width: "100%", height: UrlStorage.ParameterList.BasicData.user_type != "broker" && UrlStorage.ParameterList.BasicData.user_type != "Dealer" ? moderateScale(130) : moderateScale(220), marginBottom: moderateScale(20) }}>
+          <View style={{ width: "100%", height: UrlStorage.ParameterList.BasicData.user_type != "Dealer" && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() != 'dealer' ? moderateScale(130) : moderateScale(220), marginBottom: moderateScale(20) }}>
             <ImageBackground source={Icons.BlurBg} style={{ width: "100%", alignItems: "center", justifyContent: "center" }} imageStyle={{ resizeMode: "cover" }}>
               <View style={{ width: "100%", padding: moderateScale(20), gap: moderateScale(20), }}>
                 <View style={{ padding: moderateScale(20), backgroundColor: "#00000042", borderRadius: moderateScale(10), borderWidth: moderateScale(1), borderColor: DataStorage.primaryColorCode, gap: moderateScale(8), alignItems: "center", justifyContent: "center" }}>
@@ -356,7 +378,7 @@ const LedgerScreen = (props) => {
                   <Text style={{ color: "#FFFFFF", fontSize: moderateScale(13) }}>*Last 50 Transaction as on {moment(new Date(), 'MM/DD/YYYY').format('MMM DD, YYYY')}</Text>
                 </View>
 
-                {UrlStorage.ParameterList.BasicData.user_type != "broker" && UrlStorage.ParameterList.BasicData.user_type != "Dealer" ? null : <View style={{ width: "100%", flexDirection: "row", alignItems: "center", gap: moderateScale(20) }}>
+                {UrlStorage.ParameterList.BasicData.user_type != "Dealer" && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() != 'dealer' ? null : <View style={{ width: "100%", flexDirection: "row", alignItems: "center", gap: moderateScale(20) }}>
                   <TouchableOpacity activeOpacity={0.95} style={{ flex: 1 }}>
                     <View style={{ width: "100%", backgroundColor: "#8FC031", borderRadius: moderateScale(10), padding: moderateScale(10), alignItems: "center", justifyContent: "center" }}>
                       <Text style={{ color: Colors.white, fontSize: moderateScale(14), fontWeight: "500" }}>Confirm Balance</Text>
@@ -382,7 +404,10 @@ const LedgerScreen = (props) => {
 
                 }} activeOpacity={0.95} style={{ paddingHorizontal: moderateScale(10), paddingVertical: moderateScale(7) }}>
                   {DataStorage.typeOfUse === 1 ? renderItemDealer(item) :
-                    UrlStorage.ParameterList.BasicData.user_type == "broker" || UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer" ? renderItemDealer(item) : renderItemSubDealer(item)
+                    UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer" 
+                      ? renderItemDealer(item) : 
+                        UrlStorage.ParameterList.BasicData.user_type == "broker" && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'dealer' ?
+                          renderItemDealer(item) : renderItemSubDealer(item)
                   }
                 </TouchableOpacity>
               )}
@@ -405,7 +430,7 @@ const LedgerScreen = (props) => {
           </View>
         )}
 
-        {UrlStorage.ParameterList.BasicData.user_type != "broker" && UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() != "dealer" ? null : ledgerList?.length > 0 && <TouchableOpacity activeOpacity={0.95} onPress={handleDownloadButtonPress}>
+        {UrlStorage.ParameterList.BasicData.user_type != "Dealer" && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() != 'dealer' ? null : ledgerList?.length > 0 && <TouchableOpacity activeOpacity={0.95} onPress={handleDownloadButtonPress}>
           <View style={{ width: "100%", paddingHorizontal: moderateScale(15) }}>
             <View style={{ width: "100%", height: moderateScale(40), flexDirection: "row", gap: moderateScale(8), backgroundColor: DataStorage.primaryColorCode, borderRadius: moderateScale(10), alignItems: "center", justifyContent: "center" }}>
               <Image source={Icons.Download} style={{ width: moderateScale(18), height: moderateScale(21) }} />

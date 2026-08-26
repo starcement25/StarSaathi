@@ -76,6 +76,7 @@ import ProductWisePerformanceDetails from './src/screen/non_auth/productWisePerf
 import HomeSliderScreen from './src/screen/non_auth/HomeSliderScreen';
 
 import DealerDeclarationScreen from './src/screen/non_auth/declaration/DealerDeclarationScreen';
+import DealerDeclarationHistoryScreen from './src/screen/non_auth/declaration/DealerDeclarationHistoryScreen';
 import KismatKiBoriScreen from './src/screen/non_auth/bori/KismatKiBoriScreen';
 import NotificationScreen from './src/screen/non_auth/notification/NotificationScreen';
 import AddNewLiftingScreen from './src/screen/non_auth/liftingHistory/AddNewLiftingScreen';
@@ -92,6 +93,12 @@ import PerformanceGraphSLCT from './src/screen/non_auth/slct/PerformanceGraphSLC
 // Outstanding
 import OutstandingSummaryScreen from './src/screen/non_auth/outstanding/OutStandingSummary';
 import OverdueInvoicesScreen from './src/screen/non_auth/outstanding/OverdueInvoicesScreen';
+import DeliveryTrackOrderScreen from './src/screen/non_auth/deliveryTrackOrder/DeliveryTrackOrderScreen';
+import DeliveryTrackOrderDetails from './src/screen/non_auth/deliveryTrackOrder/DeliveryTrackOrderDetails';
+import DeliveryComplainScreen from './src/screen/non_auth/deliveryTrackOrder/DeliveryComplainScreen';
+import OverdueInvoicesListScreen from './src/screen/non_auth/outstanding/OverdueInvoicesListScreen';
+
+import GSTScreen from './src/screen/non_auth/gst/GSTScreen';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = props => {
@@ -148,6 +155,7 @@ const MainStack = () => (
         <Stack.Screen name="ProductWisePerformanceDetails" component={ProductWisePerformanceDetails} />
         <Stack.Screen name="HomeSliderScreen" component={HomeSliderScreen} />
         <Stack.Screen name="DealerDeclarationScreen" component={DealerDeclarationScreen} />
+        <Stack.Screen name="DealerDeclarationHistoryScreen" component={DealerDeclarationHistoryScreen} />
         <Stack.Screen name="KismatKiBoriScreen" component={KismatKiBoriScreen} />
         <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
         <Stack.Screen name="AddNewLiftingScreen" component={AddNewLiftingScreen} />
@@ -156,6 +164,11 @@ const MainStack = () => (
         <Stack.Screen name="PerformanceGraphSLCT" component={PerformanceGraphSLCT} />
         <Stack.Screen name="OutstandingSummaryScreen" component={OutstandingSummaryScreen} />
         <Stack.Screen name="OverdueInvoicesScreen" component={OverdueInvoicesScreen} />
+        <Stack.Screen name="DeliveryTrackOrderScreen" component={DeliveryTrackOrderScreen} />
+        <Stack.Screen name="DeliveryTrackOrderDetails" component={DeliveryTrackOrderDetails} />
+        <Stack.Screen name="DeliveryComplainScreen" component={DeliveryComplainScreen} />
+        <Stack.Screen name="OverdueInvoicesListScreen" component={OverdueInvoicesListScreen} />
+        <Stack.Screen name="GSTScreen" component={GSTScreen} />
     </Stack.Navigator>
 );
 

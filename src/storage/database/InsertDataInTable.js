@@ -692,21 +692,38 @@ export const insertDataIn_emp_master = (data) => {
 
 // branch_master INSERT
 export const insertDataIn_branch_master = (data) => {
-    if (!data) {
-        return false;
-    } else {
-        db.transaction(txn => {
-            for (let i = 0; i < data.length; ++i)
-                txn.executeSql(
-                    `INSERT INTO branch_master(company_code, branch_code, branch_name, Hq, plant_name) VALUES ( ?, ?, ?, ?, ? )`,
-                    [
-                        data[i].company_code, data[i].branch_code, data[i].branch_name, data[i].Hq, data[i].plant_name
-                    ],
-                    (sqlTxn, res) => { },
-                    error => { },
-                );
-        });
+    console.log('First row:', data?.[0]);
+
+    if (!data || data.length === 0) {
+        return Promise.resolve(false);
     }
+
+    return new Promise((resolve, reject) => {
+        db.transaction(
+            txn => {
+                data.forEach((row, i) => {
+                    txn.executeSql(
+                        `INSERT INTO branch_master(company_code, branch_code, branch_name, Hq, plant_name) VALUES (?, ?, ?, ?, ?)`,
+                        [row.company_code, row.branch_code, row.branch_name, row.Hq, row.plant_name],
+                        (sqlTxn, res) => {
+                            console.log(`Row ${i} inserted, insertId:`, res.insertId);
+                        },
+                        error => {
+                            console.log(`Row ${i} insert error:`, error, row);
+                        }
+                    );
+                });
+            },
+            error => {
+                console.log('Transaction failed:', error);
+                reject(error);
+            },
+            () => {
+                console.log('Transaction complete — all rows committed');
+                resolve(true);
+            }
+        );
+    });
 }
 
 // vendor_master INSERT
