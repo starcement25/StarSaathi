@@ -22,51 +22,48 @@ const AgeingScreen = () => {
 
     const requestForAgeingListCement = async () => {
         setLoading(true)
-
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
         }
-        const requestOptions = { method: "GET", redirect: "follow" };
+        const requestOptions = { method: "GET", redirect: "follow" }
         var url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.AgeingURL.dealer_wise_ageing_list_url
         url = url + "?customer_code=" + UrlStorage.ParameterList.BasicData.emp_id
         await fetch(url, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                if (result.process_status == 'YES') {
+                if (result.process_status == 'YES')
                     setAgeingList(result.ageing_data)
-                }
                 setLoading(false)
             })
             .catch((error) => {
                 setLoading(false)
-            });
+            })
     }
 
     const requestForAgeingListSBS = async () => {
         setLoading(true)
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
         }
-        const requestOptions = { method: "GET", redirect: "follow" };
+        const requestOptions = { method: "GET", redirect: "follow" }
         var url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.AgeingURL.dealer_wise_ageing_list_url
         url = url + "?customer_code=" + UrlStorage.ParameterList.BasicData.emp_id
         await fetch(url, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                if (result.process_status == 'YES') {
+                if (result.process_status == 'YES')
                     setAgeingList(result.ageing_data)
-                }
                 setLoading(false)
             })
             .catch((error) => {
                 setLoading(false)
-            });
+            })
     }
 
     return (

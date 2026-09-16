@@ -1,17 +1,16 @@
-import React, { useEffect } from 'react';
-import { Alert, BackHandler, Image, Text, TouchableOpacity, View } from 'react-native';
-import { moderateScale } from '../helper/Window';
-import { Icons } from '../assets/Icons';
-import { useNavigation } from '@react-navigation/native';
-import UrlStorage from '../storage/UrlStorage';
+import React from 'react'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { moderateScale } from '../helper/Window'
+import { Icons } from '../assets/Icons'
+import { useNavigation } from '@react-navigation/native'
 
 const AgeingHeaderView = (props) => {
-    const { title, subTitle = '', Information = false } = props;
-    const navigation = useNavigation();
+    const { title, subTitle = '', Information = false } = props
+    const navigation = useNavigation()
 
     const handleBackPress = () => {
-        navigation.goBack();
-    };
+        navigation.goBack()
+    }
 
     return (
         <View style={{ width: "100%", height: moderateScale(60), padding: moderateScale(10), backgroundColor: "#E41B14", flexDirection: "row", alignItems: "center", justifyContent: "center", }} >
@@ -21,12 +20,8 @@ const AgeingHeaderView = (props) => {
                 </View>
             </TouchableOpacity>
             <View style={{ flex: 1, flexDirection: 'column', paddingHorizontal: moderateScale(15), justifyContent: 'center' }}>
-                <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}>
-                    {title}
-                </Text>
-                {subTitle != '' ? <Text style={{ color: "#FFFFFF", fontSize: moderateScale(10), fontWeight: "400" }}>
-                    {subTitle}
-                </Text> : null}
+                <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}> {title} </Text>
+                {subTitle != '' ? <Text style={{ color: "#FFFFFF", fontSize: moderateScale(10), fontWeight: "400" }}> {subTitle} </Text> : null}
             </View>
             <View style={{ flexDirection: "row", gap: moderateScale(10) }}>
                 {Information ? <TouchableOpacity onPress={() => gotoLink()}>
@@ -34,7 +29,7 @@ const AgeingHeaderView = (props) => {
                 </TouchableOpacity> : null}
             </View>
         </View>
-    );
-};
+    )
+}
 
-export default AgeingHeaderView;
+export default AgeingHeaderView

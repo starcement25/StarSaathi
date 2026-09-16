@@ -14,7 +14,7 @@ const SubDealerList = [
 ]
 
 const SubDealerView = (props) => {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
     const [checked, setChecked] = useState(false)
     const CheckedHandler = () => {
         setChecked(!checked)
@@ -62,7 +62,7 @@ const SubDealerView = (props) => {
                                             <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}>All In One Solution</Text>
                                         </View>
                                     </TouchableOpacity>
-                                );
+                                )
                             }} />
                     </View>
                     <TouchableOpacity activeOpacity={0.95} onPress={() => { navigation.navigate("AllocationScreen") }}>

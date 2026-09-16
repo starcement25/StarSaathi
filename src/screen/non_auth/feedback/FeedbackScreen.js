@@ -39,38 +39,35 @@ const FeedbackScreen = (props) => {
     }, [ratingCount])
 
     const checkData = () => {
-        if (ratingCount == 0) {
+        if (ratingCount == 0)
             Toast.show({ type: 'error', text1: 'Sorry', text2: 'Please select your rating first.' })
-        } else if (review.trim() == '') {
+        else if (review.trim() == '')
             Toast.show({ type: 'error', text1: 'Sorry', text2: 'Please share your feedback' })
-        } else {
+        else
             requestForShareFeedback()
-        }
     }
 
     const requestForShareFeedback = async () => {
-        const formdata = new FormData();
-        formdata.append("customer_id", UrlStorage.ParameterList.BasicData.emp_id);
-        formdata.append("emp_code", DataStorage.feedback_customer_id);
-        formdata.append("visit_datetime", DataStorage.feedback_visit_date);
-        formdata.append("survey_rating", ratingCount.toString());
-        formdata.append("remarks", review);
-
-        var a = await AuthCheckingApi();
+        const formdata = new FormData()
+        formdata.append("customer_id", UrlStorage.ParameterList.BasicData.emp_id)
+        formdata.append("emp_code", DataStorage.feedback_customer_id)
+        formdata.append("visit_datetime", DataStorage.feedback_visit_date)
+        formdata.append("survey_rating", ratingCount.toString())
+        formdata.append("remarks", review)
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
         }
-
-        const requestOptions = { method: "POST", body: formdata, redirect: "follow" };
+        const requestOptions = { method: "POST", body: formdata, redirect: "follow" }
         var url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.SalesVisitFeedbackURL.sales_visit_feedback_create_url
         fetch(url, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                if (result.process_status == 'NO') {
+                if (result.process_status == 'NO')
                     Toast.show({ type: 'error', text1: 'Sorry', text2: result.process_message })
-                } else {
+                else {
                     Toast.show({ type: 'success', text1: 'Success', text2: result.process_message })
                     setTimeout(() => {
                         props.navigation.pop()
@@ -78,7 +75,7 @@ const FeedbackScreen = (props) => {
                 }
             })
             .catch((error) => {
-            });
+            })
     }
 
     return (

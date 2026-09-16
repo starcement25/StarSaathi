@@ -4,13 +4,12 @@ import SafeView from '../../../helper/SafeView'
 import { Colors } from '../../../assets/Colors'
 import { moderateScale } from '../../../helper/Window'
 import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView'
-import { Icons } from '../../../assets/Icons'
 import DataStorage from '../../../storage/DataStorage'
 
 const CartScreen = (props) => {
     const [productList, setProductList] = useState(DataStorage.popProductList)
     const [totalPrice, setTotalPrice] = useState(0)
-    const { arr } = props.route.params;
+    const { arr } = props.route.params
 
     useEffect(() => {
         var total = 0
@@ -19,22 +18,6 @@ const CartScreen = (props) => {
         }
         setTotalPrice(total)
     }, [productList])
-
-    const decrementHandler = (item, index) => {
-        setProductList(prevList =>
-            prevList.map((item, i) =>
-                i === index ? { ...item, count: parseInt(item.count) != 0 || parseInt(item.count) != '' ? parseInt(item.count) - 1 : parseInt(item.count) } : item
-            )
-        );
-    };
-
-    const incrementHandler = (item, index) => {
-        setProductList(prevList =>
-            prevList.map((item, i) =>
-                i === index ? { ...item, count: item.count == '' ? 1 : parseInt(item.count) + 1 } : item
-            )
-        );
-    };
 
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
@@ -58,13 +41,7 @@ const CartScreen = (props) => {
                                             </View>
                                         </View>
                                         <View style={{ paddingVertical: moderateScale(4), paddingHorizontal: moderateScale(6), borderRadius: moderateScale(10), borderWidth: moderateScale(1), borderColor: DataStorage.primaryColorCode, backgroundColor: DataStorage.transColorCode, flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: moderateScale(14) }}>
-                                            {/* <TouchableOpacity activeOpacity={0.95} onPress={() => decrementHandler(item, index)}>
-                                                <Image source={Icons.MinusSign} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: DataStorage.primaryColorCode }} />
-                                            </TouchableOpacity> */}
                                             <Text style={{ color: "#000000", fontSize: moderateScale(16), fontWeight: "500", paddingHorizontal: moderateScale(10) }}>{item.count}</Text>
-                                            {/* <TouchableOpacity activeOpacity={0.95} onPress={() => incrementHandler(item, index)}>
-                                                <Image source={Icons.AddSign} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: DataStorage.primaryColorCode }} />
-                                            </TouchableOpacity> */}
                                         </View>
                                     </View>
                                     <View style={{ width: "100%", gap: moderateScale(8), padding: moderateScale(10), borderRadius: moderateScale(10), backgroundColor: DataStorage.transColorCode }}>

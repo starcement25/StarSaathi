@@ -1,4 +1,4 @@
-import { BaseToast, ErrorToast, InfoToast } from "react-native-toast-message";
+import { BaseToast, ErrorToast, InfoToast } from "react-native-toast-message"
 
 const toastConfig = {
   success: (props) => (
@@ -25,6 +25,6 @@ const toastConfig = {
       text2Style={{ fontSize: 12 }}
       text2NumberOfLines={3} />
   )
-};
+}
 
 export default toastConfig

@@ -10,9 +10,9 @@ const DumpListPopupView = (props) => {
     const [filteredData, setFilteredData] = useState(props.dataList || [])
 
     useEffect(() => {
-        if (!searchText.trim()) {
+        if (!searchText.trim())
             setFilteredData(props.dataList)
-        } else {
+        else {
             const lowerSearch = searchText.toLowerCase()
             const filtered = props.dataList.filter(item =>
                 item.dump_name?.toLowerCase().includes(lowerSearch)
@@ -36,17 +36,12 @@ const DumpListPopupView = (props) => {
                 </TouchableOpacity>
 
                 <View style={{ width: "100%", height: '75%', backgroundColor: Colors.main, borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
-                    {/* Header */}
                     <View style={{ width: "100%", padding: moderateScale(20), backgroundColor: "#E41B14", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
                         <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}>Select Dump Name</Text>
                     </View>
-
-                    {/* Search Box */}
                     <View style={{ padding: moderateScale(15), backgroundColor: "#fff", borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
                         <TextInput placeholder="Search by dump name..." value={searchText} onChangeText={setSearchText} style={{ height: moderateScale(40), borderWidth: 1, borderColor: "#ccc", borderRadius: moderateScale(10), paddingHorizontal: moderateScale(10), fontSize: moderateScale(14), color: Colors.text }} />
                     </View>
-
-                    {/* List */}
                     <View style={{ width: "100%", flex: 1, backgroundColor: "#ffffff", paddingVertical: moderateScale(10), }}>
                         <FlatList
                             data={filteredData}

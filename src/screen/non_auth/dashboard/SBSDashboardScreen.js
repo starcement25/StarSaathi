@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Alert, Dimensions, FlatList, Image, Linking, Modal, Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View, } from "react-native";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Alert, Dimensions, FlatList, Image, Linking, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { parseString } from "react-native-xml2js";
 import Toast from "react-native-toast-message";
-import DeviceInfo from "react-native-device-info";
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SbsHeaderView from "../../../common/SbsHeaderView";
 import SafeView from "../../../helper/SafeView";
@@ -19,7 +18,6 @@ import { insertDataIn_branch_dump, insertDataIn_branch_master, insertDataIn_bran
 import toastConfig from "../../../helper/ToastConfig";
 import ShipToSelfListPopupViewNew from "../../../common/ShipToSelfListPopupViewNew";
 import Loader from "../../../common/Loader";
-import { getAllDataFrom_customer_master } from "../../../storage/database/GetDataFromTable";
 import LoadingWithText from "../../../common/LoadingWithText";
 import DashboardDataStorage from "../../../storage/DashboardDataStorage";
 import ReactNativeModal from "react-native-modal";
@@ -29,23 +27,13 @@ import AuthNotVerifyPopupView from "../../../auth/AuthNotVerifyPopupView";
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-// ---------------------------------------------------------------------------
-// STATIC DATA
-// ---------------------------------------------------------------------------
-
 const DASHBOARD_LIST_FOR_SBS = [
-  // { id: "order", title: "Order", icon: Icons.SbsOrder, screen: "OrderScreen" }, //new add
   { id: "gst_menu", title: "GSTIN Update Confirmation", icon: Icons.SBSGST, screen: "GSTScreen" },
   { id: "track_order", title: "Track Order", icon: Icons.SbsTrackOrder, screen: "TrackOrderScreen" },
   { id: "ledger", title: "Last 50 Transaction", icon: Icons.SbsLedger, screen: "LedgerScreen" },
   { id: "performance", title: "Performance", icon: Icons.SbsPerformance, screen: "SBSPerformanceGraphScreen" },
   { id: "performance_product_wise", title: "Performance\n(Product Wise)", icon: Icons.SbsProductPerformance, screen: "SBSProductWiseProductScreen" },
   { id: "scheme", title: "Scheme", icon: Icons.SbsScheme, screen: "SBSSchemeScreen" },
-  // { id: "retailer_lifting", title: "Retailer Lifting", icon: Icons.SbsRetailorLifting, screen: "ListingHistoryScreen" }, //new add
-  // { id: "pop_order", title: "Pop Order", icon: Icons.SbsPop, screen: "POPOrderScreen" }, //new add
-  // { id: "mason_lifting_approval", title: "Mason Lifting Approval", icon: Icons.SbsMasonLifting, screen: "" }, //new add
-  // { id: "pending_invoices", title: "Pending Invoices", icon: Icons.SbsPendingInvoice, screen: "PendingInvoicesScreen" }, //new add
-  // { id: "order_enquiry", title: "Order Enquiry", icon: Icons.SbsOrderEnquiry, screen: "OrderEnquiryScreen" }, //new add
   { id: "greetings", title: "Greetings", icon: Icons.SbsGreetings, screen: "" },
 ];
 
@@ -72,7 +60,7 @@ const BROKER_DASHBOARD_LIST = [
   { id: "pop_order", title: "Pop Order", icon: Icons.CementPop, screen: "POPOrderScreen" },
   { id: "mason_lifting_approval", title: "Mason Lifting Approval", icon: Icons.CementMasonLifting, screen: "" },
   { id: "pending_invoices", title: "Pending Invoices", icon: Icons.CementPendingInvoice, screen: "PendingInvoicesScreen" },
-  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "OutstandingSummaryScreen" },
+  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "AgeingScreen" },
   { id: "order_enquiry", title: "Order Enquiry", icon: Icons.CementOrderEnquiry, screen: "OrderEnquiryScreen" },
   { id: "rewards", title: "Rewards", icon: Icons.CementRewards, screen: "" },
   { id: "greetings", title: "Greetings", icon: Icons.CementGreetings, screen: "" },
@@ -82,25 +70,21 @@ const DEALER_DASHBOARD_LIST = [
   { id: "gst_menu", title: "GSTIN Update Confirmation", icon: Icons.GST, screen: "GSTScreen" },
   { id: "order", title: "Order", icon: Icons.CementOrder, screen: "OrderScreen" },
   { id: "track_order", title: "Track Order", icon: Icons.CementTrackOrder, screen: "TrackOrderScreen" },
-  // { id: "outstanding_summary", title: "Outstanding\nSummary", icon: Icons.OutstandingSummaryIcon, screen: "OutstandingSummaryScreen" },
   { id: "ledger", title: "Ledger", icon: Icons.CementLedger, screen: "LedgerScreen" },
   { id: "scheme", title: "Scheme", icon: Icons.CementScheme, screen: "SchemeScreen" },
   { id: "performance", title: "Performance\n(Month Wise)", icon: Icons.CementPerformance, screen: "PerformanceGraphScreen" },
   { id: "performance_product_wise", title: "Performance\n(Product Wise)", icon: Icons.CementProductPerformance, screen: "ProductWiseProductScreen" },
-  // { id: "PerformanceGraphSLCT", title: "Performance Graph SLCT", icon: Icons.SlctIcon, screen: "PerformanceGraphSLCT" },
   { id: "tour", title: "Tour", icon: Icons.CementTour, screen: "" },
   { id: "engagements", title: "Engagements", icon: Icons.CementEngagement, screen: "" },
-  { id: "retailer_lifting", title: "Retailer Lifting", icon: Icons.CementRetailorLifting, screen: "ListingHistoryScreen" },
+  { id: "retailer_lifting", title: "Retailer Lifting", icon: Icons.CementRetailorLifting, screen: "AssignedScreen" },
   { id: "pop_order", title: "Pop Order", icon: Icons.CementPop, screen: "POPOrderScreen" },
   { id: "mason_lifting_approval", title: "Mason Lifting Approval", icon: Icons.CementMasonLifting, screen: "" },
   { id: "pending_invoices", title: "Pending Invoices", icon: Icons.CementPendingInvoice, screen: "PendingInvoicesScreen" },
-  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "OutstandingSummaryScreen" },
+  { id: "ageing", title: "Ageing", icon: Icons.CementAgeing, screen: "AgeingScreen" },
   { id: "order_enquiry", title: "Order Enquiry", icon: Icons.CementOrderEnquiry, screen: "OrderEnquiryScreen" },
   { id: "rewards", title: "Rewards", icon: Icons.CementRewards, screen: "" },
   { id: "greetings", title: "Greetings", icon: Icons.CementGreetings, screen: "" },
   { id: "sales_visit_feedback", title: "Sales Visit Feedback", icon: Icons.CementFeedback, screen: "FeedbackListScreen" },
-  // { id: "delivery_track_order", title: "Delivery Track Order", icon: Icons.DeliveryTrackOrderIcon, screen: "DeliveryTrackOrderScreen" },
-  // { id: "delivery_complain", title: "Delivery Complain", icon: Icons.TrackOrderComplainIcon, screen: "DeliveryComplainScreen" },
 ];
 
 const OTHER_DASHBOARD_LIST = [
@@ -109,9 +93,8 @@ const OTHER_DASHBOARD_LIST = [
   { id: "ledger", title: "Ledger", icon: Icons.CementLedger, screen: "LedgerScreen" },
   { id: "performance", title: "Performance\n(Month Wise)", icon: Icons.CementPerformance, screen: "PerformanceGraphScreen" },
   { id: "performance_product_wise", title: "Performance\n(Product Wise)", icon: Icons.CementProductPerformance, screen: "ProductWiseProductScreen" },
-  // { id: "PerformanceGraphSLCT", title: "Performance Graph SLCT", icon: Icons.SlctIcon, screen: "PerformanceGraphSLCT" },
   { id: "scheme", title: "Scheme", icon: Icons.CementScheme, screen: "SchemeScreen" },
-  { id: "retailer_lifting", title: "Retailer Lifting", icon: Icons.CementRetailorLifting, screen: "ListingHistoryScreen" },
+  { id: "retailer_lifting", title: "Retailer Lifting", icon: Icons.CementRetailorLifting, screen: "AssignedScreen" },
   { id: "pop_order", title: "Pop Order", icon: Icons.CementPop, screen: "POPOrderScreen" },
   { id: "mason_lifting_approval", title: "Mason Lifting Approval", icon: Icons.CementMasonLifting, screen: "" },
   { id: "rsar_lifting_allocation", title: "RSAR Lifting Allocation", icon: Icons.RSSD, screen: "RssdLiftingAllocationScreen" },
@@ -120,17 +103,6 @@ const OTHER_DASHBOARD_LIST = [
   { id: "greetings", title: "Greetings", icon: Icons.CementGreetings, screen: "" },
   { id: "sales_visit_feedback", title: "Sales Visit Feedback", icon: Icons.CementFeedback, screen: "FeedbackListScreen" },
 ];
-
-// ---------------------------------------------------------------------------
-// HELPERS
-// ---------------------------------------------------------------------------
-
-const isBrokerOrDealer = () => {
-  //Alert.alert(UrlStorage.ParameterList.BasicData.user_type?.toLowerCase())
-
-  const t = UrlStorage.ParameterList.BasicData.user_type?.toLowerCase();
-  return t === "broker" || t === "dealer";
-};
 
 const generateCode = (count) => {
   const chars = "ABCDEhijklmnoFGHIJKLMSTUVWXYZabcdefgpxyz01234qrstuvw56NOPQR789";
@@ -143,10 +115,6 @@ const generateCode = (count) => {
 
 const TEXT_PRIMARY = "#111111";
 const TEXT_SECONDARY = "#666666";
-// ---------------------------------------------------------------------------
-// COMPONENT
-// ---------------------------------------------------------------------------
-
 const SBSDashboardScreen = (props) => {
   const navigation = useNavigation();
 
@@ -170,7 +138,6 @@ const SBSDashboardScreen = (props) => {
   const [categoryList, setCategoryList] = useState([]);
   const [showCreditLimit, setShowCreditLimit] = useState(false);
 
-  // Birth Day Popup
   const [isShowBirthDayCollectPopup, setIsShowBirthDayCollectPopup] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState("Enter Your Date of Birth");
   const [showStartDatePicker, setShowStartDatePicker] = useState(false);
@@ -196,8 +163,6 @@ const SBSDashboardScreen = (props) => {
     }
   }, [selectedCustomerType]);
 
-
-
   useEffect(() => {
     const init = async () => {
       const requestOptions = {
@@ -212,11 +177,9 @@ const SBSDashboardScreen = (props) => {
         return;
       }
 
-      fetch("https://starsaathi.com/SAP/acedns_star_slider.php", requestOptions)
+      fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/acedns_star_slider.php", requestOptions)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
-
           setBannerList(result.start_slider_data);
         })
         .catch(() => { });
@@ -236,19 +199,13 @@ const SBSDashboardScreen = (props) => {
       method: "GET",
       redirect: "follow"
     };
-    fetch("https://starsaathi.com/SAP/pending_notification_count_v3.php?the_id=" + UrlStorage.ParameterList.BasicData.customer_code, requestOptions)
+    fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/pending_notification_count_v3.php?the_id=" + UrlStorage.ParameterList.BasicData.customer_code, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log('hit Notificaion');
-
         setNotificationCount(result.pending_count);
       })
       .catch(() => { });
   }
-
-  // -------------------------------------------------------------------------
-  // Stable callbacks
-  // -------------------------------------------------------------------------
 
   const openCloseDropDownPopup = useCallback(() => {
     setDealerListPopUpOpen((prev) => !prev);
@@ -262,28 +219,16 @@ const SBSDashboardScreen = (props) => {
     props.navigation.navigate("NotificationScreen");
   }, [props.navigation]);
 
-  // -------------------------------------------------------------------------
-  // API helpers
-  // -------------------------------------------------------------------------
-
   const requestForCheckRewardForDealerFromSP = async (item) => {
-    console.log('dasdadsasdasdasda', item);
-
     const rewardsForm = new FormData();
     rewardsForm.append("user_type", item.cust_type);
     rewardsForm.append("emp_code", item.SAP_code);
-    // {"_parts": [["user_type", "dealer"], ["emp_code", "1000000470"]]}
-
     const tourForm = new FormData();
     tourForm.append("user_type", item.cust_type);
     tourForm.append("emp_code", item.customer_code);
-    // {"_parts": [["user_type", "dealer"], ["emp_code", "C/0000408"]]}
-
     const engagementsForm = new FormData();
     engagementsForm.append("mobileNumber", item.phone_no);
     engagementsForm.append("sessionToken", generateCode(16));
-    // {"_parts": [["mobileNumber", "9954230208"], ["sessionToken", "tlrQ9nuGpkp39B7F"]]}
-
     const opts = (body) => ({ method: "POST", body, redirect: "follow" });
     const { Saathi } = UrlStorage.BaseUrlList;
     const { DashboardURL } = UrlStorage.NonAuthURL.Saathi;
@@ -297,8 +242,6 @@ const SBSDashboardScreen = (props) => {
     if (rewardsRes.status === "fulfilled") {
       const r = rewardsRes.value;
       DashboardDataStorage.requestForDealerWiseRewards = r;
-      console.log('dasdadsasdasdasda', r);
-
       if (r?.process_status !== "NO") {
         setIsDealerWiseReward(true);
         setDealerWiseRewardLink(r?.reward_data?.[0]?.reward_link ?? "");
@@ -377,7 +320,6 @@ const SBSDashboardScreen = (props) => {
         UrlStorage.ParameterList.BasicData.credit_details = creditDetails;
 
         setLedgerdata(creditDetails);
-        // setLoading(false)
       } else {
         Toast.show({ type: "error", text1: "Sorry", text2: result.process_message });
       }
@@ -542,8 +484,6 @@ const SBSDashboardScreen = (props) => {
     setLoadingMessage("Download Data...70%\nPlease wait for a while");
     const { emp_code, user_type } = UrlStorage.ParameterList.BasicData;
     const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DownloadDatabaseAPI.branch_master_TXT_download_API + `?nick_name=star&emp_code=${emp_code}&user_type=${user_type}`;
-    console.log(url);
-
     try {
       const text = await (await fetch(url)).text();
       const arraySet = text.split("\n")
@@ -560,8 +500,6 @@ const SBSDashboardScreen = (props) => {
 
       insertDataIn_branch_master(arraySet);
     } catch (e) {
-      console.log('error : ' + e);
-
     } finally {
       requestForProductWiseTargetAchievementList();
     }
@@ -591,12 +529,7 @@ const SBSDashboardScreen = (props) => {
   const requestForCustomerList = useCallback(async () => {
     setLoadingMessage("Download Data...85%\nPlease wait for a while");
     const { emp_code, user_type, incremental_download } = UrlStorage.ParameterList.BasicData;
-    // const url =
-    //   UrlStorage.BaseUrlList.Saathi.base_url_saathi +
-    //   UrlStorage.NonAuthURL.Saathi.DownloadDatabaseAPI.customer_master_audit_TXT_download_API +
-    //   `?nick_name=star&emp_code=${emp_code}&user_type=${user_type}&incremental_download=${incremental_download}&last_update_time=1971-01-01?10:10:10&data_download_time=1971-01-01?10:10:10`;
-
-    const url = `https://starsaathi.com/SAP/customer-master-audit-txt-incremental_ios_v2-7.0.11.php` +
+    const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + `/customer-master-audit-txt-incremental_ios_v2-7.0.11.php` +
       `?nick_name=star&emp_code=${emp_code}&user_type=${user_type}&incremental_download=${incremental_download}&last_update_time=1971-01-01?10:10:10&data_download_time=1971-01-01?10:10:10`
 
     try {
@@ -689,15 +622,12 @@ const SBSDashboardScreen = (props) => {
 
   const getUserListForSBS = useCallback(async () => {
     const url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.dealer_list;
-    console.log('getUserListForSBS : ' + url);
-
     try {
       const result = await (
         await fetch(url, {
           headers: { Authorization: "SAP_SP", "Content-Type": "application/json" },
         })
       ).json();
-      console.log(result);
 
       setDealerList(result);
       openCloseDropDownPopup();
@@ -708,9 +638,7 @@ const SBSDashboardScreen = (props) => {
   const requestForUserPermission = useCallback(async () => {
     setLoadingMessage("Download Data...99%\nPlease wait for a while");
     const { emp_code, user_type } = UrlStorage.ParameterList.BasicData;
-    console.log(emp_code);
-
-    const url = 'https://starsaathi.com/SAP/api_get_sp_broker_permision.php?broker_code=' + emp_code;
+    const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + '/api_get_sp_broker_permision.php?broker_code=' + emp_code;
 
     try {
       const text = await (
@@ -726,9 +654,7 @@ const SBSDashboardScreen = (props) => {
   const requestForUserPermissionSBS = useCallback(async () => {
     setLoadingMessage("Download Data...99%\nPlease wait for a while");
     const { emp_code, user_type } = UrlStorage.ParameterList.BasicData;
-    console.log(emp_code);
-
-    const url = 'https://sbs.starsaathi.com/api/api/authentication/permission-list/';
+    const url = UrlStorage.BaseUrlList.SBS.base_url_sbs + 'api/authentication/permission-list/';
     const myHeaders = new Headers();
     myHeaders.append("Authorization", "SAP_SP " + emp_code);
 
@@ -755,8 +681,6 @@ const SBSDashboardScreen = (props) => {
         if (DataStorage.typeOfUse === 1) {
           await getUserListForSBS();
         } else {
-          // const arr = await getAllDataFrom_customer_master();
-          // setDealerList(arr);
           openCloseDropDownPopup();
         }
       } catch (err) {
@@ -782,8 +706,6 @@ const SBSDashboardScreen = (props) => {
       checkAndSetData();
       if (DataStorage.typeOfUse !== 1) requestLedgerListForCement(true);
     }
-
-    // requestForCheckBirthDay()
   }, []);
 
   const handleRefresh = useCallback(() => {
@@ -798,7 +720,6 @@ const SBSDashboardScreen = (props) => {
 
   const selectShipToSelfItem = useCallback(
     (item) => {
-      console.log(item);
       requestForCheckRewardForDealerFromSP(item)
       setCustomerDetails(item);
       setSelectedCustomerType(item?.cust_type)
@@ -880,15 +801,6 @@ const SBSDashboardScreen = (props) => {
 
   const renderDashboardItem = useCallback(
     ({ item }) => (
-      /**
-       * iOS shadow pattern:
-       *   gridItem       — white bg + borderRadius + shadow (NO overflow:hidden)
-       *   gridItemInner  — coloured surface on top, same borderRadius
-       *
-       * The white bg on gridItem is what iOS needs to draw the shadow.
-       * It peeks through at corners but is invisible because it matches
-       * the page background.  Never add overflow:hidden to gridItem.
-       */
       <TouchableOpacity activeOpacity={0.95} style={styles.gridItem} onPress={() => onMenuItemPress(item)} >
         <View style={styles.gridItemInner}>
           {item.id == 'PerformanceGraphSLCT' ? <View style={{ height: moderateScale(80), width: moderateScale(80), alignItems: 'center', justifyContent: 'center' }}>
@@ -918,7 +830,7 @@ const SBSDashboardScreen = (props) => {
       redirect: "follow"
     };
 
-    fetch("https://starsaathi.com/SAP/update_customer_dob.php", requestOptions)
+    fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/update_customer_dob.php", requestOptions)
       .then((response) => response.text())
       .then((result) => {
         setLoading(false)
@@ -934,7 +846,7 @@ const SBSDashboardScreen = (props) => {
       redirect: "follow"
     };
 
-    fetch("https://starsaathi.com/SAP/get-customer-dob.php?customer_id=" + UrlStorage.ParameterList.BasicData.emp_id, requestOptions)
+    fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/get-customer-dob.php?customer_id=" + UrlStorage.ParameterList.BasicData.emp_id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setLoading(false)
@@ -961,7 +873,7 @@ const SBSDashboardScreen = (props) => {
       redirect: "follow"
     };
 
-    fetch("https://starsaathi.com/SAP/birthday_wish_seen.php", requestOptions)
+    fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/birthday_wish_seen.php", requestOptions)
       .then((response) => response.text())
       .then((result) => { })
       .catch((error) => { });
@@ -973,21 +885,15 @@ const SBSDashboardScreen = (props) => {
       method: "GET",
       redirect: "follow"
     };
-
-    console.log("code----------", UrlStorage.ParameterList.BasicData);
-
-
     const customerCode = UrlStorage.ParameterList.BasicData.user_type === "broker" ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code;
 
     await fetch(`${UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DashboardURL.customer_credit_api}` + `?customer_code=${customerCode}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log("code----------", result);
-        console.log("code----------", `${UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DashboardURL.customer_credit_api}` + `?customer_code=${customerCode}`);
         setCreditLimit(result[0])
         setShowCreditLimit(true)
       })
-      .catch((error) => console.error(error));
+      .catch((error) => { });
   }
 
   const keyExtractor = useCallback((item) => item.id, []);
@@ -1008,18 +914,18 @@ const SBSDashboardScreen = (props) => {
       redirect: "follow"
     };
 
-    fetch("https://starsaathi.com/SAP/get_l2_employee_by_customer_v1.php?customer_id=" + UrlStorage.ParameterList.BasicData.emp_id, requestOptions)
+    fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/get_l2_employee_by_customer_v1.php?customer_id=" + UrlStorage.ParameterList.BasicData.emp_id, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setSoNameList(result.data)
         setLoading(false)
         setIsSoNameListShow(true)
       })
-      .catch((error) => console.error(error));
+      .catch((error) => { });
   }
 
   const handleCall = (number) => {
-    Linking.openURL(`tel:${number}`).catch(err => console.log('Dialer error:', err));
+    Linking.openURL(`tel:${number}`).catch(err => { });
   };
 
   const showLedgerCard = UrlStorage.ParameterList.BasicData.user_type === "dealer" || (UrlStorage.ParameterList.BasicData.user_type === "broker" && UrlStorage.ParameterList.BasicData.selectedCustomerType.toLowerCase() == 'dealer');
@@ -1038,13 +944,6 @@ const SBSDashboardScreen = (props) => {
           handleContactPerson={handleContactPerson}
           notificationCount={notificationCount}
         />
-
-        {/*
-          outerContent: white rounded panel.
-          overflow:"visible" is the critical iOS fix — borderRadius + overflow
-          hidden (the iOS default for Views with borderRadius) silently clips
-          every child, including the gradient card and grid shadows.
-        */}
         <View style={styles.outerContent}>
           <FlatList
             data={dashboardList}
@@ -1066,7 +965,6 @@ const SBSDashboardScreen = (props) => {
                     {DataStorage.typeOfUse == 1 && <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: DataStorage.gradientColorCode?.[0], }} />}
                     {DataStorage.typeOfUse == 1 && <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: DataStorage.gradientColorCode?.[1], opacity: 0.3, }} />}
                     {DataStorage.typeOfUse !== 1 ? (
-                      /* ── Cement / Other ── */
                       <View style={{ flexDirection: "column", width: "100%", padding: moderateScale(5), width: "100%", backgroundColor: DataStorage.gradientColorCode?.[0], overflow: 'hidden', borderRadius: moderateScale(10) }}>
                         <View style={{ flexDirection: "row", width: "100%", }}>
                           <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(2), }}>
@@ -1146,7 +1044,6 @@ const SBSDashboardScreen = (props) => {
                                   </View>
                                   <View style={{ alignSelf: 'center', height: moderateScale(10), backgroundColor: 'rgba(68, 0, 0, 0.35)', borderRadius: moderateScale(4), overflow: 'hidden', width: "100%" }}>
                                     <LinearGradient
-                                      // colors={["#ffe3e3", "#ffffff"]}   
                                       colors={['#00D492', '#009966']}
                                       start={{ x: 0, y: 0 }}
                                       end={{ x: 1, y: 0 }}
@@ -1159,110 +1056,15 @@ const SBSDashboardScreen = (props) => {
                           </View>}
                         </View>
                         <View style={{ height: 5 }} />
-
-                        {/* <View style={{ flexDirection: "row", width: "100%", }}>
-                          <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <View style={{ width: "100%", padding: moderateScale(14), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,0.20)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(15), fontWeight: "600", marginBottom: moderateScale(4), }}>
-                                {"₹" + (UrlStorage.ParameterList.BasicData.credit_details?.credit_expose ?? 0)}
-                              </Text>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(12), fontWeight: "500", }}>Outstanding Balance</Text>
-                            </View>
-                          </View>
-                          <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <View style={{ width: "100%", padding: moderateScale(14), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,0.20)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
-                             <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <Text style={{ color: Colors.white, fontSize: moderateScale(12), fontWeight: "600", }}>
-                              {"SCL "}
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(15), fontWeight: "600", }}>
-                                {"₹" + (UrlStorage.ParameterList.BasicData.credit_details?.SCL ?? 0)}
-                              </Text>
-                            </Text>
-                          </View>
-                          <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <Text style={{ color: Colors.white, fontSize: moderateScale(12), fontWeight: "600", }}>
-                              {"SCNEL "}
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(15), fontWeight: "600", }}>{"₹" + (UrlStorage.ParameterList.BasicData.credit_details?.SCNEL ?? 0)}</Text>
-                            </Text>
-                          </View>
-                            </View>
-                          </View>
-                        </View>
-                        <View style={{ flexDirection: "row", width: "100%", }}>
-                          <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <View style={{ width: "100%", padding: moderateScale(14), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,0.20)", alignItems: "center", marginBottom: moderateScale(4),justifyContent:'center' }}>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(10), fontWeight: "600", marginBottom: moderateScale(4), }}>
-                                {"₹" + (UrlStorage.ParameterList.BasicData.credit_details?.credit_limit ?? 0)}
-                              </Text>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(8), fontWeight: "500", }}>Credit Limit</Text>
-                            </View>
-                          </View>
-                          <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <View style={{ width: "100%", padding: moderateScale(14), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,0.20)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(10), fontWeight: "600", marginBottom: moderateScale(4), }}>
-                                {" ₹ "}{Number(creditLimit?.CREXP ?? 0)}
-                              </Text>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(8), fontWeight: "500", }}>Credit Limit Utilisation</Text>
-                            </View>
-                          </View>
-                          <View style={{ flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), }}>
-                            <View style={{ width: "100%", padding: moderateScale(14), borderRadius: moderateScale(10), backgroundColor: "rgba(158, 9,9 ,0.20)", alignItems: "flex-start", marginBottom: moderateScale(4), }}>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(10), fontWeight: "600", marginBottom: moderateScale(4), }}>
-                                {" ₹ "}{(Number(creditLimit?.CL ?? 0) - Number(creditLimit?.CREXP ?? 0)).toLocaleString('en-IN')}
-                              </Text>
-                              <Text style={{ color: Colors.white, fontSize: moderateScale(8), fontWeight: "500", }}>Available Credit Limit</Text>
-                            </View>
-                          </View>
-                        </View>
-                        <View style={{ flexDirection: "row", width: "100%", }}>
-                          
-                        </View>
-                        <View style={{ height: 10 }} />
-                        <View style={{ width: '100%' }}>
-                          {showCreditLimit&&<View style={{ width: '100%', paddingHorizontal: moderateScale(3), alignItems: 'center', flexDirection: 'row', }} >
-                            {(() => {
-                              const consumed = Number(creditLimit?.CREXP ?? 0);
-                              const limit = Number(creditLimit?.CL ?? 0);
-                              const rawPercentage =
-                                limit > 0 ? (consumed / limit) * 100 : 0;
-
-                              const percentage = Number(rawPercentage.toFixed(2));
-                              const consumedPercentage = Math.min(percentage, 100);
-                              const overLimit = percentage > 100;
-                              const remainingPercentage = overLimit ? Number((percentage - 100).toFixed(2)) : Number((100 - percentage).toFixed(2));
-                              return (
-                                <View style={{ width: '100%', flexDirection: 'column' }}>
-                                  <View style={{ width: '100%', flexDirection: 'row' }}>
-                                    <Text style={{ color: Colors.white, fontSize: moderateScale(10), flex: 1, }} > {`${consumedPercentage}% Consumed`} </Text>
-                                    <Text style={{ color: Colors.white, fontSize: moderateScale(10), }} > {overLimit ? `${remainingPercentage}% Over Credit Limit` : `${remainingPercentage}% Remaining`} </Text>
-                                  </View>
-                                  <View style={{ alignSelf: 'center', height: moderateScale(10), backgroundColor: 'rgba(68, 0, 0, 0.35)', borderRadius: moderateScale(4), overflow: 'hidden', width: "100%" }}>
-                                    <LinearGradient
-                                      // colors={["#ffe3e3", "#ffffff"]}   
-                                      colors={['#00D492', '#009966']}
-                                      start={{ x: 0, y: 0 }}
-                                      end={{ x: 1, y: 0 }}
-                                      style={{ height: '100%', width: `${consumedPercentage}%`, borderRadius: moderateScale(4) }}
-                                    />
-                                  </View>
-                                </View>
-                              );
-                            })()}
-                          </View>}
-                        </View> */}
                       </View>
                     ) : (
-                      /* ── SBS (typeOfUse === 1) ── */
                       <View style={styles.sbsLedgerContainer}>
-                        {/* Credit Limit pill */}
                         <View style={styles.sbsCreditLimitRow}>
                           <Text style={styles.sbsLedgerRowLabel}>Credit Limit:</Text>
                           <Text style={styles.sbsLedgerRowValue}>
                             ₹{ledgerData?.credit_limit ?? 0}
                           </Text>
                         </View>
-
-                        {/* Card holding Outstanding Balance + SSBSL */}
                         <View style={styles.sbsLedgerCard}>
                           <View style={styles.sbsLedgerRow}>
                             <Text style={styles.sbsLedgerRowLabel}>Outstanding Balance</Text>
@@ -1420,30 +1222,14 @@ const SBSDashboardScreen = (props) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// STYLES
-// ---------------------------------------------------------------------------
-
 const styles = StyleSheet.create({
   root: { width: "100%", height: "100%", backgroundColor: Colors.main, },
-
-  // ── White rounded panel ───────────────────────────────────────────────────
-  // overflow:"visible" prevents iOS from clipping children against the
-  // borderRadius.  This is the root cause of the card being cut off.
   outerContent: { flex: 1, backgroundColor: Colors.white, borderTopRightRadius: moderateScale(20), borderTopLeftRadius: moderateScale(20), overflow: "visible", },
-
-  // Padding lives in contentContainerStyle, not on the parent View,
-  // so the FlatList scroll area is not incorrectly constrained.
   flatListContent: { paddingTop: moderateScale(20), paddingHorizontal: moderateScale(10), paddingBottom: moderateScale(30), },
-
   listHeader: { width: "100%", },
-
-  // ── Banner ───────────────────────────────────────────────────────────────
   banner: { width: "100%", height: moderateScale(160), borderRadius: moderateScale(12), resizeMode: "stretch", },
   bannerSpacer: { height: moderateScale(20), },
-
   ledgerGradient: { marginBottom: moderateScale(20), width: "100%", padding: moderateScale(16), overflow: 'hidden', borderRadius: moderateScale(20), },
-
   row: { flexDirection: "row", width: "100%", },
   column: { flexDirection: "column", width: "100%", },
   flex1: { flex: 1, alignItems: "flex-start", marginHorizontal: moderateScale(5), },
@@ -1452,23 +1238,14 @@ const styles = StyleSheet.create({
   ledgerLabel: { color: Colors.white, fontSize: moderateScale(12), fontWeight: "500", },
   ledgerSubLabel: { color: Colors.white, fontSize: moderateScale(12), fontWeight: "600", },
   ledgerSubValue: { color: Colors.white, fontSize: moderateScale(15), fontWeight: "600", },
-
-  // ── SBS ledger (typeOfUse === 1) ─────────────────────────────────────────
   sbsLedgerContainer: { width: "100%", },
-  // 65%-wide pill for Credit Limit
   sbsCreditLimitRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: moderateScale(10), paddingHorizontal: moderateScale(14), borderRadius: moderateScale(12), backgroundColor: "rgba(255, 255, 255, 0.20)", width: "65%", marginBottom: moderateScale(10), },
-  // White-tinted card for the two data rows — full width, no clipping
   sbsLedgerCard: { width: "100%", borderRadius: moderateScale(12), backgroundColor: "rgba(255, 255, 255, 0.20)", paddingVertical: moderateScale(4), },
   sbsLedgerRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: moderateScale(10), paddingHorizontal: moderateScale(14), },
   sbsLedgerRowLabel: { fontSize: moderateScale(12), fontWeight: "500", color: Colors.white, opacity: 0.9, flexShrink: 1, marginRight: moderateScale(8), },
   sbsLedgerRowValue: { fontSize: moderateScale(14), fontWeight: "700", color: Colors.white, },
   divider: { height: 1, backgroundColor: "rgba(255, 255, 255, 0.30)", marginHorizontal: moderateScale(14), },
-
-  // ── Dashboard grid ────────────────────────────────────────────────────────
   columnWrapper: { justifyContent: "space-between", marginVertical: moderateScale(5), paddingHorizontal: moderateScale(5), },
-
-  // Shadow carrier — must have a non-transparent backgroundColor on iOS.
-  // Never add overflow:"hidden" here; that kills iOS shadows.
   gridItem: {
     flex: 0.48,
     borderRadius: moderateScale(10),
@@ -1485,8 +1262,6 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  // Coloured surface — sits on top of the white shadow carrier.
-  // borderRadius matches gridItem so corners look clean.
   gridItemInner: { width: "100%", backgroundColor: "#fff", borderRadius: moderateScale(10), paddingTop: moderateScale(14), paddingBottom: moderateScale(10), paddingHorizontal: moderateScale(12), alignItems: "center", justifyContent: "center", },
   gridIcon: { width: moderateScale(80), height: moderateScale(80), resizeMode: 'contain', marginBottom: moderateScale(4), },
   gridLabel: { lineHeight: moderateScale(20), minHeight: moderateScale(40), textAlign: "center", color: Colors.text, fontSize: moderateScale(15), fontWeight: "600", },

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ActivityIndicator, Text, View } from 'react-native'
-import { moderateScale } from '../helper/Window';
+import { moderateScale } from '../helper/Window'
 
 const LoadingWithText = (props) => {
     return (
@@ -11,7 +11,7 @@ const LoadingWithText = (props) => {
                 <Text style={{ fontSize: moderateScale(14), color: '#000', fontStyle: 'italic', flex: 1 }}>{props.message}</Text>
             </View>
         </View>
-    );
+    )
 }
 
 export default LoadingWithText

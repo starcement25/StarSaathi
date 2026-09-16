@@ -9,17 +9,13 @@ import { Colors } from '../assets/Colors'
 const SbsHeaderView = ({ handleOpenSBSMenu, openDealerList, customerDetails, handleRefresh, navigateToNotification, handleContactPerson, notificationCount }) => {
     const [title, setTitle] = useState()
     useEffect(() => {
-        console.log('notificationCount : ' + notificationCount);
-
         if (!customerDetails?.customer_name || !UrlStorage.ParameterList.BasicData.selectedCustomerCode) {
-            if (DataStorage.typeOfUse == 1) {
+            if (DataStorage.typeOfUse == 1)
                 setTitle("Star Saathi - SBS")
-            } else {
+            else
                 setTitle("Star Saathi - Cement")
-            }
-        } else {
+        } else
             setTitle(customerDetails?.customer_name)
-        }
     }, [customerDetails?.customer_name])
     return (
         <View style={{ width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingVertical: moderateScale(10), paddingHorizontal: moderateScale(10) }}>

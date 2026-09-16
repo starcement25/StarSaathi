@@ -18,8 +18,8 @@ android {
         applicationId "org.forcepower.starcement"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 169
-        versionName "22.069"
+        versionCode 173
+        versionName "22.073"
     }
     signingConfigs {
         debug {

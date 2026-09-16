@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import { FlatList, Image, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
-import Modal from 'react-native-modal'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
 import { moderateScale } from '../helper/Window'
 import { Colors } from '../assets/Colors'
 import { Icons } from '../assets/Icons'
-import { useNavigation } from '@react-navigation/native'
 import SubDealerView from './SubDealerView'
 import DataStorage from '../storage/DataStorage'
-
 
 const AssignedList = [
     { id: 1, }, { id: 2, }, { id: 3, }, { id: 4, }, { id: 5, },
@@ -17,7 +14,6 @@ const AssignedList = [
 ]
 
 const LiftingAddView = (props) => {
-    const navigation = useNavigation();
     const [assigned, setAssigned] = useState(false)
 
     const [isDeatilsOpen, setIsDetailsOpen] = useState(false)
@@ -33,11 +29,6 @@ const LiftingAddView = (props) => {
         setAllocated(!allocated)
     }
 
-    const [monthOpen, setMonthOpen] = useState(false)
-    const MonthHandlerOpen = () => {
-        setAllocated(!allocated)
-        setMonthOpen(!monthOpen)
-    }
     const MonthHandlerOpen1 = () => {
         props.closeLoginPopup()
     }
@@ -127,7 +118,7 @@ const LiftingAddView = (props) => {
                                         </View> : null}
                                     </View>
                                 </TouchableOpacity>
-                            );
+                            )
                         }}
                     />
                 </View>

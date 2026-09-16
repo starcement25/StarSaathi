@@ -8,22 +8,16 @@ import { moderateScale } from '../../../helper/Window'
 import UrlStorage from '../../../storage/UrlStorage'
 import { pick, types } from '@react-native-documents/picker'
 import Toast from 'react-native-toast-message'
-import { WebView } from 'react-native-webview';
+import { WebView } from 'react-native-webview'
 import Loader from '../../../common/Loader'
 
-// ============================================================
-// GSTIN Popup
-// ============================================================
-// Popup 1 - GSTIN Question
 const GSTQuestionPopup = React.memo(({ visible, primaryColor, onBackPress, selected, onDealerDumpHasNotSameGST, onSubDealerHasNotGST, onDealerDumpHasSameGST, onSubDealerHasGST }) => (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }} >
         <View style={styles.modalOverlay}>
             <TouchableOpacity style={StyleSheet.absoluteFill} activeOpacity={1} onPress={onBackPress} />
             <View style={styles.modalCard}>
                 <Text style={styles.modalTitle}>GSTIN Verification</Text>
-                <Text style={styles.modalMessage}>
-                    Is the Address registered under GSTIN?
-                </Text>
+                <Text style={styles.modalMessage}> Is the Address registered under GSTIN? </Text>
                 <View style={styles.modalButtonRow}>
                     <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={() => {
                         if (selected)
@@ -46,7 +40,7 @@ const GSTQuestionPopup = React.memo(({ visible, primaryColor, onBackPress, selec
         </View>
     </Modal>
 ))
-// Popup 2 - GSTIN Mention Name (non-dismissible)
+
 const GSTQuestionDealerPopup = React.memo(({ visible, primaryColor, onBackPress, mentionName, onChangeMentionName, onMentionNameSubmit, mentionNameError, panNo, onChangeMentionNamePanNo, panNoError }) => (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }} >
         <View style={styles.modalOverlay}>
@@ -85,9 +79,7 @@ const GSTQuestionDealerPopup = React.memo(({ visible, primaryColor, onBackPress,
                     </View>
                 </View>
                 <View style={styles.modalButtonRow}>
-                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => {
-                        onMentionNameSubmit()
-                    }}>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => { onMentionNameSubmit() }}>
                         <Text style={styles.modalButtonPrimaryText}>Submit</Text>
                     </TouchableOpacity>
                 </View>
@@ -95,7 +87,7 @@ const GSTQuestionDealerPopup = React.memo(({ visible, primaryColor, onBackPress,
         </View>
     </Modal>
 ))
-// Popup 3 - GSTIN details (YES flow)
+
 const GSTEntryPopup = React.memo(({ visible, primaryColor, gstNumber, gstNumberError, gstDocument, submitting, onChangeGSTNumber, onPickDocument, onSubmit, onBackPress }) => (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }}>
         <View style={styles.modalOverlay}>
@@ -128,18 +120,14 @@ const GSTEntryPopup = React.memo(({ visible, primaryColor, gstNumber, gstNumberE
         </View>
     </Modal>
 ))
-// Popup 4 - GSTIN turnover declaration (NO flow)
-const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBackPress, gstInfoUrl }) => {
-    const [isChecked, setIsChecked] = React.useState(false);
-    console.log(gstInfoUrl);
-    
 
+const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBackPress, gstInfoUrl }) => {
+    const [isChecked, setIsChecked] = React.useState(false)
     React.useEffect(() => {
-        if (!visible) setIsChecked(false);
-    }, [visible]);
+        if (!visible) setIsChecked(false)
+    }, [visible])
     const injectedJS = `
         (function() {
-            // ---- Force correct viewport (fixes CSS media queries not firing) ----
             var m = document.querySelector('meta[name=viewport]');
             if (!m) {
                 m = document.createElement('meta');
@@ -147,15 +135,12 @@ const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBa
                 document.getElementsByTagName('head')[0].appendChild(m);
             }
             m.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
-    
-            // ---- Reload images that failed ----
             function retry(img) {
                 var s = img.src;
                 if (!s) return;
                 img.src = '';
                 img.src = s + (s.indexOf('?') >= 0 ? '&' : '?') + '_t=' + Date.now();
             }
-    
             function initImages() {
                 var imgs = document.querySelectorAll('img');
                 Array.prototype.forEach.call(imgs, function(img) {
@@ -163,7 +148,6 @@ const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBa
                     img.addEventListener('error', function() { retry(img); }, { once: true });
                 });
             }
-    
             function start() {
                 initImages();
                 if (!document.body) return;
@@ -188,20 +172,17 @@ const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBa
             } else {
                 start();
             }
-    
-            // ---- Report viewport width for debugging ----
             if (window.ReactNativeWebView) {
                 window.ReactNativeWebView.postMessage('viewport:' + window.innerWidth);
             }
         })();
         true;
-    `;
+    `
     return (
         <Modal visible={visible} transparent animationType="fade" onRequestClose={onBackPress}>
             <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: moderateScale(14) }}>
                 <View style={{ width: '100%', backgroundColor: Colors.white, borderRadius: moderateScale(14), paddingVertical: moderateScale(20) }}>
                     <Text style={{ color: Colors.text, fontSize: moderateScale(16), fontWeight: '700', marginBottom: moderateScale(10), paddingHorizontal: moderateScale(20) }}>Declaration</Text>
-
                     <View style={styles.webviewContainer}>
                         <WebView
                             source={{ uri: gstInfoUrl }}
@@ -210,15 +191,9 @@ const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBa
                             renderLoading={() => (
                                 <ActivityIndicator style={StyleSheet.absoluteFill} color={primaryColor} />
                             )}
-                            onError={(syntheticEvent) => {
-                                console.log('WebView onError:', syntheticEvent.nativeEvent);
-                            }}
-                            onHttpError={(syntheticEvent) => {
-                                console.log('WebView onHttpError:', syntheticEvent.nativeEvent);
-                            }}
-                            onSslError={(syntheticEvent) => {
-                                console.log('WebView SSL error:', syntheticEvent.nativeEvent);
-                            }}
+                            onError={(syntheticEvent) => { }}
+                            onHttpError={(syntheticEvent) => { }}
+                            onSslError={(syntheticEvent) => { }}
                             originWhitelist={['*']}
                             mixedContentMode="always"
                             domStorageEnabled={true}
@@ -231,68 +206,41 @@ const GSTDeclarationPopup = React.memo(({ visible, primaryColor, onConfirm, onBa
                             scalesPageToFit={true}
                             setBuiltInZoomControls={false}
                             injectedJavaScript={injectedJS}
-                            onMessage={(event) => {
-                                console.log('WebView:', event.nativeEvent.data);
-                            }}
+                            onMessage={(event) => { }}
                             cacheEnabled={false}
                             cacheMode="LOAD_NO_CACHE"
                         />
                     </View>
-
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        style={styles.checkboxRow}
-                        onPress={() => setIsChecked(prev => !prev)}
-                    >
-                        <View style={[
-                            styles.checkboxBox,
-                            isChecked && { backgroundColor: primaryColor, borderColor: primaryColor }
-                        ]}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.checkboxRow} onPress={() => setIsChecked(prev => !prev)} >
+                        <View style={[styles.checkboxBox, isChecked && { backgroundColor: primaryColor, borderColor: primaryColor }]}>
                             {isChecked && <Text style={styles.checkboxTick}>✓</Text>}
                         </View>
-                        <Text style={styles.checkboxLabel}>
-                            Yes I declare
-                        </Text>
+                        <Text style={styles.checkboxLabel}> Yes I declare </Text>
                     </TouchableOpacity>
-
                     <View style={{ flexDirection: 'row', gap: moderateScale(12), marginTop: moderateScale(20), paddingHorizontal: moderateScale(20) }}>
                         <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={onBackPress}>
                             <Text style={styles.modalButtonSecondaryText}>Back</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            activeOpacity={0.7}
-                            disabled={!isChecked}
-                            style={[
-                                styles.modalButtonPrimary,
-                                { backgroundColor: isChecked ? primaryColor : '#C7C7C7' }
-                            ]}
-                            onPress={onConfirm}
-                        >
+                        <TouchableOpacity activeOpacity={0.7} disabled={!isChecked} style={[styles.modalButtonPrimary, { backgroundColor: isChecked ? primaryColor : '#C7C7C7' }]} onPress={onConfirm} >
                             <Text style={styles.modalButtonPrimaryText}>Confirm</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
         </Modal>
-    );
+    )
 })
-// Popup 5 - GSTIN Note (non-dismissible)
+
 const GSTNotePopup = React.memo(({ visible, primaryColor, onCloseNotePopup }) => (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }} >
         <View style={styles.modalOverlay}>
             <TouchableOpacity style={StyleSheet.absoluteFill} activeOpacity={1} onPress={onCloseNotePopup} />
             <View style={styles.modalCard}>
                 <Text style={styles.modalTitle}>Please Note: </Text>
-                <Text style={styles.modalMessage}>
-                    If this is your additional place of business or godown, please register the same with GST department
-                </Text>
-                <Text style={styles.modalMessage}>
-                    Ship to address GSTIN will be shown as unregistered Party in Tax invoice.
-                </Text>
+                <Text style={styles.modalMessage}> If this is your additional place of business or godown, please register the same with GST department </Text>
+                <Text style={styles.modalMessage}> Ship to address GSTIN will be shown as unregistered Party in Tax invoice. </Text>
                 <View style={styles.modalButtonRow}>
-                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => {
-                        onCloseNotePopup()
-                    }}>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => { onCloseNotePopup() }}>
                         <Text style={styles.modalButtonPrimaryText}>OK</Text>
                     </TouchableOpacity>
                 </View>
@@ -300,25 +248,19 @@ const GSTNotePopup = React.memo(({ visible, primaryColor, onCloseNotePopup }) =>
         </View>
     </Modal>
 ))
-// Popup 6 - GSTIN Confirmation (non-dismissible)
+
 const GSTConfirmationPopup = React.memo(({ visible, primaryColor, customer_details, gst_no, onSubmit, goBack }) => (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={() => { }} >
         <View style={styles.modalOverlay}>
             <TouchableOpacity style={StyleSheet.absoluteFill} activeOpacity={1} onPress={() => { }} />
             <View style={styles.modalCard}>
                 <Text style={styles.modalTitle}>Warning: </Text>
-                <Text style={{ color: Colors.text, fontSize: moderateScale(14), lineHeight: moderateScale(20) }}>
-                    Are you sure to submit the GSTIN <Text style={{ fontWeight: '600' }}>{gst_no}</Text> for {customer_details.cust_type == 'RSSD' ? 'RSAR' : 'Ship-to Party'} <Text style={{ fontWeight: '600' }}>{customer_details.dns_customer_code} - {customer_details.address}</Text> .
-                </Text>
+                <Text style={{ color: Colors.text, fontSize: moderateScale(14), lineHeight: moderateScale(20) }}> Are you sure to submit the GSTIN <Text style={{ fontWeight: '600' }}>{gst_no}</Text> for {customer_details.cust_type == 'RSSD' ? 'RSAR' : 'Ship-to Party'} <Text style={{ fontWeight: '600' }}>{customer_details.dns_customer_code} - {customer_details.address}</Text> . </Text>
                 <View style={styles.modalButtonRow}>
-                    <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={() => {
-                        goBack()
-                    }}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.modalButtonSecondary} onPress={() => { goBack() }}>
                         <Text style={styles.modalButtonSecondaryText}>Back</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => {
-                        onSubmit()
-                    }}>
+                    <TouchableOpacity activeOpacity={0.7} style={[styles.modalButtonPrimary, { backgroundColor: primaryColor }]} onPress={() => { onSubmit() }}>
                         <Text style={styles.modalButtonPrimaryText}>Confirm</Text>
                     </TouchableOpacity>
                 </View>
@@ -327,10 +269,6 @@ const GSTConfirmationPopup = React.memo(({ visible, primaryColor, customer_detai
     </Modal>
 ))
 
-
-// ============================================================
-// GSTIN & PAN Validation
-// ============================================================
 const GST_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z][A-Z][0-9A-Z]$/
 const PAN_REGEX = /^[A-Z]{5}[0-9]{4}[A-Z]$/
 const VALID_STATE_CODES = [
@@ -340,117 +278,80 @@ const VALID_STATE_CODES = [
     '31', '32', '33', '34', '35', '36', '37'
 ]
 const validateGSTNumber = (value) => {
-    if (!value || value.trim().length === 0) {
+    if (!value || value.trim().length === 0)
         return 'GSTIN number is required'
-    }
     const gst = value.trim().toUpperCase()
-    if (gst.length !== 15) {
+    if (gst.length !== 15)
         return 'GSTIN number must be 15 characters'
-    }
-    if (/\s/.test(value)) {
+    if (/\s/.test(value))
         return 'GSTIN number must not contain spaces'
-    }
-    if (!GST_REGEX.test(gst)) {
+    if (!GST_REGEX.test(gst))
         return 'Please enter a valid GSTIN number'
-    }
     const stateCode = gst.substring(0, 2)
-    if (!VALID_STATE_CODES.includes(stateCode)) {
+    if (!VALID_STATE_CODES.includes(stateCode))
         return 'Invalid state code in GSTIN number'
-    }
     const pan = gst.substring(2, 12)
     const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/
-    if (!panRegex.test(pan)) {
+    if (!panRegex.test(pan))
         return 'Invalid PAN structure within GSTIN number'
-    }
-    // if (gst[13] !== 'Z') {
-    //     return '14th character of GSTIN number must be Z'
-    // }
     return ''
 }
 const runTimeValidateGSTNumber = (value) => {
-    if (!value || value.trim().length === 0) {
+    if (!value || value.trim().length === 0)
         return 'GSTIN number is required'
-    }
     const gst = value.trim().toUpperCase()
-    if (/\s/.test(value)) {
+    if (/\s/.test(value))
         return 'GSTIN number must not contain spaces'
-    }
-    if (value.trim().length == 15) {
-        if (!GST_REGEX.test(gst)) {
+    if (value.trim().length == 15)
+        if (!GST_REGEX.test(gst))
             return 'Please enter a valid GSTIN number'
-        }
-    }
     if (value.trim().length >= 2) {
         const stateCode = gst.substring(0, 2)
-        if (!VALID_STATE_CODES.includes(stateCode)) {
+        if (!VALID_STATE_CODES.includes(stateCode))
             return 'Invalid state code in GSTIN number'
-        }
     }
-
     if (value.trim().length >= 12) {
         const pan = gst.substring(2, 12)
         const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/
-        if (!panRegex.test(pan)) {
+        if (!panRegex.test(pan))
             return 'Invalid PAN structure within GSTIN number'
-        }
     }
-    // if (value.trim().length >= 14) {
-    //     if (gst[13] !== 'Z') {
-    //         return '14th character of GSTIN number must be Z'
-    //     }
-    // }
-
     return ''
 }
 const runTimeValidatePanNumber = (value) => {
     const gst = value.trim().toUpperCase()
-    if (/\s/.test(value)) {
+    if (/\s/.test(value))
         return 'Pan number must not contain spaces'
-    }
-    if (value.trim().length == 10) {
-        if (!PAN_REGEX.test(gst)) {
+    if (value.trim().length == 10)
+        if (!PAN_REGEX.test(gst))
             return 'Please enter a valid Pan number'
-        }
-    }
     if (value.trim().length == 10) {
         const pan = value.trim()
         const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/
-        if (!panRegex.test(pan)) {
+        if (!panRegex.test(pan))
             return 'Invalid PAN number'
-        }
     }
     return ''
 }
 
-
-// ============================================================
-// Main View
-// ============================================================
 const GSTScreen = (props) => {
     const isDealer = UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'dealer'
-
     const [userList, setUserList] = useState([])
     const [userList1, setUserList1] = useState([])
-
     const [showGSTQuestionPopup, setShowGSTQuestionPopup] = useState(false)
     const [showGSTQuestionDealerPopup, setShowGSTQuestionDealerPopup] = useState(false)
     const [showGSTEntryPopup, setShowGSTEntryPopup] = useState(false)
     const [showGSTDeclarationPopup, setShowGSTDeclarationPopup] = useState(false)
     const [showGSTNotePopup, setShowGSTNotePopup] = useState(false)
     const [showGSTConfirmationPopup, setShowGSTConfirmationPopup] = useState(false)
-
     const [custType, setCustType] = useState('')
-
     const [selectCustomerDetails, setSelectCustomerDetails] = useState({})
-
     const [gstNumber, setGstNumber] = useState('')
     const [gstNumberError, setGstNumberError] = useState('')
-
     const [mentionName, setMentionName] = useState('')
     const [mentionNameError, setMentionNameError] = useState('')
     const [panNo, setPanNo] = useState('')
     const [panNoError, setPanNoError] = useState('')
-
     const [gstDocument, setGstDocument] = useState(null)
     const [loading, setLoading] = useState(false)
     const primaryColor = useMemo(() => DataStorage.primaryColorCode, [])
@@ -459,12 +360,10 @@ const GSTScreen = (props) => {
         setUserList([])
         requestForUserList()
     }, [isDealer])
+
     const requestForUserList = () => {
         setLoading(true)
-        const requestOptions = {
-            method: "GET",
-            redirect: "follow"
-        };
+        const requestOptions = { method: "GET", redirect: "follow" }
         var type = isDealer ? 'dealer' : 'sub dealer'
         fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/ship-to-party-master-txt-V3.php?emp_code=" + UrlStorage.ParameterList.BasicData.customerDetails.customer_code + "&user_type=" + type + "&login_type=" + UrlStorage.ParameterList.BasicData.user_type.toLowerCase(), requestOptions)
             .then((response) => response.json())
@@ -473,20 +372,18 @@ const GSTScreen = (props) => {
                 var arr1 = []
                 if (isDealer) {
                     for (var i = 0; i < result.dealer_data.length; i++) {
-                        if (result.dealer_data[i].cust_type == 'Dealer') {
+                        if (result.dealer_data[i].cust_type == 'Dealer')
                             arr.push(result.dealer_data[i])
-                        } else {
+                        else
                             arr1.push(result.dealer_data[i])
-                        }
                     }
                 } else {
                     for (var i = 0; i < result.sub_dealer_data.length; i++) {
                         if (result.sub_dealer_data[i].cust_type == 'RSSD') {
                             result.sub_dealer_data[i].dns_customer_code = UrlStorage.ParameterList.BasicData.emp_id
                             arr.push(result.sub_dealer_data[i])
-                        } else {
+                        } else
                             arr1.push(result.sub_dealer_data[i])
-                        }
                     }
                 }
                 setUserList(arr)
@@ -496,53 +393,54 @@ const GSTScreen = (props) => {
             .catch((error) => {
                 setLoading(false)
                 Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Something went wrong.\Try again later.' })
-            });
+            })
     }
+
     const uploadGST = (item) => {
         setSelectCustomerDetails(item)
         setCustType(item.cust_type)
         setShowGSTQuestionPopup(true)
     }
 
-
-    // Popup 1 - GSTIN Question
-    //---------For Dealer
     const onDealerDumpHasNotSameGST = () => {
         setShowGSTQuestionPopup(false)
         setShowGSTEntryPopup(true)
     }
+
     const onDealerDumpHasSameGST = () => {
         setShowGSTQuestionPopup(false)
         setShowGSTQuestionDealerPopup(true)
     }
-    //---------For RSSD
+
     const onSubDealerHasNotGST = () => {
         setShowGSTQuestionPopup(false)
         setShowGSTQuestionDealerPopup(true)
     }
+
     const onSubDealerHasGST = () => {
         setShowGSTQuestionPopup(false)
         setShowGSTEntryPopup(true)
     }
-    //---------For Popup
+
     const handleMainBackPress = () => {
         setShowGSTQuestionPopup(false)
     }
 
-
-    // Popup 2 - GSTIN Mention Name (non-dismissible)
     const handleDealerBackPress = () => {
         setShowGSTQuestionPopup(true)
         setShowGSTQuestionDealerPopup(false)
         setMentionNameError('')
     }
+
     const onChangeMentionName = useCallback((value) => {
         setMentionName(value)
     }, [mentionName])
+
     const onChangeMentionNamePanNo = useCallback((value) => {
         setPanNo(value.toUpperCase())
         setPanNoError(runTimeValidatePanNumber(value.toUpperCase()))
     }, [panNoError])
+
     const onMentionNameSubmit = () => {
         if (mentionName.trim() == '') {
             setMentionNameError('Please enter Mention Name')
@@ -552,26 +450,23 @@ const GSTScreen = (props) => {
         setShowGSTDeclarationPopup(true)
     }
 
-
-    // Popup 3 - GSTIN details (YES flow)
     const handleChangeGSTNumber = useCallback((value) => {
         setGstNumber(value.toUpperCase())
         setGstNumberError(runTimeValidateGSTNumber(value.toUpperCase()))
     }, [gstNumberError])
+
     const handlePickGSTDocument = useCallback(async () => {
         try {
-            Keyboard.dismiss();
-            const [result] = await pick({
-                type: [types.pdf, types.images],
-            })
+            Keyboard.dismiss()
+            const [result] = await pick({ type: [types.pdf, types.images], })
             setGstDocument(result)
         } catch (err) {
-            if (isErrorWithCode(err) && err.code === errorCodes.OPERATION_CANCELED) {
+            if (isErrorWithCode(err) && err.code === errorCodes.OPERATION_CANCELED)
                 return
-            }
             Toast.show({ type: 'error', text1: 'Sorry...', text2: 'Unable to select document' })
         }
     }, [])
+
     const handleSubmitGSTDetails = () => {
         const error = validateGSTNumber(gstNumber)
         if (error) {
@@ -581,35 +476,30 @@ const GSTScreen = (props) => {
         setShowGSTEntryPopup(false)
         setShowGSTConfirmationPopup(true)
     }
+
     const handleBackPress = () => {
         setShowGSTQuestionPopup(true)
         setShowGSTEntryPopup(false)
     }
 
-
-    // Popup 4 - GSTIN turnover declaration (NO flow)
     const handleGSTDeclarationConfirm = () => {
         requestForNoGSTDetailsSubmit()
     }
+
     const handleDeclarationBackPress = () => {
         setShowGSTQuestionDealerPopup(true)
         setShowGSTDeclarationPopup(false)
     }
+
     const requestForNoGSTDetailsSubmit = () => {
         setLoading(true)
-        const formdata = new FormData();
-        formdata.append("customer_id", selectCustomerDetails.dns_customer_code);
-        formdata.append("is_any", "0");
-        formdata.append("mention_name", mentionName);
-        formdata.append("pan_no", panNo);
-
-        const requestOptions = {
-            method: "POST",
-            body: formdata,
-            redirect: "follow"
-        };
-
-        fetch("https://starsaathi.com/SAP/upload_customer_gst_document-v2.php ", requestOptions)
+        const formdata = new FormData()
+        formdata.append("customer_id", selectCustomerDetails.dns_customer_code)
+        formdata.append("is_any", "0")
+        formdata.append("mention_name", mentionName)
+        formdata.append("pan_no", panNo)
+        const requestOptions = { method: "POST", body: formdata, redirect: "follow" }
+        fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/upload_customer_gst_document-v2.php ", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 setShowGSTDeclarationPopup(false)
@@ -622,17 +512,13 @@ const GSTScreen = (props) => {
                 setShowGSTNotePopup(true)
                 requestForUserList()
             })
-            .catch((error) => console.error(error));
+            .catch((error) => { })
     }
 
-
-    // Popup 5 - GSTIN Note (non-dismissible)
     const onCloseNotePopup = () => {
         setShowGSTNotePopup(false)
     }
 
-
-    // Popup 6 - GSTIN Confirmation (non-dismissible)
     const handleSubmitGSTDetailsFormConfirmationPopup = () => {
         setShowGSTConfirmationPopup(false)
         requestForNewGSTDetailsSubmit()
@@ -643,16 +529,12 @@ const GSTScreen = (props) => {
     }
     const requestForNewGSTDetailsSubmit = () => {
         setLoading(true)
-        const formdata = new FormData();
-        formdata.append("customer_id", selectCustomerDetails.dns_customer_code);
-        formdata.append("gst_no", gstNumber);
-        formdata.append("is_any", "1");
-        const requestOptions = {
-            method: "POST",
-            body: formdata,
-            redirect: "follow"
-        };
-        fetch("https://starsaathi.com/SAP/upload_customer_gst_document-v2.php", requestOptions)
+        const formdata = new FormData()
+        formdata.append("customer_id", selectCustomerDetails.dns_customer_code)
+        formdata.append("gst_no", gstNumber)
+        formdata.append("is_any", "1")
+        const requestOptions = { method: "POST", body: formdata, redirect: "follow" }
+        fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/upload_customer_gst_document-v2.php", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 requestForUserList()
@@ -664,11 +546,9 @@ const GSTScreen = (props) => {
                 setMentionName('')
                 setMentionNameError('')
             })
-            .catch((error) => console.error(error));
+            .catch((error) => { })
     }
 
-
-    // Render Function
     const renderDealerItem = ({ item, index }) => {
         return (
             <View style={{ flex: 1, flexDirection: 'column', borderRadius: moderateScale(3), borderWidth: moderateScale(1), borderColor: '#eee', backgroundColor: '#FFF', elevation: 2, margin: moderateScale(3) }}>
@@ -735,9 +615,7 @@ const GSTScreen = (props) => {
                     <ScrollView showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
                         <View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: moderateScale(5), marginBottom: moderateScale(10) }}>
-                                <Text style={{ marginHorizontal: moderateScale(10), fontSize: moderateScale(11), color: '#333', fontWeight: '600', letterSpacing: 0.5 }}>
-                                    Self
-                                </Text>
+                                <Text style={{ marginHorizontal: moderateScale(10), fontSize: moderateScale(11), color: '#333', fontWeight: '600', letterSpacing: 0.5 }}> Self </Text>
                                 <View style={{ flex: 1, height: 0.8, backgroundColor: '#d0d0d0' }} />
                             </View>
                             <FlatList
@@ -748,9 +626,7 @@ const GSTScreen = (props) => {
                                 renderItem={isDealer ? renderDealerItem : renderSubDealerItem}
                             />
                             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: moderateScale(5), marginBottom: moderateScale(10) }}>
-                                <Text style={{ marginHorizontal: moderateScale(10), fontSize: moderateScale(11), color: '#333', fontWeight: '600', letterSpacing: 0.5 }}>
-                                    Ship to Party
-                                </Text>
+                                <Text style={{ marginHorizontal: moderateScale(10), fontSize: moderateScale(11), color: '#333', fontWeight: '600', letterSpacing: 0.5 }}> Ship to Party </Text>
                                 <View style={{ flex: 1, height: 0.8, backgroundColor: '#d0d0d0' }} />
                             </View>
                             <FlatList
@@ -764,67 +640,18 @@ const GSTScreen = (props) => {
                     </ScrollView>
                 </View>
             </View>
-            <GSTQuestionPopup
-                visible={showGSTQuestionPopup}
-                primaryColor={primaryColor}
-                selected={isDealer}
-                cust_type={custType}
-                onBackPress={handleMainBackPress}
-                onDealerDumpHasNotSameGST={onDealerDumpHasNotSameGST}
-                onSubDealerHasNotGST={onSubDealerHasNotGST}
-                onDealerDumpHasSameGST={onDealerDumpHasSameGST}
-                onSubDealerHasGST={onSubDealerHasGST}
-            />
-            <GSTEntryPopup
-                visible={showGSTEntryPopup}
-                primaryColor={primaryColor}
-                gstNumber={gstNumber}
-                gstNumberError={gstNumberError}
-                gstDocument={gstDocument}
-                submitting={loading}
-                onChangeGSTNumber={handleChangeGSTNumber}
-                onPickDocument={handlePickGSTDocument}
-                onSubmit={handleSubmitGSTDetails}
-                onBackPress={handleBackPress}
-            />
-            <GSTConfirmationPopup
-                visible={showGSTConfirmationPopup}
-                primaryColor={primaryColor}
-                customer_details={selectCustomerDetails}
-                gst_no={gstNumber}
-                onSubmit={handleSubmitGSTDetailsFormConfirmationPopup}
-                goBack={handleBackPressFormConfirmationPopup}
-            />
-            <GSTQuestionDealerPopup
-                visible={showGSTQuestionDealerPopup}
-                primaryColor={primaryColor}
-                onBackPress={handleDealerBackPress}
-                mentionName={mentionName}
-                mentionNameError={mentionNameError}
-                panNo={panNo}
-                panNoError={panNoError}
-                onChangeMentionName={onChangeMentionName}
-                onChangeMentionNamePanNo={onChangeMentionNamePanNo}
-                onMentionNameSubmit={onMentionNameSubmit}
-            />
-            <GSTDeclarationPopup
-                visible={showGSTDeclarationPopup}
-                primaryColor={primaryColor}
-                onConfirm={handleGSTDeclarationConfirm}
-                onBackPress={handleDeclarationBackPress}
-                gstInfoUrl={'https://starsaathi.com/SAP/gst_declaration.php?action=get_customer&customer_id=' + selectCustomerDetails.dns_customer_code + '&mention_name=' + mentionName + '&pan_no=' + panNo}
-            />
-            <GSTNotePopup
-                visible={showGSTNotePopup}
-                primaryColor={primaryColor}
-                onCloseNotePopup={onCloseNotePopup}
-            />
+            <GSTQuestionPopup visible={showGSTQuestionPopup} primaryColor={primaryColor} selected={isDealer} cust_type={custType} onBackPress={handleMainBackPress} onDealerDumpHasNotSameGST={onDealerDumpHasNotSameGST} onSubDealerHasNotGST={onSubDealerHasNotGST} onDealerDumpHasSameGST={onDealerDumpHasSameGST} onSubDealerHasGST={onSubDealerHasGST} />
+            <GSTEntryPopup visible={showGSTEntryPopup} primaryColor={primaryColor} gstNumber={gstNumber} gstNumberError={gstNumberError} gstDocument={gstDocument} submitting={loading} onChangeGSTNumber={handleChangeGSTNumber} onPickDocument={handlePickGSTDocument} onSubmit={handleSubmitGSTDetails} onBackPress={handleBackPress} />
+            <GSTConfirmationPopup visible={showGSTConfirmationPopup} primaryColor={primaryColor} customer_details={selectCustomerDetails} gst_no={gstNumber} onSubmit={handleSubmitGSTDetailsFormConfirmationPopup} goBack={handleBackPressFormConfirmationPopup} />
+            <GSTQuestionDealerPopup visible={showGSTQuestionDealerPopup} primaryColor={primaryColor} onBackPress={handleDealerBackPress} mentionName={mentionName} mentionNameError={mentionNameError} panNo={panNo} panNoError={panNoError} onChangeMentionName={onChangeMentionName} onChangeMentionNamePanNo={onChangeMentionNamePanNo} onMentionNameSubmit={onMentionNameSubmit} />
+            <GSTDeclarationPopup visible={showGSTDeclarationPopup} primaryColor={primaryColor} onConfirm={handleGSTDeclarationConfirm} onBackPress={handleDeclarationBackPress} gstInfoUrl={UrlStorage.BaseUrlList.Saathi.base_url_saathi + '/gst_declaration.php?action=get_customer&customer_id=' + selectCustomerDetails.dns_customer_code + '&mention_name=' + mentionName + '&pan_no=' + panNo} />
+            <GSTNotePopup visible={showGSTNotePopup} primaryColor={primaryColor} onCloseNotePopup={onCloseNotePopup} />
             {loading && <Loader />}
         </SafeView>
     )
 }
+
 const styles = StyleSheet.create({
-    // GSTIN modal styles
     inputContainer: { width: "100%", borderWidth: moderateScale(1), borderColor: "#DCDDDF", borderRadius: moderateScale(10), paddingHorizontal: moderateScale(12), height: moderateScale(44), justifyContent: 'center', backgroundColor: Colors.white },
     label: { color: Colors.text, fontSize: moderateScale(14), marginBottom: moderateScale(8) },
     modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: moderateScale(24) },
@@ -843,7 +670,6 @@ const styles = StyleSheet.create({
     placeholderText: { color: "#A7A7A7" },
     modalBackButton: { alignSelf: 'flex-start', marginBottom: moderateScale(4) },
     modalBackButtonText: { fontSize: moderateScale(12), color: '#D32F2F' },
-
     webviewContainer: { width: '100%', height: moderateScale(300), overflow: 'hidden', borderWidth: moderateScale(1), borderColor: '#DCDDDF', marginBottom: moderateScale(14), paddingHorizontal: moderateScale(10) },
     webview: { flex: 1 },
     checkboxRow: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: moderateScale(4), paddingHorizontal: moderateScale(20) },
@@ -851,4 +677,5 @@ const styles = StyleSheet.create({
     checkboxTick: { color: Colors.white, fontSize: moderateScale(13), fontWeight: '700' },
     checkboxLabel: { flex: 1, color: Colors.text, fontSize: moderateScale(14), lineHeight: moderateScale(20) },
 })
+
 export default GSTScreen

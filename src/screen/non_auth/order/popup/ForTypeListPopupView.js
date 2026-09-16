@@ -21,9 +21,7 @@ const ForTypeListPopupView = (props) => {
                 </TouchableOpacity>
                 <View style={{ width: "100%", backgroundColor: Colors.main, borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
                     <View style={{ width: "100%", padding: moderateScale(20), backgroundColor: "#E41B14", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderTopLeftRadius: moderateScale(10), borderTopRightRadius: moderateScale(10) }}>
-                        <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}>
-                            Select FOR Type
-                        </Text>
+                        <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}> Select FOR Type </Text>
                     </View>
                     <View style={{ width: "100%", backgroundColor: "#ffffff", paddingVertical: moderateScale(25), borderTopRightRadius: moderateScale(25), borderTopLeftRadius: moderateScale(25) }}>
                         <FlatList
@@ -35,12 +33,10 @@ const ForTypeListPopupView = (props) => {
                                 return (
                                     <TouchableOpacity activeOpacity={0.95} onPress={() => props.selectItem(item)} >
                                         <View style={{ width: "100%", paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(13), flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: (index % 2 !== 0 ? DataStorage.transColorCode : "#FFFFFF") }}>
-                                            <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}>
-                                                {item.title}
-                                            </Text>
+                                            <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}> {item.title} </Text>
                                         </View>
                                     </TouchableOpacity>
-                                );
+                                )
                             }}
                         />
                     </View>

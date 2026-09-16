@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { WebView } from 'react-native-webview';
-import SafeView from '../../../helper/SafeView';
-import { Colors } from '../../../assets/Colors';
-import { BackHandler, StyleSheet, View, Text, Animated, Easing, Platform } from 'react-native';
-import DataStorage from '../../../storage/DataStorage';
-import { useNavigation } from '@react-navigation/native';
-import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView';
+import React, { useRef, useState, useEffect } from 'react'
+import { WebView } from 'react-native-webview'
+import SafeView from '../../../helper/SafeView'
+import { Colors } from '../../../assets/Colors'
+import { BackHandler, StyleSheet, View, Text, Animated, Easing, Platform } from 'react-native'
+import DataStorage from '../../../storage/DataStorage'
+import { useNavigation } from '@react-navigation/native'
+import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView'
 
 const SpinnerRing = ({ color }) => {
-    const rotation = useRef(new Animated.Value(0)).current;
+    const rotation = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
         Animated.loop(
@@ -18,63 +18,68 @@ const SpinnerRing = ({ color }) => {
                 easing: Easing.linear,
                 useNativeDriver: true,
             })
-        ).start();
-    }, []);
+        ).start()
+    }, [])
 
     const rotate = rotation.interpolate({
         inputRange: [0, 1],
         outputRange: ['0deg', '360deg'],
-    });
+    })
 
     return (
         <Animated.View style={[styles.spinnerRing, { borderTopColor: color, transform: [{ rotate }] }]} />
-    );
-};
+    )
+}
 
-// Extract base origin from a URL (e.g. "https://admin.starsaathirewards.com")
 const getOrigin = (url) => {
     try {
-        const { protocol, host } = new URL(url);
-        return `${protocol}//${host}`;
+        const { protocol, host } = new URL(url)
+        return `${protocol}//${host}`
     } catch {
-        return url;
+        return url
     }
-};
+}
 
 const WebLinkScreen = () => {
-    const navigation = useNavigation();
-    const webViewRef = useRef(null);
-    const [canGoBack, setCanGoBack] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const navigation = useNavigation()
+    const webViewRef = useRef(null)
+    const [canGoBack, setCanGoBack] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
-    const fadeAnim = useRef(new Animated.Value(1)).current;
-    const dot1 = useRef(new Animated.Value(0)).current;
-    const dot2 = useRef(new Animated.Value(0)).current;
-    const dot3 = useRef(new Animated.Value(0)).current;
+    const fadeAnim = useRef(new Animated.Value(1)).current
+    const dot1 = useRef(new Animated.Value(0)).current
+    const dot2 = useRef(new Animated.Value(0)).current
+    const dot3 = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
-        const a1 = animateDot(dot1, 0);
-        const a2 = animateDot(dot2, 150);
-        const a3 = animateDot(dot3, 300);
-        a1.start(); a2.start(); a3.start();
-        return () => { a1.stop(); a2.stop(); a3.stop(); };
-    }, []);
+        const a1 = animateDot(dot1, 0)
+        const a2 = animateDot(dot2, 150)
+        const a3 = animateDot(dot3, 300)
+        a1.start()
+        a2.start()
+        a3.start()
+        return () => {
+            a1.stop()
+            a2.stop()
+            a3.stop()
+        }
+    }, [])
 
     useEffect(() => {
         const backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
                 if (canGoBack) {
-                    webViewRef.current.goBack();
-                    return true;
+                    webViewRef.current.goBack()
+                    return true
                 } else {
-                    navigation.goBack();
-                    return true;
+                    navigation.goBack()
+                    return true
                 }
             }
-        );
-        return () => backHandler.remove();
-    }, [canGoBack]);
+        )
+        return () => backHandler.remove()
+    }, [canGoBack])
 
     const animateDot = (dot, delay) => {
         return Animated.loop(
@@ -94,8 +99,8 @@ const WebLinkScreen = () => {
                 }),
                 Animated.delay(600),
             ])
-        );
-    };
+        )
+    }
 
     const handleLoadEnd = () => {
         Animated.timing(fadeAnim, {
@@ -103,32 +108,26 @@ const WebLinkScreen = () => {
             duration: 350,
             easing: Easing.out(Easing.ease),
             useNativeDriver: true,
-        }).start(() => setIsLoading(false));
-    };
-
-    // FIX 1: Log resource errors to identify exact failure reason
-    const handleError = (syntheticEvent) => {
-        const { nativeEvent } = syntheticEvent;
-        console.warn('WebView page error:', nativeEvent);
-    };
-
-    const handleHttpError = (syntheticEvent) => {
-        const { nativeEvent } = syntheticEvent;
-        console.warn(
-            `WebView HTTP error: ${nativeEvent.statusCode} for ${nativeEvent.url}`
-        );
-    };
-
-    function isHTMLString(str) {
-        if (typeof str !== 'string') return false;
-        return /<\/?[a-z][\s\S]*>/i.test(str.trim());
+        }).start(() => setIsLoading(false))
     }
 
-    const webUrl = DataStorage.web_link;
-    const isHTML = isHTMLString(webUrl);
+    const handleError = (syntheticEvent) => {
+        const { nativeEvent } = syntheticEvent
+    }
+
+    const handleHttpError = (syntheticEvent) => {
+        const { nativeEvent } = syntheticEvent
+    }
+
+    function isHTMLString(str) {
+        if (typeof str !== 'string') return false
+        return /<\/?[a-z][\s\S]*>/i.test(str.trim())
+    }
+
+    const webUrl = DataStorage.web_link
+    const isHTML = isHTMLString(webUrl)
     const injectedJS = `
         (function() {
-            // Force reload all images that failed to load
             var imgs = document.querySelectorAll('img');
             imgs.forEach(function(img) {
                 if (!img.complete || img.naturalWidth === 0) {
@@ -137,8 +136,6 @@ const WebLinkScreen = () => {
                     img.src = src + (src.indexOf('?') >= 0 ? '&' : '?') + '_t=' + Date.now();
                 }
             });
-
-            // Observe future images added dynamically
             var observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(m) {
                     m.addedNodes.forEach(function(node) {
@@ -155,44 +152,36 @@ const WebLinkScreen = () => {
             observer.observe(document.body, { childList: true, subtree: true });
         })();
         true;
-    `;
-    const origin = !isHTML ? getOrigin(webUrl) : undefined;
+    `
+    const origin = !isHTML ? getOrigin(webUrl) : undefined
     const additionalHeaders = !isHTML
         ? {
-              Referer: origin + '/',
-              Origin: origin,
-              'User-Agent':
-                  Platform.OS === 'android'
-                      ? 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
-                      : 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
-          }
-        : undefined;
-
-    console.log('[WebLinkScreen] Loading URL:', webUrl);
-
+            Referer: origin + '/',
+            Origin: origin,
+            'User-Agent':
+                Platform.OS === 'android'
+                    ? 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
+                    : 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
+        }
+        : undefined
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
             <View style={{ flex: 1 }}>
                 <SBSCommonHeaderView
                     title={DataStorage.web_page_title}
                     onBack={() => {
-                        if (canGoBack) { webViewRef.current.goBack(); }
-                        else { navigation.goBack(); }
+                        if (canGoBack) { webViewRef.current.goBack() }
+                        else { navigation.goBack() }
                     }}
                 />
 
                 <WebView
                     ref={webViewRef}
-                    source={
-                        isHTML
-                            ? { html: webUrl }
-                            : { uri: webUrl, headers: additionalHeaders }
-                    }
+                    source={isHTML ? { html: webUrl } : { uri: webUrl, headers: additionalHeaders }}
                     onNavigationStateChange={(navState) => setCanGoBack(navState.canGoBack)}
                     onLoadEnd={handleLoadEnd}
                     onError={handleError}
                     onHttpError={handleHttpError}
-
                     mixedContentMode="always"
                     domStorageEnabled={true}
                     javaScriptEnabled={true}
@@ -201,7 +190,6 @@ const WebLinkScreen = () => {
                     allowFileAccessFromFileURLs={true}
                     thirdPartyCookiesEnabled={true}
                     sharedCookiesEnabled={true}
-
                     userAgent={
                         Platform.OS === 'android'
                             ? 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'
@@ -210,7 +198,6 @@ const WebLinkScreen = () => {
                     injectedJavaScript={injectedJS}
                     cacheEnabled={false}
                     cacheMode="LOAD_NO_CACHE"
-
                     style={{ flex: 1 }}
                 />
 
@@ -218,14 +205,8 @@ const WebLinkScreen = () => {
                     <Animated.View style={[styles.loaderOverlay, { opacity: fadeAnim }, { pointerEvents: 'none' }]} >
                         <View style={styles.loaderContent}>
                             <SpinnerRing color={DataStorage.primaryColorCode} />
-
-                            <Text style={[styles.loaderTitle, { color: DataStorage.primaryColorCode }]}>
-                                Loading Page
-                            </Text>
-                            <Text style={styles.loaderSubtitle}>
-                                {DataStorage.web_page_title || 'Please wait...'}
-                            </Text>
-
+                            <Text style={[styles.loaderTitle, { color: DataStorage.primaryColorCode }]}> Loading Page </Text>
+                            <Text style={styles.loaderSubtitle}> {DataStorage.web_page_title || 'Please wait...'} </Text>
                             <View style={styles.dotsRow}>
                                 {[dot1, dot2, dot3].map((dot, i) => (
                                     <Animated.View key={i} style={[styles.dot, { backgroundColor: DataStorage.primaryColorCode }, { transform: [{ translateY: dot }] },]} />
@@ -236,10 +217,10 @@ const WebLinkScreen = () => {
                 )}
             </View>
         </SafeView>
-    );
-};
+    )
+}
 
-export default WebLinkScreen;
+export default WebLinkScreen
 
 const styles = StyleSheet.create({
     loaderOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: Colors.white, alignItems: 'center', justifyContent: 'center', zIndex: 10, },
@@ -249,4 +230,4 @@ const styles = StyleSheet.create({
     loaderSubtitle: { fontSize: 13, color: '#9CA3AF', textAlign: 'center', lineHeight: 18, },
     dotsRow: { flexDirection: 'row', gap: 8, marginTop: 8, },
     dot: { width: 9, height: 9, borderRadius: 5, },
-});
+})

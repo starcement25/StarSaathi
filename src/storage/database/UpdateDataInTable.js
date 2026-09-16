@@ -1,9 +1,9 @@
-import DataStorage from '../DataStorage';
-import UrlStorage from '../UrlStorage';
-import { checkDataFor_app_version, checkDataFor_sale_access } from './CheckDataInTable';
+import DataStorage from '../DataStorage'
+import UrlStorage from '../UrlStorage'
+import { checkDataFor_app_version, checkDataFor_sale_access } from './CheckDataInTable'
 import { DataBaseSetup } from './DataBase'
-import moment from 'moment';
-const db = DataBaseSetup();
+import moment from 'moment'
+const db = DataBaseSetup()
 
 export const updateDataFor_login_user = () => {
     var date = moment(new Date()).format('YYYY-MM-DD')
@@ -16,9 +16,10 @@ export const updateDataFor_login_user = () => {
                 [UrlStorage.ParameterList.BasicData.emp_code, date, DataStorage.emp_name, DataStorage.device_id, DataStorage.password, sale_access, 1, app_version, date],
                 (sqlTxn, res) => { },
                 error => { },
-            );
-    });
+            )
+    })
 }
+
 export const updateDataFor_logout_user = () => {
     var date = moment(new Date()).format('YYYY-MM-DD')
     db.transaction(txn => {
@@ -28,8 +29,8 @@ export const updateDataFor_logout_user = () => {
                 [0, UrlStorage.ParameterList.BasicData.emp_code, date],
                 (sqlTxn, res) => { },
                 error => { },
-            );
-    });
+            )
+    })
 }
 
 export const updateDataFor_data_download_log = (table_name) => {
@@ -41,6 +42,6 @@ export const updateDataFor_data_download_log = (table_name) => {
                 [date, table_name],
                 (sqlTxn, res) => { },
                 error => { },
-            );
-    });
+            )
+    })
 }

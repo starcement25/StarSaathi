@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, } from 'react-native';
-import SafeView from '../../../helper/SafeView';
-import { Colors } from '../../../assets/Colors';
-import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView';
-import { moderateScale } from '../../../helper/Window';
-import moment from 'moment';
-import DataStorage from '../../../storage/DataStorage';
-import { Icons } from '../../../assets/Icons';
-import formatINR from '../../../helper/formatINR';
-import AgeingHeaderView from '../../../common/AgeingHeaderView';
-import UrlStorage from '../../../storage/UrlStorage';
-import Loader from '../../../common/Loader';
+import React, { useEffect, useState } from 'react'
+import { View, Text, TouchableOpacity, FlatList, Image } from 'react-native'
+import SafeView from '../../../helper/SafeView'
+import { Colors } from '../../../assets/Colors'
+import { moderateScale } from '../../../helper/Window'
+import DataStorage from '../../../storage/DataStorage'
+import { Icons } from '../../../assets/Icons'
+import formatINR from '../../../helper/formatINR'
+import AgeingHeaderView from '../../../common/AgeingHeaderView'
+import UrlStorage from '../../../storage/UrlStorage'
+import Loader from '../../../common/Loader'
 
 export default function OverdueInvoicesScreen(props) {
   const [daySet, setDaySet] = useState([])
   const [totalAmount, setTotalAmount] = useState(0)
   const [paymentAmount, setPaymentAmount] = useState(0)
   const [seletedCount, setSeletedCount] = useState(0)
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     requestForAgeInformation()
@@ -28,9 +26,9 @@ export default function OverdueInvoicesScreen(props) {
     const requestOptions = {
       method: "GET",
       redirect: "follow"
-    };
+    }
     var url = ''
-    var startday = 0, endday = 0;
+    var startday = 0, endday = 0
     var c1 = false
     if (DataStorage.ageingObj.endDate == 0) {
       c1 = true
@@ -40,12 +38,10 @@ export default function OverdueInvoicesScreen(props) {
       startday = DataStorage.ageingObj.label.split(' ')[0].split('-')[0]
       endday = DataStorage.ageingObj.label.split(' ')[0].split('-')[1]
     }
-    if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker') {
-      url = "https://starsaathi.com/SAP/customer_ageing_details_api.php?type=" + DataStorage.type + "&customer_id=" + UrlStorage.ParameterList.BasicData.customerDetails.SAP_code + "&startday=" + startday + "&endday=" + endday
-    } else {
-      url = "https://starsaathi.com/SAP/customer_ageing_details_api.php?type=" + DataStorage.type + "&customer_id=" + UrlStorage.ParameterList.BasicData.emp_id + "&startday=" + startday + "&endday=" + endday
-    }
-    console.log(url);
+    if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker')
+      url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/customer_ageing_details_api.php?type=" + DataStorage.type + "&customer_id=" + UrlStorage.ParameterList.BasicData.customerDetails.SAP_code + "&startday=" + startday + "&endday=" + endday
+    else
+      url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/customer_ageing_details_api.php?type=" + DataStorage.type + "&customer_id=" + UrlStorage.ParameterList.BasicData.emp_id + "&startday=" + startday + "&endday=" + endday
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -53,10 +49,7 @@ export default function OverdueInvoicesScreen(props) {
         var totalAmount = 0
         for (var i = 0; i < result.data.length; i++) {
           var amount = 0
-          var obj = {
-            label: result.data[i].title,
-            subLabel: result.data[i].title +" overdue",
-          }
+          var obj = { label: result.data[i].title, subLabel: result.data[i].title + " overdue", }
           var list = []
           var a = 0
           for (var j = 0; j < result.data[i].data.length; j++) {
@@ -71,32 +64,25 @@ export default function OverdueInvoicesScreen(props) {
               cr_dr: checker ? "CR" : "DR",
               isSelect: false
             }
-
             if (checker)
               a -= parseFloat(o.cr)
             else
               a += parseFloat(o.dr)
-
             list.push(innerObj)
-
           }
-
           amount += a
           totalAmount += a
           obj = { ...obj, list, amount }
-
           if (amount != 0)
             arr.push(obj)
-
         }
-
         setDaySet(arr)
         setTotalAmount(totalAmount)
         setLoading(false)
       })
       .catch((error) => {
         setLoading(false)
-      });
+      })
   }
 
   return (
@@ -159,5 +145,5 @@ export default function OverdueInvoicesScreen(props) {
       </View>
       {loading ? <Loader /> : null}
     </SafeView>
-  );
+  )
 }

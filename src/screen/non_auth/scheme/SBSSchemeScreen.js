@@ -19,42 +19,25 @@ const SBSSchemeScreen = (props) => {
     const [listOfScheme, setListOfScheme] = useState([])
 
     useEffect(() => {
-        if (UrlStorage.ParameterList.BasicData.user_type == "broker" || UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer") {
+        if (UrlStorage.ParameterList.BasicData.user_type == "broker" || UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "dealer")
             checkUserType()
-        } else {
+        else
             checkUserTypeSubDealer()
-        }
     }, [])
 
-    const fetchAuthData = async () => {
-        var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-        }
-    }
-
     const checkUserType = async () => {
-        const myHeaders = new Headers();
-
+        const myHeaders = new Headers()
         if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == "broker") {
-            myHeaders.append("Authorization", UrlStorage.ParameterList.BasicData.user_type == 'broker' ? `SAP_SP` : `SAP_DEALER` + `${UrlStorage.ParameterList.BasicData.emp_id}`);
+            myHeaders.append("Authorization", UrlStorage.ParameterList.BasicData.user_type == 'broker' ? `SAP_SP` : `SAP_DEALER` + `${UrlStorage.ParameterList.BasicData.emp_id}`)
             myHeaders.append("Content-Type", "application/json")
         } else {
-            myHeaders.append("Authorization", UrlStorage.ParameterList.BasicData.user_type == 'broker' ? `SAP_SP` : `SAP_DEALER` + `${UrlStorage.ParameterList.BasicData.emp_id}`);
+            myHeaders.append("Authorization", UrlStorage.ParameterList.BasicData.user_type == 'broker' ? `SAP_SP` : `SAP_DEALER` + `${UrlStorage.ParameterList.BasicData.emp_id}`)
             myHeaders.append("Content-Type", "application/json")
         }
-
-        const requestOptions = {
-            method: "GET",
-            redirect: "follow",
-            headers: myHeaders
-        };
-
-        var url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.Scheme.scheme_list + `?dealer_id=${UrlStorage.ParameterList.BasicData.emp_id}`;
-
-        setLoading(true);
-        var a = await AuthCheckingApi();
+        const requestOptions = { method: "GET", redirect: "follow", headers: myHeaders }
+        var url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.Scheme.scheme_list + `?dealer_id=${UrlStorage.ParameterList.BasicData.emp_id}`
+        setLoading(true)
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
@@ -63,31 +46,28 @@ const SBSSchemeScreen = (props) => {
         await fetch(url, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                // The response is an array directly, not result.data
-                if (Array.isArray(result)) {
+                if (Array.isArray(result))
                     setListOfScheme(result)
-                } else if (result.data && Array.isArray(result.data)) {
+                else if (result.data && Array.isArray(result.data))
                     setListOfScheme(result.data)
-                } else {
+                else
                     setListOfScheme([])
-                }
                 setLoading(false)
             })
             .catch((error) => {
-                Toast.show({ type: 'error', text1: 'Error', text2: 'Failed to load schemes' });
-                setLoading(false);
-            });
-    };
+                Toast.show({ type: 'error', text1: 'Error', text2: 'Failed to load schemes' })
+                setLoading(false)
+            })
+    }
 
     const checkUserTypeSubDealer = async () => {
         try {
-            setLoading(true);
-            const arr = await getAllDataFrom_branch_schemes_PDF_Sub_dealer("");
+            setLoading(true)
+            const arr = await getAllDataFrom_branch_schemes_PDF_Sub_dealer("")
             var a = []
             for (var i = 0; i < arr.length; i++) {
-                if (arr[i].PDF_file_name != null) {
+                if (arr[i].PDF_file_name != null)
                     a.push(arr[i])
-                }
             }
             setListOfScheme(a)
             setLoading(false)
@@ -97,144 +77,86 @@ const SBSSchemeScreen = (props) => {
     }
 
     const formatDate = (dateString) => {
-        if (!dateString) return '';
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        });
-    };
+        if (!dateString) return ''
+        const date = new Date(dateString)
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    }
 
     const isSchemeActive = (startDate, endDate) => {
-        if (!startDate || !endDate) return false;
-        const now = new Date();
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        return now >= start && now <= end;
-    };
+        if (!startDate || !endDate) return false
+        const now = new Date()
+        const start = new Date(startDate)
+        const end = new Date(endDate)
+        return now >= start && now <= end
+    }
 
     const validateAndSanitizeUrl = (url) => {
-        if (!url || url.trim() === '') {
-            return null;
-        }
-
-        let sanitizedUrl = url.trim();
-
-        // Handle http:// by replacing with https://
-        if (sanitizedUrl.startsWith('http://')) {
-            sanitizedUrl = sanitizedUrl.replace('http://', 'https://');
-        }
-        // Add https:// if no protocol
-        else if (!sanitizedUrl.startsWith('https://')) {
-            sanitizedUrl = `https://${sanitizedUrl}`;
-        }
-
-        // Basic URL validation
+        if (!url || url.trim() === '')
+            return null
+        let sanitizedUrl = url.trim()
+        if (sanitizedUrl.startsWith('http://'))
+            sanitizedUrl = sanitizedUrl.replace('http://', 'https://')
+        else if (!sanitizedUrl.startsWith('https://'))
+            sanitizedUrl = `https://${sanitizedUrl}`
         try {
-            new URL(sanitizedUrl);
-            return sanitizedUrl;
+            new URL(sanitizedUrl)
+            return sanitizedUrl
         } catch (e) {
-            return null;
+            return null
         }
-    };
+    }
 
     const renderSchemeCard = ({ item, index }) => {
-        const isActive = isSchemeActive(item.start_date, item.end_date);
-
+        const isActive = isSchemeActive(item.start_date, item.end_date)
         return (
             <TouchableOpacity activeOpacity={0.85} style={styles.gridItem} onPress={() => {
-                const folderPath = item.pdf_url || item.url;
-
-                // Validate URL exists
+                const folderPath = item.pdf_url || item.url
                 if (!folderPath || folderPath.trim() === '') {
-                    Alert.alert('Error', 'PDF URL not available for this scheme');
-                    return;
+                    Alert.alert('Error', 'PDF URL not available for this scheme')
+                    return
                 }
-
-                // Sanitize and validate URL
-                const sanitizedUrl = validateAndSanitizeUrl(folderPath);
-
+                const sanitizedUrl = validateAndSanitizeUrl(folderPath)
                 if (!sanitizedUrl) {
-                    Alert.alert('Error', 'Invalid PDF URL. Please contact support.');
-                    return;
+                    Alert.alert('Error', 'Invalid PDF URL. Please contact support.')
+                    return
                 }
-
-                props.navigation.navigate('PdfViewScreen', {
-                    pdfUrl: sanitizedUrl,
-                    pdfLink: sanitizedUrl,
-                    page_title: item.scheme || `Scheme ${index + 1}`,
-                    type: 'url'
-                });
+                props.navigation.navigate('PdfViewScreen', { pdfUrl: sanitizedUrl, pdfLink: sanitizedUrl, page_title: item.scheme || `Scheme ${index + 1}`, type: 'url' })
             }} >
                 <View style={[styles.card, isActive && styles.activeCard]}>
-                    {/* Status Badge */}
-                    {/* {isActive && (
-                        <View style={styles.activeBadge}>
-                            <View style={styles.activeDot} />
-                        </View>
-                    )} */}
-
-                    {/* Scheme Image */}
                     <View style={styles.imageContainer}>
                         <Image source={Icons.CementScheme} style={styles.schemeImage} resizeMode="contain" />
                     </View>
-
-                    {/* Scheme Info */}
                     <View style={styles.infoContainer}>
-                        <Text numberOfLines={2} style={styles.schemeName} >
-                            {item.scheme || `Scheme ${index + 1}`}
-                        </Text>
-
-                        {/* Date Range */}
-                        {item.start_date && item.end_date && (
-                            <Text style={styles.dateText} numberOfLines={1}>
-                                {formatDate(item.start_date)} - {formatDate(item.end_date)}
-                            </Text>
-                        )}
-
-                        {/* Branch Code */}
-                        {/* {item.branch_code && (
-                            <Text style={styles.branchText} numberOfLines={1}>
-                                {item.branch_code}
-                            </Text>
-                        )} */}
+                        <Text numberOfLines={2} style={styles.schemeName} > {item.scheme || `Scheme ${index + 1}`} </Text>
+                        {item.start_date && item.end_date && <Text style={styles.dateText} numberOfLines={1}> {formatDate(item.start_date)} - {formatDate(item.end_date)} </Text>}
                     </View>
                 </View>
             </TouchableOpacity>
-        );
-    };
+        )
+    }
 
     const renderEmptyState = () => (
         <View style={styles.emptyContainer}>
             <Image source={Icons.CementScheme} style={styles.emptyImage} resizeMode="contain" />
             <Text style={styles.emptyTitle}>No Schemes Available</Text>
-            <Text style={styles.emptySubtitle}>
-                There are currently no schemes to display.{'\n'}
-                Please check back later.
-            </Text>
+            <Text style={styles.emptySubtitle}> There are currently no schemes to display.{'\n'} Please check back later. </Text>
         </View>
-    );
+    )
 
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
             <View style={styles.container}>
                 <SBSCommonHeaderView title="All Schemes" backPath=" " />
-
                 <View style={styles.contentContainer}>
-                    {listOfScheme?.length === 0 && !loading ? (
-                        renderEmptyState()
-                    ) : (
-                        <FlatList
-                            data={listOfScheme}
-                            numColumns={2}
-                            key="two-column-grid"
-                            keyExtractor={(item, index) => item.sl_no?.toString() || index.toString()}
-                            showsVerticalScrollIndicator={false}
-                            contentContainerStyle={styles.listContent}
-                            columnWrapperStyle={styles.columnWrapper}
-                            renderItem={renderSchemeCard} />
-                    )}
+                    {listOfScheme?.length === 0 && !loading ? renderEmptyState() : <FlatList
+                        data={listOfScheme}
+                        numColumns={2}
+                        key="two-column-grid"
+                        keyExtractor={(item, index) => item.sl_no?.toString() || index.toString()}
+                        showsVerticalScrollIndicator={false}
+                        contentContainerStyle={styles.listContent}
+                        columnWrapperStyle={styles.columnWrapper}
+                        renderItem={renderSchemeCard} />}
                 </View>
             </View>
             <Toast config={toastConfig} />
@@ -264,6 +186,6 @@ const styles = StyleSheet.create({
     emptyImage: { width: moderateScale(120), height: moderateScale(120), opacity: 0.5, marginBottom: moderateScale(24), },
     emptyTitle: { fontSize: moderateScale(18), fontWeight: '700', color: '#1A1A1A', marginBottom: moderateScale(8), textAlign: 'center', },
     emptySubtitle: { fontSize: moderateScale(14), color: '#666666', textAlign: 'center', lineHeight: moderateScale(20), },
-});
+})
 
-export default SBSSchemeScreen;
+export default SBSSchemeScreen

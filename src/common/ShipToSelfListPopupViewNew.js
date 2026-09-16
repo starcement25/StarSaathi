@@ -22,7 +22,7 @@ const PALETTE = {
     tabInactiveBg: '#FFFFFF',
     divider: '#EEF1F7',
     shadow: '#B0BAD0',
-};
+}
 
 const ShipToSelfListPopupViewNew = (props) => {
     const [searchText, setSearchText] = useState("")
@@ -52,19 +52,18 @@ const ShipToSelfListPopupViewNew = (props) => {
                     if (userList[a].cust_type.toLowerCase() == type.toLowerCase())
                         arr.push(userList[a])
                 }
-            } else {
-                arr = await getAllDataFrom_customer_master1(type, typeBranch);
-            }
+            } else
+                arr = await getAllDataFrom_customer_master1(type, typeBranch)
             setDataSet(arr)
             setFilteredData(arr)
         }
-        check();
+        check()
     }, [type, typeBranch])
 
     useEffect(() => {
         const branchData = async () => {
             var arrBranch = []
-            arrBranch = await getAllBranchCodeAndName();
+            arrBranch = await getAllBranchCodeAndName()
             setBranchDataSet(arrBranch)
         }
         branchData()
@@ -105,15 +104,12 @@ const ShipToSelfListPopupViewNew = (props) => {
                 <TouchableOpacity style={{ width: '100%', height: '25%' }} onPress={close} >
                     <View style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
-
                 <View style={{ width: "100%", height: '75%', backgroundColor: Colors.main, borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
-                    {/* Header */}
                     <View style={{ width: "100%", padding: moderateScale(16), backgroundColor: "#E41B14", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
                         <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}>
                             {"Select " + type + " Name "}
                         </Text>
                     </View>
-
                     <View style={{ paddingHorizontal: moderateScale(15), backgroundColor: "#fff", paddingTop: moderateScale(10) }}>
                         {isMulti ? <View style={{ width: '100%', flexDirection: 'row' }}>
                             {categoryList.map((cat, i) => {
@@ -125,7 +121,6 @@ const ShipToSelfListPopupViewNew = (props) => {
                             })}
                         </View> : null}
                     </View>
-
                     <View style={{ paddingHorizontal: moderateScale(15), backgroundColor: "#fff", paddingTop: moderateScale(10) }}>
                         <Dropdown
                             style={{ height: moderateScale(44), borderWidth: 1, borderColor: PALETTE.border, borderRadius: moderateScale(8), paddingHorizontal: moderateScale(12), backgroundColor: PALETTE.card }}
@@ -147,13 +142,9 @@ const ShipToSelfListPopupViewNew = (props) => {
                             flatListProps={{ keyboardShouldPersistTaps: 'handled' }}
                         />
                     </View>
-
-                    {/* Dealer Search */}
                     <View style={{ padding: moderateScale(15), backgroundColor: "#fff" }}>
                         <TextInput placeholder="Search dealer name or code..." value={searchText} onChangeText={setSearchText} style={{ height: moderateScale(40), borderWidth: 1, borderColor: "#ccc", borderRadius: moderateScale(10), paddingHorizontal: moderateScale(10), fontSize: moderateScale(14), color: Colors.text }} />
                     </View>
-
-                    {/* Dealer List */}
                     <View style={{ width: "100%", flex: 1, backgroundColor: "#ffffff", paddingVertical: moderateScale(10), }}>
                         <FlatList
                             data={filteredData}
@@ -165,7 +156,7 @@ const ShipToSelfListPopupViewNew = (props) => {
                                 <TouchableOpacity activeOpacity={0.95} onPress={() => props.selectItem(item)}>
                                     <View style={{ width: "100%", paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(13), flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: (index % 2 !== 0 ? DataStorage.transColorCode : "#FFFFFF") }}>
                                         <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}>
-                                            {item.customer_name?.replaceAll("&amp;", '&') + (item?.SAP_code ? " - " + item?.SAP_code : "")}
+                                            {item.customer_name?.replaceAll("&amp", '&') + (item?.SAP_code ? " - " + item?.SAP_code : "")}
                                         </Text>
                                     </View>
                                 </TouchableOpacity>

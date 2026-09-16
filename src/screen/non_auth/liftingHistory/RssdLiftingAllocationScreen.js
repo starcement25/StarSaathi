@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FlatList, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import SafeView from '../../../helper/SafeView'
 import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView'
-import UrlStorage from '../../../storage/UrlStorage';
-import { Colors } from '../../../assets/Colors';
-import { moderateScale } from '../../../helper/Window';
-import { AuthCheckingApi } from '../../../auth/AuthCheckingApi';
-import AuthNotVerifyPopupView from '../../../auth/AuthNotVerifyPopupView';
+import UrlStorage from '../../../storage/UrlStorage'
+import { Colors } from '../../../assets/Colors'
+import { moderateScale } from '../../../helper/Window'
+import { AuthCheckingApi } from '../../../auth/AuthCheckingApi'
+import AuthNotVerifyPopupView from '../../../auth/AuthNotVerifyPopupView'
 
 const RssdLiftingAllocationScreen = () => {
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState()
     const [assignedFilterOpen, setAssignedFilterOpen] = useState(false)
     const [authChecker, setAuthChecker] = useState(false)
     const [liftingList, setLiftingList] = useState([])
@@ -21,28 +21,16 @@ const RssdLiftingAllocationScreen = () => {
         getLiftingAllocationDetails()
     }, [selectedDate])
 
-    const fetchAuthData = async () => {
-        var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-        }
-    }
-
     const getLiftingAllocationDetails = async (page_no) => {
         setLoading(true)
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
         }
         let baseUrl = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.AllocationHistoryURL.allocation_history_list_url + `?customer_id=${UrlStorage.ParameterList.BasicData.emp_id}&user_type=${UrlStorage.ParameterList.BasicData.user_type}&page_no=${page_no}&year_month=${selectedDate}`
-
-        const requestOptions = {
-            method: "GET",
-            redirect: "follow"
-        };
+        const requestOptions = { method: "GET", redirect: "follow" }
         await fetch(baseUrl, requestOptions)
             .then((response) => response.json())
             .then((result) => {
@@ -53,9 +41,9 @@ const RssdLiftingAllocationScreen = () => {
                     setLiftingList([])
                     setFilteredList([])
                 }
-            }).catch((error) => { });
+            }).catch((error) => { })
         setLoading(false)
-    };
+    }
 
     const handleSearch = (text) => {
         setSearchText(text)
@@ -74,27 +62,24 @@ const RssdLiftingAllocationScreen = () => {
     }
 
     const MonthYearPicker = ({ visible, onClose, onConfirm, currentSelectedDate }) => {
-        const today = new Date();
-        const currentMonth = today.getMonth() + 1;
-        const currentYear = today.getFullYear();
-
+        const today = new Date()
+        const currentMonth = today.getMonth() + 1
+        const currentYear = today.getFullYear()
         const parseSelectedDate = (dateString) => {
             if (dateString) {
-                const [year, month] = dateString.split("-");
+                const [year, month] = dateString.split("-")
                 return {
                     month: parseInt(month, 10),
                     year: parseInt(year, 10)
-                };
+                }
             }
-            return { month: currentMonth, year: currentYear };
-        };
-
-        const parsedDate = parseSelectedDate(currentSelectedDate);
-        const [selectedMonth, setSelectedMonth] = useState(parsedDate.month);
-        const [selectedYear, setSelectedYear] = useState(parsedDate.year);
-        const monthRef = useRef(null);
-        const yearRef = useRef(null);
-
+            return { month: currentMonth, year: currentYear }
+        }
+        const parsedDate = parseSelectedDate(currentSelectedDate)
+        const [selectedMonth, setSelectedMonth] = useState(parsedDate.month)
+        const [selectedYear, setSelectedYear] = useState(parsedDate.year)
+        const monthRef = useRef(null)
+        const yearRef = useRef(null)
         const months = [
             { label: "Jan", value: 1 },
             { label: "Feb", value: 2 },
@@ -108,43 +93,37 @@ const RssdLiftingAllocationScreen = () => {
             { label: "Oct", value: 10 },
             { label: "Nov", value: 11 },
             { label: "Dec", value: 12 },
-        ];
-
-        const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i).reverse();
-
+        ]
+        const years = Array.from({ length: currentYear - 2000 + 1 }, (_, i) => 2000 + i).reverse()
         const onModalShow = () => {
-
-            const updatedParsedDate = parseSelectedDate(currentSelectedDate);
-            setSelectedMonth(updatedParsedDate.month);
-            setSelectedYear(updatedParsedDate.year);
-
+            const updatedParsedDate = parseSelectedDate(currentSelectedDate)
+            setSelectedMonth(updatedParsedDate.month)
+            setSelectedYear(updatedParsedDate.year)
             setTimeout(() => {
                 if (monthRef.current) {
                     monthRef.current.scrollToIndex({
                         index: updatedParsedDate.month - 1,
                         animated: true
-                    });
+                    })
                 }
                 if (yearRef.current) {
-                    const yearIndex = years.indexOf(updatedParsedDate.year);
+                    const yearIndex = years.indexOf(updatedParsedDate.year)
                     if (yearIndex !== -1) {
                         yearRef.current.scrollToIndex({
                             index: yearIndex,
                             animated: true
-                        });
+                        })
                     }
                 }
-            }, 100);
-        };
+            }, 100)
+        }
 
         return (
             <Modal visible={visible} animationType="slide" transparent onShow={onModalShow}>
                 <View style={styles.overlay}>
                     <View style={styles.modal}>
                         <Text style={styles.title}>Select Month & Year</Text>
-
                         <View style={styles.pickerRow}>
-
                             <FlatList
                                 ref={monthRef}
                                 showsVerticalScrollIndicator={false}
@@ -154,9 +133,7 @@ const RssdLiftingAllocationScreen = () => {
                                 contentContainerStyle={{ paddingVertical: 10 }}
                                 renderItem={({ item }) => (
                                     <TouchableOpacity style={[styles.option, selectedMonth === item.value && styles.selectedOption,]} onPress={() => setSelectedMonth(item.value)} >
-                                        <Text style={[styles.optionText, selectedMonth === item.value && styles.selectedText,]} >
-                                            {item.label}
-                                        </Text>
+                                        <Text style={[styles.optionText, selectedMonth === item.value && styles.selectedText,]} > {item.label} </Text>
                                     </TouchableOpacity>
                                 )}
                                 getItemLayout={(data, index) => ({ length: 50, offset: 50 * index, index })}
@@ -170,9 +147,7 @@ const RssdLiftingAllocationScreen = () => {
                                 contentContainerStyle={{ paddingVertical: 10 }}
                                 renderItem={({ item }) => (
                                     <TouchableOpacity style={[styles.option, selectedYear === item && styles.selectedOption,]} onPress={() => setSelectedYear(item)} >
-                                        <Text style={[styles.optionText, selectedYear === item && styles.selectedText,]} >
-                                            {item}
-                                        </Text>
+                                        <Text style={[styles.optionText, selectedYear === item && styles.selectedText,]} > {item} </Text>
                                     </TouchableOpacity>
                                 )}
                                 getItemLayout={(data, index) => ({ length: 50, offset: 50 * index, index })}
@@ -186,8 +161,8 @@ const RssdLiftingAllocationScreen = () => {
                             <TouchableOpacity
                                 style={styles.confirm}
                                 onPress={() => {
-                                    const formatted = `${selectedYear}-${String(selectedMonth).padStart(2, "0")}`;
-                                    onConfirm(formatted);
+                                    const formatted = `${selectedYear}-${String(selectedMonth).padStart(2, "0")}`
+                                    onConfirm(formatted)
                                 }} >
                                 <Text style={{ color: "#fff" }}>Confirm</Text>
                             </TouchableOpacity>
@@ -195,74 +170,59 @@ const RssdLiftingAllocationScreen = () => {
                     </View>
                 </View>
             </Modal>
-        );
-    };
+        )
+    }
 
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
             <View style={{ flex: 1, backgroundColor: Colors.white }}>
                 <SBSCommonHeaderView title="Sub Dealer Allocation" Filter={true} handlePerformanceFilterOpen={AssignedFilterOpenHandler} />
-
-                {/* Search Bar */}
                 <View style={styles.searchContainer}>
                     <TextInput placeholder="Search by product..." placeholderTextColor="#888" value={searchText} onChangeText={handleSearch} style={styles.searchInput} />
                 </View>
-
-                {filteredList.length > 0 ? (
-                    <FlatList
-                        data={filteredList}
-                        keyExtractor={(item, index) => index.toString()}
-                        showsVerticalScrollIndicator={false}
-                        decelerationRate="fast"
-                        renderItem={({ item }) => {
-                            return (
-                                <View style={styles.card}>
-                                    <View style={styles.cell}>
-                                        <Text style={styles.label}>Product</Text>
-                                        <Text style={styles.value}>{item.prod_desc}</Text>
-                                    </View>
-                                    <View style={styles.cell}>
-                                        <Text style={styles.label}>Allocated Qty</Text>
-                                        <Text style={styles.value}>{item.allocation_qty}</Text>
-                                    </View>
-                                    <View style={styles.cell}>
-                                        <Text style={styles.label}>Transaction Date</Text>
-                                        <Text style={styles.value}>{item.date_and_time}</Text>
-                                    </View>
-                                    <View style={styles.cell}>
-                                        <Text style={styles.label}>Counter Name</Text>
-                                        <Text style={styles.value}>{item.counter_name}</Text>
-                                    </View>
-                                    <View style={styles.cell}>
-                                        <Text style={styles.label}>Invoice No</Text>
-                                        <Text style={styles.value}>{item.inv_no}</Text>
-                                    </View>
-                                    <View style={styles.cell}>
-                                        <Text style={styles.label}>Invoice Date</Text>
-                                        <Text style={styles.value}>{item.inv_date}</Text>
-                                    </View>
+                {filteredList.length > 0 ? <FlatList
+                    data={filteredList}
+                    keyExtractor={(item, index) => index.toString()}
+                    showsVerticalScrollIndicator={false}
+                    decelerationRate="fast"
+                    renderItem={({ item }) => {
+                        return (
+                            <View style={styles.card}>
+                                <View style={styles.cell}>
+                                    <Text style={styles.label}>Product</Text>
+                                    <Text style={styles.value}>{item.prod_desc}</Text>
                                 </View>
-                            )
-                        }}
-                    />
-                ) : (
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, color: '#999' }}>No records found</Text>
-                    </View>
-                )}
-            </View>
-
-            {assignedFilterOpen && (
-                <MonthYearPicker
-                    visible={assignedFilterOpen}
-                    currentSelectedDate={selectedDate}
-                    onClose={() => setAssignedFilterOpen(false)}
-                    onConfirm={(value) => {
-                        setAssignedFilterOpen(false);
-                        setSelectedDate(value)
+                                <View style={styles.cell}>
+                                    <Text style={styles.label}>Allocated Qty</Text>
+                                    <Text style={styles.value}>{item.allocation_qty}</Text>
+                                </View>
+                                <View style={styles.cell}>
+                                    <Text style={styles.label}>Transaction Date</Text>
+                                    <Text style={styles.value}>{item.date_and_time}</Text>
+                                </View>
+                                <View style={styles.cell}>
+                                    <Text style={styles.label}>Counter Name</Text>
+                                    <Text style={styles.value}>{item.counter_name}</Text>
+                                </View>
+                                <View style={styles.cell}>
+                                    <Text style={styles.label}>Invoice No</Text>
+                                    <Text style={styles.value}>{item.inv_no}</Text>
+                                </View>
+                                <View style={styles.cell}>
+                                    <Text style={styles.label}>Invoice Date</Text>
+                                    <Text style={styles.value}>{item.inv_date}</Text>
+                                </View>
+                            </View>
+                        )
                     }}
-                />
-            )}
+                /> : <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{ fontSize: 16, color: '#999' }}>No records found</Text>
+                </View>}
+            </View>
+            {assignedFilterOpen && <MonthYearPicker visible={assignedFilterOpen} currentSelectedDate={selectedDate} onClose={() => setAssignedFilterOpen(false)} onConfirm={(value) => {
+                setAssignedFilterOpen(false)
+                setSelectedDate(value)
+            }} />}
             <AuthNotVerifyPopupView isVisible={authChecker} onClose={() => setAuthChecker(false)} />
 
         </SafeView>
@@ -324,5 +284,5 @@ const styles = StyleSheet.create({
     value: { fontWeight: '400', color: '#555', alignItems: 'flex-start', flex: 0.5 },
     searchContainer: { paddingHorizontal: 12, paddingVertical: 8, },
     searchInput: { backgroundColor: "#F5F5F5", borderRadius: 8, paddingHorizontal: 12, height: 40, borderWidth: 1, borderColor: "#ddd", color: "#000", },
-});
+})
 

@@ -1,5 +1,4 @@
 export const Icons = {
-  // Icon File
   LogoCircle: require("../assets/icons/logo-round.png"),
   LogoSquare: require("../assets/icons/logo-square.png"),
   Back: require("../assets/icons/back.png"),
@@ -115,4 +114,4 @@ export const Icons = {
   PlantNameIcon: require("../assets/icons/location.png"),
   OrderTypeIcon: require("../assets/icons/file.png"),
   rightArrow: require("../assets/icons/rigthArrow.png"),
-};
+}

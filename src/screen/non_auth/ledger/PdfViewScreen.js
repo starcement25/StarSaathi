@@ -1,197 +1,159 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { View, ActivityIndicator, TouchableOpacity, Text, Alert, Platform } from 'react-native';
-import Pdf from 'react-native-pdf';
-import RNBlobUtil from 'react-native-blob-util';
-import RNFetchBlob from 'react-native-blob-util';
-import SafeView from '../../../helper/SafeView';
-import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView';
-import { Colors } from '../../../assets/Colors';
-import { moderateScale } from '../../../helper/Window';
-import moment from 'moment';
+import React, { useEffect, useState, useRef } from 'react'
+import { View, ActivityIndicator, TouchableOpacity, Text, Alert, Platform } from 'react-native'
+import Pdf from 'react-native-pdf'
+import RNBlobUtil from 'react-native-blob-util'
+import RNFetchBlob from 'react-native-blob-util'
+import SafeView from '../../../helper/SafeView'
+import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView'
+import { Colors } from '../../../assets/Colors'
+import { moderateScale } from '../../../helper/Window'
+import moment from 'moment'
 
 const PdfViewScreen = ({ route, navigation }) => {
-    const [pdfPath, setPdfPath] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [loadingText, setLoadingText] = useState('Preparing PDF...');
-    const [error, setError] = useState(false);
-    const isMounted = useRef(true);
-    const downloadTimeoutRef = useRef(null);
+    const [pdfPath, setPdfPath] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const [loadingText, setLoadingText] = useState('Preparing PDF...')
+    const [error, setError] = useState(false)
+    const isMounted = useRef(true)
+    const downloadTimeoutRef = useRef(null)
 
-    const { pdfUrl, page_title, type, pdfLink } = route.params;
+    const { pdfUrl, page_title, type, pdfLink } = route.params
 
-    // Cleanup on unmount
     useEffect(() => {
         return () => {
-            isMounted.current = false;
-
-            // Clear any pending timeouts
-            if (downloadTimeoutRef.current) {
-                clearTimeout(downloadTimeoutRef.current);
-            }
-
-            // Cleanup cached file when unmounting (ignore errors as file might be in use)
+            isMounted.current = false
+            if (downloadTimeoutRef.current)
+                clearTimeout(downloadTimeoutRef.current)
             if (pdfPath && type === 'url') {
                 setTimeout(() => {
-                    RNFetchBlob.fs.unlink(pdfPath).catch(() => { });
-                }, 100);
+                    RNFetchBlob.fs.unlink(pdfPath).catch(() => { })
+                }, 100)
             }
-        };
-    }, [pdfPath, type]);
+        }
+    }, [pdfPath, type])
 
-    // Navigation cleanup listener
     useEffect(() => {
         const unsubscribe = navigation.addListener('beforeRemove', (e) => {
-            // Cleanup when navigating away (ignore errors)
             if (pdfPath && type === 'url') {
                 setTimeout(() => {
-                    RNFetchBlob.fs.unlink(pdfPath).catch(() => { });
-                }, 100);
+                    RNFetchBlob.fs.unlink(pdfPath).catch(() => { })
+                }, 100)
             }
-        });
-
-        return unsubscribe;
-    }, [navigation, pdfPath, type]);
+        })
+        return unsubscribe
+    }, [navigation, pdfPath, type])
 
     const download = async () => {
         try {
-            if (!isMounted.current) return;
-
-            setLoadingText('Downloading PDF...');
-            setError(false);
-
-            // Add timeout to prevent hanging (30 seconds)
+            if (!isMounted.current) return
+            setLoadingText('Downloading PDF...')
+            setError(false)
             const timeoutPromise = new Promise((_, reject) => {
                 downloadTimeoutRef.current = setTimeout(() => {
-                    reject(new Error('Download timeout - Please check your connection'));
-                }, 30000);
-            });
-
+                    reject(new Error('Download timeout - Please check your connection'))
+                }, 30000)
+            })
             const downloadPromise = RNFetchBlob.config({
                 fileCache: true,
                 appendExt: 'pdf',
-            }).fetch('GET', pdfUrl);
-
-            const res = await Promise.race([downloadPromise, timeoutPromise]);
-
-            // Clear timeout on success
-            if (downloadTimeoutRef.current) {
-                clearTimeout(downloadTimeoutRef.current);
-            }
-
+            }).fetch('GET', pdfUrl)
+            const res = await Promise.race([downloadPromise, timeoutPromise])
+            if (downloadTimeoutRef.current)
+                clearTimeout(downloadTimeoutRef.current)
             if (isMounted.current && res && res.path()) {
-                setLoadingText('Loading PDF...');
-                setPdfPath(res.path());
+                setLoadingText('Loading PDF...')
+                setPdfPath(res.path())
             }
         } catch (e) {
             if (isMounted.current) {
-                setLoadingText('Error loading PDF');
-                setError(true);
-                setLoading(false);
-                Alert.alert(
-                    'Error',
-                    e.message || 'Failed to load PDF. Please check your internet connection and try again.',
+                setLoadingText('Error loading PDF')
+                setError(true)
+                setLoading(false)
+                Alert.alert('Error', e.message || 'Failed to load PDF. Please check your internet connection and try again.',
                     [
+                        { text: 'Go Back', onPress: () => navigation.goBack() },
                         {
-                            text: 'Go Back',
-                            onPress: () => navigation.goBack()
-                        },
-                        {
-                            text: 'Retry',
-                            onPress: () => {
-                                setError(false);
-                                setLoading(true);
-                                download();
+                            text: 'Retry', onPress: () => {
+                                setError(false)
+                                setLoading(true)
+                                download()
                             }
                         }
                     ]
-                );
+                )
             }
         }
-    };
+    }
 
     useEffect(() => {
-        if (type == 'url') {
-            download();
-        } else if (type == 'local') {
-            // Validate local file exists
+        if (type == 'url')
+            download()
+        else if (type == 'local') {
             RNFetchBlob.fs.exists(pdfUrl)
                 .then((exists) => {
                     if (exists) {
-                        setPdfPath(pdfUrl);
-                        setLoadingText('Loading PDF...');
+                        setPdfPath(pdfUrl)
+                        setLoadingText('Loading PDF...')
                     } else {
-                        setError(true);
-                        setLoading(false);
-                        Alert.alert('Error', 'PDF file not found on device');
+                        setError(true)
+                        setLoading(false)
+                        Alert.alert('Error', 'PDF file not found on device')
                     }
                 })
                 .catch((err) => {
-                    setError(true);
-                    setLoading(false);
-                });
-        } else {
-            setLoadingText('Loading PDF...');
-        }
-    }, []);
+                    setError(true)
+                    setLoading(false)
+                })
+        } else
+            setLoadingText('Loading PDF...')
+    }, [])
 
-    // Fallback: Clear loading immediately when PDF path is available
     useEffect(() => {
         if (pdfPath) {
             const timer = setTimeout(() => {
-                setLoading(false);
-            }, 1000);
-
-            return () => clearTimeout(timer);
+                setLoading(false)
+            }, 1000)
+            return () => clearTimeout(timer)
         }
-    }, [pdfPath]);
+    }, [pdfPath])
 
     const getPdfSource = () => {
         if (type === 'url' || type === 'local') {
-            return pdfPath ? { uri: `file://${pdfPath}`, cache: false } : null;
+            return pdfPath ? { uri: `file://${pdfPath}`, cache: false } : null
         }
-        return { uri: pdfUrl, cache: true };
-    };
+        return { uri: pdfUrl, cache: true }
+    }
 
     const downloadPdf = async () => {
         const dateTime = moment(new Date()).format('YYYYMMDDHHmmss')
-        const { config, fs } = RNBlobUtil;
-        const isIOS = Platform.OS === 'ios';
-        const dirToSave = isIOS ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
-        const filePath = `${dirToSave}/${page_title}_${dateTime}.pdf`;
-        const fileName = `${page_title}_${dateTime}.pdf`;
+        const { config, fs } = RNBlobUtil
+        const isIOS = Platform.OS === 'ios'
+        const dirToSave = isIOS ? fs.dirs.DocumentDir : fs.dirs.DownloadDir
+        const filePath = `${dirToSave}/${page_title}_${dateTime}.pdf`
+        const fileName = `${page_title}_${dateTime}.pdf`
 
         if (type === 'local') {
             try {
-                await RNBlobUtil.fs.cp(pdfUrl, filePath);
-
-                if (Platform.OS === 'android') {
-                    await RNBlobUtil.fs.scanFile([{ path: filePath, mime: 'application/pdf' }]);
-                }
-
-                Alert.alert(
-                    'Download Successful',
-                    'PDF has been saved to your device.',
+                await RNBlobUtil.fs.cp(pdfUrl, filePath)
+                if (Platform.OS === 'android')
+                    await RNBlobUtil.fs.scanFile([{ path: filePath, mime: 'application/pdf' }])
+                Alert.alert('Download Successful', 'PDF has been saved to your device.',
                     [
+                        { text: 'OK', style: 'cancel' },
                         {
-                            text: 'OK',
-                            style: 'cancel'
-                        },
-                        {
-                            text: 'Open',
-                            onPress: () => {
-                                if (Platform.OS === 'ios') {
-                                    RNBlobUtil.ios.previewDocument(filePath);
-                                } else {
-                                    RNBlobUtil.android.actionViewIntent(filePath, 'application/pdf');
-                                }
+                            text: 'Open', onPress: () => {
+                                if (Platform.OS === 'ios')
+                                    RNBlobUtil.ios.previewDocument(filePath)
+                                else
+                                    RNBlobUtil.android.actionViewIntent(filePath, 'application/pdf')
                             }
                         }
                     ]
-                );
+                )
             } catch (error) {
-                Alert.alert('Error', 'Failed to download file');
+                Alert.alert('Error', 'Failed to download file')
             }
-            return;
+            return
         }
 
         config({
@@ -214,36 +176,30 @@ const PdfViewScreen = ({ route, navigation }) => {
                     'Download Successful',
                     'PDF has been saved to your device.',
                     [
+                        { text: 'OK', style: 'cancel' },
                         {
-                            text: 'OK',
-                            style: 'cancel'
-                        },
-                        {
-                            text: 'Open',
-                            onPress: () => {
-                                if (Platform.OS === 'ios') {
-                                    RNBlobUtil.ios.previewDocument(filePath);
-                                } else {
-                                    RNBlobUtil.android.actionViewIntent(filePath, 'application/pdf');
-                                }
+                            text: 'Open', onPress: () => {
+                                if (Platform.OS === 'ios')
+                                    RNBlobUtil.ios.previewDocument(filePath)
+                                else
+                                    RNBlobUtil.android.actionViewIntent(filePath, 'application/pdf')
                             }
                         }
                     ]
-                );
+                )
             })
             .catch(error => {
-                Alert.alert('Error', 'Failed to download file. Please try again.');
-            });
-    };
+                Alert.alert('Error', 'Failed to download file. Please try again.')
+            })
+    }
 
     const downloadFromUrl = async () => {
         const dateTime = moment(new Date()).format('YYYYMMDDHHmmss')
-        const { fs } = RNBlobUtil;
-        const isIOS = Platform.OS === 'ios';
-        const dir = isIOS ? fs.dirs.DocumentDir : fs.dirs.DownloadDir;
-        const fileName = `${page_title}_${dateTime}.pdf`;
-        const path = `${dir}/${fileName}`;
-
+        const { fs } = RNBlobUtil
+        const isIOS = Platform.OS === 'ios'
+        const dir = isIOS ? fs.dirs.DocumentDir : fs.dirs.DownloadDir
+        const fileName = `${page_title}_${dateTime}.pdf`
+        const path = `${dir}/${fileName}`
         try {
             const res = await RNBlobUtil.config({
                 path: path,
@@ -257,30 +213,24 @@ const PdfViewScreen = ({ route, navigation }) => {
                     title: fileName,
                     path: path,
                 },
-            }).fetch("GET", pdfUrl);
-
+            }).fetch("GET", pdfUrl)
             Alert.alert(
                 'Download Successful',
                 'PDF has been saved to your device.',
                 [
+                    { text: 'OK', style: 'cancel' },
                     {
-                        text: 'OK',
-                        style: 'cancel'
-                    },
-                    {
-                        text: 'Open',
-                        onPress: () => {
-                            if (Platform.OS === 'ios') {
-                                RNBlobUtil.ios.previewDocument(path);
-                            } else {
-                                RNBlobUtil.android.actionViewIntent(path, 'application/pdf');
-                            }
+                        text: 'Open', onPress: () => {
+                            if (Platform.OS === 'ios')
+                                RNBlobUtil.ios.previewDocument(path)
+                            else
+                                RNBlobUtil.android.actionViewIntent(path, 'application/pdf')
                         }
                     }
                 ]
-            );
+            )
         } catch (err) {
-            Alert.alert('Error', 'Failed to download file. Please try again.');
+            Alert.alert('Error', 'Failed to download file. Please try again.')
         }
     }
 
@@ -297,26 +247,23 @@ const PdfViewScreen = ({ route, navigation }) => {
                     </View>
                 </View>
             </View>
-        );
-    };
+        )
+    }
 
     const ErrorView = () => (
         <View style={styles.errorContainer}>
             <Text style={styles.errorText}>Failed to load PDF</Text>
-            <Text style={styles.errorSubText}>
-                The PDF file could not be loaded. Please check your connection and try again.
-            </Text>
+            <Text style={styles.errorSubText}> The PDF file could not be loaded. Please check your connection and try again. </Text>
             <View style={styles.errorButtonContainer}>
                 <TouchableOpacity
                     style={styles.retryButton}
                     onPress={() => {
-                        setError(false);
-                        setLoading(true);
-                        if (type === 'url') {
-                            download();
-                        } else {
-                            setPdfPath(pdfUrl);
-                        }
+                        setError(false)
+                        setLoading(true)
+                        if (type === 'url')
+                            download()
+                        else
+                            setPdfPath(pdfUrl)
                     }} >
                     <Text style={styles.retryButtonText}>Retry</Text>
                 </TouchableOpacity>
@@ -325,70 +272,55 @@ const PdfViewScreen = ({ route, navigation }) => {
                 </TouchableOpacity>
             </View>
         </View>
-    );
+    )
 
-    const pdfSource = getPdfSource();
+    const pdfSource = getPdfSource()
 
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main} disableKeyboardDismiss={true}>
-            <SBSCommonHeaderView
-                title={page_title}
-                backPath="back"
-                Information={false}
-                gotoLink={null}
-                navigation={navigation}
-            />
+            <SBSCommonHeaderView title={page_title} backPath="back" Information={false} gotoLink={null} navigation={navigation} />
             <View style={{ flex: 1 }}>
-                {error ? (
-                    <ErrorView />
-                ) : (
+                {error ? <ErrorView /> :
                     <>
-                        {pdfSource && (
-                            <Pdf
-                                source={pdfSource}
-                                trustAllCerts={false}
-                                enablePaging={true}
-                                onLoadComplete={(numberOfPages, filePath) => { setLoading(false); }}
-                                onPageChanged={(page, numberOfPages) => { setLoading(false); }}
-                                onError={(error) => {
-                                    setError(true);
-                                    setLoading(false);
-                                }}
-                                onPressLink={(uri) => { }}
-                                style={{ flex: 1, backgroundColor: Colors.white }}
-                                spacing={0}
-                                enableAnnotationRendering={false}
-                                maxScale={3}
-                                minScale={0.5}
-                                scale={1}
-                            />
-                        )}
-
-                        {!loading && !error && pdfSource && (
-                            <TouchableOpacity
-                                onPress={() => {
-                                    if (type === 'local') {
-                                        downloadPdf();
-                                    } else if (type === 'url') {
-                                        downloadFromUrl();
-                                    } else {
-                                        downloadPdf();
-                                    }
-                                }}
-                                style={styles.downloadButton}
-                                activeOpacity={0.8}
-                            >
-                                <Text style={styles.downloadButtonText}>Download PDF</Text>
-                            </TouchableOpacity>
-                        )}
+                        {pdfSource && <Pdf
+                            source={pdfSource}
+                            trustAllCerts={false}
+                            enablePaging={true}
+                            onLoadComplete={(numberOfPages, filePath) => { setLoading(false) }}
+                            onPageChanged={(page, numberOfPages) => { setLoading(false) }}
+                            onError={(error) => {
+                                setError(true)
+                                setLoading(false)
+                            }}
+                            onPressLink={(uri) => { }}
+                            style={{ flex: 1, backgroundColor: Colors.white }}
+                            spacing={0}
+                            enableAnnotationRendering={false}
+                            maxScale={3}
+                            minScale={0.5}
+                            scale={1}
+                        />}
+                        {!loading && !error && pdfSource && <TouchableOpacity
+                            onPress={() => {
+                                if (type === 'local')
+                                    downloadPdf()
+                                else if (type === 'url')
+                                    downloadFromUrl()
+                                else
+                                    downloadPdf()
+                            }}
+                            style={styles.downloadButton}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={styles.downloadButtonText}>Download PDF</Text>
+                        </TouchableOpacity>}
                     </>
-                )}
+                }
             </View>
-
             {loading && <LoadingOverlay />}
         </SafeView>
-    );
-};
+    )
+}
 
 const styles = {
     loadingContainer: { position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center', zIndex: 1000, },
@@ -410,6 +342,6 @@ const styles = {
     backButtonText: { color: '#333', fontSize: moderateScale(14), fontWeight: '600', textAlign: 'center', },
     downloadButton: { position: 'absolute', bottom: moderateScale(30), left: moderateScale(100), right: moderateScale(100), height: moderateScale(50), backgroundColor: Colors.main, borderRadius: moderateScale(10), elevation: 10, shadowColor: '#000', shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.3, shadowRadius: 6, justifyContent: 'center', alignItems: 'center', },
     downloadButtonText: { color: '#fff', fontSize: moderateScale(15), fontWeight: '600', }
-};
+}
 
-export default PdfViewScreen;
+export default PdfViewScreen

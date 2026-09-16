@@ -36,7 +36,7 @@ const SingleSelectPopupView = (props) => {
                                             <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}>{item.prod_desc}</Text>
                                         </View>
                                     </TouchableOpacity>
-                                );
+                                )
                             }} />
                     </View>
                 </View>

@@ -19,40 +19,26 @@ const FeedbackListScreen = (props) => {
         requestForVisitList()
     }, [])
 
-    const fetchAuthData = async () => {
-        var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-        }
-    }
-
     const requestForVisitList = async () => {
-        const requestOptions = {
-            method: "GET",
-            redirect: "follow"
-        };
+        const requestOptions = { method: "GET", redirect: "follow" }
         var url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.SalesVisitFeedbackURL.sales_visit_list_url
         url = url + "?customer_code=" + UrlStorage.ParameterList.BasicData.emp_id
-
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
         }
-
         fetch(url, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                if (result.process_status == 'NO') {
+                if (result.process_status == 'NO')
                     Toast.show({ type: 'error', text1: 'Sorry', text2: result.process_message })
-                } else {
+                else
                     setVisitList(result.sales_team_visit_data)
-                }
             })
             .catch((error) => {
-            });
+            })
     }
 
     const gotoFeedbackScreen = (item) => {

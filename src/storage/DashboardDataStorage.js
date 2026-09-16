@@ -5,4 +5,4 @@ let DashboardDataStorage = {
     requestLedgerListForCement: {},
     requestLedgerForSBS: {},
 }
-export default DashboardDataStorage;
+export default DashboardDataStorage

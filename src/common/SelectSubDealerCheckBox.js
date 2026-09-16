@@ -11,9 +11,9 @@ const SelectSubDealerCheckBox = (props) => {
     const [selectedItems, setSelectedItems] = useState([])
 
     useEffect(() => {
-        if (!searchText.trim()) {
+        if (!searchText.trim())
             setFilteredData(props.dataList)
-        } else {
+        else {
             const lowerSearch = searchText.toLowerCase()
             const filtered = props.dataList.filter(item =>
                 item.customer_name?.toLowerCase().includes(lowerSearch)
@@ -22,18 +22,17 @@ const SelectSubDealerCheckBox = (props) => {
         }
     }, [searchText, props.dataList])
 
-const getItemKey = (item) =>
-    item.customer_code ?? item.SAP_code ?? item.customer_name
+    const getItemKey = (item) =>
+        item.customer_code ?? item.SAP_code ?? item.customer_name
 
-const toggleSelection = (item) => {
-    const key = getItemKey(item)
-    const exists = selectedItems.some(selected => getItemKey(selected) === key)
-    if (exists) {
-        setSelectedItems(prev => prev.filter(selected => getItemKey(selected) !== key))
-    } else {
-        setSelectedItems(prev => [...prev, item])
+    const toggleSelection = (item) => {
+        const key = getItemKey(item)
+        const exists = selectedItems.some(selected => getItemKey(selected) === key)
+        if (exists)
+            setSelectedItems(prev => prev.filter(selected => getItemKey(selected) !== key))
+        else
+            setSelectedItems(prev => [...prev, item])
     }
-}
 
     const handleCancel = () => {
         setSearchText("")
@@ -60,16 +59,10 @@ const toggleSelection = (item) => {
                 <TouchableOpacity style={{ width: '100%', height: '25%' }} onPress={handleCancel} >
                     <View style={{ width: '100%', height: '100%' }} />
                 </TouchableOpacity>
-
                 <View style={{ width: "100%", height: '75%', backgroundColor: Colors.main, borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
-                    {/* Header */}
                     <View style={{ width: "100%", padding: moderateScale(16), backgroundColor: "#E41B14", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
-                        <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}>
-                            {"Select Sub Dealer Name"}
-                        </Text>
+                        <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}> {"Select Sub Dealer Name"} </Text>
                     </View>
-
-                    {/* Search Box */}
                     <View style={{ padding: moderateScale(15), backgroundColor: "#fff" }}>
                         <TextInput
                             placeholder="Search by name..."
@@ -77,8 +70,6 @@ const toggleSelection = (item) => {
                             onChangeText={setSearchText}
                             style={{ height: moderateScale(40), borderWidth: 1, borderColor: "#ccc", borderRadius: moderateScale(10), paddingHorizontal: moderateScale(10), fontSize: moderateScale(14), color: Colors.text }} />
                     </View>
-
-                    {/* List */}
                     <View style={{ width: "100%", flex: 1, backgroundColor: "#ffffff", paddingVertical: moderateScale(10), }}>
                         <FlatList
                             data={filteredData}
@@ -90,25 +81,17 @@ const toggleSelection = (item) => {
                                 return (
                                     <TouchableOpacity activeOpacity={0.95} onPress={() => toggleSelection(item)} >
                                         <View style={{ width: "100%", paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(13), flexDirection: "row", alignItems: "center", backgroundColor: (index % 2 !== 0 ? DataStorage.transColorCode : "#FFFFFF") }}>
-                                            {/* Checkbox */}
                                             <View style={{ width: 20, height: 20, borderRadius: 4, borderWidth: 1.5, borderColor: "#E41B14", marginRight: 12, alignItems: "center", justifyContent: "center", backgroundColor: isSelected ? "#E41B14" : "#fff" }}>
-                                                {isSelected && (
-                                                    <Text style={{ color: "#fff", fontSize: 12 }}>✓</Text>
-                                                )}
+                                                {isSelected && <Text style={{ color: "#fff", fontSize: 12 }}>✓</Text>}
                                             </View>
-
-                                            <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}>
-                                                {item.customer_name?.replaceAll("&amp;", '&') + (item?.SAP_code ?" - " + item?.SAP_code : "")}
-                                            </Text>
+                                            <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500", textTransform: "uppercase" }}> {item.customer_name?.replaceAll("&amp", '&') + (item?.SAP_code ? " - " + item?.SAP_code : "")} </Text>
                                         </View>
                                     </TouchableOpacity>
                                 )
                             }}
                             ListEmptyComponent={() => (
                                 <View style={{ padding: moderateScale(20), alignItems: "center" }}>
-                                    <Text style={{ color: Colors.text, fontSize: moderateScale(14) }}>
-                                        No results found
-                                    </Text>
+                                    <Text style={{ color: Colors.text, fontSize: moderateScale(14) }}> No results found </Text>
                                 </View>
                             )}
                         />
@@ -117,7 +100,6 @@ const toggleSelection = (item) => {
                         <TouchableOpacity onPress={handleCancel} style={{ flex: 1, marginRight: 10, paddingVertical: 12, borderRadius: 8, backgroundColor: "#ccc", alignItems: "center" }} >
                             <Text style={{ color: "#000", fontWeight: "600" }}>Cancel</Text>
                         </TouchableOpacity>
-
                         <TouchableOpacity onPress={handleSubmit} style={{ flex: 1, marginLeft: 10, paddingVertical: 12, borderRadius: 8, backgroundColor: "#E41B14", alignItems: "center" }} >
                             <Text style={{ color: "#fff", fontWeight: "600" }}>Submit</Text>
                         </TouchableOpacity>

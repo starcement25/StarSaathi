@@ -1,7 +1,6 @@
 import { ScrollView, Text, TouchableOpacity, View, FlatList, Image } from "react-native"
 import SafeView from "../../../helper/SafeView"
 import { Colors } from "../../../assets/Colors"
-import SBSCommonHeaderView from "../../../common/SBSCommonHeaderView"
 import { moderateScale } from "../../../helper/Window"
 import { useEffect, useState } from "react"
 import UrlStorage from "../../../storage/UrlStorage"
@@ -14,13 +13,13 @@ import formatINR from "../../../helper/formatINR"
 import AgeingHeaderView from "../../../common/AgeingHeaderView"
 import { Icons } from "../../../assets/Icons"
 
-const NUM_COLUMNS = 3;
+const NUM_COLUMNS = 3
 
 const OutstandingSummaryScreen = (props) => {
   const [segments, setSegments] = useState([])
   const [type, setType] = useState('combined')
   const [dayList, setDayList] = useState([])
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   const [isShow, setIsShow] = useState(false)
   const [title, setTitle] = useState('')
   const [daySet, setDaySet] = useState([])
@@ -33,18 +32,17 @@ const OutstandingSummaryScreen = (props) => {
     setTitle('')
     setIsShow(false)
   }, [type])
+
   useEffect(() => {
     if (title != '')
       requestForAgeInformation()
   }, [title])
+
   const requestForAgeInformation = () => {
     setLoading(true)
-    const requestOptions = {
-      method: "GET",
-      redirect: "follow"
-    };
+    const requestOptions = { method: "GET", redirect: "follow" }
     var url = ''
-    var startday = 0, endday = 0;
+    var startday = 0, endday = 0
     var c1 = false
     if (DataStorage.ageingObj.endDate == 0) {
       c1 = true
@@ -54,12 +52,10 @@ const OutstandingSummaryScreen = (props) => {
       startday = title.split(' ')[0].split('-')[0]
       endday = title.split(' ')[0].split('-')[1]
     }
-    if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker') {
-      url = "https://starsaathi.com/SAP/customer_ageing_details_api.php?type=" + type + "&customer_id=" + UrlStorage.ParameterList.BasicData.customerDetails.SAP_code + "&startday=" + startday + "&endday=" + endday
-    } else {
-      url = "https://starsaathi.com/SAP/customer_ageing_details_api.php?type=" + type + "&customer_id=" + UrlStorage.ParameterList.BasicData.emp_id + "&startday=" + startday + "&endday=" + endday
-    }
-    console.log(url);
+    if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker')
+      url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/customer_ageing_details_api.php?type=" + type + "&customer_id=" + UrlStorage.ParameterList.BasicData.customerDetails.SAP_code + "&startday=" + startday + "&endday=" + endday
+    else
+      url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/customer_ageing_details_api.php?type=" + type + "&customer_id=" + UrlStorage.ParameterList.BasicData.emp_id + "&startday=" + startday + "&endday=" + endday
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -67,10 +63,7 @@ const OutstandingSummaryScreen = (props) => {
         var totalAmount = 0
         for (var i = 0; i < result.data.length; i++) {
           var amount = 0
-          var obj = {
-            label: result.data[i].title,
-            subLabel: result.data[i].title + " overdue",
-          }
+          var obj = { label: result.data[i].title, subLabel: result.data[i].title + " overdue", }
           var list = []
           var a = 0
           for (var j = 0; j < result.data[i].data.length; j++) {
@@ -85,51 +78,39 @@ const OutstandingSummaryScreen = (props) => {
               cr_dr: checker ? "CR" : "DR",
               isSelect: false
             }
-
             if (checker)
               a -= parseFloat(o.cr)
             else
               a += parseFloat(o.dr)
-
             list.push(innerObj)
-
           }
-
           amount += a
           totalAmount += a
           var isShow = false
           obj = { ...obj, list, amount, isShow }
-
           if (amount != 0)
             arr.push(obj)
-
         }
-
         setDaySet(arr)
         setTotalAmount(totalAmount)
         setLoading(false)
       })
       .catch((error) => {
         setLoading(false)
-      });
+      })
   }
+
   const requestForAgeInfo = () => {
     setLoading(true)
-    const requestOptions = {
-      method: "GET",
-      redirect: "follow"
-    };
-    console.log(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/customer_ageing_api.php?type=" + type + "&customer_code=" + (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.customer_code));
-
+    const requestOptions = { method: "GET", redirect: "follow" }
     fetch(UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/customer_ageing_api.php?type=" + type + "&customer_code=" + (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.customer_code), requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result)
         if (result.status) {
-          var arr = [];
+          var arr = []
           for (i = 0; i < result.data.length; i++) {
             var obj = {}
-            if (i == result.data.length - 1) {
+            if (i == result.data.length - 1)
               obj = {
                 label: `${i == 0 ? 0 : parseInt(result.data[i - 1].title.toString().replace("Day", "").replace("Abv", ""))}+ Days`,
                 value: parseFloat(result.data[i].value),
@@ -139,7 +120,7 @@ const OutstandingSummaryScreen = (props) => {
                 endDate: 0,
                 isShow: false,
               }
-            } else {
+            else
               obj = {
                 label: `${i == 0 ? 0 : parseInt(result.data[i - 1].title.toString().replace("Day", "").replace("Abv", "")) + 1}-${parseInt(result.data[i].title.toString().replace("Day", "").replace("Abv", ""))} Days`,
                 value: parseFloat(result.data[i].value),
@@ -149,20 +130,19 @@ const OutstandingSummaryScreen = (props) => {
                 endDate: parseInt(result.data[i].title.toString().replace("Day", "").replace("Abv", "")),
                 isShow: false,
               }
-            }
             arr.push(obj)
           }
           setSegments(arr)
           setLoading(false)
         } else {
-          Toast.show({ type: "error", text1: "Sorry...", text2: result.message });
+          Toast.show({ type: "error", text1: "Sorry...", text2: result.message })
         }
       })
-      .catch((error) => console.error(error));
+      .catch((error) => { })
   }
 
   const renderSegmentCard = ({ item, index }) => {
-    const isLastInRow = (index + 1) % NUM_COLUMNS === 0;
+    const isLastInRow = (index + 1) % NUM_COLUMNS === 0
     return (
       <TouchableOpacity
         onPress={() => {
@@ -178,8 +158,8 @@ const OutstandingSummaryScreen = (props) => {
           <Text style={{ fontSize: moderateScale(12), fontWeight: '800', color: '#1a1a1a', textAlign: 'center' }} numberOfLines={1} adjustsFontSizeToFit > ₹{formatINR(item.value)} </Text>
         </View>
       </TouchableOpacity>
-    );
-  };
+    )
+  }
 
   return (
     <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={Colors.main}>
@@ -190,19 +170,15 @@ const OutstandingSummaryScreen = (props) => {
             <TouchableOpacity onPress={() => setType('combined')} style={{ flex: 1, alignItems: 'center', paddingVertical: moderateScale(8), borderRadius: moderateScale(2), backgroundColor: type == 'combined' ? '#C0392B' : '#FFFFFF', borderWidth: type == 'combined' ? 0 : 1, borderColor: '#E8ECF2', shadowColor: type == 'combined' ? '#C0392B' : '#B0BAD0', shadowOffset: { width: 0, height: type == 'combined' ? 4 : 1 }, shadowOpacity: type == 'combined' ? 0.25 : 0.07, shadowRadius: type == 'combined' ? 8 : 3, elevation: type == 'combined' ? 5 : 1, }}>
               <Text style={{ fontSize: moderateScale(11), fontWeight: type == 'combined' ? '700' : '500', color: type == 'combined' ? '#fff' : '#AAA', letterSpacing: 0.2, textAlign: 'center', }}>Combined</Text>
             </TouchableOpacity>
-
             <TouchableOpacity onPress={() => setType('scl')} style={{ flex: 1, alignItems: 'center', paddingVertical: moderateScale(8), borderRadius: moderateScale(2), backgroundColor: type == 'scl' ? '#C0392B' : '#FFFFFF', borderWidth: type == 'scl' ? 0 : 1, borderColor: '#E8ECF2', shadowColor: type == 'scl' ? '#C0392B' : '#B0BAD0', shadowOffset: { width: 0, height: type == 'scl' ? 4 : 1 }, shadowOpacity: type == 'scl' ? 0.25 : 0.07, shadowRadius: type == 'scl' ? 8 : 3, elevation: type == 'scl' ? 5 : 1, }}>
               <Text style={{ fontSize: moderateScale(11), fontWeight: type == 'scl' ? '700' : '500', color: type == 'scl' ? '#fff' : '#AAA', letterSpacing: 0.2, textAlign: 'center', }}>SCL</Text>
             </TouchableOpacity>
-
             <TouchableOpacity onPress={() => setType('scnel')} style={{ flex: 1, alignItems: 'center', paddingVertical: moderateScale(8), borderRadius: moderateScale(2), backgroundColor: type == 'scnel' ? '#C0392B' : '#FFFFFF', borderWidth: type == 'scnel' ? 0 : 1, borderColor: '#E8ECF2', shadowColor: type == 'scnel' ? '#C0392B' : '#B0BAD0', shadowOffset: { width: 0, height: type == 'scnel' ? 4 : 1 }, shadowOpacity: type == 'scnel' ? 0.25 : 0.07, shadowRadius: type == 'scnel' ? 8 : 3, elevation: type == 'scnel' ? 5 : 1, }}>
               <Text style={{ fontSize: moderateScale(11), fontWeight: type == 'scnel' ? '700' : '500', color: type == 'scnel' ? '#fff' : '#AAA', letterSpacing: 0.2, textAlign: 'center', }}>SCNEL</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: moderateScale(5), marginBottom: moderateScale(10) }}>
-            <Text style={{ marginHorizontal: moderateScale(10), fontSize: moderateScale(11), color: '#888', fontWeight: '600', letterSpacing: 0.5 }}>
-              As on {moment(new Date()).format('DD MMM, YYYY')}
-            </Text>
+            <Text style={{ marginHorizontal: moderateScale(10), fontSize: moderateScale(11), color: '#888', fontWeight: '600', letterSpacing: 0.5 }}> As on {moment(new Date()).format('DD MMM, YYYY')} </Text>
             <View style={{ flex: 1, height: 0.8, backgroundColor: '#d0d0d0' }} />
           </View>
           <FlatList
@@ -226,11 +202,7 @@ const OutstandingSummaryScreen = (props) => {
               return <View style={{ backgroundColor: '#ffffff', borderRadius: moderateScale(14), shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.07, shadowRadius: 10, elevation: 1, marginVertical: moderateScale(4) }}>
                 <TouchableOpacity
                   onPress={() => {
-                    setDaySet(prev =>
-                      prev.map((d, i) =>
-                        i === index ? { ...d, isShow: d.isShow ? false : true } : { ...d, isShow: false }
-                      )
-                    );
+                    setDaySet(prev => prev.map((d, i) => i === index ? { ...d, isShow: d.isShow ? false : true } : { ...d, isShow: false }))
                   }}
                   style={{ flexDirection: 'row', alignItems: 'center', padding: moderateScale(16), gap: moderateScale(6) }}>
                   <Text style={{ fontSize: moderateScale(16), fontWeight: '600', color: '#444444' }}> {item.label}</Text>
@@ -265,7 +237,6 @@ const OutstandingSummaryScreen = (props) => {
                   />
                   <View style={{ height: 10 }} />
                 </>}
-
               </View>
             }}
           /> : null}
@@ -274,7 +245,7 @@ const OutstandingSummaryScreen = (props) => {
       <Toast config={toastConfig} />
       {loading ? <Loader /> : null}
     </SafeView>
-  );
-};
+  )
+}
 
-export default OutstandingSummaryScreen;
+export default OutstandingSummaryScreen

@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Linking, Platform, Text, TouchableHighlight, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Icons } from '../../assets/Icons';
-import { moderateScale } from '../../helper/Window';
-import UrlStorage from '../../storage/UrlStorage';
-import { Colors } from '../../assets/Colors';
-import SafeView from '../../helper/SafeView';
-import DataStorage from '../../storage/DataStorage';
-import DeviceInfo from 'react-native-device-info';
+import { Image, Linking, Platform, Text, TouchableHighlight, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Icons } from '../../assets/Icons'
+import { moderateScale } from '../../helper/Window'
+import UrlStorage from '../../storage/UrlStorage'
+import { Colors } from '../../assets/Colors'
+import SafeView from '../../helper/SafeView'
+import DataStorage from '../../storage/DataStorage'
+import DeviceInfo from 'react-native-device-info'
 
 const SplashScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
   const [isUpdate, setIsUpdate] = useState(false)
   useEffect(() => {
     const timer = setTimeout(() => {
       checkAppVersion()
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+    }, 3000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const checkAppVersion = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
+    const myHeaders = new Headers()
+    myHeaders.append("Accept", "application/json")
 
     const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow"
-    };
-    var url = '';
+    }
+    var url = ''
     url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + "/show_latest_app_version_v2.php"
-    console.log(url);
-
     fetch(url, requestOptions)
       .then((response) => response.json())
       .then((result) => {
@@ -57,7 +55,7 @@ const SplashScreen = () => {
           }
         }
       })
-      .catch((error) => { });
+      .catch((error) => { })
   }
 
   const checkLogin = async () => {
@@ -84,29 +82,29 @@ const SplashScreen = () => {
         const image = await AsyncStorage.getItem('image_url')
         UrlStorage.ParameterList.BasicData.image_url = image
 
-        navigation.replace("HomeScreen");
+        navigation.replace("HomeScreen")
       } catch (error) {
-        navigation.replace("LoginScreen");
+        navigation.replace("LoginScreen")
       }
     } else {
-      navigation.replace("LoginScreen");
+      navigation.replace("LoginScreen")
     }
   }
 
   const gotoStoreForUpdate = async () => {
-    const androidUrl = "market://details?id=org.forcepower.starcement";
-    const iosUrl = "itms-apps://apps.apple.com/app/id6754075343";
+    const androidUrl = "market://details?id=org.forcepower.starcement"
+    const iosUrl = "itms-apps://apps.apple.com/app/id6754075343"
 
-    const fallbackAndroid = "https://play.google.com/store/apps/details?id=org.forcepower.starcement";
-    const fallbackIos = "https://apps.apple.com/app/id6754075343";
+    const fallbackAndroid = "https://play.google.com/store/apps/details?id=org.forcepower.starcement"
+    const fallbackIos = "https://apps.apple.com/app/id6754075343"
 
-    const url = Platform.OS === "android" ? androidUrl : iosUrl;
-    const fallback = Platform.OS === "android" ? fallbackAndroid : fallbackIos;
+    const url = Platform.OS === "android" ? androidUrl : iosUrl
+    const fallback = Platform.OS === "android" ? fallbackAndroid : fallbackIos
 
     try {
-      await Linking.openURL(url);
+      await Linking.openURL(url)
     } catch {
-      Linking.openURL(fallback);
+      Linking.openURL(fallback)
     }
   }
 

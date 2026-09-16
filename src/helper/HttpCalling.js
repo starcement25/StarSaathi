@@ -1,18 +1,16 @@
-import axios from 'axios';
-import { decryptFromHex } from './Crypto';
+import axios from 'axios'
+import { decryptFromHex } from './Crypto'
 
 export const httpPostCallWithXmlResponseDecrypted = async (url, jsonPayload) => {
     try {
         const response = await axios.post(url, jsonPayload, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json', },
             responseType: 'text',
-        });
-        let responseFromServer = response.data;
-        responseFromServer = decryptFromHex(responseFromServer);
-        return responseFromServer;
+        })
+        let responseFromServer = response.data
+        responseFromServer = decryptFromHex(responseFromServer)
+        return responseFromServer
     } catch (e) {
-        return 'Network Failure';
+        return 'Network Failure'
     }
-};
+}

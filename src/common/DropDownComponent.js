@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Dropdown } from 'react-native-element-dropdown';
-import DataStorage from '../storage/DataStorage';
+import React, { useState } from 'react'
+import { View } from 'react-native'
+import { Dropdown } from 'react-native-element-dropdown'
+import DataStorage from '../storage/DataStorage'
 
 const DropdownComponent = ({ data = [], label = "" }) => {
-  const [value, setValue] = useState(null);
-  const [isFocus, setIsFocus] = useState(false);
+  const [value, setValue] = useState(null)
+  const [isFocus, setIsFocus] = useState(false)
 
   return (
     <View style={{ backgroundColor: 'white', width: "100%" }}>
@@ -26,12 +26,12 @@ const DropdownComponent = ({ data = [], label = "" }) => {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={item => {
-          setValue(item.value);
-          setIsFocus(false);
+          setValue(item.value)
+          setIsFocus(false)
         }}
       />
     </View>
-  );
-};
+  )
+}
 
-export default DropdownComponent;
+export default DropdownComponent

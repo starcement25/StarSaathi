@@ -9,10 +9,9 @@ import UrlStorage from '../../../storage/UrlStorage'
 import Loader from '../../../common/Loader'
 import SelectSubDealerCheckBox from '../../../common/SelectSubDealerCheckBox'
 import { getMySubDealerList } from '../../../storage/database/GetDataFromTable'
-import { AuthCheckingApi } from '../../../auth/AuthCheckingApi'
 import AuthNotVerifyPopupView from '../../../auth/AuthNotVerifyPopupView'
+import { AuthCheckingApi } from '../../../auth/AuthCheckingApi'
 
-// ─── Constants ───────────────────────────────────────────────────────────────
 const PRIMARY = '#E41B14'
 const PRIMARY_LIGHT = '#FFF0EF'
 const CARD_BG = '#FFFFFF'
@@ -24,55 +23,43 @@ const BORDER = '#E5E7EB'
 const SUCCESS = '#10B981'
 const SUCCESS_BG = '#ECFDF5'
 
-// ─── Cross-platform toast ─────────────────────────────────────────────────────
 const showToast = (message) => {
     if (Platform.OS === 'android') ToastAndroid.show(message, ToastAndroid.SHORT)
     else Alert.alert('Notice', message)
 }
 
-// ─── Helper: initial avatar color ─────────────────────────────────────────────
 const AVATAR_COLORS = ['#6366F1', '#F59E0B', '#10B981', '#3B82F6', '#8B5CF6', '#EC4899']
 const avatarColor = (name = '') => AVATAR_COLORS[name.charCodeAt(0) % AVATAR_COLORS.length]
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// AllocationBottomSheet
-// ═══════════════════════════════════════════════════════════════════════════════
 const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem, assignedInvoiceItem, available_allocation_qty, onConfirm, isSubmitting }) => {
     const translateY = useRef(new Animated.Value(600)).current
     const backdropOpacity = useRef(new Animated.Value(0)).current
     const keyboardOffset = useRef(new Animated.Value(0)).current
     const [activeIndex, setActiveIndex] = useState(0)
     const [quantities, setQuantities] = useState({})
-
     const allocationQty = Number(available_allocation_qty) || 0
     const invoiceQty = Number(assignedInvoiceItem?.invqty) || 0
     const productName = assignedItem?.prod_display_name || ''
-
     const getDealerKey = (d) => d?.customer_code ?? d?.id ?? d?.customer_name ?? ''
-
     const currentDealer = subDealers[activeIndex]
     const currentDealerKey = currentDealer ? getDealerKey(currentDealer) : ''
     const currentQtyValue = quantities[currentDealerKey] ?? ''
-
     const totalAllocated = Object.values(quantities).reduce((s, v) => s + (parseFloat(v) || 0), 0)
     const remainingQty = allocationQty - totalAllocated
     const pct = allocationQty > 0 ? Math.min(totalAllocated / allocationQty, 1) : 0
-
     const othersTotal = (key) => Object.entries(quantities).reduce((s, [k, v]) => k === key ? s : s + (parseFloat(v) || 0), 0)
-
     const isCurrentOverLimit = (() => {
         const val = parseFloat(currentQtyValue) || 0
         return val > 0 && (othersTotal(currentDealerKey) + val) > allocationQty
     })()
-
     const isDealerOverLimit = (key) => {
         const val = parseFloat(quantities[key]) || 0
         return val > 0 && (othersTotal(key) + val) > allocationQty
     }
-
     useEffect(() => {
         if (visible) {
-            setActiveIndex(0); setQuantities({})
+            setActiveIndex(0)
+            setQuantities({})
             Animated.parallel([
                 Animated.spring(translateY, { toValue: 0, useNativeDriver: true, tension: 65, friction: 11 }),
                 Animated.timing(backdropOpacity, { toValue: 1, duration: 300, useNativeDriver: true }),
@@ -93,22 +80,23 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
         const onHide = () => Animated.timing(keyboardOffset, { toValue: 0, duration: Platform.OS === 'android' ? 160 : 250, useNativeDriver: true }).start()
         const s = Keyboard.addListener(showEv, onShow)
         const h = Keyboard.addListener(hideEv, onHide)
-        return () => { s.remove(); h.remove() }
+        return () => {
+            s.remove()
+            h.remove()
+        }
     }, [])
 
     const handleAllocate = () => {
-
         for (var i = 0; i < subDealers.length; i++) {
             const key = getDealerKey(subDealers[i])
             const qty = parseFloat(quantities[key]) || 0
             if (qty <= 0) {
                 var message = 'Please enter a valid quantity greater than 0'
-                if (subDealers.length > 1) {
+                if (subDealers.length > 1)
                     message = message + ' for every sub-dealer.'
-                } else {
+                else
                     message = message + '.'
-                }
-                showToast(message);
+                showToast(message)
                 return
             }
             if (isCurrentOverLimit) {
@@ -116,39 +104,32 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
                 return
             }
         }
-
         Keyboard.dismiss()
         onConfirm(assignedItem, quantities)
     }
 
-    const handleClose = () => { Keyboard.dismiss(); onClose() }
+    const handleClose = () => {
+        Keyboard.dismiss()
+        onClose()
+    }
 
     return (
         <View style={[StyleSheet.absoluteFillObject, { pointerEvents: visible ? 'auto' : 'none' }]}>
             <TouchableWithoutFeedback onPress={handleClose}>
                 <Animated.View style={[bsStyles.backdrop, { opacity: backdropOpacity }]} />
             </TouchableWithoutFeedback>
-
             <Animated.View style={[bsStyles.sheet, { transform: [{ translateY: Animated.add(translateY, keyboardOffset) }] }]}>
-
-                {/* Handle */}
                 <View style={bsStyles.handle} />
-
-                {/* Title row */}
                 <View style={bsStyles.titleRow}>
                     <Text style={bsStyles.sheetTitle}>Allocate Stock</Text>
                     <TouchableOpacity onPress={handleClose} style={bsStyles.closeBtn}>
                         <Text style={bsStyles.closeBtnText}>✕</Text>
                     </TouchableOpacity>
                 </View>
-
-                {/* Product pill */}
                 <View style={bsStyles.productPill}>
                     <View style={bsStyles.productDot} />
                     <Text style={bsStyles.productPillText} numberOfLines={1}>{productName}</Text>
                 </View>
-
-                {/* Sub-dealer tabs */}
                 <FlatList
                     horizontal
                     data={subDealers}
@@ -160,22 +141,19 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
                         const isActive = index === activeIndex
                         const hasError = isDealerOverLimit(key)
                         return (
-                            <TouchableOpacity style={[bsStyles.tab, isActive && bsStyles.tabActive, hasError && bsStyles.tabError]} onPress={() => { Keyboard.dismiss(); setActiveIndex(index) }} >
+                            <TouchableOpacity style={[bsStyles.tab, isActive && bsStyles.tabActive, hasError && bsStyles.tabError]} onPress={() => {
+                                Keyboard.dismiss()
+                                setActiveIndex(index)
+                            }} >
                                 <View style={[bsStyles.tabAvatar, { backgroundColor: avatarColor(item?.customer_name || '') }]}>
-                                    <Text style={bsStyles.tabAvatarText}>
-                                        {(item?.customer_name || '?').charAt(0).toUpperCase()}
-                                    </Text>
+                                    <Text style={bsStyles.tabAvatarText}> {(item?.customer_name || '?').charAt(0).toUpperCase()} </Text>
                                 </View>
-                                <Text style={[bsStyles.tabText, isActive && bsStyles.tabTextActive, hasError && bsStyles.tabTextError]} numberOfLines={1}>
-                                    {item?.customer_name || `Dealer ${index + 1}`}
-                                </Text>
+                                <Text style={[bsStyles.tabText, isActive && bsStyles.tabTextActive, hasError && bsStyles.tabTextError]} numberOfLines={1}> {item?.customer_name || `Dealer ${index + 1}`} </Text>
                                 {hasError && <View style={bsStyles.tabErrorDot} />}
                             </TouchableOpacity>
                         )
                     }}
                 />
-
-                {/* Allocation progress */}
                 <View style={bsStyles.progressCard}>
                     <View style={bsStyles.progressRow}>
                         <View style={bsStyles.progressStat}>
@@ -189,21 +167,15 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
                             <Text style={bsStyles.progressPct}>{Math.round(pct * 100)}% used</Text>
                         </View>
                         <View style={[bsStyles.progressStat, { alignItems: 'flex-end' }]}>
-                            <Text style={[bsStyles.progressStatVal, remainingQty < 0 && { color: PRIMARY }]}>
-                                {remainingQty < 0 ? 0 : remainingQty}
-                            </Text>
+                            <Text style={[bsStyles.progressStatVal, remainingQty < 0 && { color: PRIMARY }]}> {remainingQty < 0 ? 0 : remainingQty} </Text>
                             <Text style={bsStyles.progressStatLbl}>Remaining MT</Text>
                         </View>
                     </View>
                 </View>
-
-                {/* Qty input */}
                 <View style={bsStyles.inputCard}>
                     <View style={bsStyles.inputLabelRow}>
                         <Text style={bsStyles.inputLabel}>Enter Quantity for</Text>
-                        <Text style={bsStyles.inputDealerName} numberOfLines={1}>
-                            {currentDealer?.customer_name}
-                        </Text>
+                        <Text style={bsStyles.inputDealerName} numberOfLines={1}> {currentDealer?.customer_name} </Text>
                     </View>
                     <View style={[bsStyles.inputRow, isCurrentOverLimit && bsStyles.inputRowError]}>
                         <TextInput
@@ -218,15 +190,9 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
                             <Text style={bsStyles.unitText}>MT</Text>
                         </View>
                     </View>
-                    {isCurrentOverLimit && (
-                        <Text style={bsStyles.errorHint}>
-                            ⚠ Max allowed: {Math.max(0, allocationQty - othersTotal(currentDealerKey))} MT
-                        </Text>
-                    )}
+                    {isCurrentOverLimit && <Text style={bsStyles.errorHint}> ⚠ Max allowed: {Math.max(0, allocationQty - othersTotal(currentDealerKey))} MT </Text>}
                     <Text style={bsStyles.invoiceHint}>Invoice Qty: {invoiceQty} MT</Text>
                 </View>
-
-                {/* Buttons */}
                 <View style={bsStyles.btnRow}>
                     <TouchableOpacity style={bsStyles.cancelBtn} onPress={handleClose}>
                         <Text style={bsStyles.cancelBtnText}>Cancel</Text>
@@ -237,9 +203,7 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
                         activeOpacity={(isCurrentOverLimit || isSubmitting) ? 1 : 0.85}
                         disabled={isSubmitting}
                     >
-                        <Text style={bsStyles.allocateBtnText}>
-                            {isSubmitting ? 'Confirming...' : 'Confirm Allocation'}
-                        </Text>
+                        <Text style={bsStyles.allocateBtnText}> {isSubmitting ? 'Confirming...' : 'Confirm Allocation'} </Text>
                     </TouchableOpacity>
                 </View>
             </Animated.View>
@@ -247,15 +211,11 @@ const AllocationBottomSheet = ({ visible, onClose, subDealers = [], assignedItem
     )
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// Main Screen
-// ═══════════════════════════════════════════════════════════════════════════════
 const AssignedScreen = (props) => {
-
-    const [orderInfo, setOrderInfo] = useState({});
-    const [invoiceInfo, setInvoiceInfo] = useState({});
-    const [available_allocation_qty, set_available_allocation_qty] = useState(0);
-    const [assigned, setAssigned] = useState(false)
+    const [orderInfo, setOrderInfo] = useState({})
+    const [invoiceInfo, setInvoiceInfo] = useState({})
+    const [available_allocation_qty, set_available_allocation_qty] = useState(0)
+    const [assigned, setAssigned] = useState(UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() == 'RSSD'.toLocaleLowerCase())
     const [assignedFilterOpen, setAssignedFilterOpen] = useState(false)
     const [loading, setLoading] = useState(true)
     const [searchText, setSearchText] = useState('')
@@ -264,166 +224,106 @@ const AssignedScreen = (props) => {
     const [selectedDate, setSelectedDate] = useState(`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`)
     const [allocationData, setAllocationData] = useState()
     const [subDealerSheetVisible, setSubDealerSheetVisible] = useState(false)
+    const [subDealerSheetVisibleRSSD, setSubDealerSheetVisibleRSSD] = useState(false)
     const [selectedSubDealers, setSelectedSubDealers] = useState([])
     const [allocationSheetVisible, setAllocationSheetVisible] = useState(false)
     const [authChecker, setAuthChecker] = useState(false)
     const [selectedAssignedItem, setSelectedAssignedItem] = useState(null)
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [bufferDate, setBufferDate] = useState(0)
+    const [isChangeAllocation, setIsChangeAllocation] = useState(false)
+    const [changeType, setChangeType] = useState(false)
 
     useEffect(() => {
         !assigned ? getAssignedHistoryForCement() : getAllocatedHistoryForCement()
     }, [assigned, selectedDate])
 
-    useEffect(() => { requestForCementShippingToSubDealer() }, [])
-    const fetchAuthData = async () => {
-        var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
+    useEffect(() => {
+        requestForCheckSetting()
+        requestForCementShippingToSubDealer()
+    }, [])
+
+    const requestForCheckSetting = async () => {
+        const requestOptions = { method: "GET", redirect: "follow" }
+        const basicData = UrlStorage.ParameterList.BasicData
+        const customerCode = basicData.user_type?.toLowerCase() === 'broker' ? basicData.selectedCustomerCode : basicData.emp_id
+        const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + `/api_get_rssd_allocation_settings.php?customer_id=${encodeURIComponent(customerCode)}`
+        try {
+            const response = await fetch(url, requestOptions)
+            if (!response.ok)
+                throw new Error(`Allocation settings request failed (${response.status})`)
+            const result = await response.json()
+            if (result.process_sts === 'YES') {
+                setIsChangeAllocation(result.data.rssd_allocation_change)
+                setBufferDate(result.data.rssd_allocation_days)
+            }
+        } catch (error) {
         }
     }
 
-    // const getAssignedHistoryForCement = async () => {
-    //     setLoading(true)
-    //     var a = await AuthCheckingApi();
-    //     if (!a) {
-    //         setAuthChecker(true)
-    //         setLoading(false)
-    //         return false
-    //     }
-    //     try {
-    //         const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_url + '?month_year=' + selectedDate + '&customer_code=' + (UrlStorage.ParameterList.BasicData.user_type == 'broker' ?UrlStorage.ParameterList.BasicData.selectedCustomerCode:  UrlStorage.ParameterList.BasicData.emp_id)
-    //         console.log(url);
-
-    //         const r = await fetch(url, { method: 'GET' })
-    //         const result = await r.json()
-    //         setAssignedList( result.process_status === 'YES' ? result.dispatched_order_data.map(i => { const allInvoices = i.dispatched_invoice_data?.flat() || []; const canAllocate = allInvoices.length > 0 && allInvoices.every(item => item.allocation_complete === 'YES'); return { ...i, isOpen: false, canAllocate: canAllocate, }; }) : [] );
-
-    //         //setAssignedList(result.process_status === 'YES' ? result.dispatched_order_data.map(i => ({ ...i, isOpen: false })) : [])
-    //     } catch (e) { }
-    //     setLoading(false)
-    // }
     const getAssignedHistoryForCement = async () => {
-        setLoading(true);
-
-        var a = await AuthCheckingApi();
-
+        setLoading(true)
+        var a = await AuthCheckingApi()
         if (!a) {
-            setAuthChecker(true);
-            setLoading(false);
-            return false;
+            setAuthChecker(true)
+            setLoading(false)
+            return false
         }
-
         try {
             var a = ''
-            if (UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() == 'RSSD'.toLocaleLowerCase()) {
-                console.log('RSSD');
+            if (UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() == 'RSSD'.toLocaleLowerCase())
                 a = UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_RSSD_url
-            } else {
-                console.log('not RSSD. ' + UrlStorage.ParameterList.BasicData.user_type);
+            else
                 a = UrlStorage.NonAuthURL.Saathi.LiftingURL.dispatched_order_data_list_url
-            }
-            var url =
-                UrlStorage.BaseUrlList.Saathi.base_url_saathi +
-                a +
-                '?month_year=' +
-                selectedDate +
-                '&customer_code=' +
-                (
-                    UrlStorage.ParameterList.BasicData.user_type == 'broker'
-                        ? UrlStorage.ParameterList.BasicData.selectedCustomerCode
-                        : UrlStorage.ParameterList.BasicData.emp_id
-                );
-
-            console.log(url);
-
-            const r = await fetch(url, { method: 'GET' });
-            const result = await r.json();
-
+            var url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + a + '?month_year=' + selectedDate + '&customer_code=' +
+                (UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.emp_id)
+            const r = await fetch(url, { method: 'GET' })
+            const result = await r.json()
             if (result.process_status === 'YES') {
-
-                const rssdAllocationDays = parseInt(
-                    result.rssd_allocation_days,
-                    10
-                ) || 0;
-
-                // Today - use only date, not time
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                // For 11 days, valid dates are today and previous 10 days.
-                // Example:
-                // Today = 11-Aug
-                // Valid from = 01-Aug
-                const allocationStartDate = new Date(today);
-                allocationStartDate.setDate(
-                    allocationStartDate.getDate() - (rssdAllocationDays - 1)
-                );
-
+                const rssdAllocationDays = parseInt(result.rssd_allocation_days, 10) || 0
+                const today = new Date()
+                today.setHours(0, 0, 0, 0)
+                const allocationStartDate = new Date(today)
+                allocationStartDate.setDate(allocationStartDate.getDate() - (rssdAllocationDays - 1))
                 const assignedData = result.dispatched_order_data.map(i => {
-
-                    const allInvoices =
-                        i.dispatched_invoice_data?.flat() || [];
-
-                    // Existing allocation check
-                    const canAllocate =
-                        allInvoices.length > 0 &&
-                        allInvoices.every(
-                            item => item.allocation_complete === 'YES'
-                        );
-
-                    // New allocation date check
-                    const canAllocate2 =
-                        allInvoices.length > 0 &&
-                        allInvoices.every(item => {
-
-                            if (!item.invdt) {
-                                return false;
-                            }
-
-                            // invdt format: YYYY-MM-DD
-                            const [year, month, day] =
-                                item.invdt.split('-').map(Number);
-
-                            const invoiceDate = new Date(
-                                year,
-                                month - 1,
-                                day
-                            );
-
-                            invoiceDate.setHours(0, 0, 0, 0);
-
-                            return (
-                                invoiceDate >= allocationStartDate &&
-                                invoiceDate <= today
-                            );
-                        });
-
+                    const allInvoices = i.dispatched_invoice_data?.flat() || []
+                    const autoAllocationValues = allInvoices.map(item => item?.auto_allocation?.toString().trim().toUpperCase())
+                    let autoAllocation = 'NO'
+                    if (autoAllocationValues.length > 0 && autoAllocationValues.every(value => value === 'YES'))
+                        autoAllocation = 'Auto Allocated'
+                    else if (autoAllocationValues.length > 0 && autoAllocationValues.every(value => value == null))
+                        autoAllocation = 'NO'
+                    else if (autoAllocationValues.length > 0 && !autoAllocationValues.every(value => value === 'NO'))
+                        autoAllocation = 'Re-Allocated'
+                    const canAllocate = allInvoices.length > 0 && allInvoices.every(item => item.allocation_complete === 'YES')
+                    const canAllocate2 = allInvoices.length > 0 && allInvoices.every(item => {
+                        if (!item.invdt)
+                            return false
+                        const [year, month, day] = item.invdt.split('-').map(Number)
+                        const invoiceDate = new Date(year, month - 1, day)
+                        invoiceDate.setHours(0, 0, 0, 0)
+                        return (invoiceDate >= allocationStartDate && invoiceDate <= today)
+                    })
                     return {
                         ...i,
                         isOpen: false,
                         canAllocate: canAllocate,
                         canAllocate2: canAllocate2,
-                    };
-                });
-
-                setAssignedList(assignedData);
-
-            } else {
-                setAssignedList([]);
-            }
-
+                        auto_allocation: autoAllocation,
+                    }
+                })
+                setAssignedList(assignedData)
+            } else
+                setAssignedList([])
         } catch (e) {
-            console.log('getAssignedHistoryForCement error:', e);
-            setAssignedList([]);
+            setAssignedList([])
         }
-
-        setLoading(false);
-    };
+        setLoading(false)
+    }
 
     const getAllocatedHistoryForCement = async () => {
         setLoading(true)
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
@@ -431,8 +331,6 @@ const AssignedScreen = (props) => {
         }
         try {
             const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.allocation_data_invoice_url + '?year_month=' + selectedDate + '&customer_id=' + UrlStorage.ParameterList.BasicData.emp_id + '&user_type=' + UrlStorage.ParameterList.BasicData.user_type
-            console.log(url);
-
             const r = await fetch(url)
             const result = await r.json()
             if (result.process_status === 'YES') {
@@ -446,26 +344,15 @@ const AssignedScreen = (props) => {
 
     const requestForCementShippingToSubDealer = async () => {
         setLoading(true)
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
         }
         try {
-
-            //const url = `${UrlStorage.BaseUrlList.Saathi.base_url_saathi}${UrlStorage.NonAuthURL.Saathi.OrderURL1.dealer_data_list_url}?emp_code=${UrlStorage.ParameterList.BasicData.user_type != 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerCode : UrlStorage.ParameterList.BasicData.customerDetails.customer_code}&user_type=sub dealer&login_type=${UrlStorage.ParameterList.BasicData.user_type}`
-
-            // const result = await (await fetch(url)).json()
             const local = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.selectedCustomerCode, true)
-
             setSubDealerData(local)
-
-            // if (result.process_status === 'YES' && result.sub_dealer_data?.length > 0) {
-            //     setSubDealerData([...result.sub_dealer_data].sort((a, b) => a.customer_name.trim().toLowerCase().localeCompare(b.customer_name.trim().toLowerCase())))
-            // } else {
-
-            // }
         } catch (e) {
             try {
                 const local = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.selectedCustomerCode)
@@ -478,52 +365,84 @@ const AssignedScreen = (props) => {
     const getDealerKey = (d) => d?.customer_code ?? d?.id ?? d?.customer_name ?? ''
 
     const confirmOrder = async (orderDetails, quantities) => {
-        if (isSubmitting) return
-        setIsSubmitting(true)
-        try {
-            var a = await AuthCheckingApi();
-            if (!a) {
-                setAuthChecker(true)
-                setLoading(false)
-                return false
+        if (UrlStorage.ParameterList.BasicData.user_type.toLowerCase() == 'RSSD'.toLocaleLowerCase()) {
+            Alert.alert('Warning', 'Under development.')
+        } else {
+            if (changeType == 're-allocation') {
+                if (isSubmitting) return
+                setIsSubmitting(true)
+                try {
+                    var a = await AuthCheckingApi()
+                    if (!a) {
+                        setAuthChecker(true)
+                        setLoading(false)
+                        return false
+                    }
+                    const fd = new FormData()
+                    fd.append("APPORDERNO", invoiceInfo.apporderno)
+                    fd.append("inv_no", invoiceInfo.invno)
+                    fd.append("created_by", UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.SAP_code : UrlStorage.ParameterList.BasicData.emp_id)
+                    for (var i = 0; i < selectedSubDealers.length; i++) {
+                        const key = getDealerKey(selectedSubDealers[i])
+                        const qty = parseFloat(quantities[key]) || 0
+                        fd.append('sub_dealer_allocations[' + i + '][sub_dealer_id]', selectedSubDealers[i].SAP_code)
+                        fd.append('sub_dealer_allocations[' + i + '][qty]', String(qty))
+                    }
+                    const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.lifting_re_approve_url
+                    const result = await (await fetch(url, { method: 'POST', body: fd })).json()
+                    if (result?.process_status?.toLowerCase() === 'yes') {
+                        setAllocationSheetVisible(false)
+                        Alert.alert('Success', 'Re-Allocation confirmed successfully.\nSent for approval.')
+                        setAssignedList([])
+                        getAssignedHistoryForCement()
+                    } else Alert.alert('Error', result?.process_message || 'Unknown error')
+                } catch (e) { Alert.alert('Error', 'Please contact admin.') }
+                finally {
+                    setIsSubmitting(false)
+                }
+            } else {
+                if (isSubmitting) return
+                setIsSubmitting(true)
+                try {
+                    var a = await AuthCheckingApi()
+                    if (!a) {
+                        setAuthChecker(true)
+                        setLoading(false)
+                        return false
+                    }
+                    const fd = new FormData()
+                    for (var i = 0; i < selectedSubDealers.length; i++) {
+                        const key = getDealerKey(selectedSubDealers[i])
+                        const qty = parseFloat(quantities[key]) || 0
+                        fd.append('allocation_data[' + i + '][APPORDERNO]', invoiceInfo.apporderno)
+                        fd.append('allocation_data[' + i + '][order_id]', orderDetails.order_id)
+                        fd.append('allocation_data[' + i + '][inv_no]', invoiceInfo.invno)
+                        fd.append('allocation_data[' + i + '][prod_desc]', invoiceInfo.prod_display_name)
+                        fd.append('allocation_data[' + i + '][qty]', String(qty))
+                        fd.append('allocation_data[' + i + '][inv_qty]', invoiceInfo.invqty)
+                        fd.append('allocation_data[' + i + '][inv_date]', invoiceInfo.invdt)
+                        fd.append('allocation_data[' + i + '][sub_dealer_id]', selectedSubDealers[i].SAP_code)
+                        fd.append('allocation_data[' + i + '][customer_id]', UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.SAP_code : UrlStorage.ParameterList.BasicData.emp_id)
+                    }
+                    const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.lifting_approve_url
+                    const result = await (await fetch(url, { method: 'POST', body: fd })).json()
+                    if (result?.process_status?.toLowerCase() === 'yes') {
+                        setAllocationSheetVisible(false)
+                        Alert.alert('Success', 'Allocation confirmed successfully.')
+                        setAssignedList([])
+                        getAssignedHistoryForCement()
+                    } else Alert.alert('Error', result?.process_message || 'Unknown error')
+                } catch (e) { Alert.alert('Error', 'Please contact admin.') }
+                finally {
+                    setIsSubmitting(false)
+                }
             }
-            const fd = new FormData()
-            for (var i = 0; i < selectedSubDealers.length; i++) {
-                const key = getDealerKey(selectedSubDealers[i])
-                const qty = parseFloat(quantities[key]) || 0
-                fd.append('allocation_data[' + i + '][APPORDERNO]', invoiceInfo.apporderno)
-                fd.append('allocation_data[' + i + '][order_id]', orderDetails.order_id)
-                fd.append('allocation_data[' + i + '][inv_no]', invoiceInfo.invno)
-                fd.append('allocation_data[' + i + '][prod_desc]', invoiceInfo.prod_display_name)
-                fd.append('allocation_data[' + i + '][qty]', String(qty))
-                fd.append('allocation_data[' + i + '][inv_qty]', invoiceInfo.invqty)
-                fd.append('allocation_data[' + i + '][inv_date]', invoiceInfo.invdt)
-                fd.append('allocation_data[' + i + '][sub_dealer_id]', selectedSubDealers[i].SAP_code)
-                fd.append('allocation_data[' + i + '][customer_id]', UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.SAP_code : UrlStorage.ParameterList.BasicData.emp_id)
-            }
-
-            const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.lifting_approve_url
-            console.log(url)
-            console.log('fd', fd)
-
-            const result = await (await fetch(url, { method: 'POST', body: fd })).json()
-
-            if (result?.process_status?.toLowerCase() === 'yes') {
-                setAllocationSheetVisible(false)
-                Alert.alert('Success', 'Allocation confirmed successfully.')
-                setAssignedList([])
-                getAssignedHistoryForCement()
-            } else Alert.alert('Error', result?.process_message || 'Unknown error')
-        } catch (e) { Alert.alert('Error', 'Please contact admin.') }
-        finally {
-            setIsSubmitting(false)
         }
     }
 
     const requestForOldSetLiftingData = async () => {
-
         try {
-            var a = await AuthCheckingApi();
+            var a = await AuthCheckingApi()
             if (!a) {
                 setAuthChecker(true)
                 setLoading(false)
@@ -534,12 +453,10 @@ const AssignedScreen = (props) => {
             fd.append('app_orderno', orderInfo.order_id)
             fd.append('customer_code', UrlStorage.ParameterList.BasicData.user_type.toLowerCase() === 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code)
             const url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.LiftingURL.download_invoice_url
-
             const result = await (await fetch(url, { method: 'POST', body: fd })).json()
-
             if (result?.process_status?.toLowerCase() === 'yes') {
                 setLoading(false)
-                set_available_allocation_qty(result.dispatched_invoice_data[0].available_allocation_qty);
+                set_available_allocation_qty(result.dispatched_invoice_data[0].available_allocation_qty)
                 setAllocationSheetVisible(true)
             } else Alert.alert('Error', result?.process_message || 'Unknown error')
         } catch (e) { Alert.alert('Error', 'Please contact admin.') }
@@ -549,20 +466,35 @@ const AssignedScreen = (props) => {
 
     const DetailsOpenHandler = (index) => setAssignedList(prev => prev.map((item, idx) => ({ ...item, isOpen: idx === index ? !item.isOpen : false })))
 
-    const handleAllocatePress = (item, sub) => {
+    const handleAllocatePress = (item, sub, type) => {
         setSelectedAssignedItem(item)
         setSelectedSubDealers([])
         setSubDealerSheetVisible(true)
         setOrderInfo(item)
         setInvoiceInfo(sub)
+        setChangeType(type)
+    }
+
+    const handleAllocatePress1 = (item, sub, type, qty) => {
+        setSelectedAssignedItem(item)
+        setSelectedSubDealers([])
+        setSubDealerSheetVisible(true)
+        setOrderInfo(item)
+        setInvoiceInfo(sub)
+        setChangeType(type)
+        set_available_allocation_qty(qty)
     }
 
     const handleSubDealerSelected = (dealerOrArray) => {
         const dealers = Array.isArray(dealerOrArray) ? dealerOrArray : [dealerOrArray]
         setSelectedSubDealers(dealers)
         setSubDealerSheetVisible(false)
-        setLoading(true)
-        requestForOldSetLiftingData()
+        if (changeType == 're-allocation')
+            setAllocationSheetVisible(true)
+        else {
+            setLoading(true)
+            requestForOldSetLiftingData()
+        }
     }
 
     function formatMonthYear(input) {
@@ -571,7 +503,6 @@ const AssignedScreen = (props) => {
         return `${names[parseInt(month, 10) - 1]} ${year}`
     }
 
-    // ── Month-Year Picker ─────────────────────────────────────────────────────
     const MonthYearPicker = ({ visible, onClose, onConfirm, currentSelectedDate }) => {
         const today = new Date()
         const parseDate = (s) => {
@@ -586,7 +517,6 @@ const AssignedScreen = (props) => {
         const yearRef = useRef(null)
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((l, i) => ({ label: l, value: i + 1 }))
         const years = Array.from({ length: today.getFullYear() - 2000 + 1 }, (_, i) => 2000 + i).reverse()
-
         if (!visible) return null
         return (
             <View style={[StyleSheet.absoluteFillObject, { zIndex: 999 }]}>
@@ -611,9 +541,7 @@ const AssignedScreen = (props) => {
                             }}
                             renderItem={({ item }) => (
                                 <TouchableOpacity style={[pickerStyles.option, selMonth === item.value && pickerStyles.optionActive]} onPress={() => setSelMonth(item.value)} >
-                                    <Text style={[pickerStyles.optionText, selMonth === item.value && pickerStyles.optionTextActive]}>
-                                        {item.label}
-                                    </Text>
+                                    <Text style={[pickerStyles.optionText, selMonth === item.value && pickerStyles.optionTextActive]}> {item.label} </Text>
                                 </TouchableOpacity>
                             )}
                         />
@@ -632,9 +560,7 @@ const AssignedScreen = (props) => {
                             }}
                             renderItem={({ item }) => (
                                 <TouchableOpacity style={[pickerStyles.option, selYear === item && pickerStyles.optionActive]} onPress={() => setSelYear(item)} >
-                                    <Text style={[pickerStyles.optionText, selYear === item && pickerStyles.optionTextActive]}>
-                                        {item}
-                                    </Text>
+                                    <Text style={[pickerStyles.optionText, selYear === item && pickerStyles.optionTextActive]}> {item} </Text>
                                 </TouchableOpacity>
                             )}
                         />
@@ -652,20 +578,27 @@ const AssignedScreen = (props) => {
         )
     }
 
-    // ── Render ────────────────────────────────────────────────────────────────
     const filteredList = assignedList.filter(item => {
         const term = searchText.toLowerCase()
         if (!term) return true
         return (item?.order_id || item?.name || '').toLowerCase().includes(term) || (item?.prod_display_name || '').toLowerCase().includes(term)
     })
 
+    const dayCalculation = (invoice_date) => {
+        const today = new Date()
+        const invDate = new Date(invoice_date)
+        const diffMs = today - invDate
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+        return diffDays <= bufferDate
+    }
+    const handleSubDealerSelectedRSSD = (dealerOrArray) => {
+        const dealers = Array.isArray(dealerOrArray) ? dealerOrArray : [dealerOrArray]
+    }
+
     return (
         <SafeView backgroundColor={PAGE_BG} bar={false} statusbarColor={PRIMARY}>
             <StatusBar barStyle="light-content" backgroundColor={PRIMARY} />
-
             <View style={{ flex: 1, backgroundColor: PAGE_BG }}>
-
-                {/* ── Header ── */}
                 <View style={s.header}>
                     <TouchableOpacity onPress={() => props.navigation.pop()} style={s.backBtn}>
                         <Image source={Icons.Back} style={s.backIcon} />
@@ -678,9 +611,7 @@ const AssignedScreen = (props) => {
                         <Image source={Icons.Filter} style={s.filterIcon} />
                     </TouchableOpacity>
                 </View>
-
-                {/* ── Tabs ── */}
-                <View style={s.tabBar}>
+                {UrlStorage.ParameterList.BasicData.user_type.toLocaleLowerCase() == 'RSSD'.toLocaleLowerCase() ? null : <View style={s.tabBar}>
                     {['Assigned', 'Allocated'].map((label, i) => {
                         const active = (i === 1) === assigned
                         return (
@@ -690,9 +621,7 @@ const AssignedScreen = (props) => {
                             </TouchableOpacity>
                         )
                     })}
-                </View>
-
-                {/* ── Search ── */}
+                </View>}
                 <View style={s.searchWrap}>
                     <Image source={Icons.Search} style={s.searchIcon} />
                     <TextInput
@@ -708,23 +637,19 @@ const AssignedScreen = (props) => {
                         </TouchableOpacity>
                     )}
                 </View>
-
-                {/* ── List ── */}
-                {filteredList.length === 0 && !loading ? (
-                    <View style={s.emptyState}>
-                        <Text style={s.emptyIcon}>📦</Text>
-                        <Text style={s.emptyTitle}>No Data Found</Text>
-                        <Text style={s.emptySub}>Try adjusting the month or search term</Text>
-                    </View>
-                ) : (
+                {filteredList.length === 0 && !loading ? <View style={s.emptyState}>
+                    <Text style={s.emptyIcon}>📦</Text>
+                    <Text style={s.emptyTitle}>No Data Found</Text>
+                    <Text style={s.emptySub}>Try adjusting the month or search term</Text>
+                </View> : (
                     <FlatList
                         data={filteredList}
                         keyExtractor={(_, i) => i.toString()}
                         showsVerticalScrollIndicator={false}
+                        style={{ width: "100%" }}
                         contentContainerStyle={{ padding: moderateScale(14), paddingBottom: 40 }}
                         renderItem={({ item, index }) => {
                             if (!assigned) {
-                                // ── Assigned card ──
                                 const isOpen = item.isOpen
                                 return (
                                     <View style={s.card}>
@@ -732,7 +657,7 @@ const AssignedScreen = (props) => {
                                             <View style={s.cardInner}>
                                                 <View style={s.cardLeft}>
                                                     <View style={s.orderIdRow}>
-                                                        <Text style={[s.orderId, { color: item.canAllocate ? '#10B981' : '#1A1A2E', }]}>{item?.order_id}</Text>
+                                                        <Text style={[s.orderId, { color: item.canAllocate ? '#10B981' : '#1A1A2E', }]}> {item?.order_id + "  "} <Text style={{ fontSize: 12, color: item?.auto_allocation?.toLowerCase() == 'auto allocated' ? '#10B981' : '#666666' }}>{item?.auto_allocation?.toLowerCase() == 'no' ? '' : "( " + item?.auto_allocation + " )"}</Text> </Text>
                                                         <View style={s.statusBadge}>
                                                             <View style={s.statusDot} />
                                                             <Text style={s.statusText}>{item?.STATUS || 'Active'}</Text>
@@ -741,10 +666,8 @@ const AssignedScreen = (props) => {
                                                     <Text style={s.productTitle} numberOfLines={1}>{item?.prod_display_name}</Text>
                                                     <View style={s.cardMetaRow}>
                                                         <Text style={s.metaChip}>{item?.order_date}</Text>
-                                                        {/* //<Text style={s.metaChip}>{item?.freight}</Text> */}
                                                     </View>
                                                     <View style={s.cardMetaRow}>
-                                                        {/* <Text style={s.metaChip}>{item?.order_date}</Text> */}
                                                         <Text style={s.metaChip}>{item?.freight}</Text>
                                                     </View>
                                                     <View style={s.cardFooterRow}>
@@ -755,40 +678,71 @@ const AssignedScreen = (props) => {
                                                     </View>
                                                 </View>
                                                 <View style={[s.chevronBtn, isOpen && s.chevronBtnActive]}>
-                                                    <Image
-                                                        source={isOpen ? Icons.UpArrow : Icons.DownArrow}
-                                                        style={[s.chevronIcon, { tintColor: isOpen ? '#fff' : PRIMARY }]}
-                                                    />
+                                                    <Image source={isOpen ? Icons.UpArrow : Icons.DownArrow} style={[s.chevronIcon, { tintColor: isOpen ? '#fff' : PRIMARY }]} />
                                                 </View>
                                             </View>
                                         </TouchableOpacity>
-
                                         {isOpen && item?.dispatched_invoice_data?.length > 0 && (
                                             <View style={s.invoiceSection}>
                                                 <Text style={s.invoiceSectionTitle}>Invoice Details</Text>
-                                                {item.dispatched_invoice_data.map((sub, i) => (
-                                                    <View key={i} style={s.invoiceCard}>
-                                                        <View style={s.invoiceTopRow}>
-                                                            <View>
-                                                                <Text style={s.invoiceLabel}>Invoice No</Text>
-                                                                <Text style={{ fontSize: moderateScale(13), color: sub.allocation_complete == 'NO' ? '#1A1A2E' : '#10B981', fontWeight: '600' }}>{sub.invno}</Text>
+                                                {item.dispatched_invoice_data
+                                                    .filter(sub => sub?.delete_at != 1)
+                                                    .filter((sub, index, invoices) =>
+                                                        !sub?.invno || invoices.findIndex(invoice => invoice?.invno === sub.invno) === index
+                                                    )
+                                                    .map((sub, i) => (
+                                                        <View key={i} style={s.invoiceCard}>
+                                                            <View style={s.invoiceTopRow}>
+                                                                <View>
+                                                                    <Text style={s.invoiceLabel}>Invoice No</Text>
+                                                                    <Text style={{ fontSize: moderateScale(13), color: sub.allocation_complete == 'NO' ? '#1A1A2E' : '#10B981', fontWeight: '600' }}>{sub.invno}</Text>
+                                                                </View>
+                                                                <View style={{ alignItems: 'flex-end' }}>
+                                                                    <Text style={s.invoiceLabel}>Date</Text>
+                                                                    <Text style={s.invoiceValue}>{sub.invdt}</Text>
+                                                                </View>
                                                             </View>
-                                                            <View style={{ alignItems: 'flex-end' }}>
-                                                                <Text style={s.invoiceLabel}>Date</Text>
-                                                                <Text style={s.invoiceValue}>{sub.invdt}</Text>
+                                                            <View style={s.invoiceBottomRow}>
+                                                                <View style={s.invoiceQtyWrap}>
+                                                                    <Text style={s.invoiceQtyLabel}>Qty</Text>
+                                                                    <Text style={s.invoiceQtyVal}>{sub.invqty} MT</Text>
+                                                                </View>
+                                                                {sub.available_allocation_qty == 0 ? <>
+                                                                    {item.order_for_type != 'self' && item?.auto_allocation.toLowerCase() != 're-allocated' ? <>
+                                                                        {sub?.history_rejected_qty != 0 || (sub?.history_approved_qty + sub?.history_pending_qty != sub?.history_total_qty) || sub?.history_total_qty == 0 ?
+                                                                            <>
+                                                                                {dayCalculation(sub?.invdt) ?
+                                                                                    <TouchableOpacity style={s.allocateBtn} onPress={() => {
+                                                                                        var a = sub.invqty - sub?.history_approved_qty - sub?.history_pending_qty
+                                                                                        handleAllocatePress1(item, sub, 're-allocation', a)
+                                                                                    }}>
+                                                                                        <Text style={s.allocateBtnText}>Re-Allocate →</Text>
+                                                                                    </TouchableOpacity> : null}
+                                                                            </>
+                                                                            : null}
+                                                                    </> : null}
+                                                                </> : <>
+                                                                    {item.canAllocate2 ? <>
+                                                                        {item?.auto_allocation.toLowerCase() != 're-allocated' ?
+                                                                            <TouchableOpacity style={s.allocateBtn} onPress={() => handleAllocatePress(item, sub, 'allocation')}>
+                                                                                <Text style={s.allocateBtnText}>Allocate →</Text>
+                                                                            </TouchableOpacity> : <>
+                                                                                {sub?.history_rejected_qty != 0 || (sub?.history_approved_qty + sub?.history_pending_qty != sub?.history_total_qty) || sub?.history_total_qty == 0 ?
+                                                                                    <>
+                                                                                        {dayCalculation(sub?.latest_reject_date) ?
+                                                                                            <TouchableOpacity style={s.allocateBtn} onPress={() => {
+                                                                                                var a = sub.invqty - sub?.history_approved_qty - sub?.history_pending_qty
+                                                                                                handleAllocatePress1(item, sub, 're-allocation', a)
+                                                                                            }}>
+                                                                                                <Text style={s.allocateBtnText}>Re-Allocate →</Text>
+                                                                                            </TouchableOpacity> : null}
+                                                                                    </> : null}
+                                                                            </>}
+                                                                    </> : null}
+                                                                </>}
                                                             </View>
                                                         </View>
-                                                        <View style={s.invoiceBottomRow}>
-                                                            <View style={s.invoiceQtyWrap}>
-                                                                <Text style={s.invoiceQtyLabel}>Qty</Text>
-                                                                <Text style={s.invoiceQtyVal}>{sub.invqty} MT</Text>
-                                                            </View>
-                                                            {item.canAllocate2 && <TouchableOpacity style={s.allocateBtn} onPress={() => handleAllocatePress(item, sub)}>
-                                                                <Text style={s.allocateBtnText}>Allocate →</Text>
-                                                            </TouchableOpacity>}
-                                                        </View>
-                                                    </View>
-                                                ))}
+                                                    ))}
                                             </View>
                                         )}
                                     </View>
@@ -800,48 +754,49 @@ const AssignedScreen = (props) => {
                                         <View style={{ width: "100%", overflow: "hidden", borderWidth: moderateScale(1), borderColor: "#DCDDDF", borderRadius: moderateScale(10), backgroundColor: "#FFFFFF", elevation: 10, shadowColor: DataStorage.primaryColorCode, shadowRadius: moderateScale(20), shadowOffset: { x: 0, y: 4 } }}>
                                             <View style={{ alignContent: 'center', flexDirection: 'row', flex: 1, paddingVertical: 10 }}>
                                                 <Text style={{ color: Colors.text, paddingHorizontal: 10 }}>{item?.name}</Text>
-                                                {isOpen ? (
-                                                    <View style={{ width: moderateScale(20), height: moderateScale(20), borderWidth: moderateScale(1), backgroundColor: DataStorage.primaryColorCode, borderColor: DataStorage.primaryColorCode, alignItems: "center", justifyContent: "center", position: 'absolute', end: 10, top: 10 }}>
-                                                        <Image source={Icons.UpArrow} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: "#FFFFFF" }} />
-                                                    </View>
-                                                ) : (
-                                                    <View style={{ width: moderateScale(20), height: moderateScale(20), borderWidth: moderateScale(1), borderColor: DataStorage.primaryColorCode, alignItems: "center", justifyContent: "center", position: 'absolute', end: 10, top: 10 }}>
-                                                        <Image source={Icons.DownArrow} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: DataStorage.primaryColorCode }} />
-                                                    </View>
-                                                )}
+                                                {isOpen ? <View style={{ width: moderateScale(20), height: moderateScale(20), borderWidth: moderateScale(1), backgroundColor: DataStorage.primaryColorCode, borderColor: DataStorage.primaryColorCode, alignItems: "center", justifyContent: "center", position: 'absolute', end: 10, top: 10 }}>
+                                                    <Image source={Icons.UpArrow} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: "#FFFFFF" }} />
+                                                </View> : <View style={{ width: moderateScale(20), height: moderateScale(20), borderWidth: moderateScale(1), borderColor: DataStorage.primaryColorCode, alignItems: "center", justifyContent: "center", position: 'absolute', end: 10, top: 10 }}>
+                                                    <Image source={Icons.DownArrow} style={{ width: moderateScale(10), height: moderateScale(10), tintColor: DataStorage.primaryColorCode }} />
+                                                </View>}
                                             </View>
                                             {isOpen && (
                                                 <FlatList
                                                     data={getAllocationsByName(item?.name)}
+                                                    style={{ width: "100%" }}
                                                     keyExtractor={(_, i) => i.toString()}
-                                                    renderItem={({ item: subItem }) => (
-                                                        <View style={{ padding: moderateScale(10), marginHorizontal: moderateScale(5), gap: moderateScale(10), backgroundColor: DataStorage.transColorCode, borderRadius: moderateScale(8), marginVertical: moderateScale(5) }}>
-                                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                                <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Product:</Text>
-                                                                <Text numberOfLines={2} style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500", width: moderateScale(150) }}>{subItem?.prod_desc}</Text>
+                                                    renderItem={({ item: subItem }) => {
+                                                        return (
+                                                            <View style={{ width: '100%', paddingHorizontal: moderateScale(5) }}>
+                                                                <View style={{ padding: moderateScale(10), gap: moderateScale(10), backgroundColor: DataStorage.transColorCode, borderRadius: moderateScale(8), marginVertical: moderateScale(5) }}>
+                                                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                                                        <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Product:</Text>
+                                                                        <Text numberOfLines={2} style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500", width: moderateScale(150) }}>{subItem?.prod_desc}</Text>
+                                                                    </View>
+                                                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                                                        <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Allocation Qty:</Text>
+                                                                        <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.allocation_qty}</Text>
+                                                                    </View>
+                                                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                                                        <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Trans Date:</Text>
+                                                                        <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.date_and_time}</Text>
+                                                                    </View>
+                                                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                                                        <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Counter Name:</Text>
+                                                                        <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500", flex: 1 }}>{subItem?.counter_name}</Text>
+                                                                    </View>
+                                                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                                                        <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Invoice No:</Text>
+                                                                        <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.inv_no}</Text>
+                                                                    </View>
+                                                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                                                        <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Invoice Date:</Text>
+                                                                        <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.inv_date}</Text>
+                                                                    </View>
+                                                                </View>
                                                             </View>
-                                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                                <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Allocation Qty:</Text>
-                                                                <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.allocation_qty}</Text>
-                                                            </View>
-                                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                                <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Trans Date:</Text>
-                                                                <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.date_and_time}</Text>
-                                                            </View>
-                                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                                <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Counter Name:</Text>
-                                                                <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.counter_name}</Text>
-                                                            </View>
-                                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                                <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Invoice No:</Text>
-                                                                <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.inv_no}</Text>
-                                                            </View>
-                                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                                <Text style={{ color: "#7D7D7D", fontSize: moderateScale(13), width: moderateScale(120) }}>Invoice Date:</Text>
-                                                                <Text style={{ color: Colors.text, fontSize: moderateScale(13), fontWeight: "500" }}>{subItem?.inv_date}</Text>
-                                                            </View>
-                                                        </View>
-                                                    )}
+                                                        )
+                                                    }}
                                                 />
                                             )}
                                         </View>
@@ -852,35 +807,13 @@ const AssignedScreen = (props) => {
                     />
                 )}
             </View>
-
-            <SelectSubDealerCheckBox
-                isVisible={subDealerSheetVisible}
-                dataList={subDealerData}
-                closePopup={() => setSubDealerSheetVisible(false)}
-                selectItem={handleSubDealerSelected}
-                isDealer={false}
-            />
-
-            <AllocationBottomSheet
-                visible={allocationSheetVisible}
-                onClose={() => setAllocationSheetVisible(false)}
-                isSubmitting={isSubmitting}
-                subDealers={selectedSubDealers}
-                assignedItem={selectedAssignedItem}
-                assignedInvoiceItem={invoiceInfo}
-                available_allocation_qty={available_allocation_qty}
-                onConfirm={confirmOrder}
-            />
-
-            {assignedFilterOpen && (
-                <MonthYearPicker
-                    visible={assignedFilterOpen}
-                    currentSelectedDate={selectedDate}
-                    onClose={() => setAssignedFilterOpen(false)}
-                    onConfirm={(val) => { setAssignedFilterOpen(false); setSelectedDate(val) }}
-                />
-            )}
-
+            <SelectSubDealerCheckBox isVisible={subDealerSheetVisible} dataList={subDealerData} closePopup={() => setSubDealerSheetVisible(false)} selectItem={handleSubDealerSelected} isDealer={false} />
+            <SelectSubDealerCheckBox isVisible={subDealerSheetVisibleRSSD} dataList={subDealerData} closePopup={() => setSubDealerSheetVisibleRSSD(false)} selectItem={handleSubDealerSelectedRSSD} isDealer={false} />
+            <AllocationBottomSheet visible={allocationSheetVisible} onClose={() => setAllocationSheetVisible(false)} isSubmitting={isSubmitting} subDealers={selectedSubDealers} assignedItem={selectedAssignedItem} assignedInvoiceItem={invoiceInfo} available_allocation_qty={available_allocation_qty} onConfirm={confirmOrder} />
+            {assignedFilterOpen && <MonthYearPicker visible={assignedFilterOpen} currentSelectedDate={selectedDate} onClose={() => setAssignedFilterOpen(false)} onConfirm={(val) => {
+                setAssignedFilterOpen(false)
+                setSelectedDate(val)
+            }} />}
             {loading && <Loader />}
             <AuthNotVerifyPopupView isVisible={authChecker} onClose={() => setAuthChecker(false)} />
         </SafeView>
@@ -889,9 +822,6 @@ const AssignedScreen = (props) => {
 
 export default AssignedScreen
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// Styles
-// ═══════════════════════════════════════════════════════════════════════════════
 const s = StyleSheet.create({
     header: { backgroundColor: PRIMARY, flexDirection: 'row', alignItems: 'center', paddingHorizontal: moderateScale(16), paddingVertical: moderateScale(14), paddingTop: moderateScale(18), },
     backBtn: { width: moderateScale(36), height: moderateScale(36), borderRadius: moderateScale(18), backgroundColor: 'rgba(255,255,255,0.18)', alignItems: 'center', justifyContent: 'center', },
@@ -900,38 +830,28 @@ const s = StyleSheet.create({
     headerSub: { color: 'rgba(255,255,255,0.75)', fontSize: moderateScale(12), marginTop: 1 },
     filterBtn: { width: moderateScale(36), height: moderateScale(36), borderRadius: moderateScale(18), backgroundColor: 'rgba(255,255,255,0.18)', alignItems: 'center', justifyContent: 'center', },
     filterIcon: { width: moderateScale(18), height: moderateScale(18), tintColor: '#fff' },
-
-    // Tab bar
     tabBar: { flexDirection: 'row', backgroundColor: '#fff', paddingHorizontal: moderateScale(16), borderBottomWidth: 1, borderBottomColor: BORDER, },
     tabItem: { flex: 1, alignItems: 'center', paddingVertical: moderateScale(12), position: 'relative', },
     tabItemActive: {},
     tabLabel: { fontSize: moderateScale(14), color: TEXT_SOFT, fontWeight: '500' },
     tabLabelActive: { color: PRIMARY, fontWeight: '700' },
     tabIndicator: { position: 'absolute', bottom: 0, left: '20%', right: '20%', height: 3, borderRadius: 2, backgroundColor: PRIMARY, },
-
-    // Search
     searchWrap: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', marginHorizontal: moderateScale(14), marginTop: moderateScale(14), marginBottom: moderateScale(4), borderRadius: moderateScale(12), paddingHorizontal: moderateScale(14), borderWidth: 1, borderColor: BORDER, height: moderateScale(46), },
     searchIcon: { width: moderateScale(16), height: moderateScale(16), tintColor: TEXT_SOFT, marginRight: 10 },
     searchInput: { flex: 1, fontSize: moderateScale(14), color: TEXT_DARK },
     searchClear: { padding: 4 },
-
-    // Empty state
     emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingBottom: 80 },
     emptyIcon: { fontSize: 48, marginBottom: 12 },
     emptyTitle: { fontSize: moderateScale(16), fontWeight: '700', color: TEXT_DARK, marginBottom: 6 },
     emptySub: { fontSize: moderateScale(13), color: TEXT_MID },
-
-    // Card
     card: { backgroundColor: CARD_BG, borderRadius: moderateScale(16), marginBottom: moderateScale(12), borderWidth: 1, borderColor: BORDER, overflow: 'hidden', elevation: 3, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.07, shadowRadius: 8, },
     cardInner: { flexDirection: 'row', alignItems: 'center', padding: moderateScale(14), gap: moderateScale(10), },
     cardLeft: { flex: 1, gap: moderateScale(6) },
-
     orderIdRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
     orderId: { fontSize: moderateScale(15), fontWeight: '700', color: TEXT_DARK },
     statusBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: SUCCESS_BG, paddingHorizontal: moderateScale(8), paddingVertical: moderateScale(3), borderRadius: 20, gap: 4, },
     statusDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: SUCCESS },
     statusText: { fontSize: moderateScale(11), color: SUCCESS, fontWeight: '600' },
-
     productTitle: { fontSize: moderateScale(13), color: TEXT_MID, fontWeight: '500' },
     cardMetaRow: { flexDirection: 'row', gap: 8 },
     metaChip: { fontSize: moderateScale(11), color: TEXT_MID },
@@ -939,12 +859,9 @@ const s = StyleSheet.create({
     destText: { fontSize: moderateScale(12), color: TEXT_MID, flex: 1 },
     qtyBadge: { backgroundColor: PRIMARY_LIGHT, paddingHorizontal: moderateScale(10), paddingVertical: moderateScale(3), borderRadius: 20, },
     qtyBadgeText: { fontSize: moderateScale(12), color: PRIMARY, fontWeight: '700' },
-
     chevronBtn: { width: moderateScale(30), height: moderateScale(30), borderRadius: moderateScale(8), borderWidth: 1.5, borderColor: PRIMARY, alignItems: 'center', justifyContent: 'center', },
     chevronBtnActive: { backgroundColor: PRIMARY, borderColor: PRIMARY },
     chevronIcon: { width: moderateScale(10), height: moderateScale(10) },
-
-    // Invoice section
     invoiceSection: { borderTopWidth: 1, borderTopColor: BORDER, padding: moderateScale(12), gap: moderateScale(10), backgroundColor: '#FAFAFA', },
     invoiceSectionTitle: { fontSize: moderateScale(12), fontWeight: '700', color: TEXT_MID, textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 2, },
     invoiceCard: { backgroundColor: '#fff', borderRadius: moderateScale(12), padding: moderateScale(12), borderWidth: 1, borderColor: BORDER, gap: moderateScale(10), },
@@ -957,13 +874,10 @@ const s = StyleSheet.create({
     invoiceQtyVal: { fontSize: moderateScale(16), fontWeight: '800', color: TEXT_DARK },
     allocateBtn: { backgroundColor: PRIMARY, paddingVertical: moderateScale(8), paddingHorizontal: moderateScale(16), borderRadius: moderateScale(10), },
     allocateBtnText: { color: '#fff', fontSize: moderateScale(13), fontWeight: '700' },
-
-    // Allocated card
     avatarCircle: { width: moderateScale(42), height: moderateScale(42), borderRadius: moderateScale(21), alignItems: 'center', justifyContent: 'center', marginRight: moderateScale(4), },
     avatarInitial: { color: '#fff', fontSize: moderateScale(16), fontWeight: '800' },
     counterName: { fontSize: moderateScale(15), fontWeight: '700', color: TEXT_DARK },
     allocCount: { fontSize: moderateScale(12), color: TEXT_MID, marginTop: 2 },
-
     allocCard: { backgroundColor: '#fff', borderRadius: moderateScale(12), padding: moderateScale(12), borderWidth: 1, borderColor: BORDER, gap: moderateScale(10), },
     allocHeader: { flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 },
     allocProduct: { flex: 1, fontSize: moderateScale(13), fontWeight: '600', color: TEXT_DARK },
@@ -975,7 +889,6 @@ const s = StyleSheet.create({
     allocMetaVal: { fontSize: moderateScale(12), color: TEXT_DARK, fontWeight: '600', textAlign: 'center' },
 })
 
-// ── Bottom sheet styles ───────────────────────────────────────────────────────
 const bsStyles = StyleSheet.create({
     backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.5)' },
     sheet: { position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: '#fff', borderTopLeftRadius: moderateScale(28), borderTopRightRadius: moderateScale(28), paddingHorizontal: moderateScale(20), paddingBottom: moderateScale(36), paddingTop: moderateScale(12), elevation: 24, shadowColor: '#000', shadowOffset: { width: 0, height: -4 }, shadowOpacity: 0.15, shadowRadius: 16, },
@@ -987,8 +900,6 @@ const bsStyles = StyleSheet.create({
     productPill: { flexDirection: 'row', alignItems: 'center', backgroundColor: PRIMARY_LIGHT, borderRadius: 20, paddingHorizontal: moderateScale(12), paddingVertical: moderateScale(6), alignSelf: 'flex-start', marginBottom: moderateScale(16), gap: 6, },
     productDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: PRIMARY },
     productPillText: { fontSize: moderateScale(13), color: PRIMARY, fontWeight: '600', maxWidth: 240 },
-
-    // Tabs
     tab: { flexDirection: 'row', alignItems: 'center', width: moderateScale(130), paddingVertical: moderateScale(8), paddingHorizontal: moderateScale(10), marginRight: moderateScale(8), borderRadius: moderateScale(10), borderWidth: 1.5, borderColor: BORDER, gap: 6, backgroundColor: '#FAFAFA', },
     tabActive: { borderColor: PRIMARY, backgroundColor: PRIMARY_LIGHT },
     tabError: { borderColor: PRIMARY, backgroundColor: '#FFF0EF' },
@@ -998,8 +909,6 @@ const bsStyles = StyleSheet.create({
     tabTextActive: { color: PRIMARY, fontWeight: '700' },
     tabTextError: { color: PRIMARY },
     tabErrorDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: PRIMARY, flexShrink: 0 },
-
-    // Progress
     progressCard: { backgroundColor: '#F9FAFB', borderRadius: moderateScale(14), padding: moderateScale(14), marginBottom: moderateScale(14), borderWidth: 1, borderColor: BORDER, },
     progressRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
     progressStat: { alignItems: 'flex-start' },
@@ -1009,8 +918,6 @@ const bsStyles = StyleSheet.create({
     progressBarBg: { width: '100%', height: 8, borderRadius: 4, backgroundColor: '#E5E7EB', overflow: 'hidden' },
     progressBarFill: { height: '100%', borderRadius: 4 },
     progressPct: { fontSize: moderateScale(10), color: TEXT_MID, fontWeight: '600' },
-
-    // Input
     inputCard: { backgroundColor: '#F9FAFB', borderRadius: moderateScale(14), padding: moderateScale(14), marginBottom: moderateScale(16), borderWidth: 1, borderColor: BORDER, gap: moderateScale(10), },
     inputLabelRow: { flexDirection: 'row', alignItems: 'center', gap: 4, flexWrap: 'wrap' },
     inputLabel: { fontSize: moderateScale(13), color: TEXT_MID },
@@ -1022,8 +929,6 @@ const bsStyles = StyleSheet.create({
     unitText: { fontSize: moderateScale(14), fontWeight: '700', color: TEXT_MID },
     errorHint: { fontSize: moderateScale(12), color: PRIMARY, fontWeight: '500' },
     invoiceHint: { fontSize: moderateScale(12), color: TEXT_SOFT },
-
-    // Buttons
     btnRow: { flexDirection: 'row', gap: moderateScale(10) },
     cancelBtn: { flex: 1, paddingVertical: moderateScale(14), borderRadius: moderateScale(12), alignItems: 'center', backgroundColor: '#F3F4F6', borderWidth: 1, borderColor: BORDER, },
     cancelBtnText: { fontSize: moderateScale(14), color: TEXT_MID, fontWeight: '600' },
@@ -1031,7 +936,6 @@ const bsStyles = StyleSheet.create({
     allocateBtnDisabled: { backgroundColor: '#E5E7EB' },
     allocateBtnText: { fontSize: moderateScale(14), color: '#fff', fontWeight: '700', letterSpacing: 0.3 },
 })
-
 
 const pickerStyles = StyleSheet.create({
     sheet: { position: 'absolute', bottom: 0, left: 0, right: 0, backgroundColor: '#fff', borderTopLeftRadius: moderateScale(24), borderTopRightRadius: moderateScale(24), padding: moderateScale(20), height: '55%', elevation: 20, },

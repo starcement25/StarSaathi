@@ -1,24 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { TouchableOpacity, View, Text, Platform, Animated, FlatList, Modal, StyleSheet, Image, ScrollView, Dimensions, TouchableWithoutFeedback } from 'react-native'
-import { BarChart } from 'react-native-gifted-charts';
+import { TouchableOpacity, View, Text, Platform, Animated, FlatList, Modal, StyleSheet, Image, ScrollView, Dimensions } from 'react-native'
+import { BarChart } from 'react-native-gifted-charts'
 import SafeView from '../../../helper/SafeView'
 import { moderateScale } from '../../../helper/Window'
 import SBSCommonHeaderView from '../../../common/SBSCommonHeaderView'
 import { Colors } from '../../../assets/Colors'
 import { useNavigation } from '@react-navigation/native'
 import DataStorage from '../../../storage/DataStorage'
-import LinearGradient from 'react-native-linear-gradient';
-import UrlStorage from '../../../storage/UrlStorage';
-import ShipToSelfListPopupView from '../order/popup/ShipToSelfListPopupView';
-import Loader from '../../../common/Loader';
+import LinearGradient from 'react-native-linear-gradient'
+import UrlStorage from '../../../storage/UrlStorage'
+import ShipToSelfListPopupView from '../order/popup/ShipToSelfListPopupView'
+import Loader from '../../../common/Loader'
 import { getMySubDealerList } from '../../../storage/database/GetDataFromTable'
-import { Icons } from '../../../assets/Icons';
-import { AuthCheckingApi } from '../../../auth/AuthCheckingApi';
-import AuthNotVerifyPopupView from '../../../auth/AuthNotVerifyPopupView';
+import { Icons } from '../../../assets/Icons'
+import { AuthCheckingApi } from '../../../auth/AuthCheckingApi'
+import AuthNotVerifyPopupView from '../../../auth/AuthNotVerifyPopupView'
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-
-// Color Set Graph bar
 const GRAPH_BAR_COLOR_CURRENT_FY_TARGET = '#4A90E2'
 const GRAPH_BAR_COLOR_CURRENT_FY_ACHIEVEMENTS = '#50E3C2'
 const GRAPH_BAR_COLOR_PREVIOUS_FY_TARGET = '#0076fe'
@@ -26,12 +23,9 @@ const GRAPH_BAR_COLOR_PREVIOUS_FY_ACHIEVEMENTS = '#00fa85'
 const GRAPH_BAR_COLOR_COMPARE_PREVIOUS_FY_ACHIEVEMENTS = '#FF7700'
 const GRAPH_BAR_COLOR_COMPARE_CURRENT_FY_ACHIEVEMENTS = '#50E3C2'
 
-// Color Set Percentage bar
 const MORE_THAN_100_PERCENTAGE = ['#00D492', '#009966']
 const LESS_THAN_100_PERCENTAGE = ['#E8BE76', '#FF7700']
 const EQUAL_0_PERCENTAGE = ['#FF6467', '#E7000B']
-
-
 
 const FINANCIAL_MONTHS = [
     { code: '04', label: 'April' },
@@ -77,83 +71,53 @@ function getPreviousFYLabel(currentStartYear) {
     return { label: `FY ${y}-${String(y + 1).slice(2)}`, startYear: y }
 }
 
-// ─── Component ────────────────────────────────────────────────────────────────
-
 const NewPerformanceGraphScreen = (props) => {
     const navigation = useNavigation()
-
-    // Graph state
     const [loading, setLoading] = useState(true)
     const [allParsedData, setAllParsedData] = useState([])
     const [barData, setBardata] = useState([])
     const [maxValue, setMaxValue] = useState(100)
     const [hideGraph, setHideGraph] = useState(false)
     const [authChecker, setAuthChecker] = useState(false)
-
-    // Sub-dealer
     const [subDealerData, setSubDealerData] = useState([])
     const [subDealerId, setDealerSubDealerId] = useState(UrlStorage.ParameterList.BasicData.emp_code)
     const [subDealerFilterOpen, setSubDealerFilterOpen] = useState(false)
-
-    // Filter state
-    // 'full'   → showing all 12 months of current FY
-    // 'single' → showing a single selected month
     const [filterMode, setFilterMode] = useState('full')
     const [selectedYear, setSelectedYear] = useState(null)
     const [selectedMonth, setSelectedMonth] = useState(null)
-
-    // Modals
     const [yearModalVisible, setYearModalVisible] = useState(false)
     const [monthModalVisible, setMonthModalVisible] = useState(false)
     const [confirmClearModalVisible, setConfirmClearModalVisible] = useState(false)
-
-    // Animation
     const [chartKey, setChartKey] = useState(0)
     const fadeAnim = useRef(new Animated.Value(1)).current
     const slideAnim = useRef(new Animated.Value(0)).current
-
-    // Year options
     const currentFY = getCurrentFYLabel()
     const previousFY = getPreviousFYLabel(currentFY.startYear)
     const yearOptions = [currentFY, previousFY]
-
-
-    //new design dataset
-    // Current FY
     const [currentYearTotalTarget, setCurrentYearTotalTarget] = useState(0)
     const [currentYearTotalAchievement, setCurrentYearTotalAchievement] = useState(0)
     const [currentYearPercentageOfPerformance, setCurrentYearPercentageOfPerformance] = useState(0)
     const [currentYearDifferentOfTotalAndAchievement, setCurrentYearDifferentOfTotalAndAchievement] = useState(0)
     const [currentYearDataSet, setCurrentYearDataSet] = useState([])
-    // Previous FY
     const [previousYearTotalTarget, setPreviousYearTotalTarget] = useState(0)
     const [previousYearTotalAchievement, setPreviousYearTotalAchievement] = useState(0)
     const [previousYearPercentageOfPerformance, setPreviousYearPercentageOfPerformance] = useState(0)
     const [previousYearDifferentOfTotalAndAchievement, setPreviousYearDifferentOfTotalAndAchievement] = useState(0)
     const [previousYearDataSet, setPreviousYearDataSet] = useState([])
-    // Compare
     const [compareDataSet, setCompareDataSet] = useState([])
-
-    //show dataset
     const [totalTarget, setTotalTarget] = useState(0)
     const [achievement, setAchievement] = useState(0)
     const [avgPerformance, setAvgPerformance] = useState(0)
     const [different, setDifferent] = useState(0)
     const [dataSet, setDataSet] = useState([])
-
-    // drop down
     const [yearModal, setYearModal] = useState(false)
     const [title, setTitle] = useState('Current FY')
-
-
-    // ─── Init ──────────────────────────────────────────────────────────────────
 
     useEffect(() => {
         const init = async () => {
             setLoading(true)
-            if (UrlStorage.ParameterList.BasicData.user_type === 'broker' || UrlStorage.ParameterList.BasicData.user_type === 'Dealer') {
+            if (UrlStorage.ParameterList.BasicData.user_type === 'broker' || UrlStorage.ParameterList.BasicData.user_type === 'Dealer')
                 await requestForCementSubDealer()
-            }
             if (UrlStorage.ParameterList.BasicData.user_type === 'broker') { } else {
                 if (DataStorage.typeOfUse == 1)
                     await fetchAndParseDataSBS(UrlStorage.ParameterList.BasicData.emp_code)
@@ -170,32 +134,19 @@ const NewPerformanceGraphScreen = (props) => {
         else
             fetchAndParseData(UrlStorage.ParameterList.BasicData.emp_code)
     }, [subDealerId])
-    const fetchAuthData = async () => {
-        var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-        }
-    }
 
     function getValidMonthCodes(startYear) {
-    const now = new Date()
-    const currentMonth = String(now.getMonth() + 1).padStart(2, '0')
-    const currentYear = now.getFullYear()
-
-    // For previous FY, all 12 months are valid
-    if (startYear < currentFY.startYear) return MONTH_ORDER
-
-    // For current FY, only include months up to and including the current month
-    return MONTH_ORDER.filter(code => {
-        const monthYear = (parseInt(code) >= 4) ? startYear : startYear + 1
-        if (monthYear < currentYear) return true
-        if (monthYear > currentYear) return false
-        return parseInt(code) <= parseInt(currentMonth)
-    })
-}
-
-    // ─── Animate chart swap ────────────────────────────────────────────────────
+        const now = new Date()
+        const currentMonth = String(now.getMonth() + 1).padStart(2, '0')
+        const currentYear = now.getFullYear()
+        if (startYear < currentFY.startYear) return MONTH_ORDER
+        return MONTH_ORDER.filter(code => {
+            const monthYear = (parseInt(code) >= 4) ? startYear : startYear + 1
+            if (monthYear < currentYear) return true
+            if (monthYear > currentYear) return false
+            return parseInt(code) <= parseInt(currentMonth)
+        })
+    }
 
     const animateChartChange = (callback) => {
         Animated.parallel([
@@ -211,24 +162,20 @@ const NewPerformanceGraphScreen = (props) => {
         })
     }
 
-    // ─── API ───────────────────────────────────────────────────────────────────
-
     const requestForCementSubDealer = async () => {
         try {
-            var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+            var a = await AuthCheckingApi()
+            if (!a) {
+                setAuthChecker(true)
+                setLoading(false)
+                return false
+            }
             let url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.OrderURL1.dealer_data_list_url + `?emp_code=${UrlStorage.ParameterList.BasicData.emp_code}` + `&user_type=sub dealer` + `&login_type=${UrlStorage.ParameterList.BasicData.user_type}`
-
             const response = await fetch(url)
             const result = await response.json()
-
-            if (result.process_status === 'YES' && Array.isArray(result.sub_dealer_data) && result.sub_dealer_data.length > 0) {
+            if (result.process_status === 'YES' && Array.isArray(result.sub_dealer_data) && result.sub_dealer_data.length > 0)
                 setSubDealerData(result.sub_dealer_data)
-            } else {
+            else {
                 const local = await getMySubDealerList(UrlStorage.ParameterList.BasicData.user_type, UrlStorage.ParameterList.BasicData.emp_code)
                 setSubDealerData(local)
             }
@@ -242,20 +189,18 @@ const NewPerformanceGraphScreen = (props) => {
 
     const fetchAndParseData = async (emp_code) => {
         setLoading(true)
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
             return false
-        } 
+        }
         try {
             let url = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DownloadDatabaseAPI.product_wise_target_achievement_TXT_download_API
             url += `?nick_name=start&user_type=${UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.selectedCustomerType : UrlStorage.ParameterList.BasicData.user_type}&emp_code=${UrlStorage.ParameterList.BasicData.user_type == 'broker' ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code}`
-
             const response = await fetch(url)
             const text = await response.text()
             const parsed = parseEmployeeData(text)
-
             setAllParsedData(parsed)
             applyFullCurrentYear(parsed, emp_code)
         } catch (error) {
@@ -267,7 +212,7 @@ const NewPerformanceGraphScreen = (props) => {
 
     const fetchAndParseDataSBS = async (emp_code) => {
         setLoading(true)
-        var a = await AuthCheckingApi();
+        var a = await AuthCheckingApi()
         if (!a) {
             setAuthChecker(true)
             setLoading(false)
@@ -276,11 +221,9 @@ const NewPerformanceGraphScreen = (props) => {
         try {
             let url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.BaseUrlList.SBS.sbs_performance
             url += `?dealer_id=${emp_code}`
-
             const response = await fetch(url)
             const text = await response.text()
             const parsed = parseEmployeeData(text)
-
             setAllParsedData(parsed)
             applyFullCurrentYear(parsed, emp_code)
         } catch (error) {
@@ -290,8 +233,6 @@ const NewPerformanceGraphScreen = (props) => {
         }
     }
 
-    // ─── Parse raw TXT data ────────────────────────────────────────────────────
-
     function parseEmployeeData(rawResponse) {
         const lines = rawResponse.trim().split('\n').slice(2)
         const employeeMap = {}
@@ -300,7 +241,6 @@ const NewPerformanceGraphScreen = (props) => {
         var previousYearTotalTarget = 0, previousYearTotalAchievement = 0, previousYearPercentageOfPerformance = 0, previousYearDifferentOfTotalAndAchievement = 0
         var pyArray = []
         var compareArray = []
-
         lines.forEach(line => {
             const parts = line.split('^')
             if (parts.length >= 8) {
@@ -312,8 +252,6 @@ const NewPerformanceGraphScreen = (props) => {
                 const cyAchievement = parseFloat(parts[5]) || 0
                 const pyTarget = parseFloat(parts[6]) || 0
                 const pyAchievement = parseFloat(parts[7]) || 0
-
-                // Current Year Data
                 const cyPercentage = (cyAchievement / cyTarget) * 100
                 var cyDifferent = 0
                 if (cyTarget > cyAchievement)
@@ -331,8 +269,6 @@ const NewPerformanceGraphScreen = (props) => {
                 cyArray.push(obj)
                 currentYearTotalTarget = currentYearTotalTarget + cyTarget
                 currentYearTotalAchievement = currentYearTotalAchievement + cyAchievement
-
-                // Previous year data
                 const pyPercentage = (pyAchievement / pyTarget) * 100
                 var pyDifferent = 0
                 if (pyTarget > pyAchievement)
@@ -350,7 +286,6 @@ const NewPerformanceGraphScreen = (props) => {
                 pyArray.push(pyObj)
                 previousYearTotalTarget = previousYearTotalTarget + pyTarget
                 previousYearTotalAchievement = previousYearTotalAchievement + pyAchievement
-
                 const comparePercentage = (cyAchievement / pyAchievement) * 100
                 var compareDifferent = 0
                 if (cyAchievement > pyAchievement)
@@ -366,15 +301,12 @@ const NewPerformanceGraphScreen = (props) => {
                     isGrowth: comparePercentage >= 100
                 }
                 compareArray.push(compareObj)
-
                 if (!employeeMap[empId]) {
                     employeeMap[empId] = { empId, productId, productName, data: {} }
                 }
                 employeeMap[empId].data[monthCode] = { cyTarget, cyAchievement, pyTarget, pyAchievement }
             }
         })
-
-        // Current Year Data
         currentYearPercentageOfPerformance = (currentYearTotalAchievement / currentYearTotalTarget) * 100
         if (currentYearTotalTarget > currentYearTotalAchievement)
             currentYearDifferentOfTotalAndAchievement = currentYearTotalTarget - currentYearTotalAchievement
@@ -384,26 +316,17 @@ const NewPerformanceGraphScreen = (props) => {
         setCurrentYearTotalAchievement(currentYearTotalAchievement)
         setCurrentYearPercentageOfPerformance(currentYearPercentageOfPerformance)
         setCurrentYearDifferentOfTotalAndAchievement(currentYearDifferentOfTotalAndAchievement)
-        // setCurrentYearDataSet([...cyArray].sort((a, b) => {
-        //     return MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id);
-        // }))
         const validCYMonths = getValidMonthCodes(currentFY.startYear)
-
-const filteredCYArray = cyArray.filter(item => validCYMonths.includes(item.id))
-const sortedCYArray = [...filteredCYArray].sort((a, b) =>
-    MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id)
-)
-
-setCurrentYearDataSet(sortedCYArray)
-
-        //show data set
+        const filteredCYArray = cyArray.filter(item => validCYMonths.includes(item.id))
+        const sortedCYArray = [...filteredCYArray].sort((a, b) =>
+            MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id)
+        )
+        setCurrentYearDataSet(sortedCYArray)
         setTotalTarget(currentYearTotalTarget)
         setAchievement(currentYearTotalAchievement)
         setAvgPerformance(currentYearPercentageOfPerformance)
         setDifferent(currentYearDifferentOfTotalAndAchievement)
         setDataSet(sortedCYArray)
-
-        // Previous year data
         previousYearPercentageOfPerformance = (previousYearTotalAchievement / previousYearTotalTarget) * 100
         if (previousYearTotalTarget > previousYearTotalAchievement)
             previousYearDifferentOfTotalAndAchievement = previousYearTotalTarget - previousYearTotalAchievement
@@ -414,23 +337,19 @@ setCurrentYearDataSet(sortedCYArray)
         setPreviousYearPercentageOfPerformance(previousYearPercentageOfPerformance)
         setPreviousYearDifferentOfTotalAndAchievement(previousYearDifferentOfTotalAndAchievement)
         setPreviousYearDataSet([...pyArray].sort((a, b) => {
-            return MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id);
+            return MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id)
         }))
-
-        // Compare FY Achi.
         setCompareDataSet([...compareArray].sort((a, b) => {
-            return MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id);
+            return MONTH_ORDER.indexOf(a.id) - MONTH_ORDER.indexOf(b.id)
         }))
 
         return Object.values(employeeMap).map(emp => {
             const currentYear = []
             const previousYear = []
             const compareYear = []
-
             MONTH_ORDER.forEach(monthCode => {
                 const entry = emp.data[monthCode] || { cyTarget: 0, cyAchievement: 0, pyTarget: 0, pyAchievement: 0 }
                 const label = MONTH_SHORT[monthCode]
-
                 currentYear.push(
                     { value: entry.cyTarget, label, spacing: 4, labelWidth: 45, labelTextStyle: { color: 'gray', fontSize: 10 }, frontColor: GRAPH_BAR_COLOR_CURRENT_FY_TARGET },
                     { value: entry.cyAchievement, frontColor: GRAPH_BAR_COLOR_CURRENT_FY_ACHIEVEMENTS, spacing: 15 }
@@ -444,11 +363,9 @@ setCurrentYearDataSet(sortedCYArray)
                     { value: entry.cyAchievement, frontColor: GRAPH_BAR_COLOR_COMPARE_CURRENT_FY_ACHIEVEMENTS, spacing: 15 }
                 )
             })
-
             const cyMax = Math.max(...currentYear.map(d => d.value), 1)
             const pyMax = Math.max(...previousYear.map(d => d.value), 1)
             const compMax = Math.max(...compareYear.map(d => d.value), 1)
-
             return {
                 ...emp,
                 currentYear,
@@ -468,7 +385,6 @@ setCurrentYearDataSet(sortedCYArray)
             setBardata([])
             return
         }
-
         setHideGraph(false)
         animateChartChange(() => {
             setBardata(empData.currentYear)
@@ -483,13 +399,13 @@ setCurrentYearDataSet(sortedCYArray)
     const applySingleMonth = (year, month) => {
         const emp_code = subDealerId?.customer_code ?? UrlStorage.ParameterList.BasicData.emp_code
         const empData = allParsedData.find(e => e.empId === emp_code) ?? allParsedData[0]
-        if (!empData) { setHideGraph(true); return }
-
+        if (!empData) {
+            setHideGraph(true)
+            return
+        }
         const fyData = year.startYear === currentFY.startYear ? empData.currentYear : empData.previousYear
-
         const monthIndex = MONTH_ORDER.indexOf(month.code)
         if (monthIndex === -1) return
-
         const targetBar = {
             ...fyData[monthIndex * 2],
             label: month.label,
@@ -497,9 +413,7 @@ setCurrentYearDataSet(sortedCYArray)
             labelWidth: 60,
         }
         const achievementBar = { ...fyData[monthIndex * 2 + 1] }
-
         const maxVal = Math.ceil((Math.max(targetBar.value, achievementBar.value, 1) * 1.3) / 100) * 100
-
         setHideGraph(false)
         animateChartChange(() => {
             setBardata([targetBar, achievementBar])
@@ -511,19 +425,12 @@ setCurrentYearDataSet(sortedCYArray)
         })
     }
 
-    // ─── Filter button press ───────────────────────────────────────────────────
-
     const handleFilterPress = () => {
-        if (filterMode === 'single') {
-            // Already filtered → show confirm/clear alert
+        if (filterMode === 'single')
             setConfirmClearModalVisible(true)
-        } else {
-            // Full mode → open year picker
+        else
             setYearModalVisible(true)
-        }
     }
-
-    // ─── Sub-dealer ────────────────────────────────────────────────────────────
 
     const selectShipToSelfItem = (item) => {
         setDealerSubDealerId(item)
@@ -544,7 +451,6 @@ setCurrentYearDataSet(sortedCYArray)
                 setBardata([])
                 return
             }
-
             setHideGraph(false)
             animateChartChange(() => {
                 setBardata(empData.currentYear)
@@ -567,7 +473,6 @@ setCurrentYearDataSet(sortedCYArray)
                 setBardata([])
                 return
             }
-
             setHideGraph(false)
             animateChartChange(() => {
                 setBardata(empData.previousYear)
@@ -579,7 +484,6 @@ setCurrentYearDataSet(sortedCYArray)
             })
         } else if (item.id == 3) {
             setDataSet(compareDataSet)
-
             const emp_code = subDealerId?.customer_code ?? UrlStorage.ParameterList.BasicData.emp_code
             const empData = allParsedData.find(e => e.empId === emp_code) ?? allParsedData[0]
             if (!empData) {
@@ -587,7 +491,6 @@ setCurrentYearDataSet(sortedCYArray)
                 setBardata([])
                 return
             }
-
             setHideGraph(false)
             animateChartChange(() => {
                 setBardata(empData.compareYear)
@@ -602,7 +505,6 @@ setCurrentYearDataSet(sortedCYArray)
         setYearModal(false)
     }
 
-
     const colorSet = (percentage) => {
         if (parseInt(percentage) >= 100)
             return MORE_THAN_100_PERCENTAGE
@@ -615,15 +517,13 @@ setCurrentYearDataSet(sortedCYArray)
     const colorForBar = (title) => {
         switch (title) {
             case 'Current FY':
-                return [GRAPH_BAR_COLOR_CURRENT_FY_TARGET, GRAPH_BAR_COLOR_CURRENT_FY_ACHIEVEMENTS];
+                return [GRAPH_BAR_COLOR_CURRENT_FY_TARGET, GRAPH_BAR_COLOR_CURRENT_FY_ACHIEVEMENTS]
             case 'Previous FY':
-                return [GRAPH_BAR_COLOR_PREVIOUS_FY_TARGET, GRAPH_BAR_COLOR_PREVIOUS_FY_ACHIEVEMENTS];
+                return [GRAPH_BAR_COLOR_PREVIOUS_FY_TARGET, GRAPH_BAR_COLOR_PREVIOUS_FY_ACHIEVEMENTS]
             case 'Current FY vs Previous FY':
-                return [GRAPH_BAR_COLOR_COMPARE_PREVIOUS_FY_ACHIEVEMENTS, GRAPH_BAR_COLOR_COMPARE_CURRENT_FY_ACHIEVEMENTS];
+                return [GRAPH_BAR_COLOR_COMPARE_PREVIOUS_FY_ACHIEVEMENTS, GRAPH_BAR_COLOR_COMPARE_CURRENT_FY_ACHIEVEMENTS]
         }
     }
-
-    // ─── Render ────────────────────────────────────────────────────────────────
 
     const renderItem = ({ item, index }) => (
         <View style={{ width: '100%', flexDirection: 'row', paddingHorizontal: moderateScale(15), paddingVertical: moderateScale(10), borderTopWidth: moderateScale(.5), borderBottomWidth: moderateScale(.5), borderColor: '#E2E8F0' }}>
@@ -640,7 +540,7 @@ setCurrentYearDataSet(sortedCYArray)
                     <View style={{ paddingHorizontal: moderateScale(10), height: moderateScale(35), paddingVertical: moderateScale(3), flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: item.isGrowth ? '#A4F4CF' : '#FFC9C9', backgroundColor: item.isGrowth ? '#ECFDF5' : '#FEF2F2', borderRadius: moderateScale(5) }}>
                         <Image source={item.isGrowth ? require('../../../assets/new_icon/up.png') : require('../../../assets/new_icon/down.png')} style={{ width: moderateScale(20), height: moderateScale(20) }} />
                         <View style={{ width: moderateScale(10) }} />
-                        <Text style={{ color: item.isGrowth ? '#007A55' : '#C10007', fontWeight: '800', fontSize: moderateScale(18) }}>{(isNaN(parseFloat(item.percentage))|| !isFinite(parseFloat(item.percentage))) ? "---" : `${parseFloat(item.percentage).toFixed(2)} `} %</Text>
+                        <Text style={{ color: item.isGrowth ? '#007A55' : '#C10007', fontWeight: '800', fontSize: moderateScale(18) }}>{(isNaN(parseFloat(item.percentage)) || !isFinite(parseFloat(item.percentage))) ? "---" : `${parseFloat(item.percentage).toFixed(2)} `} %</Text>
                     </View>
                 </View>
                 <View style={{ height: moderateScale(10) }} />
@@ -665,20 +565,12 @@ setCurrentYearDataSet(sortedCYArray)
             </View>
             <View style={{ width: moderateScale(10) }} />
         </View>
-    );
+    )
 
     return (
         <SafeView backgroundColor={Colors.white} bar={false} statusbarColor={DataStorage.typeOfUse == 1 ? '#8FC227' : Colors.main}>
             <View style={{ width: "100%", height: "100%", backgroundColor: Colors.white }}>
-
-                <SBSCommonHeaderView
-                    title="Month-wise Performance"
-                    backPath=" "
-                    Filter={false}
-                    navigation={navigation}
-                    props={props}
-                    handlePerformanceFilterOpen={handleFilterPress}
-                />
+                <SBSCommonHeaderView title="Month-wise Performance" backPath=" " Filter={false} navigation={navigation} props={props} handlePerformanceFilterOpen={handleFilterPress} />
                 <View style={{ width: '100%', height: moderateScale(55), backgroundColor: '#E41B14', alignItems: 'center', justifyContent: 'center', paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(5) }}>
                     <TouchableOpacity onPress={() => setYearModal(true)} style={{ width: '100%', height: '100%', borderRadius: moderateScale(10), borderWidth: 1, borderColor: '#FFFFFF50', backgroundColor: '#FFFFFF30', alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingHorizontal: moderateScale(20) }}>
                         <Text style={{ color: '#FFFFFF', fontSize: moderateScale(16), fontWeight: '500' }}>{title}</Text>
@@ -725,7 +617,7 @@ setCurrentYearDataSet(sortedCYArray)
                                         </View>
                                         <View style={{ height: moderateScale(5) }} />
                                         <View style={{ paddingHorizontal: moderateScale(15) }}>
-                                            <Text style={{ color: '#009966', fontWeight: '500', fontSize: moderateScale(16) }}>{(isNaN(parseFloat(avgPerformance))|| !isFinite(parseFloat(avgPerformance))) ? "---" : `${parseFloat(avgPerformance).toFixed(2)} `} % of Target</Text>
+                                            <Text style={{ color: '#009966', fontWeight: '500', fontSize: moderateScale(16) }}>{(isNaN(parseFloat(avgPerformance)) || !isFinite(parseFloat(avgPerformance))) ? "---" : `${parseFloat(avgPerformance).toFixed(2)} `} % of Target</Text>
                                         </View>
                                         <View style={{ height: moderateScale(20) }} />
                                         <View style={{ height: moderateScale(10), borderBottomLeftRadius: moderateScale(20), borderBottomRightRadius: moderateScale(20), width: '100%', backgroundColor: '#009966' }} />
@@ -817,25 +709,14 @@ setCurrentYearDataSet(sortedCYArray)
                         <View style={{ height: moderateScale(15) }} />
                     </View>
                 </ScrollView>
-
-
-                <ShipToSelfListPopupView
-                    isVisible={subDealerFilterOpen}
-                    dataList={subDealerData}
-                    closePopup={() => setSubDealerFilterOpen(false)}
-                    selectItem={selectShipToSelfItem}
-                    isDealer={false}
-                />
+                <ShipToSelfListPopupView isVisible={subDealerFilterOpen} dataList={subDealerData} closePopup={() => setSubDealerFilterOpen(false)} selectItem={selectShipToSelfItem} isDealer={false} />
             </View>
-
             {loading && <Loader />}
-
             <Modal visible={yearModalVisible} transparent animationType="fade" onRequestClose={() => setYearModalVisible(false)}>
                 <TouchableOpacity activeOpacity={1} style={styles.overlay} onPress={() => setYearModalVisible(false)}>
                     <TouchableOpacity activeOpacity={1} style={styles.card}>
                         <Text style={styles.cardTitle}>Select Financial Year</Text>
                         <Text style={styles.cardSubtitle}>Choose a year to filter the graph</Text>
-
                         <View style={{ width: '100%', marginTop: moderateScale(16) }}>
                             {yearOptions.map((yr, index) => (
                                 <View key={yr.startYear}>
@@ -851,20 +732,17 @@ setCurrentYearDataSet(sortedCYArray)
                                 </View>
                             ))}
                         </View>
-
                         <TouchableOpacity onPress={() => setYearModalVisible(false)} style={styles.cancelBtn}>
                             <Text style={styles.cancelText}>Cancel</Text>
                         </TouchableOpacity>
                     </TouchableOpacity>
                 </TouchableOpacity>
             </Modal>
-
             <Modal visible={monthModalVisible} transparent animationType="slide" onRequestClose={() => setMonthModalVisible(false)}>
                 <TouchableOpacity activeOpacity={1} style={styles.overlay} onPress={() => setMonthModalVisible(false)}>
                     <TouchableOpacity activeOpacity={1} style={[styles.card, { maxHeight: '75%' }]}>
                         <Text style={styles.cardTitle}>Select Month</Text>
                         <Text style={styles.cardSubtitle}>{selectedYear?.label}</Text>
-
                         <FlatList
                             data={FINANCIAL_MONTHS}
                             keyExtractor={item => item.code}
@@ -881,75 +759,52 @@ setCurrentYearDataSet(sortedCYArray)
                                 </TouchableOpacity>
                             )}
                         />
-
                         <TouchableOpacity onPress={() => setMonthModalVisible(false)} style={styles.cancelBtn}>
                             <Text style={styles.cancelText}>Cancel</Text>
                         </TouchableOpacity>
                     </TouchableOpacity>
                 </TouchableOpacity>
             </Modal>
-
             <Modal visible={confirmClearModalVisible} transparent animationType="fade" onRequestClose={() => setConfirmClearModalVisible(false)}>
                 <TouchableOpacity activeOpacity={1} style={styles.overlay} onPress={() => setConfirmClearModalVisible(false)}>
                     <TouchableOpacity activeOpacity={1} style={styles.card}>
-
                         <View style={styles.iconCircle}>
                             <Text style={{ fontSize: moderateScale(26) }}>📊</Text>
                         </View>
-
                         <Text style={styles.cardTitle}>Change Filter?</Text>
-
                         <Text style={[styles.cardSubtitle, { textAlign: 'center', marginBottom: moderateScale(4) }]}>
                             Currently viewing{'\n'}
                             <Text style={{ fontWeight: '700', color: Colors.text }}>
                                 {selectedYear?.label}  ·  {selectedMonth?.label}
                             </Text>
                         </Text>
-
-                        <Text style={[styles.cardSubtitle, { textAlign: 'center', marginBottom: moderateScale(24) }]}>
-                            Do you want to select a different month, or reset to full year view?
-                        </Text>
-
+                        <Text style={[styles.cardSubtitle, { textAlign: 'center', marginBottom: moderateScale(24) }]}> Do you want to select a different month, or reset to full year view? </Text>
                         <View style={{ flexDirection: 'row', gap: moderateScale(12), width: '100%' }}>
-                            {/* Clear → reset to full current year */}
                             <TouchableOpacity activeOpacity={0.85} style={[styles.dialogBtn, { backgroundColor: '#FAFAFA', borderWidth: 1, borderColor: '#E0E0E0' }]} onPress={() => {
                                 setConfirmClearModalVisible(false)
                                 applyFullCurrentYear()
                             }} >
                                 <Text style={[styles.dialogBtnText, { color: Colors.text }]}>Clear</Text>
                             </TouchableOpacity>
-
-                            {/* Confirm → fresh year selection */}
-                            <TouchableOpacity
-                                activeOpacity={0.9}
-                                style={[styles.dialogBtn, { backgroundColor: DataStorage.primaryColorCode, elevation: 6, shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 6, shadowOffset: { width: 0, height: 4 } }]}
-                                onPress={() => {
-                                    setConfirmClearModalVisible(false)
-                                    setTimeout(() => setYearModalVisible(true), 300)
-                                }} >
+                            <TouchableOpacity activeOpacity={0.9} style={[styles.dialogBtn, { backgroundColor: DataStorage.primaryColorCode, elevation: 6, shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 6, shadowOffset: { width: 0, height: 4 } }]} onPress={() => {
+                                setConfirmClearModalVisible(false)
+                                setTimeout(() => setYearModalVisible(true), 300)
+                            }} >
                                 <Text style={[styles.dialogBtnText, { color: Colors.white }]}>Confirm</Text>
                             </TouchableOpacity>
                         </View>
                     </TouchableOpacity>
                 </TouchableOpacity>
             </Modal>
-
-            {/* Modal for Year dropdown */}
             <Modal visible={yearModal} transparent animationType="fade" onRequestClose={() => { setYearModal(false) }} >
                 <View style={{ width: '100%', height: '100%', flexDirection: 'column' }}>
-                    <TouchableOpacity style={{ width: '100%', flex: 1 }}
-                        onPress={() => { setYearModal(false) }} >
+                    <TouchableOpacity style={{ width: '100%', flex: 1 }} onPress={() => { setYearModal(false) }} >
                         <View style={{ width: '100%', height: '100%', backgroundColor: '#0006' }} />
                     </TouchableOpacity>
                     <View style={{ width: "100%", backgroundColor: Colors.main }}>
-                        {/* Header */}
                         <View style={{ width: "100%", padding: moderateScale(16), backgroundColor: "#E41B14", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderTopLeftRadius: moderateScale(20), borderTopRightRadius: moderateScale(20) }}>
-                            <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}>
-                                Select Your Option
-                            </Text>
+                            <Text style={{ color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "600" }}> Select Your Option </Text>
                         </View>
-
-                        {/* List */}
                         <View style={{ width: "100%", backgroundColor: "#ffffff", paddingVertical: moderateScale(10), }}>
                             <FlatList
                                 data={[{ id: 1, title: 'Current FY', }, { id: 2, title: 'Previous FY', }, { id: 3, title: 'Current FY vs Previous FY', }]}
@@ -960,9 +815,7 @@ setCurrentYearDataSet(sortedCYArray)
                                     return (
                                         <TouchableOpacity activeOpacity={0.95} onPress={() => { changeFYDataSet(item) }} >
                                             <View style={{ width: "100%", paddingHorizontal: moderateScale(20), paddingVertical: moderateScale(13), flexDirection: "row", alignItems: "center", justifyContent: "space-between", backgroundColor: (index % 2 !== 0 ? DataStorage.transColorCode : "#FFFFFF") }}>
-                                                <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500" }}>
-                                                    {item.title}
-                                                </Text>
+                                                <Text style={{ color: Colors.text, fontSize: moderateScale(14), fontWeight: "500" }}> {item.title} </Text>
                                             </View>
                                         </TouchableOpacity>
                                     )
@@ -973,12 +826,9 @@ setCurrentYearDataSet(sortedCYArray)
                 </View>
             </Modal>
             <AuthNotVerifyPopupView isVisible={authChecker} onClose={() => setAuthChecker(false)} />
-
         </SafeView>
     )
 }
-
-// ─── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
     overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', paddingHorizontal: moderateScale(24), },

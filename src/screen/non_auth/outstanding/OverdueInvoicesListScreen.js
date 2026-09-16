@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
-import SafeView from '../../../helper/SafeView';
-import { Colors } from '../../../assets/Colors';
-import { moderateScale } from '../../../helper/Window';
-import DataStorage from '../../../storage/DataStorage';
-import formatINR from '../../../helper/formatINR';
-import AgeingHeaderView from '../../../common/AgeingHeaderView';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react'
+import { View, Text, FlatList } from 'react-native'
+import SafeView from '../../../helper/SafeView'
+import { Colors } from '../../../assets/Colors'
+import { moderateScale } from '../../../helper/Window'
+import DataStorage from '../../../storage/DataStorage'
+import formatINR from '../../../helper/formatINR'
+import AgeingHeaderView from '../../../common/AgeingHeaderView'
+import moment from 'moment'
 
 export default function OverdueInvoicesListScreen(props) {
   const [dataSet, setDataSet] = useState(DataStorage.dayWiseAgeingList)
@@ -40,10 +40,10 @@ export default function OverdueInvoicesListScreen(props) {
     setDrAmount(drAmount)
     setDrCount(drCount)
   }, [])
-  
+
   return (
     <SafeView backgroundColor={'#F4F6FA'} bar={false} statusbarColor={Colors.main}>
-      <AgeingHeaderView title={"Uncleared Invoices"} subTitle={'Due on '+moment(new Date()).format('DD MMM, YYYY')} Information={false} />
+      <AgeingHeaderView title={"Uncleared Invoices"} subTitle={'Due on ' + moment(new Date()).format('DD MMM, YYYY')} Information={false} />
       <View style={{ flex: 1, backgroundColor: '#F4F6FA' }}>
         <View style={{ backgroundColor: '#ffffff', borderRadius: moderateScale(14), padding: moderateScale(16), shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.07, shadowRadius: 10, elevation: 5, marginHorizontal: moderateScale(10), marginTop: moderateScale(10) }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(6) }}>
@@ -84,25 +84,7 @@ export default function OverdueInvoicesListScreen(props) {
           />
         </View>
         <View style={{ height: moderateScale(10) }} />
-        {/* <>
-          <View style={{ backgroundColor: '#ffffff', borderRadius: moderateScale(14), paddingVertical: moderateScale(16), shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.07, shadowRadius: 10, elevation: 1, marginHorizontal: moderateScale(10) }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(6), paddingHorizontal: moderateScale(16) }}>
-              <Text style={{ fontSize: moderateScale(12), fontWeight: '500', color: '#444444', flex: 1 }}> Total DR ({drCount}) </Text>
-              <Text style={{ fontSize: moderateScale(12), fontWeight: '700', color: '#444444' }}> ₹{formatINR(drAmount)} </Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(6), paddingHorizontal: moderateScale(16), marginTop: moderateScale(10) }}>
-              <Text style={{ fontSize: moderateScale(12), fontWeight: '500', color: '#444444', flex: 1 }}> Total CR ({crCount}) </Text>
-              <Text style={{ fontSize: moderateScale(12), fontWeight: '700', color: '#444444' }}> - ₹{formatINR(crAmount)} </Text>
-            </View>
-            <View style={{ width: '100%', height: 1, backgroundColor: '#eee', marginTop: moderateScale(10) }} />
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: moderateScale(6), paddingHorizontal: moderateScale(16), marginTop: moderateScale(10) }}>
-              <Text style={{ fontSize: moderateScale(12), fontWeight: '500', color: '#444444', flex: 1 }}> Total Outstanding ({dataSet.length}) </Text>
-              <Text style={{ fontSize: moderateScale(14), fontWeight: '700', color: '#E74C3C' }}> ₹{formatINR(totalAmount)} </Text>
-            </View>
-          </View>
-          <View style={{ height: moderateScale(2) }} />
-        </> */}
       </View>
     </SafeView>
-  );
+  )
 }

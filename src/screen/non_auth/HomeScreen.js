@@ -20,10 +20,7 @@ const HomeScreen = (props) => {
   const [authChecker, setAuthChecker] = useState(false)
 
   useEffect(() => {
-    DataStorage.typeOfUse = 1 && getDealer();
-    //  setTimeout(()=>{
-    //   gotoDashboardScreen(false)
-    //  },1000)
+    DataStorage.typeOfUse = 1 && getDealer()
   }, [])
 
   useFocusEffect(
@@ -37,41 +34,41 @@ const HomeScreen = (props) => {
             { text: "Yes", onPress: () => BackHandler.exitApp() },
           ],
           { cancelable: false }
-        );
-        return true;
-      };
+        )
+        return true
+      }
 
       const backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         onBackPress
-      );
+      )
 
-      return () => backHandler.remove();
+      return () => backHandler.remove()
     }, [])
-  );
+  )
 
   const getDealer = async () => {
     setLoading(true)
 
-    var a = await AuthCheckingApi();
-        if (!a) {
-            setAuthChecker(true)
-            setLoading(false)
-            return false
-        }
+    var a = await AuthCheckingApi()
+    if (!a) {
+      setAuthChecker(true)
+      setLoading(false)
+      return false
+    }
 
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    const myHeaders = new Headers()
+    myHeaders.append("Content-Type", "application/json")
     const requestOptions = {
       method: "POST",
       redirect: "follow",
       headers: myHeaders,
       body: JSON.stringify({ dealer_id: UrlStorage.ParameterList.BasicData.emp_id })
-    };
+    }
     var url = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.dealer_details
     await fetch(url, requestOptions)
       .then((response) => {
-        return response.json(); // ✅ return the parsed JSON Promise
+        return response.json()
       })
       .then((result) => {
         DataStorage.isSbsRegister = result?.data?.for_sbs
@@ -80,7 +77,7 @@ const HomeScreen = (props) => {
         setIsCement(result?.data?.for_cement)
       })
       .catch((error) => {
-      });
+      })
     setLoading(false)
   }
 
@@ -99,7 +96,7 @@ const HomeScreen = (props) => {
       DataStorage.menuColorCode = "#F5F8EF"
     }
     DataStorage.isFirstOpen = true
-    props.navigation.navigate("SBSDashboardScreen");
+    props.navigation.navigate("SBSDashboardScreen")
   }
 
   return (
@@ -130,11 +127,6 @@ const HomeScreen = (props) => {
             <View style={{ height: moderateScale(40) }}></View>
           </View>
         </View>
-        {/* <TouchableOpacity activeOpacity={0.95} style={{ width: "100%", alignItems: "center" }} onPress={() => gotoDashboardScreen()}>
-          <View style={{ width: "100%", height: moderateScale(40), borderRadius: moderateScale(10), backgroundColor: buttonColor, alignItems: "center", justifyContent: "center", }}>
-            <Text style={{ color: Colors.white, fontSize: moderateScale(14), fontWeight: "500" }}>Confirm</Text>
-          </View>
-        </TouchableOpacity> */}
       </View>
       <Toast config={toastConfig} />
       {loading && <Loader />}
