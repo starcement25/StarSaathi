@@ -886,6 +886,7 @@ const SBSDashboardScreen = (props) => {
       redirect: "follow"
     };
     const customerCode = UrlStorage.ParameterList.BasicData.user_type === "broker" ? UrlStorage.ParameterList.BasicData.customerDetails.customer_code : UrlStorage.ParameterList.BasicData.emp_code;
+    console.log(`${UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DashboardURL.customer_credit_api}` + `?customer_code=${customerCode}`);
 
     await fetch(`${UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.DashboardURL.customer_credit_api}` + `?customer_code=${customerCode}`, requestOptions)
       .then((response) => response.json())
@@ -1031,7 +1032,6 @@ const SBSDashboardScreen = (props) => {
                               const limit = Number(creditLimit?.CL ?? 0);
                               const rawPercentage =
                                 limit > 0 ? (consumed / limit) * 100 : 0;
-
                               const percentage = Number(rawPercentage.toFixed(2));
                               const consumedPercentage = Math.min(percentage, 100);
                               const overLimit = percentage > 100;

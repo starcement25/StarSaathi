@@ -1,7 +1,7 @@
 let UrlStorage = {
   BaseUrlList: {
     Saathi: {
-      base_url_saathi: "https://starsaathi.com/SAP",
+      base_url_saathi: "https://dev.starsaathi.com/SAP",
       mason_link: "https://starlinkinfluencers.in/web/public/dealer/authenticate?authkey=$2y$10$wAa61qlCON2lRFMsRxobGeynsxG5M/CPHB.Vxt21DLY4dnbmaN9a6&sapcode=",
     },
     SBS: {

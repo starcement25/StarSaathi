@@ -109,6 +109,8 @@ const LoginScreen = (props) => {
                 await AsyncStorage.setItem('user_details_dealerId', dealerId)
                 await AsyncStorage.setItem('user_details_mobileNumber', mobileNumber)
                 setIsLoading(false)
+                console.log(response);
+
                 props.navigation.navigate('OTPScreen')
             } else {
                 setIsLoading(false)

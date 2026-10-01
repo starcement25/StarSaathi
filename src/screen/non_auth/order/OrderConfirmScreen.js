@@ -109,6 +109,8 @@ const OrderConfirmScreen = (props) => {
       formdata.append('user_type', UrlStorage?.ParameterList?.BasicData?.user_type ?? '')
       formdata.append('login_user_id', empCode)
       const apiUrl = UrlStorage.BaseUrlList.Saathi.base_url_saathi + UrlStorage.NonAuthURL.Saathi.OrderURL.new_order_create_url
+      console.log(apiUrl);
+
       const response = await fetch(apiUrl, { method: 'POST', body: formdata })
       const statusCode = response.status
       const text = await response.text()
@@ -166,12 +168,16 @@ const OrderConfirmScreen = (props) => {
         }],
       }
       const apiUrl = UrlStorage.BaseUrlList.SBS.base_url_sbs + UrlStorage.NonAuthURL.SBS.order.create_order
+      console.log(JSON.stringify(payload));
+      console.log(apiUrl);
       const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), })
       let data = null
       try {
         data = await response.json()
       } catch (e) {
       }
+      console.log(data);
+
       if (response.ok) {
         Toast.show({ type: 'success', text1: 'Success', text2: 'Order Placed Successfully' })
         setTimeout(() => {
