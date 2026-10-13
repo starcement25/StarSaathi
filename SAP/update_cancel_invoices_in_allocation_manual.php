@@ -5,7 +5,7 @@ include "star_connection.php";
 include "../cron_page_start.php";
 $allocation_details_invoicewise  = "allocation_details_invoicewise";
 //$curr_date = date("Y-m-d");
-$curr_date_for = '2026-06-03';
+$curr_date_for = '2026-09-30';
 $customer_id_check = "1000003935"; // 👈 set this to correct customer_id if known
 
 $countexe = 0;

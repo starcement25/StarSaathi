@@ -1,7 +1,7 @@
 <?php
 include "star_connection.php";
 $dealer_app_version = "dealer_app_version";
-$app_version_data = array("ANDROID"=>"1.1","IOS"=>"1.1");
+$app_version_data = array("ANDROID"=>"1.1","IOS"=>"1.1","IOS (OLD)"=>"1.1");
 $branch_consumer_scheme_status="branch_consumer_scheme_status";
 
 $current_date=date('Y-m-d');
@@ -30,7 +30,8 @@ if($totall>0){
 			}
 		}
 	}
-	$res_data = array("process_status"=>"YES","process_message"=>"New version available.","android_app_version"=>$app_version_data["ANDROID"],"ios_app_version"=>$app_version_data["IOS"],"current_date"=>$current_date,"consumer_scheme_status"=>$consumer_scheme_status);
+	//print_r ($app_version_data);die;
+	$res_data = array("process_status"=>"YES","process_message"=>"New version available.","android_app_version"=>$app_version_data["ANDROID"],"ios_app_version"=>$app_version_data["IOS"],"ios_app_old_version"=>$app_version_data["IOS (OLD)"],"current_date"=>$current_date,"consumer_scheme_status"=>$consumer_scheme_status);
 }else{
 	$res_data = array("process_status"=>"YES","process_message"=>"Success.","android_app_version"=>$app_version_data["ANDROID"],"ios_app_version"=>$app_version_data["IOS"],"current_date"=>$current_date,"consumer_scheme_status"=>$consumer_scheme_status );
 }

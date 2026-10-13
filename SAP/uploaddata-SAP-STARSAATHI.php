@@ -137,6 +137,11 @@ $sqlcustomerSAP="SELECT KUNNR,ALTKN,NAME1,NAME2,NAME3,STRAS,STREET1,STREET2,STRE
 			$customer_id=$dns_customer_code_val;
 			//echo 'dfdfdfdfdfdf'.$dns_customer_code;
 			$customer_name=${customer_name.$dns_customer_code_val};
+			//10-06-26
+			$customer_name = iconv('UTF-8', 'UTF-8//IGNORE', $customer_name);
+			$customer_name = preg_replace('/[^A-Za-z0-9 ]/', '', $customer_name);
+			$customer_name = preg_replace('/\s+/', ' ', trim($customer_name));
+			//10-06-26
 			//$customer_id=${customer_id.$dns_customer_code_val};
 			$branch_code=${branch_code.$dns_customer_code_val};
 			$dns_route_code=${dns_route_code.$dns_customer_code_val};

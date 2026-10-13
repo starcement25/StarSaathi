@@ -9,6 +9,7 @@ $t_apperpdo_offline = "T_APPERPDO_OFFLINE";
 $t_dochallan = "T_DOCHALLAN";
 $customer_master = "customer_master";
 $product_master = "product_master";
+$product_master_sbs = "product_master_sbs";
 $cron_update_table = "cron_update_table";
 $curr_date_time = date("Y-m-d H:i:s");
 $curr_date_time_formated=str_replace(':','_',$curr_date_time);
@@ -87,11 +88,27 @@ if(count($app_results_arr)>0){
 		}
 		
 if($vbeln!=""){
-	$sql1 = "select `prod_code`,`prod_desc` from product_master where `dns_prod_code`='$matnr'";	
+	$order_type = "";
+	$sql1 = "select `prod_code`,`prod_desc` from $product_master where `dns_prod_code`='$matnr'";	
 	$res1 = mysql_query($sql1);
+	if(mysql_num_rows($res1)>0){
 	$row1 = mysql_fetch_assoc($res1);
 	$prod_code = $row1["prod_code"] ? addslashes(trim($row1["prod_code"])) : "";
 	$prod_desc = $row1["prod_desc"] ? addslashes(trim($row1["prod_desc"])) : "";
+	$order_type = "CEMENT";
+	}else{
+	$sql1 = "select `prod_code`,`prod_desc` from $product_master_sbs where `dns_prod_code`='$matnr'";
+	$res1 = mysql_query($sql1);
+	if(mysql_num_rows($res1)>0){
+	$row1 = mysql_fetch_assoc($res1);
+	$prod_code = $row1["prod_code"] ? addslashes(trim($row1["prod_code"])) : "";
+	$prod_desc = $row1["prod_desc"] ? addslashes(trim($row1["prod_desc"])) : "";
+	$order_type = "SBS";
+	}else{
+	$prod_code = "";
+	$prod_desc = "";
+	}
+	}
 	
 	$sqldump = "select `dump_name` from branch_dump where `dump_code`='$werks'";	
 	$resdump = mysql_query($sqldump);
@@ -112,7 +129,7 @@ if($vbeln!=""){
 	$dealer_code = $rowdealer["customer_code"] ? addslashes(trim($rowdealer["customer_code"])) : "";
 	$dns_dealer_code = $rowdealer["dns_customer_code"] ? addslashes(trim($rowdealer["dns_customer_code"])) : "";			
 
-echo $sqlchkdelivery = "SELECT `id`,`ERPORDERNO` FROM $t_dochallan where `ERPORDERNO`='$vbeln'";
+ $sqlchkdelivery = "SELECT `id`,`ERPORDERNO` FROM $t_dochallan where `ERPORDERNO`='$vbeln'";
 $reschkdelivery = mysql_query($sqlchkdelivery);
 $totchkdelivery = mysql_num_rows($reschkdelivery);
 	if($totchkdelivery > 0)
@@ -131,11 +148,11 @@ if($totres1>0){
 $row1=mysql_fetch_assoc($res1);
 $the_id = $row1["id"] ? addslashes(trim($row1["id"])) : "";
 
-$sql_clupd = "update $t_apperpdo_offline set `STATUS`='$current_status'   where `id`='$the_id'";
+$sql_clupd = "update $t_apperpdo_offline set `STATUS`='$current_status',`order_type`='$order_type',prod_code='$prod_code',prod_display_name='$prod_desc'    where `id`='$the_id'";
 $res_clupd = mysql_query($sql_clupd);
 $upd_cnt++;
 }else{
-$sql_clin = "insert into $t_apperpdo_offline (`ERPORDERNO`,`ERPORDERDT`,`consignee_SAP_code`,`consignee_name`,`consignee_code`,`dns_consignee_code`,`customer_code`,`dns_customer_code`,`customer_SAP_code`,`customer_name`,`prod_code`,`dns_prod_code`,`prod_display_name`,`QTY`,`STATUS`,`freight`,`dump_code`,`dump_name`,`last_update_datetime`,`unit_of_measurement`) values ('$vbeln','$erdat_time_str_format','$kunwe_ana','$consignee_name','$consignee_code','$dns_consignee_code','$dealer_code','$dns_dealer_code','$kunnr','$dealer_name','$prod_code','$matnr','$prod_desc','$kwmeng','$current_status','$inco1','$werks','$the_dump_name','$upd_format','$vrkme')";
+$sql_clin = "insert into $t_apperpdo_offline (`ERPORDERNO`,`ERPORDERDT`,`consignee_SAP_code`,`consignee_name`,`consignee_code`,`dns_consignee_code`,`customer_code`,`dns_customer_code`,`customer_SAP_code`,`customer_name`,`prod_code`,`dns_prod_code`,`prod_display_name`,`QTY`,`STATUS`,`freight`,`dump_code`,`dump_name`,`last_update_datetime`,`unit_of_measurement`,`order_type`) values ('$vbeln','$erdat_time_str_format','$kunwe_ana','$consignee_name','$consignee_code','$dns_consignee_code','$dealer_code','$dns_dealer_code','$kunnr','$dealer_name','$prod_code','$matnr','$prod_desc','$kwmeng','$current_status','$inco1','$werks','$the_dump_name','$upd_format','$vrkme','$order_type')";
 $res_clin = mysql_query($sql_clin);
 if($res_clin){
 $in_cnt++;

@@ -110,6 +110,7 @@ if($user_type=="dealer"){
 						$customer_master.customer_name,
 						$customer_master.address,
 						$customer_master.phone_no,
+						$customer_master.cust_type,
 						$destination_master.destination_name
 					FROM 
 						$customer_master
@@ -134,13 +135,13 @@ if($user_type=="dealer"){
 						$con
 						$order_restrict_cond
 					";
-					//echo"<pre>";print_r($sqlshiptoparty);die;			
+					//echo"<pre>";print_r($sqlshiptoparty);		
 	$rsshiptoparty=mysql_query($sqlshiptoparty);
 	$countshiptoparty=mysql_num_rows($rsshiptoparty);
 	if($countshiptoparty >0)
 	{
 		$sqldealerdestination="SELECT $customer_master.dns_customer_code,$customer_master.customer_code,$customer_master.customer_name,
-					$customer_master.address,$customer_master.phone_no,$destination_master.destination_name 
+					$customer_master.address,$customer_master.phone_no,$destination_master.destination_name, $customer_master.cust_type 
 					FROM $customer_master,$customer_destination,$destination_master WHERE 
 					$customer_master.customer_code=$customer_destination.customer_code AND
 					$destination_master.destination_code=$customer_destination.destination_code AND 
@@ -159,8 +160,9 @@ if($user_type=="dealer"){
 			$dealer_address=$rowdealerdestination['address'];
 			$dealer_address=accent2ascii($dealer_address);
 			$dealer_phone_no=$rowdealerdestination['phone_no'];
-								
-		$dealer_data[] = array("customer_code"=>$dealer_customer_code,"dns_customer_code"=>$dealer_dns_customer_code,"customer_name"=>$dealer_customer_name_final,"address"=>$dealer_address,"phone_no"=>$dealer_phone_no);
+			$dealer_cust_type=$rowdealerdestination['cust_type'];
+
+		$dealer_data[] = array("customer_code"=>$dealer_customer_code,"dns_customer_code"=>$dealer_dns_customer_code,"customer_name"=>$dealer_customer_name_final,"address"=>$dealer_address,"phone_no"=>$dealer_phone_no,"cust_type"=>$dealer_cust_type);
 		}
 
 		while($rowshiptoparty=mysql_fetch_array($rsshiptoparty))
@@ -174,9 +176,10 @@ if($user_type=="dealer"){
 			$address=$rowshiptoparty['address'];
 			$address=accent2ascii($address);
 			$phone_no=$rowshiptoparty['phone_no'];
+			$cust_type=$rowshiptoparty['cust_type'];
 			if($customer_name_final!='')
 			{
-				$dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name_final,"address"=>$address,"phone_no"=>$phone_no);
+				$dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name_final,"address"=>$address,"phone_no"=>$phone_no,"cust_type"=>$cust_type);
 			}
 		}
 		$dealer_data = utf8ize($dealer_data);
@@ -187,7 +190,7 @@ if($user_type=="dealer"){
 	{
 		
 		//10-03-26
-		 $sql1 = "select `customer_name`,`address`,`phone_no`,`dns_customer_code`,`customer_code` from $customer_master where customer_code='".$emp_code."'";
+		 $sql1 = "select `customer_name`,`address`,`phone_no`,`dns_customer_code`,`customer_code`,cust_type from $customer_master where customer_code='".$emp_code."'";
 		$res1 = mysql_query($sql1);
 		$totres1 = mysql_num_rows($res1);
 		if($totres1>0){
@@ -197,7 +200,8 @@ if($user_type=="dealer"){
 		$phone_no = trim($row1["phone_no"]);
 		$dns_customer_code = trim($row1["dns_customer_code"]);
 		$customer_code = trim($row1["customer_code"]);
-		$dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name,"address"=>$address,"phone_no"=>$phone_no);
+		$cust_type = trim($row1["cust_type"]);
+		$dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name,"address"=>$address,"phone_no"=>$phone_no,"cust_type"=>$cust_type);
 			//echo"<pre>";print_r($dealer_data);
 			$dealer_data = utf8ize($dealer_data);
 
@@ -231,6 +235,7 @@ else if($user_type=="sub dealer"){
 					$customer_master.customer_name,
 					$customer_master.address,
 					$customer_master.phone_no,
+					$customer_master.cust_type,
 					$destination_master.destination_name 
 				FROM 
 					$customer_master,
@@ -279,10 +284,10 @@ else if($user_type=="sub dealer"){
 			$customer_name_final=accent2ascii($customer_name_final);
 			$address=accent2ascii($address);
 			$phone_no=$rowshiptoparty['phone_no'];
-			
+			$cust_type=$rowshiptoparty['cust_type'];
 			if($customer_name_final!='')
 			{
-				$sub_dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name_final,"address"=>$address,"phone_no"=>$phone_no);
+				$sub_dealer_data[] = array("customer_code"=>$customer_code,"dns_customer_code"=>$dns_customer_code,"customer_name"=>$customer_name_final,"address"=>$address,"phone_no"=>$phone_no,"cust_type"=>$cust_type);
 			}
 
 		}
