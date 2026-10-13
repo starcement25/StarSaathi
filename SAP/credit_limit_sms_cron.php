@@ -109,7 +109,7 @@ while ($row = mysql_fetch_assoc($res)) {
        SEND SMS IF ABOVE 75%
     ========================================================= */
 
-    if ($utilization >= 75) {
+   /* if ($utilization >= 75) {
 
         $today_date = date('d-m-Y');
 
@@ -118,13 +118,11 @@ while ($row = mysql_fetch_assoc($res)) {
         $utilization."% as on ".$today_date.
         ". Kindly ensure timely payment and monitor your available balance to avoid transaction interruptions. - Star Cement";
 
-        /* ================= SEND SMS ================= */
+       
         //$mob_no='7003541247';
         $sms_res = send_sms_new($tmp_id, $mob_no, $otp_text);
-        /*echo "<pre>";
-        print_r($sms_res);
-        echo "</pre>";*/
-        /* ================= SMS LOG INSERT ================= */
+        
+        
         date_default_timezone_set('Asia/Kolkata');
         $created_at = date('Y-m-d H:i:s');
         $log_sql = "
@@ -142,7 +140,7 @@ while ($row = mysql_fetch_assoc($res)) {
         ";
 
         mysql_query($log_sql);
-        /* ================= LOG ================= */
+        
 
         echo "<br>";
         echo "SMS Sent To : ".$customer_name;
@@ -151,7 +149,54 @@ while ($row = mysql_fetch_assoc($res)) {
         echo " (".$mob_no.")";
         echo " Utilization : ".$utilization."%";
         echo "<br>"; 
-    }
+    }*/
+        /* =========================================================
+   SEND SMS FOR 75% AND 90%
+========================================================= */
+                if ($utilization >= 75) {
+
+            if ($utilization >= 90) {
+                $sms_type = "90";
+                $sms_percent = "90";
+            } else {
+                $sms_type = "75";
+                $sms_percent = "75";
+                //continue;
+
+            }
+
+            $today_date = date('d-m-Y');
+
+            $otp_text = "Dear ".$customer_name.
+            ", your current credit limit utilisation has reached :".
+            $sms_percent."% as on ".$today_date.
+            ". Kindly ensure timely payment and monitor your available balance to avoid transaction interruptions. - Star Cement";
+                //$mob_no='7003541247';
+            $sms_res = send_sms_new($tmp_id, $mob_no, $otp_text);
+
+            $created_at = date('Y-m-d H:i:s');
+
+             $log_sql = "
+                INSERT INTO credit_limit_sms_log
+                SET
+                    customer_id   = '".mysql_real_escape_string($customer_id)."',
+                    customer_name = '".mysql_real_escape_string($customer_name)."',
+                    mob_no        = '".mysql_real_escape_string($mob_no)."',
+                    cl_amount     = '".mysql_real_escape_string($CL)."',
+                    crexp_amount  = '".mysql_real_escape_string($CREXP)."',
+                    utilization   = '".mysql_real_escape_string($utilization)."',
+                    sms_type      = '".$sms_type."',
+                    sms_text      = '".mysql_real_escape_string($otp_text)."',
+                    sms_response  = '".mysql_real_escape_string($sms_res)."',
+                    created_at    = '".$created_at."'
+            ";
+
+            mysql_query($log_sql);
+
+            echo "<br>";
+            echo "SMS Sent (".$sms_type."%) : ".$customer_name." (".$mob_no.")";
+            echo "<br>"; //die;
+        }
 }
 
 echo "<br><b>CRON COMPLETED</b>";

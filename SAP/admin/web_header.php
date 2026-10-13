@@ -3,6 +3,7 @@ $file_name = basename($_SERVER['PHP_SELF']);
 if($file_name==''){
 	$file_name = "index.php";
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -113,6 +114,22 @@ if($file_name==''){
                             <span>Home</span>
                         </a>
                     </li>
+                    <?php if($_SESSION["start_user_type"]=="ACCOUNTS" || $_SESSION["start_user_type"]=="ADMIN"){  ?>
+                     <li <?php if($file_name=="lifting_register_list.php"){ echo 'class="active"';}?>>
+                        <a href="lifting_register_list.php">
+                        <i class="material-icons">view_list</i>
+                        <span>Griha Pravesh Consumer Scheme</span>
+                        </a>
+                        </li>
+                    <?php }?>
+                      <?php if($_SESSION["start_user_type"]=="ACCOUNTS" || $_SESSION["start_user_type"]=="ADMIN"){  ?>
+                     <li <?php if($file_name=="dealer_registration_list.php"){ echo 'class="active"';}?>>
+                        <a href="dealer_registration_list.php">
+                        <i class="material-icons">view_list</i>
+                        <span>Dealer Registration</span>
+                        </a>
+                        </li>
+                    <?php }?>
 
                    <?php if($_SESSION["start_report_admin_name"]=='user1' || $_SESSION["start_report_admin_name"]=='user2'){ ?>
                         <li <?php if($file_name=="lifting_report.php"){ echo 'class="active"';}?>>
@@ -121,21 +138,28 @@ if($file_name==''){
                         <span>Lifting Report</span>
                         </a>
                         </li>
-                <?php } else if($_SESSION["start_report_admin_name"]=='user3'){ ?>
+                <?php } else if($_SESSION["start_report_admin_name"]=='AshishBaroi_BD'){ ?>
                     <li <?php if($file_name=="unique_admin_pop_order_report.php"){ echo 'class="active"';}?>>
                     <a href="unique_admin_pop_order_report.php">
                     <i class="material-icons">layers</i>
                     <span>POP Order</span>
                     </a>
                     </li>
-					<?php }else{ ?>
+                    <?php } else if($_SESSION["start_report_admin_name"]=='user3'){ ?>
+                    <li <?php if($file_name=="unique_admin_pop_order_report.php"){ echo 'class="active"';}?>>
+                    <a href="unique_admin_pop_order_report.php">
+                    <i class="material-icons">layers</i>
+                    <span>POP Order</span>
+                    </a>
+                    </li>
+					<?php } else{ if($_SESSION["start_user_type"]!="ACCOUNTS"){  ?>
                     <li <?php if($file_name=="home_page_slider_list.php"){ echo 'class="active"';}?>>
                         <a href="home_page_slider_list.php">
                             <i class="material-icons">layers</i>
                             <span>App Slider</span>
                         </a>
                     </li>
-
+                    <?php } ?>
 
                     <?php
                     if($_SESSION["start_user_type"]=="MANAGER"){ ?>
@@ -170,7 +194,18 @@ if($file_name==''){
                         <span>Cancelled Order List</span>
                         </a>
                         </li-->
-					<?php }else{
+					<?php }elseif($_SESSION["start_user_type"]=="ACCOUNTS"){ ?>
+                       
+
+                        <!--li <?php //if($file_name=="canceled_order_list.php"){ echo 'class="active"';}?>>
+                        <a href="canceled_order_list.php">
+                        <i class="material-icons">layers</i>
+                        <span>Cancelled Order List</span>
+                        </a>
+                        </li-->
+					<?php }
+                    
+                    else{
 					?>
                     <li <?php if($file_name=="dealer_list.php"){ echo 'class="active"';}?>>
                         <a href="dealer_list.php">
@@ -240,6 +275,12 @@ if($file_name==''){
                         <a href="customer_list.php">
                             <i class="material-icons">layers</i>
                             <span>Customer List</span>
+                        </a>
+                    </li>
+                    <li <?php if($file_name=="gst_document_list.php"){ echo 'class="active"';}?>>
+                        <a href="gst_document_list.php">
+                            <i class="material-icons">view_list</i>
+                            <span>GST Document List</span>
                         </a>
                     </li>
 					<li <?php if($file_name=="order_list.php"){ echo 'class="active"';}?>>

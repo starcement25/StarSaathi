@@ -77,7 +77,7 @@ if(strtolower($user_type)=="dealer"){
 		$branch_value_array=explode(',',$branch_value);
 		$branch_value = "'".implode("','", $branch_value_array)."'";
 		$condition_branch=' AND PM.branch_code IN ('.$branch_value.')';
-		$sqlquery="SELECT DISTINCT PM.prod_code,PM.prod_desc,PM.dns_prod_code,PM.product_group_code,PM.branch_code 
+		 $sqlquery="SELECT DISTINCT PM.prod_code,PM.prod_desc,PM.dns_prod_code,PM.product_group_code,PM.branch_code 
 					FROM product_master PM
                    WHERE PM.prod_desc <>'' AND PM.acedns='Y'  
 					 ".$condition_branch.$condition_login_type." ORDER BY PM.prod_desc ASC";

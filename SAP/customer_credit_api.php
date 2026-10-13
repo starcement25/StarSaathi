@@ -99,20 +99,33 @@ if (isset($json['d']['results']) && count($json['d']['results']) > 0) {
 
             // Normal utilized amount
             $total_available =  $utilized_limit;
-
-        } else {
-
-            // Negative exposure adjustment
-            $total_available = $credit_limit + ($utilized_limit * -1);
-        }
-
-        $final_data[] = array(
+ $final_data[] = array(
             "status" => true,
             "kunnr"  => $row['kunnr'],
             "CL"     => number_format($credit_limit, 2, '.', ''),
             "CREXP"  => number_format($utilized_limit, 2, '.', ''),
             "utilized"  => number_format($total_available, 2, '.', '')
         );
+        } else {
+
+            // Negative exposure adjustment
+            $total_available = $credit_limit + ($utilized_limit * -1);
+             $final_data[] = array(
+            "status" => true,
+            "kunnr"  => $row['kunnr'],
+            "CL"     => number_format($credit_limit, 2, '.', ''),
+            "CREXP"  => number_format($utilized_limit, 2, '.', ''),
+            "utilized"  => number_format($utilized_limit, 2, '.', '')
+        );
+        }
+
+        // $final_data[] = array(
+        //     "status" => true,
+        //     "kunnr"  => $row['kunnr'],
+        //     "CL"     => number_format($credit_limit, 2, '.', ''),
+        //     "CREXP"  => number_format($utilized_limit, 2, '.', ''),
+        //     "utilized"  => number_format($total_available, 2, '.', '')
+        // );
     }
 } else {
 

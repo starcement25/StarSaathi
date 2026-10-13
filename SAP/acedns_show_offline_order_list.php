@@ -31,15 +31,15 @@ if(strtoupper($user_type)=='DEALER' || strtoupper($user_type)=='BROKER')
 {
 /*$sqlall = "select $T_APPERPDO_OFFLINE.*,$destination_master.dns_destination_code,$destination_master.destination_name from $T_APPERPDO_OFFLINE left join $customer_destination ON $customer_destination.customer_code=$T_APPERPDO_OFFLINE.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code where $T_APPERPDO_OFFLINE.`customer_code`='$the_id' $date_qry order by $T_APPERPDO_OFFLINE.`ERPORDERDT` desc";*/
 
-$sqlall = "select $T_APPERPDO_OFFLINE.*,$destination_master.dns_destination_code,$destination_master.destination_name from $T_APPERPDO_OFFLINE left join $customer_destination ON $customer_destination.customer_code=$T_APPERPDO_OFFLINE.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code where $T_APPERPDO_OFFLINE.`customer_code`='$the_id' $date_qry order by $T_APPERPDO_OFFLINE.`ERPORDERDT` desc";
+$sqlall = "select $T_APPERPDO_OFFLINE.*,$destination_master.dns_destination_code,$destination_master.destination_name from $T_APPERPDO_OFFLINE left join $customer_destination ON $customer_destination.customer_code=$T_APPERPDO_OFFLINE.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code where $T_APPERPDO_OFFLINE.`customer_code`='$the_id' AND order_type='CEMENT'  $date_qry order by $T_APPERPDO_OFFLINE.`ERPORDERDT` desc";
 }
 else
 {
 /*$sqlall = "select $T_APPERPDO_OFFLINE.*,$destination_master.dns_destination_code,$destination_master.destination_name from $T_APPERPDO_OFFLINE left join $customer_destination ON $customer_destination.customer_code=$T_APPERPDO_OFFLINE.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code  where ($T_APPERPDO_OFFLINE.`consignee_code`='$the_id' OR $T_APPERPDO_OFFLINE.`dns_consignee_code` IN(SELECT $customer_master.dns_customer_code FROM $customer_master WHERE $customer_master.rds_tag='".$the_id."'
 AND $customer_master.cust_type='ShiptoParty-Subdeale')) $date_qry order by $T_APPERPDO_OFFLINE.`ERPORDERDT` desc";*/
 
-$sqlall = "select $T_APPERPDO_OFFLINE.*,$destination_master.dns_destination_code,$destination_master.destination_name from $T_APPERPDO_OFFLINE left join $customer_destination ON $customer_destination.customer_code=$T_APPERPDO_OFFLINE.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code  where ($T_APPERPDO_OFFLINE.`consignee_code`='$the_id' OR $T_APPERPDO_OFFLINE.`dns_consignee_code` IN(SELECT $customer_master.dns_customer_code FROM $customer_master WHERE $customer_master.rds_tag='".$the_id."'
-AND $customer_master.cust_type='ShiptoParty-Subdeale')) $date_qry order by $T_APPERPDO_OFFLINE.`ERPORDERDT` desc";
+$sqlall = "select $T_APPERPDO_OFFLINE.*,$destination_master.dns_destination_code,$destination_master.destination_name from $T_APPERPDO_OFFLINE left join $customer_destination ON $customer_destination.customer_code=$T_APPERPDO_OFFLINE.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code  where ($T_APPERPDO_OFFLINE.`consignee_code`='$the_id' OR $T_APPERPDO_OFFLINE.`dns_consignee_code` IN(SELECT $customer_master.dns_customer_code FROM $customer_master  WHERE $customer_master.rds_tag='".$the_id."'
+AND $customer_master.cust_type='ShiptoParty-Subdeale')) AND order_type='CEMENT' $date_qry order by $T_APPERPDO_OFFLINE.`ERPORDERDT` desc";
 }
 //echo"<pre>";print_r($sqlall);die;
 $resall = mysql_query($sqlall);

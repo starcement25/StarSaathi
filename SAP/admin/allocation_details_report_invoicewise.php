@@ -455,6 +455,7 @@ include "web_header.php";
 							<thead>
 								<tr>
 									<th>Allocation&nbsp;Date&nbsp;Time</th>
+									<th>Auto&nbsp;Allocation</th>
 									<th>APPORDERNO</th>
 									<th>Order&nbsp;Type</th>
 									<th>Inv&nbsp;Date</th>
@@ -478,6 +479,7 @@ include "web_header.php";
 							<tfoot>
 								<tr>
 									<th>Allocation&nbsp;Date&nbsp;Time</th>
+									<th>Auto&nbsp;Allocation</th>
 									<th>APPORDERNO</th>
 									<th>Order&nbsp;Type</th>
 									<th>Inv&nbsp;Date</th>
@@ -520,6 +522,10 @@ include "web_header.php";
 										$prod_display_name = $row1["prod_desc"] ? trim($row1["prod_desc"]) : "";
 										$inv_cancl = $row1["inv_cancl"] ? trim($row1["inv_cancl"]) : "";
 										$delete_at = $row1["delete_at"] ? trim($row1["delete_at"]) : "";
+										// Set to 'Yes' by auto_allocation_cron.php; anything else (blank
+										// on older rows) means the allocation was made by hand.
+										$auto_allocation = isset($row1["auto_allocation"]) ? trim($row1["auto_allocation"]) : "";
+										$auto_allocation = (strtoupper($auto_allocation) == "YES") ? "Yes" : "No";
 
 								$monthval=substr($row1["date_and_time"],5,2);
 								/*$sqldespatchqty="select SUM(CHALLANQTY) as total_despatch_qty from $T_DOCHALLAN where `dns_customer_code`='$linked_dealer_code'  AND dns_prod_code='$dns_prod_code' AND substring(CHALLANDT,6,2)='$monthval'";
@@ -545,6 +551,7 @@ include "web_header.php";
 								?>
 										<tr>
 											<td><?php echo $date_and_time;?></td>
+											<td><?php if($auto_allocation=="Yes"){ ?><span style="color:green; font-weight:bold;">Yes</span><?php }else{ ?>No<?php } ?></td>
 											<td><?php echo $APPORDERNO;?></td>
 											<td><?php echo $is_offline;?></td>
 											<td><?php echo $inv_date;?></td>
@@ -577,7 +584,7 @@ include "web_header.php";
 								} else {
 									?>
 									<tr>
-										<td style="text-align:center" colspan="19">No data found.</td>
+										<td style="text-align:center" colspan="20">No data found.</td>
 									</tr>
 								<?php
 								}

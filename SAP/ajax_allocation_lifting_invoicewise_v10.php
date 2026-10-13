@@ -28,7 +28,7 @@ if ($customer_id == "") {
 	else $year_month_condition="";
 //sk 28/05/25
 /*$sqlin = "SELECT allocation_id, dns_prod_code, prod_desc, allocation_qty, date_and_time, order_id,sub_dealer_id,inv_no,inv_qty,inv_date   FROM $allocation_details WHERE $user_type_clause $year_month_condition AND inv_cancl='no' order by date_and_time desc";*/
-$sqlin = "SELECT allocation_id, dns_prod_code, prod_desc, allocation_qty, date_and_time, order_id,sub_dealer_id,inv_no,inv_qty,inv_date,delete_at   FROM $allocation_details WHERE $user_type_clause $year_month_condition AND inv_cancl='no' AND delete_at='0' order by date_and_time desc";
+$sqlin = "SELECT allocation_id, dns_prod_code, prod_desc, allocation_qty, date_and_time, order_id,sub_dealer_id,inv_no,inv_qty,APPORDERNO,inv_date,delete_at   FROM $allocation_details WHERE $user_type_clause $year_month_condition AND inv_cancl='no' AND delete_at='0' order by date_and_time desc";
 
 //echo
 //     SELECT allocation_id, dns_prod_code, prod_desc, allocation_qty, date_and_time, order_id
@@ -70,9 +70,15 @@ $sqlin = "SELECT allocation_id, dns_prod_code, prod_desc, allocation_qty, date_a
 				$rscustomer=mysql_query($sqlcustomer);
 				$rowcustomer=mysql_fetch_array($rscustomer);
 				$customer_name=$rowcustomer['customer_name'];
+
+
+				$apporder="SELECT STATUS from T_APPERPDO where APPORDERNO='".$row['APPORDERNO']."'";
+				$appordersql=mysql_query($apporder);
+				$rowapporder=mysql_fetch_array($appordersql);
+				
 				//echo"<pre>";print_r($sqlcustomer);
 
-                $allocation_data[] = array("allocation_id" => $allocation_id, "prod_desc" => $prod_desc, "allocation_qty" => $allocation_qty, "date_and_time" => $date_and_time, "order_id" => $order_id, "inv_no" => $inv_no, "inv_date" => $inv_date, "counter_name" => $customer_name,"is_deleted"=>$delete_at);
+                $allocation_data[] = array("allocation_id" => $allocation_id, "prod_desc" => $prod_desc, "allocation_qty" => $allocation_qty, "date_and_time" => $date_and_time, "order_id" => $order_id, "inv_no" => $inv_no, "inv_date" => $inv_date, "counter_name" => $customer_name,"apporderno"=>$row['APPORDERNO'],"order_status"=>$rowapporder['STATUS'],"is_deleted"=>$delete_at);
             }
 
 			//echo"<pre>";print_r($allocation_data);die;

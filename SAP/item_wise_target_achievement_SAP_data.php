@@ -42,7 +42,7 @@ if ($row['cust_type'] == 'Dealer') {
 
             // 🔥 Load product master once
             $product_map = [];
-            $res_prod = mysql_query("SELECT dns_prod_code, prod_desc FROM $product_master");
+            $res_prod = mysql_query("SELECT dns_prod_code, prod_desc FROM $product_master where acedns ='Y'");
             while ($row_prod = mysql_fetch_assoc($res_prod)) {
                 $product_map[$row_prod['dns_prod_code']] = $row_prod['prod_desc'];
             }
@@ -65,6 +65,9 @@ if ($row['cust_type'] == 'Dealer') {
 
                 // product name
                 $prod_desc = isset($product_map[$itemcode]) ? $product_map[$itemcode] : '';
+                if($prod_desc == '' || $prod_desc == null){
+                    continue;
+                }
 
                 // INIT
                 if (!isset($grouped_data[$itemcode])) {

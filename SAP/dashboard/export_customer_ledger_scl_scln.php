@@ -57,9 +57,10 @@ $the_customer_id = "";
 $output = "<html><body><div  class=\"container\" style=\"width:100%;\"><img src=\"images/star-pdf-logo.jpeg\" alt=\"Star\" width=\"100px\" style=\"position:absolute; top:0px;\"/><h3 style=\"text-align:center;\">STAR CEMENT LIMITED</h3><h4 style=\"text-align:center;\">COMPANY WISE LEDGER</h4><p style=\"text-align:center;\">Period from ".$the_start_date." To ".$the_end_date."</p> <p><strong>Party Code</strong> : ".$the_customer_id." </p><p><strong>Party Name</strong> : ".$customer_name."</p><table style=\"width:100%; text-align:left;border:1px solid #333; \"><thead>
 
         <tr style=\"height: 50px;\">
-          <th style=\"border-left: 1px solid #dee2e6; padding:5px;  width:15%\"><b>COMPANY</b></th>
+          <th style=\"border-left: 1px solid #dee2e6; padding:5px;  width:5%\"><b>COMPANY</b></th>
           <th style=\"border-left: 1px solid #dee2e6; padding:5px; width:15%\"><b>VOUCHERDT</b></th>
           <th style=\"border-left: 1px solid #dee2e6; padding:5px; width:20%\"><b>PARTICULARS</b></th>
+          <th style=\"border-left: 1px solid #dee2e6; padding:5px; width:10%\"><b>NARRATION</b></th>
           <th style=\"border-left: 1px solid #dee2e6; padding:5px; width:10%\"><b>QTY</b></th>
           <th style=\"border-left: 1px solid #dee2e6; padding:5px; width:15%\"><b>AMTDR(Rs.)</b></th>
           <th style=\"border-left: 1px solid #dee2e6; padding:5px; width:10%\"><b>AMTCR(Rs.)</b></th>
@@ -94,6 +95,14 @@ if(count($app_results_arr)>0){
 		$DrAmount = $app_results_aval["DrAmount"];
 		$Balance = $app_results_aval["Balance"];
 		$OpBalance = $app_results_aval["OpBalance"];
+		$blart = $app_results_aval["blart"];
+		$Sgtxt = $app_results_aval["Sgtxt"];
+		if($blart=='RV'){
+			$narration="SALES INVOICE";
+		}else{
+			$narration=$Sgtxt;
+
+		}
 		
 		$Bldat_format = "";
 		if($Bldat!=""){
@@ -119,11 +128,13 @@ if(count($app_results_arr)>0){
 		}
 		$total_balance=$total_balance+$Balance;
 		
-		$customer_ledger_data[]= array("Butxt"=>$Butxt,"Bldat"=>$Bldat_format,"particulars"=>$particulars,"quayntity"=>$quayntity,"CrAmount"=>$CrAmount,"DrAmount"=>$DrAmount,"total_balance"=>$total_balance);
+		$customer_ledger_data[]= array("Butxt"=>$Butxt,"Bldat"=>$Bldat_format,"particulars"=>$particulars,"quayntity"=>$quayntity,"CrAmount"=>$CrAmount,"DrAmount"=>$DrAmount,"total_balance"=>$total_balance,"narration"=>$narration);
 		
 	}
 	//print_r($credit_note_data);
 	//usort($customer_ledger_data, 'sort_by_date');
+	//echo"<pre>";print_r($customer_ledger_data);die;
+
 	foreach($customer_ledger_data as $customer_ledger_data_val)
 	{
 		$Butxt = $customer_ledger_data_val["Butxt"];
@@ -133,14 +144,16 @@ if(count($app_results_arr)>0){
 		$CrAmount = $customer_ledger_data_val["CrAmount"];
 		$DrAmount = $customer_ledger_data_val["DrAmount"];
 		$total_balance = $customer_ledger_data_val["total_balance"];
+		$narration = $customer_ledger_data_val["narration"];
 		
 		$Bldat_format = date("d/m/Y",strtotime($Bldat));
 		if($Butxt=='SCNE') $Butxt='SCNEL';
 		
 		$output .= "<tr>
-          <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px; width:15%\">".$Butxt."</td>
+          <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px; width:5%\">".$Butxt."</td>
           <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px; width:15%\">".$Bldat_format."</td>
           <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px; width:20%\">".$particulars."</td>
+          <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px; width:10%\">".$narration."</td>
           <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px;text-align: right; width:10%\">".number_format($quayntity,2)."</td>
           <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px;text-align: right; width:15%\">".number_format($CrAmount,2)."</td>
           <td style=\"border-top: 1px solid #dee2e6;border-left:1px solid #dee2e6; padding:5px;text-align: right; width:10%\">".number_format($DrAmount,2)."</td>

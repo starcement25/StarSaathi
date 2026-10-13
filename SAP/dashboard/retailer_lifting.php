@@ -58,6 +58,8 @@ $sql_on_ord = "select `APPORDERNO`,`ERPORDERNO`,`STATUS`,`order_date`,`prod_disp
 	where `dns_customer_code`='$sswa_selected_dealer_code'  
 	and `status`='Dispatched' 
 	order by `order_date` desc LIMIT 500";
+
+	// echo $sql_on_ord;die;
 $res_on_ord = mysql_query($sql_on_ord);
 
 // Offline orders
@@ -202,8 +204,9 @@ include "web_header.php";
 					if($year!='') $date_condition.=" AND SUBSTRING($T_DOINVOICE.INVDT,1,4)='".$year."'";
 					
 					 $sqlinv = "select * from $T_DOINVOICE where `APPORDERNO`='$apporderno' 
-								AND INVNO NOT IN(SELECT DISTINCT inv_no FROM $allocation_details WHERE `inv_cancl`='yes' ) 
+								AND INVNO NOT IN(SELECT inv_no FROM $allocation_details WHERE `inv_cancl`='yes' AND  `APPORDERNO`='$apporderno') 
 								$date_condition";
+					// echo $sqlinv;die;			
 					$resinv = mysql_query($sqlinv);
 					if(mysql_num_rows($resinv)>0){
 

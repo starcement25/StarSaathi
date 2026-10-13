@@ -267,7 +267,7 @@ if ( $current_date > $cutoff_date) {
 // }
 
 
-$check_sql = "SELECT COUNT(*) as count FROM dealer_exclusice WHERE customer_id = '$customer_id' AND current_year = '$year' AND month = '$month'";
+$check_sql = "SELECT COUNT(*) as count FROM dealer_exclusice WHERE customer_id = '$customer_id' AND current_year = '$year' AND month = '$month' AND status !='2'";
 $check_result = mysql_query($check_sql);
 $check_row = mysql_fetch_assoc($check_result);
 

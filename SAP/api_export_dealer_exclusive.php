@@ -1,242 +1,23 @@
 <?php
 
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-// date_default_timezone_set('Asia/Kolkata');
-
-
-// $conn = mysqli_connect("172.17.0.2", "root", "Passw0rd123#$", "starsaathi_STARS");
-
-// if (!$conn) {
-//     die("Connection failed: " . mysqli_connect_error());
-// }
-
-
-// $month = isset($_GET['month']) ? intval($_GET['month']) : null;
-// $year = isset($_GET['year']) ? intval($_GET['year']) : null;
-// $approval_status = isset($_GET['status']) ? mysqli_real_escape_string($conn, $_GET['status']) : null;
-// $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : null;
-// $where = [];
-// if ($month) {
-//     $where[] = "d.month = $month";
-// }
-
-// if ($approval_status !== null) $where[] = "d.status = '$approval_status'";
-// if ($year) {
-//     $where[] = "YEAR(d.created_at) = $year";
-// }
-// if ($search !== null) {
-//     $where[] = "(c.customer_name LIKE '%$search%' OR d.customer_id LIKE '%$search%' OR d.customer_code LIKE '%$search%')";
-// }
-// $whereClause = '';
-// if (!empty($where)) {
-//     $whereClause = 'WHERE ' . implode(' AND ', $where);
-// }
-
-
-// $filename = "dealer_exclusice_requests.csv";
-// if ($month && $year) {
-//     $filename = "dealer_exclusice_requests.csv";
-// }
-
-// header('Content-Type: text/csv');
-// header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-
-// $output = fopen('php://output', 'w');
-
-
-// fputcsv($output, [
-//     'Sr. No', 'Dealer Code', 'Dealer ID', 'Dealer Name', 'Month',
-//     'Branch', 'Lifting Qty', 'ASM Approval Status', 'Approved By ASM',
-//     'ASM Approved Date', 'RSM Approval Status', 'Approved By RSM',
-//     'RSM Approved Date','Status', 'Created At'
-// ]);
-
-
-// $sql = "SELECT 
-//         d.*,
-//         COALESCE(asm.emp_name, 'N/A') AS asm_name,
-//         COALESCE(rsm.emp_name, 'N/A') AS rsm_name  
-//     FROM dealer_exclusice d
-//     LEFT JOIN employee_master asm ON d.asm_approved_by = asm.emp_code
-//     LEFT JOIN employee_master rsm ON d.rsm_approved_by = rsm.emp_code
-//     LEFT JOIN customer_master c ON d.customer_id = c.customer_id
-//     $whereClause
-//     ORDER BY d.created_at DESC";
-
-// $result = mysqli_query($conn, $sql);
-// if (!$result) {
-//     die("Query Error: " . mysqli_error($conn));
-// }
-//  //echo"<pre>";print_r($result);die;
-
-// $i = 0;
-// while ($row = mysqli_fetch_assoc($result)) {
-    
-//     $monthNumber = $row['month'];
-//     $yearStr = date('Y', strtotime($row['created_at']));
-//     $monthName = date('F', mktime(0, 0, 0, $monthNumber, 1));
-//     $displayMonthYear = $monthName . ', ' . $yearStr;
-
-   
-//     $asm_status = ($row['asm_approve_status'] == 1) ? 'Approved' : (($row['asm_approve_status'] == 2) ? 'Rejected' : 'Pending');
-//     $rsm_status = ($row['rsm_approve_status'] == 1) ? 'Approved' : (($row['rsm_approve_status'] == 2) ? 'Rejected' : 'Pending');
-//     $ex_status= ($row['status'] == 1) ? 'Approved' : (($row['status'] == 2) ? 'Not Approved' : 'Pending');
-
-//     fputcsv($output, [
-//         ++$i,
-//         $row['customer_code'],
-//         $row['customer_id'],
-//         $row['dealer_name'],
-//         $displayMonthYear,
-//         $row['branch'],
-//         $row['lifting_qty'],
-//         $asm_status,
-//         $row['asm_name'],
-//         !empty($row['asm_approve_date']) ? date('d-m-Y', strtotime($row['asm_approve_date'])) : 'N/A',
-//         $rsm_status,
-//         $row['rsm_name'],
-//         !empty($row['rsm_approve_date']) ? date('d-m-Y', strtotime($row['rsm_approve_date'])) : 'N/A',
-//         $ex_status,
-//         !empty($row['created_at']) ? date('d-m-Y', strtotime($row['created_at'])) : 'N/A',
-//     ]);
-// }
-
-// fclose($output);
-// mysqli_close($conn);
-// exit;
-
-
-
-
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
-// date_default_timezone_set('Asia/Kolkata');
-
-// //$conn = mysqli_connect("172.17.0.2", "root", "Passw0rd123#$", "starsaathi_STARS");
-// require_once("starsaathi_connection.php");
-// $localDB = new starsaathi_connection();
-// $conn = $localDB->conn;
-// if (!$conn) {
-//     die("Connection failed: " . mysqli_connect_error());
-// }
-
-
-// $month = isset($_GET['month']) && $_GET['month'] !== '' ? intval($_GET['month']) : null;
-// $year = isset($_GET['year']) && $_GET['year'] !== '' ? intval($_GET['year']) : null;
-// $approval_status = isset($_GET['status']) && $_GET['status'] !== '' ? mysqli_real_escape_string($conn, $_GET['status']) : null;
-// $search = isset($_GET['search']) && $_GET['search'] !== '' ? mysqli_real_escape_string($conn, $_GET['search']) : null;
-
-
-// $where = [];
-
-// if (!is_null($month)) {
-//     $where[] = "d.month = $month";
-// }
-
-// if (!is_null($year)) {
-//     $where[] = "YEAR(d.created_at) = $year";
-// }
-
-// if (!is_null($approval_status)) {
-//     $where[] = "d.status = '$approval_status'";
-// }
-
-// if (!is_null($search)) {
-//     $where[] = "(c.customer_name LIKE '%$search%' OR d.customer_id LIKE '%$search%' OR d.customer_code LIKE '%$search%')";
-// }
-
-// $whereClause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
-
-
-// $filename = "dealer_exclusice_requests.csv";
-
-
-// header('Content-Type: text/csv');
-// header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-
-// $output = fopen('php://output', 'w');
-
-
-// fputcsv($output, [
-//     'Sr. No', 'Dealer Code', 'Dealer ID', 'Dealer Name', 'Month',
-//     'Branch', 'Lifting Qty', 'ASM Approval Status', 'Approved By ASM',
-//     'ASM Approved Date', 'RSM Approval Status', 'Approved By RSM',
-//     'RSM Approved Date', 'Status', 'Created At'
-// ]);
-
-
-// $sql = "
-//     SELECT 
-//         d.*,
-//         COALESCE(c.customer_name, '') AS dealer_name,
-//         COALESCE(asm.emp_name, 'N/A') AS asm_name,
-//         COALESCE(rsm.emp_name, 'N/A') AS rsm_name
-//     FROM dealer_exclusice d
-//     LEFT JOIN employee_master asm ON d.asm_approved_by = asm.emp_code
-//     LEFT JOIN employee_master rsm ON d.rsm_approved_by = rsm.emp_code
-//     LEFT JOIN customer_master c ON d.customer_id = c.customer_id
-//     $whereClause
-//     ORDER BY d.created_at DESC
-// ";
-
-// $result = mysqli_query($conn, $sql);
-
-// if (!$result) {
-//     die("Query Error: " . mysqli_error($conn));
-// }
-
-// $i = 0;
-// while ($row = mysqli_fetch_assoc($result)) {
-//     $monthNumber = $row['month'];
-//     $yearStr = date('Y', strtotime($row['created_at']));
-//     $monthName = date('F', mktime(0, 0, 0, $monthNumber, 1));
-//     $displayMonthYear = $monthName . ', ' . $yearStr;
-
-//     $asm_status = ($row['asm_approve_status'] == 1) ? 'Approved' : (($row['asm_approve_status'] == 2) ? 'Rejected' : 'Pending');
-//     $rsm_status = ($row['rsm_approve_status'] == 1) ? 'Approved' : (($row['rsm_approve_status'] == 2) ? 'Rejected' : 'Pending');
-//     $ex_status = ($row['status'] == 1) ? 'Approved' : (($row['status'] == 2) ? 'Not Approved' : 'Pending');
-
-//     fputcsv($output, [
-//         ++$i,
-//         $row['customer_code'],
-//         $row['customer_id'],
-//         $row['dealer_name'],
-//         $displayMonthYear,
-//         $row['branch'],
-//         $row['lifting_qty'],
-//         $asm_status,
-//         $row['asm_name'],
-//         !empty($row['asm_approve_date']) ? date('d-m-Y', strtotime($row['asm_approve_date'])) : 'N/A',
-//         $rsm_status,
-//         $row['rsm_name'],
-//         !empty($row['rsm_approve_date']) ? date('d-m-Y', strtotime($row['rsm_approve_date'])) : 'N/A',
-//         $ex_status,
-//         !empty($row['created_at']) ? date('d-m-Y', strtotime($row['created_at'])) : 'N/A',
-//     ]);
-// }
-
-// // Close output stream and DB connection
-// fclose($output);
-// mysqli_close($conn);
-// exit;
-
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_DEPRECATED);
 date_default_timezone_set('Asia/Kolkata');
 
+header('Content-Type: application/json');
+
 require_once("starsaathi_connection.php");
 $localDB = new starsaathi_connection();
 $conn = $localDB->conn;
 
 if (!$conn) {
-    die("Connection failed: " . mysql_error());
+    echo json_encode([
+        "process_status"  => "NO",
+        "process_message" => "Connection failed: " . mysql_error()
+    ]);
+    exit;
 }
 
 // Input sanitization using mysql_real_escape_string
@@ -246,6 +27,28 @@ $approval_status = isset($_GET['status']) && $_GET['status'] !== '' ? mysql_real
 $search = isset($_GET['search']) && $_GET['search'] !== '' ? mysql_real_escape_string($_GET['search']) : null;
 $emp_code = isset($_GET['emp_code']) ? mysql_real_escape_string($_GET['emp_code']) : null;
 $where = [];
+
+$dns_emp_code = isset($_GET['dns_emp_code']) 
+    ? mysql_real_escape_string($_GET['dns_emp_code']) 
+    : null;
+    if(!empty($dns_emp_code))
+{
+    $empQry = "
+        SELECT emp_code 
+        FROM employee_master 
+        WHERE dns_emp_code = '$dns_emp_code'
+        LIMIT 1
+    ";
+
+    $empRs = mysql_query($empQry);
+
+    if($empRs && mysql_num_rows($empRs) > 0)
+    {
+        $empRow = mysql_fetch_assoc($empRs);
+
+        $emp_code = $empRow['emp_code'];
+    }
+}
 
 
 $tree = getEmployeeFlatTree($emp_code);
@@ -288,31 +91,21 @@ if (!is_null($search)) {
     $where[] = "(c.customer_name LIKE '%$search%' OR d.customer_id LIKE '%$search%' OR d.customer_code LIKE '%$search%')";
 }
 
-if (!empty($allCustomerCodes) && $_GET['emp_code'] !== 'admin') {
+if (!empty($allCustomerCodes) && (!isset($_GET['emp_code']) || $_GET['emp_code'] !== 'admin')) {
     $where[] = "d.customer_id IN ($customerCodesStr)";
 }
 $whereClause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
 
-$filename = "dealer_exclusice_requests.csv";
-
-header('Content-Type: text/csv');
-header('Content-Disposition: attachment; filename="' . $filename . '"');
-
-$output = fopen('php://output', 'w');
-
-fputcsv($output, [
-    'Sr. No', 'Dealer Code', 'Dealer ID', 'Dealer Name', 'Month',
-    'Branch', 'Lifting Qty', 'ASM Approval Status', 'Approved By ASM',
-    'ASM Approved Date', 'RSM Approval Status', 'Approved By RSM',
-    'RSM Approved Date', 'Status', 'Created At'
-]);
-
 $sql = "
-    SELECT 
+    SELECT
         d.*,
         IFNULL(c.customer_name, '') AS dealer_name,
         IFNULL(asm.emp_name, 'N/A') AS asm_name,
-        IFNULL(rsm.emp_name, 'N/A') AS rsm_name
+        IFNULL(asm.emp_code, 'N/A') AS asm_code,
+        IFNULL(asm.dns_emp_code, '') AS asm_dns_emp_code,
+        IFNULL(rsm.emp_name, 'N/A') AS rsm_name,
+        IFNULL(rsm.emp_code, 'N/A') AS rsm_code,
+        IFNULL(rsm.dns_emp_code, '') AS rsm_dns_emp_code
     FROM dealer_exclusice d
     LEFT JOIN employee_master asm ON d.asm_approved_by = asm.emp_code
     LEFT JOIN employee_master rsm ON d.rsm_approved_by = rsm.emp_code
@@ -324,9 +117,14 @@ $sql = "
 $result = mysql_query($sql, $conn);
 
 if (!$result) {
-    die("Query Error: " . mysql_error());
+    echo json_encode([
+        "process_status"  => "NO",
+        "process_message" => "Query Error: " . mysql_error()
+    ]);
+    exit;
 }
 
+$data = [];
 $i = 0;
 while ($row = mysql_fetch_assoc($result)) {
     $monthNumber = $row['month'];
@@ -338,26 +136,36 @@ while ($row = mysql_fetch_assoc($result)) {
     $rsm_status = ($row['rsm_approve_status'] == 1) ? 'Approved' : (($row['rsm_approve_status'] == 2) ? 'Rejected' : 'Pending');
     $ex_status = ($row['status'] == 1) ? 'Approved' : (($row['status'] == 2) ? 'Not Approved' : 'Pending');
 
-    fputcsv($output, [
-        ++$i,
-        $row['customer_code'],
-        $row['customer_id'],
-        $row['dealer_name'],
-        $displayMonthYear,
-        $row['branch'],
-        $row['lifting_qty'],
-        $asm_status,
-        $row['asm_name'],
-        !empty($row['asm_approve_date']) ? date('d-m-Y', strtotime($row['asm_approve_date'])) : 'N/A',
-        $rsm_status,
-        $row['rsm_name'],
-        !empty($row['rsm_approve_date']) ? date('d-m-Y', strtotime($row['rsm_approve_date'])) : 'N/A',
-        $ex_status,
-        !empty($row['created_at']) ? date('d-m-Y', strtotime($row['created_at'])) : 'N/A',
-    ]);
+    $data[] = [
+        "Sr. No"              => ++$i,
+        "ID"                  => $row['id'],
+        "Dealer Code"         => $row['customer_code'],
+        "Dealer ID"           => $row['customer_id'],
+        "Dealer Name"         => $row['dealer_name'],
+        "Month"               => $displayMonthYear,
+        "Branch"              => $row['branch'],
+        "Lifting Qty"         => $row['lifting_qty'],
+        "ASM Code"            => $row['asm_code'],
+        "ASM DNS Emp Code"    => $row['asm_dns_emp_code'],
+        "ASM Approval Status" => $asm_status,
+        "Approved By ASM"     => $row['asm_name'],
+        "ASM Approved Date"   => !empty($row['asm_approve_date']) ? date('d-m-Y', strtotime($row['asm_approve_date'])) : 'N/A',
+        "RSM Code"            => $row['rsm_code'],
+        "RSM DNS Emp Code"    => $row['rsm_dns_emp_code'],
+        "RSM Approval Status" => $rsm_status,
+        "Approved By RSM"     => $row['rsm_name'],
+        "RSM Approved Date"   => !empty($row['rsm_approve_date']) ? date('d-m-Y', strtotime($row['rsm_approve_date'])) : 'N/A',
+        "Status"              => $ex_status,
+        "Created At"          => !empty($row['created_at']) ? date('d-m-Y', strtotime($row['created_at'])) : 'N/A',
+    ];
 }
 
-fclose($output);
+echo json_encode([
+    "process_status"  => "YES",
+    "process_message" => "Success",
+    "total_records"   => count($data),
+    "data"            => $data
+]);
 
 
 
@@ -427,7 +235,7 @@ function getAllMappedCustomerCodes($empCodes)
     foreach ($empCodes as $empCode) {
         $empCodeEscaped = mysql_real_escape_string($empCode);
 
-        $sql = "SELECT customer_code FROM customer_route_emp_relation WHERE emp_code = '$empCodeEscaped'";
+        $sql = "SELECT customer_code FROM customer_route_emp_relation WHERE emp_code = '$empCodeEscaped' and acedns='Y'";
         // $sql = "
         //         SELECT 
         //             r.customer_code,

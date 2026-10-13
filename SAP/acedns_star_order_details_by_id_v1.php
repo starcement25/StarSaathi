@@ -31,7 +31,7 @@ if ($the_id != "") {
         $date_qry = "";
     }
 
-    $sqlall = "select * from $T_APPERPDO where `customer_code`='$the_id' $date_qry order by `order_date` desc";
+    $sqlall = "select * from $T_APPERPDO where (`sub_dealer_code`='$the_id' OR `customer_code`='$the_id') AND `APPORDERNO` Not LIKE '%SBS%' $date_qry order by `order_date` desc";
 
     $resall = mysql_query($sqlall);
     $totall = mysql_num_rows($resall);

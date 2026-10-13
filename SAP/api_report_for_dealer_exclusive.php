@@ -29,6 +29,29 @@ $offset = ($page - 1) * $limit;
 $emp_code = isset($_GET['emp_code']) ? mysql_real_escape_string($_GET['emp_code']) : null;
 $search = isset($_GET['search']) ? mysql_real_escape_string($_GET['search']) : null;
 
+$dns_emp_code = isset($_GET['dns_emp_code']) 
+    ? mysql_real_escape_string($_GET['dns_emp_code']) 
+    : null;
+    if(!empty($dns_emp_code))
+{
+    $empQry = "
+        SELECT emp_code 
+        FROM employee_master 
+        WHERE dns_emp_code = '$dns_emp_code'
+        LIMIT 1
+    ";
+
+    $empRs = mysql_query($empQry);
+
+    if($empRs && mysql_num_rows($empRs) > 0)
+    {
+        $empRow = mysql_fetch_assoc($empRs);
+
+        $emp_code = $empRow['emp_code'];
+    }
+}
+
+
 $tree = getEmployeeFlatTree($emp_code);
 
 
@@ -235,7 +258,7 @@ function getAllMappedCustomerCodes($empCodes)
     foreach ($empCodes as $empCode) {
         $empCodeEscaped = mysql_real_escape_string($empCode);
 
-        $sql = "SELECT customer_code FROM customer_route_emp_relation WHERE emp_code = '$empCodeEscaped'";
+        $sql = "SELECT customer_code FROM customer_route_emp_relation WHERE emp_code = '$empCodeEscaped' and acedns='Y'";
         // $sql = "
         //         SELECT 
         //             r.customer_code,

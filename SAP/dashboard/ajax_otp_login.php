@@ -84,12 +84,40 @@ $user_type = "DEALER";
 		$token         = mysql_real_escape_string($token);
 
 		// FIXED SQL (removed extra comma)
-		$sql = "UPDATE changepassword 
+		/*$sql = "UPDATE changepassword 
 				SET deviceid = '$deviceid',
 					loggedin_date_time = '$location_date',
 					token = '$token'
 				WHERE dns_customer_code = '$dealer_id'
 				LIMIT 1";
+
+		$result = mysql_query($sql);*/
+
+		// Check if record exists
+		$checkSql = "SELECT 1 FROM changepassword
+					WHERE dns_customer_code = '$dealer_id'
+					LIMIT 1";
+
+		$checkRes = mysql_query($checkSql);
+
+		if ($checkRes && mysql_num_rows($checkRes) > 0) {
+
+			// ✅ UPDATE
+			$sql = "UPDATE changepassword 
+					SET deviceid = '$deviceid',
+						loggedin_date_time = '$location_date',
+						token = '$token'
+					WHERE dns_customer_code = '$dealer_id'
+					LIMIT 1";
+
+		} else {
+
+			// ✅ INSERT
+			$sql = "INSERT INTO changepassword
+					(customer_code, dns_customer_code, deviceid, loggedin_date_time, token)
+					VALUES
+					('$customer_code', '$dealer_id', '$deviceid', '$location_date', '$token')";
+		}
 
 		$result = mysql_query($sql);
 //auth end 23-04-26

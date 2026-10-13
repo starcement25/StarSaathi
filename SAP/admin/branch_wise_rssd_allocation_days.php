@@ -113,18 +113,20 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
 	  $the_branch_code=$the_branch_code_val[$i];
 	  $allocation_days_val=$_REQUEST["allocation_days_".$the_branch_code];
 	 if($allocation_days_val=='')	$allocation_days_val=0;
+	  $reallocation_days_val=$_REQUEST["reallocation_days_".$the_branch_code];
+	 if($reallocation_days_val=='')	$reallocation_days_val=0;
 	  //if($allocation_days_val!=''){
 		  $sqlselbranch="SELECT branch_code FROM branch_rssd_allocation_days WHERE branch_code='".$the_branch_code."'";
 		  $rsselbranch=mysql_query($sqlselbranch);
 		  $countselbranch=mysql_num_rows($rsselbranch);
 		  if($countselbranch==0)
 			 {
-			  $ins_sql="INSERT INTO branch_rssd_allocation_days SET branch_code ='$the_branch_code',allocation_days ='".$allocation_days_val."',upload_time =CURRENT_TIMESTAMP()";
+			  $ins_sql="INSERT INTO branch_rssd_allocation_days SET branch_code ='$the_branch_code',allocation_days ='".$allocation_days_val."',reallocation_days ='".$reallocation_days_val."',upload_time =CURRENT_TIMESTAMP()";
 			 mysql_query($ins_sql) or die(mysql_error()." Error in inser allocation days.");
 		  
 		  }
 		  else{
-			$upd_sql="UPDATE branch_rssd_allocation_days SET allocation_days ='$allocation_days_val',upload_time =CURRENT_TIMESTAMP() WHERE branch_code = '".$the_branch_code."'";
+			$upd_sql="UPDATE branch_rssd_allocation_days SET allocation_days ='$allocation_days_val',reallocation_days ='$reallocation_days_val',upload_time =CURRENT_TIMESTAMP() WHERE branch_code = '".$the_branch_code."'";
 			mysql_query($upd_sql) or die(mysql_error()." Error in update allocation days.");
 		  }
 	  //}
@@ -146,6 +148,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>Branch&nbsp;Code</th>
                                             <th>Branch&nbsp;Name</th>
                                             <th>Allocation Days</th>
+                                            <th>Reallocation Days</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -153,12 +156,13 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                             <th>Branch&nbsp;Code</th>
                                             <th>Branch&nbsp;Name</th>
                                             <th>Allocation Days</th>
+                                            <th>Reallocation Days</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
 <?php
 
-$sql1 = "SELECT $branch_master.`branch_code`,$branch_master.`dns_branch_code`,$branch_master.`branch_name`,$branch_rssd_allocation_days.`allocation_days` FROM $branch_master left join $branch_rssd_allocation_days on $branch_master.`branch_code`=$branch_rssd_allocation_days.`branch_code` $new_whr_str order by $branch_master.`branch_name` asc limit $start_from,$limit";
+$sql1 = "SELECT $branch_master.`branch_code`,$branch_master.`dns_branch_code`,$branch_master.`branch_name`,$branch_rssd_allocation_days.`allocation_days`,$branch_rssd_allocation_days.`reallocation_days` FROM $branch_master left join $branch_rssd_allocation_days on $branch_master.`branch_code`=$branch_rssd_allocation_days.`branch_code` $new_whr_str order by $branch_master.`branch_name` asc limit $start_from,$limit";
 $res1 = mysql_query($sql1);
 $totres1 = mysql_num_rows($res1);
 if($totres1>0){
@@ -167,6 +171,7 @@ if($totres1>0){
 		$the_dns_branch_code = $row1["dns_branch_code"];
 		$the_branch_name = $row1["branch_name"];
 		$allocation_days = $row1["allocation_days"] ? trim($row1["allocation_days"]) : "";
+		$reallocation_days = $row1["reallocation_days"] ? trim($row1["reallocation_days"]) : "";
 		
 ?>
 <tr>
@@ -178,18 +183,24 @@ if($totres1>0){
 <?php echo "<input type=\"hidden\" name=\"the_branch_code_val[]\" value=".$the_branch_code.">";?>
 
 <span class="os_ldr" id="ca_ldr_<?php echo $the_branch_code;?>"></span></td>
+<td style="position:relative;">
+
+<input type="text" class="form-control" name="reallocation_days_<?php echo $the_branch_code;?>" id="reallocation_days_<?php echo $the_branch_code;?>" the_brnch_code="<?php echo $the_branch_code;?>" style="width: 50%" value="<?php echo $reallocation_days;?>">
+
+<span class="os_ldr" id="ca_ldr_reallocation_<?php echo $the_branch_code;?>"></span></td>
 </tr>
 <?php
 	}
 }else{
 ?>
 <tr>
-<td style="text-align:center" colspan="3">No data found.</td>
+<td style="text-align:center" colspan="4">No data found.</td>
 </tr>
 <?php
 }
 ?>
 <tr>
+<td></td>
 <td></td>
 <td></td>
 <td style="text-align:left" ><input type="submit" name="save" name="save" class="btn bg-red waves-effect" /></td>

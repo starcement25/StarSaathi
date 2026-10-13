@@ -368,7 +368,7 @@ $pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo l
 //$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!='' and $t_apperpdo.`STATUS`!='Order canceled' $new_whr_str ";
 $pgsql = "select $t_apperpdo.*,$customer_master.`branch_code`,$customer_master.`customer_id`,
 	$destination_master.dns_destination_code,$destination_master.destination_name from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code`  left join $customer_destination ON $customer_destination.customer_code=$customer_master.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code
-where 1  $new_whr_str order by $t_apperpdo.`id` desc  ";
+where 1 AND order_type='CEMENT'  $new_whr_str order by $t_apperpdo.`id` desc  ";
 
 //}
 $pgres = mysql_query($pgsql);
@@ -562,7 +562,7 @@ where $t_apperpdo.`APPORDERNO`!='' and $t_apperpdo.`STATUS`!='Order canceled' $n
 
 $sql1 = "select $t_apperpdo.*,$customer_master.`branch_code`,$customer_master.`customer_id`,
 	$destination_master.dns_destination_code,$destination_master.destination_name from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code`  left join $customer_destination ON $customer_destination.customer_code=$customer_master.`customer_code` left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code
-where 1  $new_whr_str order by $t_apperpdo.`ERPORDERDT` desc limit $start_from,$limit";
+where 1 AND order_type='CEMENT' $new_whr_str order by $t_apperpdo.`ERPORDERDT` desc limit $start_from,$limit";
 
 //}
 //echo"<pre>";print_r($sql1);die;

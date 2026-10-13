@@ -1,6 +1,7 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', '1');
+/*
+error_reporting(E_ALL);
+ini_set('display_errors', '1');*/
 
 header('Content-Type: application/json');
 
@@ -17,9 +18,12 @@ if (!isset($_GET['emp_code'])) {
 }
 
 $emp_Code = trim($_GET['emp_code']);
+ $dns_emp_code = trim($_GET['dns_emp_code']);
 $emp_Code = mysql_real_escape_string($emp_Code);
 
-$employee = "SELECT * FROM employee_master WHERE emp_code = '$emp_Code'";
+//  print_r($dns_emp_code);die;
+//$employee = "SELECT * FROM employee_master WHERE emp_code = '$emp_Code'";
+$employee = "SELECT * FROM employee_master WHERE dns_emp_code = '$dns_emp_code'";
 $emp_result = mysql_query($employee);
 
 if (!$emp_result) {
@@ -28,7 +32,8 @@ if (!$emp_result) {
 
 $row_emp = mysql_fetch_assoc($emp_result);
 
-
+$dns_emp_code = $row_emp['dns_emp_code'];
+//  print_r($dns_emp_code);die;
 function getEmployeeFlatTree($managerCode, &$visited = [])
 {
     $employees = [];
@@ -94,7 +99,7 @@ function getAllMappedCustomerCodes($empCodes)
     foreach ($empCodes as $empCode) {
         $empCodeEscaped = mysql_real_escape_string($empCode);
 
-         $sql = "SELECT customer_code FROM customer_route_emp_relation WHERE emp_code = '$empCodeEscaped'";
+         $sql = "SELECT customer_code FROM customer_route_emp_relation WHERE emp_code = '$empCodeEscaped' and acedns='Y'";
     // $sql = "
     //         SELECT 
     //             r.customer_code,
@@ -125,9 +130,9 @@ function getAllMappedCustomerCodes($empCodes)
 
 
 $tree = getEmployeeFlatTree($row_emp['emp_code'] );
-// displayEmployeeList($tree);
-//print_r($tree );
-// die;
+ //displayEmployeeList($tree);
+/*print_r($tree);
+die;*/
 $empCodes = array_column($tree, 'emp_code');
 
 

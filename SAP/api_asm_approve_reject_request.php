@@ -87,7 +87,7 @@ if (!$data) {
 
     exit;
 }
-$required = ['dealer_id', 'emp_code', 'status', 'table_id'];
+$required = ['dealer_id', 'dns_emp_code', 'status', 'table_id'];
 foreach ($required as $field) {
     if (empty($data[$field])) {
         http_response_code(400);
@@ -99,7 +99,7 @@ foreach ($required as $field) {
 }
 
 $dealer_id = mysql_real_escape_string($data['dealer_id']);
-$emp_code = mysql_real_escape_string($data['emp_code']);
+$dns_emp_code = mysql_real_escape_string($data['dns_emp_code']);
 //$status = (int)mysql_real_escape_string($data['status']);
 $id = mysql_real_escape_string($data['table_id']);
 $input_status = strtolower(trim($data['status'])); 
@@ -134,9 +134,16 @@ $status = $status_map[$input_status];
 
 
 
-$emp_sql = "SELECT * FROM employee_master WHERE emp_code = '$emp_code'";
+$emp_sql = "SELECT * FROM employee_master WHERE dns_emp_code = '$dns_emp_code'";
 $emp_res = mysql_query($emp_sql);
 $row = mysql_fetch_assoc($emp_res);
+if (!$row) {
+    http_response_code(400);
+    $res_data = array("process_status" => "No", "process_message" => "Failed!", 'error' => "Employee not found for dns_emp_code");
+    echo json_encode($res_data);
+    exit;
+}
+$emp_code = mysql_real_escape_string($row['emp_code']);
 // echo '<pre>';
 // print_r($row);
 //  die;

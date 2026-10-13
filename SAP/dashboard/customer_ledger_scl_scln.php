@@ -21,6 +21,7 @@ $ledger_link = "";
 $company_sts_arr = array();
 $company_sts_arr[] = array("key_val"=>"1010","title_val"=>"SCL");
 $company_sts_arr[] = array("key_val"=>"1017","title_val"=>"SCNEL");
+//$company_sts_arr[] = array("key_val"=>"1016","title_val"=>"SSBSL");
 
 $sql3 = "select `dns_customer_code`,`customer_id`,customer_name from $customer_master where `customer_code`='$sswa_selected_customer_code'";
 $res3 = mysql_query($sql3);
@@ -60,14 +61,12 @@ if($the_customer_id!=""){
 		$to_dt=$_REQUEST['to_dt'];
 		if($from_dt=='' && $to_dt=='')
 		{
-		$the_start_date = date('d/m/Y', strtotime("-7 days,$curr_date"));
-		$the_end_date =  date('d/m/Y');
+		/* default search window : the last one month */
+		$from_dt = date('Y-m-d', strtotime("-1 month"));
+		$to_dt   = date('Y-m-d');
 		}
-		else
-		{
-			$the_start_date=date('d/m/Y', strtotime($from_dt));
-			$the_end_date=date('d/m/Y', strtotime($to_dt));
-		}
+		$the_start_date=date('d/m/Y', strtotime($from_dt));
+		$the_end_date=date('d/m/Y', strtotime($to_dt));
 	$the_company_code=$_REQUEST['astn_comp_code'];
 
 $add_page_name = "customer_ledger_scl_scln.php";
@@ -100,6 +99,42 @@ include "web_header.php";
 	display:none;
 }
 
+/* --- Balance confirmation PDF toolbar --- */
+.bc-pdf-bar {
+	text-align:center;
+	padding:14px 0 28px 0;
+}
+.bc-pdf-bar .bc-field {
+	display:inline-block;
+	vertical-align:bottom;
+	text-align:left;
+	margin:0 8px 10px 8px;
+}
+.bc-pdf-bar label {
+	display:block;
+	margin:0 0 6px 0;
+	font-size:13px;
+	font-weight:600;
+	color:#555;
+	letter-spacing:.3px;
+}
+.bc-pdf-bar select.form-control {
+	min-width:200px;
+	height:38px;
+	padding:0 10px;
+}
+.bc-pdf-bar input.form-control {
+	min-width:170px;
+	height:38px;
+	padding:0 10px;
+}
+.bc-pdf-bar .btn {
+	height:38px;
+	padding:0 26px;
+	line-height:38px;
+	margin:0;
+}
+
 </style>
 <form action="" method="post">
 <section class="content">
@@ -121,45 +156,49 @@ include "web_header.php";
             </div-->
             <div class="card">
             <div class="header">
-            <h3 style="text-align:center">Company wise Daily Transaction Details (1st Aug 2022 onwards)</h3>
-			<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 add_top_bottom_padding">
-				<span style="text-align:center">&nbsp;</span>
-            <select class="form-control" id="astn_comp_code" name="astn_comp_code" style="padding-left:2px;">
-            <option value="">Select Company</option>
+            <h3 style="text-align:center">Daily Account Ledger </h3>
+    <div class="bc-pdf-bar">
+        <div class="bc-field">
+            <label for="astn_comp_code">Company</label>
+            <select class="form-control" id="astn_comp_code" name="astn_comp_code">
                 <?php
 					$the_company_sts=$_REQUEST['astn_comp_code'];
-
-                       foreach($company_sts_arr as $company_sts_arr_val){
-		$the_key_val = $company_sts_arr_val["key_val"];
-		$the_title_val = $company_sts_arr_val["title_val"]; ?>
-        <option value="<?php echo $the_key_val;?>" <?php if($the_key_val==$the_company_sts){?> selected="selected" <?php } ?>><?php echo $the_title_val;?></option>
-        <?php
-	}
+					if($the_company_sts=='') $the_company_sts = '1010';
+					foreach($company_sts_arr as $company_sts_arr_val){
+						$the_key_val = $company_sts_arr_val["key_val"];
+						$the_title_val = $company_sts_arr_val["title_val"]; ?>
+                <option value="<?php echo $the_key_val;?>" <?php if($the_key_val==$the_company_sts){?> selected="selected" <?php } ?>><?php echo $the_title_val." (".$the_key_val.")";?></option>
+                <?php
+					}
                 ?>
-
-		</select>
-		</div>
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 add_top_bottom_padding">
-				<span style="text-align:center">From Date</span>
-    <input type="date" class="form-control" id="from_dt" name="from_dt"  value="<?php echo $from_dt;?>" placeholder="Choose from date" min="2022-08-01">
+            </select>
+        </div>
+        <div class="bc-field">
+            <label for="from_dt">From Date</label>
+            <input type="date" class="form-control" id="from_dt" name="from_dt" value="<?php echo $from_dt;?>" min="2022-08-01" max="<?php echo date('Y-m-d');?>">
+        </div>
+        <div class="bc-field">
+            <label for="to_dt">To Date</label>
+            <input type="date" class="form-control" id="to_dt" name="to_dt" value="<?php echo $to_dt;?>" min="2022-08-01" max="<?php echo date('Y-m-d');?>">
+        </div>
+        <div class="bc-field">
+            <button type="button" class="btn bg-red waves-effect" id="bc_pdf_btn">Generate PDF</button>
+        </div>
     </div>
-    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 add_top_bottom_padding">
-		<span style="text-align:center">To Date</span>
-    <input type="date" class="form-control" id="to_dt" name="to_dt" value="<?php echo $to_dt;?>" placeholder="Choose to date">
-    </div>
-    <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 add_top_bottom_padding">
+    <!--div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 add_top_bottom_padding">
 		<span style="text-align:center">&nbsp;</span>
     <button type="submit" class="btn bg-red waves-effect srch_btn" >Search</button>
     </div>
      <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 add_top_bottom_padding">
 		 <span style="text-align:center">&nbsp;</span>
     <a href="export_customer_ledger_scl_scln.php?the_start_date=<?php echo $from_dt;?>&the_end_date=<?php echo $to_dt;?>&customer_code=<?php echo $sswa_selected_customer_code;?>&the_company_code=<?php echo $the_company_code;?>" class="btn bg-red waves-effe">Export</a>
-    </div>
-				<br />
-				<br />
-            <h3 style="text-align:center">Period From : <?php echo $the_start_date?>  To : <?php echo $the_end_date?></h3>
+    </div-->
+            <!--h3 style="text-align:center">Period From : <?php echo $the_start_date?>  To : <?php echo $the_end_date?></h3-->
             </div>
 
+<?php /* on-screen report disabled - this page only produces the PDF now.
+         if(false) keeps the markup and the SAP call intact but unexecuted. */ ?>
+<?php if(false){ ?>
               <div class="table-responsive">
               <table class="table table-bordered">
               <thead>
@@ -167,6 +206,7 @@ include "web_header.php";
                 <th>COMPANY</th>
                 <th>VOUCHERDT</th>
                 <th>PARTICULARS</th>
+                <th>Narration</th>
                 <th>QTY</th>
                 <th>AMTDR(Rs.)</th>
                 <th>AMTCR(Rs.)</th>
@@ -222,6 +262,14 @@ if(count($app_results_arr)>0){
 		$DrAmount = $app_results_aval["DrAmount"];
 		$Balance = $app_results_aval["Balance"];
 		$OpBalance = $app_results_aval["OpBalance"];
+		$blart = $app_results_aval["blart"];
+		$Sgtxt = $app_results_aval["Sgtxt"];
+		if($blart=='RV'){
+			$narration="SALES INVOICE";
+		}else{
+			$narration=$Sgtxt;
+
+		}
 
 		$Bldat_format = "";
 		if($Bldat!=""){
@@ -252,6 +300,7 @@ if(count($app_results_arr)>0){
 	<td><?php echo $Butxt;?></td>
 	<td><?php echo $Bldat_format;?></td>
     <td><?php echo $particulars;?> </td>
+    <td><?php echo $narration;?> </td>
 	<td><?php echo number_format($quayntity,2);?></td>
 	<td><?php echo number_format($CrAmount,2);?></td>
 	<td><?php echo number_format($DrAmount,2);?></td>
@@ -266,14 +315,15 @@ if(count($app_results_arr)>0){
   }
 }
 	else{ ?>
-<tr>
+<!--tr>
 <td colspan="6" align="center"> No record found</td>
-</tr>
+</tr-->
 <?php } ?>
 
 </tbody>
 </table>
 </div>
+<?php } /* end of the disabled on-screen report */ ?>
 </div>
 </div>
         </div>
@@ -291,6 +341,30 @@ jQuery(".lb_img_btn").click(function(){
 		jQuery("#the_contn_model_p").html(the_narr_val);
 		jQuery("#open_model_btn").trigger("click");
 	}
+});
+
+jQuery("#bc_pdf_btn").click(function(){
+	var the_comp_code = jQuery("#astn_comp_code").val();
+	var the_from_dt   = jQuery("#from_dt").val();
+	var the_to_dt     = jQuery("#to_dt").val();
+
+	if(the_comp_code==""){
+		alert("Please select a company.");
+		return false;
+	}
+	if(the_from_dt=="" || the_to_dt==""){
+		alert("Please choose both the from and to dates.");
+		return false;
+	}
+	if(the_from_dt > the_to_dt){
+		alert("From date cannot be later than the to date.");
+		return false;
+	}
+
+	var the_pdf_url = "balance_confirmation_pdf.php?bukrs="+encodeURIComponent(the_comp_code)
+					+"&from_dt="+encodeURIComponent(the_from_dt)
+					+"&to_dt="+encodeURIComponent(the_to_dt);
+	window.open(the_pdf_url,"_blank");
 });
 
 });

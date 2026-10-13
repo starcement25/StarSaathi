@@ -721,6 +721,75 @@ function show_SAP_plant_from_customer_code($the_customer_code){
 
     return $the_SAP_plant;
 }
+// Plant name lookup - same logic as api_get_plant_name.php
+function show_plant_name_from_customer_code($the_customer_code){
+
+    $plant_name = "";
+
+    $SAP_customer_master = "ptblcustomermaster";
+
+    $customer_master = "customer_master";
+
+    if($the_customer_code == ""){
+
+        return $plant_name;
+    }
+
+    // resolve KUNNR (SAP customer id) from the app customer code
+    $the_KUNNR = $the_customer_code;
+
+    $sql_cust = "SELECT customer_id FROM $customer_master WHERE `customer_code`='$the_customer_code' LIMIT 0,1";
+
+    $res_cust = mysql_query($sql_cust);
+
+    if($res_cust && mysql_num_rows($res_cust) > 0){
+
+        $row_cust = mysql_fetch_assoc($res_cust);
+
+        if(trim($row_cust["customer_id"]) != ""){
+
+            $the_KUNNR = addslashes(trim($row_cust["customer_id"]));
+        }
+    }
+
+    $sql1 = "SELECT VWERK 
+             FROM $SAP_customer_master 
+             WHERE KUNNR = '$the_KUNNR' 
+               AND (VKORG='1017' OR VKORG='1010') 
+               AND VWERK != '' 
+             ORDER BY AEDAT DESC, ADDITIONAL_DATA1 DESC 
+             LIMIT 1";
+
+    $res1 = mysql_query($sql1);
+
+    $the_SAP_plant = "";
+
+    if($res1 && mysql_num_rows($res1) > 0){
+
+        $row1 = mysql_fetch_assoc($res1);
+
+        $the_SAP_plant = addslashes(trim($row1["VWERK"]));
+    }
+
+    if($the_SAP_plant != ""){
+
+        $sql2 = "SELECT plant_name 
+                 FROM plant_list_cement 
+                 WHERE plant_code = '$the_SAP_plant'
+                 LIMIT 1";
+
+        $res2 = mysql_query($sql2);
+
+        if($res2 && mysql_num_rows($res2) > 0){
+
+            $row2 = mysql_fetch_assoc($res2);
+
+            $plant_name = trim($row2["plant_name"]);
+        }
+    }
+
+    return $plant_name;
+}
 function show_dump_name_from_dump_code($the_dump_code,$branch_code){
 
 $the_dump_name = "";
@@ -1274,6 +1343,8 @@ $the_SAP_destination=show_SAP_LZONE_from_customer_code($customer_code);
 
 $the_SAP_plant=show_SAP_plant_from_customer_code($customer_code);
 
+$the_plant_name=show_plant_name_from_customer_code($customer_code);
+
 $phone_no = $order_data_val["phone_no"] ? addslashes(trim($order_data_val["phone_no"])) : "";
 
 $dump_status = $order_data_val["dump_status"] ? addslashes(trim($order_data_val["dump_status"])) : "NO";
@@ -1664,6 +1735,8 @@ if(count($the_fetched_array)>0){
 
 					<b>Dump Name: </b> '.$dump_name.'<br>
 
+					<b>Plant Name: </b> '.$the_plant_name.'<br>
+
 					<b>Dealer Truck: </b> '.$dealer_truck.'<br>';
 
 
@@ -1772,6 +1845,8 @@ if($email_hierarchy!=''){
 					<b>Dump Status: </b> '.$dump_status.'<br>
 
 					<b>Dump Name: </b> '.$dump_name.'<br>
+
+					<b>Plant Name: </b> '.$the_plant_name.'<br>
 
 					<b>Dealer Truck: </b> '.$dealer_truck.'<br>';
 		//echo"<pre>";print_r('sk');
@@ -2026,6 +2101,8 @@ $sub_dealer_name=$rowcustcode['customer_name'];
 		$rowcustcode=mysqli_fetch_array($rscustcode);
 
 		$customer_code = $rowcustcode['customer_code'];
+
+		$the_plant_name = show_plant_name_from_customer_code($customer_code);
 
 		$branch_code = $rowcustcode['branch_code'];
 
@@ -2312,6 +2389,8 @@ $sub_dealer_name=$rowcustcode['customer_name'];
 					<b>Dump Status: </b> '.$dump_status.'<br>
 
 					<b>Dump Name: </b> '.$dump_name.'<br>
+
+					<b>Plant Name: </b> '.$the_plant_name.'<br>
 
 					<b>Dealer Truck: </b> '.$dealer_truck.'<br>';
 

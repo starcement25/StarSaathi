@@ -25,6 +25,18 @@ $sswa_selected_customer_code = $_SESSION["sswa_selected_customer_code"];
 $ledger_total_balance = 0;
 $ledger_link = "";
 
+/* Earliest date the security deposit statement is drawn from by default.
+   security_deposit_pdf.php uses the same value when no range is passed. */
+if(!defined('SD_PDF_DEFAULT_FROM')){
+	define('SD_PDF_DEFAULT_FROM','2025-04-01');
+}
+
+/* Companies the security deposit statement PDF can be drawn for */
+$company_sts_arr = array();
+$company_sts_arr[] = array("key_val"=>"1010","title_val"=>"SCL");
+$company_sts_arr[] = array("key_val"=>"1017","title_val"=>"SCNEL");
+//$company_sts_arr[] = array("key_val"=>"1016","title_val"=>"SSBSL");
+
 $sql3 = "select `dns_customer_code`,`customer_id`,customer_name from $customer_master where `customer_code`='$sswa_selected_customer_code'";
 $res3 = mysql_query($sql3);
 $totres3 = mysql_num_rows($res3);
@@ -66,28 +78,12 @@ if($the_customer_id!=""){
 		$curr_month = date("m");
 		if($from_dt=='' && $to_dt=='')
 		{
-			$curr_date_time = date("Y-m-d H:i:s");
-			if($curr_month > 3)
-			{
-				$monthyearstart=date("Y",strtotime($curr_date_time))-1;
-				$monthyearend=date("Y",strtotime($curr_date_time));
-			}
-			else
-			{
-				$monthyearstart=date("Y",strtotime($curr_date_time))-2;
-				$monthyearend=date("Y",strtotime($curr_date_time))-1;
-			}
-
-			/*$the_start_date='31/07/'.$monthyearstart;
-			$the_end_date =  '31/03/'.$monthyearend;*/
-			$the_start_date='31/07/'.$initial_year;
-			$the_end_date =  date('d/m/Y',strtotime($curr_date));
+			/* default search window for the security deposit statement */
+			$from_dt = SD_PDF_DEFAULT_FROM;
+			$to_dt   = $curr_date;
 		}
-		else
-		{
-			$the_start_date=date('d/m/Y', strtotime($from_dt));
-			$the_end_date=date('d/m/Y', strtotime($to_dt));
-		}
+		$the_start_date=date('d/m/Y', strtotime($from_dt));
+		$the_end_date=date('d/m/Y', strtotime($to_dt));
 
 $astn_fy=$_REQUEST['astn_fy'];
 	if($astn_fy==''){
@@ -135,7 +131,43 @@ include "web_header.php";
 .hide_narr{
 	display:none;
 }
-	
+
+/* --- Security deposit PDF toolbar --- */
+.sd-pdf-bar {
+	text-align:center;
+	padding:14px 0 28px 0;
+}
+.sd-pdf-bar .sd-field {
+	display:inline-block;
+	vertical-align:bottom;
+	text-align:left;
+	margin:0 8px 10px 8px;
+}
+.sd-pdf-bar label {
+	display:block;
+	margin:0 0 6px 0;
+	font-size:13px;
+	font-weight:600;
+	color:#555;
+	letter-spacing:.3px;
+}
+.sd-pdf-bar select.form-control {
+	min-width:200px;
+	height:38px;
+	padding:0 10px;
+}
+.sd-pdf-bar input.form-control {
+	min-width:170px;
+	height:38px;
+	padding:0 10px;
+}
+.sd-pdf-bar .btn {
+	height:38px;
+	padding:0 26px;
+	line-height:38px;
+	margin:0;
+}
+
 </style>
 <form action="" method="post">
 <section class="content">
@@ -180,15 +212,44 @@ include "web_header.php";
 		<span style="text-align:center">&nbsp;</span>
     <button type="submit" class="btn bg-red waves-effect srch_btn" >Search</button>
     </div-->
-     <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 add_top_bottom_padding">
+     <!--div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 add_top_bottom_padding">
 		 <span style="text-align:center">&nbsp;</span>
     <a href="export_security_ledger.php?the_start_date=<?php echo $from_dt;?>&the_end_date=<?php echo $to_dt;?>&customer_code=<?php echo $sswa_selected_customer_code;?>" class="btn bg-red waves-effe">Export</a>
+    </div-->
+    <div class="sd-pdf-bar">
+        <div class="sd-field">
+            <label for="sd_pdf_comp_code">Company</label>
+            <select class="form-control" id="sd_pdf_comp_code" name="sd_pdf_comp_code">
+                <?php
+					$the_company_sts = $_REQUEST['sd_pdf_comp_code'];
+					if($the_company_sts=='') $the_company_sts = '1010';
+					foreach($company_sts_arr as $company_sts_arr_val){
+						$the_key_val = $company_sts_arr_val["key_val"];
+						$the_title_val = $company_sts_arr_val["title_val"]; ?>
+                <option value="<?php echo $the_key_val;?>" <?php if($the_key_val==$the_company_sts){?> selected="selected" <?php } ?>><?php echo $the_title_val." (".$the_key_val.")";?></option>
+                <?php
+					}
+                ?>
+            </select>
+        </div>
+        <div class="sd-field">
+            <label for="from_dt">From Date</label>
+            <input type="date" class="form-control" id="from_dt" name="from_dt" value="<?php echo $from_dt;?>" min="2022-04-01" max="<?php echo date('Y-m-d');?>">
+        </div>
+        <div class="sd-field">
+            <label for="to_dt">To Date</label>
+            <input type="date" class="form-control" id="to_dt" name="to_dt" value="<?php echo $to_dt;?>" min="2022-04-01" max="<?php echo date('Y-m-d');?>">
+        </div>
+        <div class="sd-field">
+            <button type="button" class="btn bg-red waves-effect" id="sd_pdf_btn">Generate PDF</button>
+        </div>
     </div>
-				<br />
-				<br />
-            <h3 style="text-align:center">Period From : <?php echo $the_start_date?>  To : <?php echo $the_end_date?></h3>
+            <!--h3 style="text-align:center">Period From : <?php echo $the_start_date?>  To : <?php echo $the_end_date?></h3-->
             </div>
             
+<?php /* on-screen report disabled - this page only produces the PDF now.
+         if(false) keeps the markup and the SAP call intact but unexecuted. */ ?>
+<?php if(false){ ?>
               <div class="table-responsive">
               <table class="table table-bordered">
               <thead>
@@ -244,7 +305,7 @@ $the_filter = '&$filter=(Kunnr eq \''.$the_customer_id.'\' and ( Bldat ge dateti
 	
 	/*https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZOVW_LEDG_SECDEP_CDS/ZOVW_LEDG_SECDEP(p_Code='1000001336',p_Frm=datetime'2022-04-01T00:00:00',p_To=datetime'2023-03-31T00:00:00')/Set?$format=json&sap-client=900*/
 
-$url_ck1 = 'https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZOVW_LEDG_SECDEP_CDS/ZOVW_LEDG_SECDEP(p_Code=\''.$the_customer_id.'\',p_Frm=datetime\''.$the_start_date_time.'\',p_To=datetime\''.$the_end_date_time.'\')/Set?$format=json&sap-client=900';
+ $url_ck1 = 'https://starfiori.starcement.co.in:'.SRARFIORI_PORT_NO.'/sap/opu/odata/sap/ZOVW_LEDG_SECDEP_CDS/ZOVW_LEDG_SECDEP(p_Code=\''.$the_customer_id.'\',p_Frm=datetime\''.$the_start_date_time.'\',p_To=datetime\''.$the_end_date_time.'\')/Set?$format=json&sap-client=900';
 	
 
 $body_for_mcode10 = get_data_from_cserver($url_ck1);
@@ -321,14 +382,15 @@ if(count($app_results_arr)>0){
   }
 }
 	else{ ?>
-<tr>
+<!--tr>
 <td colspan="6" align="center"> No record found</td>
-</tr>
+</tr-->
 <?php } ?>
-         
+
 </tbody>
 </table>
 </div>
+<?php } /* end of the disabled on-screen report */ ?>
 </div>
 </div>
         </div>
@@ -347,7 +409,31 @@ jQuery(".lb_img_btn").click(function(){
 		jQuery("#open_model_btn").trigger("click");
 	}
 });
-	
+
+jQuery("#sd_pdf_btn").click(function(){
+	var the_comp_code = jQuery("#sd_pdf_comp_code").val();
+	var the_from_dt   = jQuery("#from_dt").val();
+	var the_to_dt     = jQuery("#to_dt").val();
+
+	if(the_comp_code==""){
+		alert("Please select a company.");
+		return false;
+	}
+	if(the_from_dt=="" || the_to_dt==""){
+		alert("Please choose both the from and to dates.");
+		return false;
+	}
+	if(the_from_dt > the_to_dt){
+		alert("From date cannot be later than the to date.");
+		return false;
+	}
+
+	var the_pdf_url = "security_deposit_pdf.php?bukrs="+encodeURIComponent(the_comp_code)
+					+"&from_dt="+encodeURIComponent(the_from_dt)
+					+"&to_dt="+encodeURIComponent(the_to_dt);
+	window.open(the_pdf_url,"_blank");
+});
+
 });
 </script>
 

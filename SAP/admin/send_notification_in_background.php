@@ -1,46 +1,73 @@
 <?php
+
+
 set_time_limit(0);
 error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 date_default_timezone_set('Asia/Kolkata');
 include "star_connection.php";
+/*---signs the service account json and hands back a fresh (cached) fcm token---*/
+include dirname(__FILE__)."/../fcm_token.php";
 $notification_message = "notification_message";
 $img_dir = "noty_images/";
 $server_url1 = "http://" . $_SERVER['SERVER_NAME']."/";
 $image_link_url = $server_url1."admin/noty_images/";
 
 
+/*---writes the api request/response in a day wise log file kept beside this script---*/
+function write_noty_log($log_txt){
+$log_file = dirname(__FILE__)."/noty_log/noty_log_".date("Y-m-d").".txt";
+if(!file_exists(dirname($log_file))){
+@mkdir(dirname($log_file),0777,true);
+}
+@file_put_contents($log_file,date("Y-m-d H:i:s")." | ".$log_txt."\n",FILE_APPEND);
+}
+
 function send_push_notification_in_android($registration_ids,$message) {
-$apikey = "AAAAXvy8orQ:APA91bEM7eOUXD-n11s4C4SmSgmbsZyjEp9zOS_sBYpwxUB8ov0okUqrQLiYl7RvEp3K2HMlwsBZe0NTFN3L9-XIH4ymebSolmzBM2rtF7gbczsyQyOuBeRkCLqeqH9ymXtS5iZRKQlV";	
-       
-$url = 'https://fcm.googleapis.com/fcm/send';
-$headers = array(
-'Authorization: key='.$apikey,
-'Content-Type: application/json'
-);
-$fields = array(
-'to' => $registration_ids,
-'data' => $message
-);
-	// Open connection
-	$ch = curl_init(); 
-	// Set the url, number of POST vars, POST data
-	curl_setopt($ch, CURLOPT_URL, $url); 
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-	// Disabling SSL Certificate support temporarly
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields)); 
-	// Execute post
-	$result = curl_exec($ch);	
-	//print_r($result);
-	if ($result === FALSE) {
-	$result = '{"success":0,"failure":1}';
-	} 
-	// Close connection
-	curl_close($ch);
+/*---the access token is no longer hard coded. fcm_send_message() in
+     ../fcm_token.php mints one from service-account.json, caches it for its
+     1 hour lifetime and retries once if fcm rejects it with a 401---*/
+/*---v1 allows only string values inside `data`, so flatten what the caller has built---*/
+$v1_data = array();
+if(is_array($message["data"])){
+	foreach($message["data"] as $d_key=>$d_val){
+		if(is_array($d_val)){
+		$v1_data[$d_key] = json_encode($d_val);
+		}else if(is_bool($d_val)){
+		$v1_data[$d_key] = $d_val ? "true" : "false";
+		}else{
+		$v1_data[$d_key] = strval($d_val);
+		}
+	}
+}
+$noty_title = $message["data"]["title"] ? $message["data"]["title"] : "";
+$noty_body = $message["data"]["message"] ? $message["data"]["message"] : "";
+$noty_image = $message["data"]["image"] ? $message["data"]["image"] : "";
+
+$fcm_message = array();
+$fcm_message["token"] = $registration_ids;
+/*$fcm_message["token"] = "d-95M_avSWiv7gcRNwN8ap:APA91bFwC7Oi3YvSV-ydi9lIUD3JI7-g9Mvjt7neuhA7R2gpKFH18eKZ9CS1QToJd6CCm6Zi4tb2hJIHIOD3RTJF7VKhnMXfQUlET3uOoSGOmqbvrZne9iU";*/
+$fcm_message["notification"] = array("title"=>$noty_title,"body"=>$noty_body);
+if($noty_image!=""){
+$fcm_message["notification"]["image"] = $noty_image;
+}
+if(count($v1_data)>0){
+$fcm_message["data"] = $v1_data;
+}
+echo"<pre>";print_r(json_encode($fcm_message));
+
+$fields = array("message"=>$fcm_message);
+	/*---token handling + the actual post both live in fcm_token.php now---*/
+	$send_res = fcm_send_message($fcm_message);
+	$result = $send_res["response"];
+	$http_code = $send_res["http_code"];
+	$curl_err = $send_res["error"];
+	/*---log what was sent to fcm and what came back---*/
+	write_noty_log("ANDROID | regid: ".$registration_ids." | http_code: ".$http_code." | request: ".json_encode($fields)." | response: ".$result." | curl_error: ".$curl_err);
+	/*---v1 returns the message name on success, there is no `success` counter like the old api---*/
 	$result_str = json_decode($result,true);
-	if($result_str["success"]==1){
+echo"<pre>";print_r($result_str);
+
+	if($http_code==200 && $result_str["name"]!=""){
 	return "TRUE";
 	}else{
 	return "FALSE";
@@ -108,12 +135,14 @@ CURLOPT_HEADER => 1
 ));
 
 $result = curl_exec($http2ch);
+$pn_status = curl_getinfo($http2ch, CURLINFO_HTTP_CODE);
+/*---log what was sent to apns and what came back---*/
+write_noty_log("IOS | devicetoken: ".$deviceToken." | http_code: ".$pn_status." | request: ".$message." | response: ".$result." | curl_error: ".curl_error($http2ch));
 if ($result === FALSE) {
 //throw new Exception("Curl failed: ".curl_error($http2ch));
 }else{
-$pn_status = curl_getinfo($http2ch, CURLINFO_HTTP_CODE);
 if($pn_status==200){
-$pnres = "TRUE";	
+$pnres = "TRUE";
 }
 }
 

@@ -60,6 +60,7 @@ if($whr_str!=""){
 	$new_whr_str ="";
 }
 $add_page_name = "edit_sp_broker_list.php";
+$permision_page_name = "permision_sp_broker_list.php";
 $page_name = "sp_broker_list.php";
 $cnt = 0;
 $countrow = 1;
@@ -184,6 +185,7 @@ if($totres1>0){
 <td><?php echo $app_version;?></td>
 <td><?php echo $menuname_for_the_user;?></td>	
 <td><a href="<?php echo $add_page_name."?thebrokerid=".$broker_id."&paged=".$page?>" class="btn bg-red waves-effect">Edit</a></td>
+<td><a href="<?php echo $permision_page_name."?thebrokerid=".$broker_id."&paged=".$page?>" class="btn bg-red waves-effect">Permission</a></td>
 </tr>
 
 <?php

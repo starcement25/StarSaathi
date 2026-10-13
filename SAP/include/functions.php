@@ -563,9 +563,12 @@ function return_no_days($val1,$val2)
 	}
 	return $countday;
 }
-function return_employee_hierarchy($emp_code) {
+function return_employee_hierarchy_OLD($emp_code) {
+
+
     $emphierarchy = array();
     employee_hierarchy_details($emp_code, $emphierarchy);
+	
 	foreach($emphierarchy as $hierarchyval)
 	{
 		$emphierarchystring.=$hierarchyval.',';
@@ -581,7 +584,26 @@ function return_employee_hierarchy($emp_code) {
 	}
     return $emphierarchystring;
 }
-function employee_hierarchy_details($emp_code,&$emphierarchy){
+
+function return_employee_hierarchy($emp_code)
+{
+    $emphierarchy = array();
+    $visited = array();
+
+    employee_hierarchy_details(
+        $emp_code,
+        $emphierarchy,
+        $visited
+    );
+
+    if (empty($emphierarchy)) {
+		
+        return "'" . $emp_code . "'";
+    }
+// print_r(implode(',', $emphierarchy));die;
+    return implode(',', $emphierarchy);
+}
+function employee_hierarchy_details_OLD($emp_code,&$emphierarchy){
    //$sqlemphierarchy="SELECT emp_code FROM employee_master WHERE reporting_to='".$emp_code."'";
    $sqlemphierarchy="SELECT emp_code FROM employee_master WHERE FIND_IN_SET( '".$emp_code."', reporting_to)";
    $rsemphierarchy=mysql_query($sqlemphierarchy);
@@ -601,6 +623,46 @@ function employee_hierarchy_details($emp_code,&$emphierarchy){
 			$emphierarchy[] ="'".$emp_code."'";
 		}
 	}
+}
+
+function employee_hierarchy_details($emp_code, &$emphierarchy, &$visited)
+{
+    // Prevent infinite recursion / duplicate processing
+    if (isset($visited[$emp_code])) {
+        return;
+    }
+
+    $visited[$emp_code] = true;
+
+    // Add current employee
+    if (!in_array("'" . $emp_code . "'", $emphierarchy)) {
+        $emphierarchy[] = "'" . $emp_code . "'";
+    }
+
+    $sqlemphierarchy = "
+        SELECT emp_code
+        FROM employee_master
+        WHERE FIND_IN_SET('" . mysql_real_escape_string($emp_code) . "', reporting_to)
+    ";
+
+    // echo $sqlemphierarchy . "<br>";
+
+    $rsemphierarchy = mysql_query($sqlemphierarchy);
+
+    if (!$rsemphierarchy) {
+        die("Hierarchy Query Error: " . mysql_error());
+    }
+
+    while ($rowemphierarchy = mysql_fetch_assoc($rsemphierarchy)) {
+
+        $child_emp_code = $rowemphierarchy['emp_code'];
+
+        employee_hierarchy_details(
+            $child_emp_code,
+            $emphierarchy,
+            $visited
+        );
+    }
 }
 function return_employee_upper_hierarchy($emp_code) {
     $emphierarchy = array();

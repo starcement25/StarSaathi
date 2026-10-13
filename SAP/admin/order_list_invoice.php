@@ -363,11 +363,11 @@ $page = $_GET['paged'] ? $_GET['paged'] : 1;
 /*---------PAGINATION RELATED CODE START----------*/
 if($_SESSION["start_user_type"]=="MANAGER" && $order_show_branch!=""){
 //$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!='' and $t_apperpdo.`STATUS`!='Order canceled' and $customer_master.`branch_code` in('".$theactbcstr."') $new_whr_str ";
-$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!=''  and $customer_master.`branch_code` in('".$theactbcstr."') $new_whr_str ";
+$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!='' AND `APPORDERNO` Not LIKE '%SBS%'   and $customer_master.`branch_code` in('".$theactbcstr."') $new_whr_str ";
 
 }else{
 //$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!='' and $t_apperpdo.`STATUS`!='Order canceled' $new_whr_str ";
-$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!=''   $new_whr_str ";
+$pgsql = "select $t_apperpdo.*,$customer_master.`branch_code` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` where $t_apperpdo.`APPORDERNO`!='' AND `APPORDERNO` Not LIKE '%SBS%'   $new_whr_str ";
 
 }
 $pgres = mysql_query($pgsql);
@@ -606,7 +606,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
 <?php
 if($_SESSION["start_user_type"]=="MANAGER" && $order_show_branch!=""){
 	$sql1 = "select $t_apperpdo.*,$customer_master.`branch_code`,$customer_master.`customer_id` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` 
-where $t_apperpdo.`APPORDERNO`!=''  and $customer_master.`branch_code` in('".$theactbcstr."') 
+where $t_apperpdo.`APPORDERNO`!='' AND `APPORDERNO` Not LIKE '%SBS%'   and $customer_master.`branch_code` in('".$theactbcstr."') 
 $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";
 /*$sql1 = "select $t_apperpdo.*,$customer_master.`branch_code`,$customer_master.`customer_id` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` 
 where $t_apperpdo.`APPORDERNO`!='' and $t_apperpdo.`STATUS`!='Order canceled' and $customer_master.`branch_code` in('".$theactbcstr."') 
@@ -618,7 +618,7 @@ $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";*/
 where $t_apperpdo.`APPORDERNO`!='' and $t_apperpdo.`STATUS`!='Order canceled' $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";*/
 
 $sql1 = "select $t_apperpdo.*,$customer_master.`branch_code`,$customer_master.`customer_id` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` 
-where $t_apperpdo.`APPORDERNO`!=''  $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";
+where $t_apperpdo.`APPORDERNO`!='' AND `APPORDERNO` Not LIKE '%SBS%'  $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";
 /*
 $sql1 = "select $t_apperpdo.APPORDERNO,$t_apperpdo.ERPORDERNO,$t_apperpdo.ERPORDERDT,$t_apperpdo.STATUS,$t_apperpdo.order_date,$t_apperpdo.freight,$t_apperpdo.destination_name,$t_apperpdo.destination_address,$t_apperpdo.order_for_type, $t_apperpdo.consignee_name,$t_apperpdo.consignee_address,$t_apperpdo.order_for,$t_apperpdo.prod_code,$t_apperpdo.prod_display_name,$t_apperpdo.dns_customer_code,$t_apperpdo.phone_no,$t_apperpdo.dump_status,$t_apperpdo.dump_name,$t_apperpdo.dealer_truck,$t_apperpdo.Delivery_point,$t_apperpdo.Remarks_text,$t_apperpdo.Additional_data_1,$t_apperpdo.order_from,$t_apperpdo.order_by,$t_apperpdo.authorized_by,$t_apperpdo.authorization_date,$t_apperpdo.ref_sub_dealer_order_id,$t_apperpdo.customer_code,$t_apperpdo.dns_sub_dealer_code,$t_apperpdo.sub_dealer_code,$t_apperpdo.id, $customer_master.`branch_code`,$customer_master.`customer_id` from $t_apperpdo left join $customer_master on $t_apperpdo.`customer_code`=$customer_master.`customer_code` 
 where $t_apperpdo.`APPORDERNO`!=''  $new_whr_str order by $t_apperpdo.`id` desc limit $start_from,$limit";*/

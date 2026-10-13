@@ -60,6 +60,7 @@ if ($the_customer_code == "") {
 	where $t_apperpdo.dns_customer_code='".$the_customer_code."' and (`status`='Success' or `status`='Shipped' )  $date_qry order by $t_apperpdo_pop.`order_date` desc limit $start_from,$limit";*/
 		$sqlall2 = "select $t_apperpdo.APPORDERNO,$t_apperpdo.order_date ,$t_apperpdo.QTY,$t_apperpdo.dns_prod_code,$t_apperpdo.prod_display_name,$t_apperpdo.STATUS ,$t_apperpdo.freight,$t_apperpdo.destination_name,$customer_master.`customer_name`,$customer_master.`customer_id` from $t_apperpdo inner join $customer_master on $t_apperpdo.`dns_customer_code`=$customer_master.`dns_customer_code`
 	where $t_apperpdo.dns_customer_code='" . $dns_customer_code . "' and `status`='Dispatched'  order by $t_apperpdo.`order_date` desc";
+	// echo $sqlall2;die;
 		$resall2 = mysql_query($sqlall2);
 		$totall2 = mysql_num_rows($resall2);
 		if ($totall2 > 0) {
@@ -86,7 +87,7 @@ if ($the_customer_code == "") {
 					$date_condition=" AND SUBSTRING($T_DOINVOICE.INVDT,1,6)='".$month_year_val."'";
 				}
 				//$sqlall3 = "select * from $T_DOINVOICE where `APPORDERNO`='$order_id' AND INVNO NOT IN(SELECT DISTINCT inv_no FROM $allocation_details WHERE `inv_cancl`='yes' )".$date_condition;
-				$sqlall3 = "select * from $T_DOINVOICE where `APPORDERNO`='$order_id' AND INVNO NOT IN(SELECT DISTINCT inv_no FROM $allocation_details WHERE `inv_cancl`='yes' )
+				$sqlall3 = "select * from $T_DOINVOICE where `APPORDERNO`='$order_id' AND INVNO NOT IN(SELECT DISTINCT inv_no FROM $allocation_details WHERE `inv_cancl`='yes' AND `APPORDERNO`='$order_id')
 				".$date_condition;
 				$resall3 = mysql_query($sqlall3);
 				$totall3 = mysql_num_rows($resall3);
@@ -200,6 +201,7 @@ if ($the_customer_code == "") {
 				 left join $destination_master ON $customer_destination.destination_code=$destination_master.destination_code
 				where $t_apperpdo_offline.STATUS='Dispatched' 
 				AND $t_apperpdo_offline.prod_code !=''
+				AND $t_apperpdo_offline.order_type ='CEMENT'
 				AND $t_apperpdo_offline.dns_customer_code='" . $dns_customer_code . "' $date_condition
 				"; // Change to your actual table name
 				//echo"<pre>";print_r($query);die;
@@ -226,8 +228,9 @@ if ($the_customer_code == "") {
 					$order_date_time = "";
 				}
 					$sqlall3 = "select * from $T_DOINVOICE where `ERPORDERNO`='$order_id' AND INVNO NOT IN(SELECT DISTINCT inv_no FROM $allocation_details WHERE `inv_cancl`='yes'  )
-				".$date_condition;
-				//echo"<pre>";print_r($sqlall3);die;
+					".$date_condition;
+					//echo $sqlall3;die;
+				// echo"<pre>";print_r($sqlall3);die;
 				$resall3 = mysql_query($sqlall3);
 				$totall3 = mysql_num_rows($resall3);
 				 if ($totall3 > 0) {

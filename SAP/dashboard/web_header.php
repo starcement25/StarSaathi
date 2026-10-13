@@ -112,7 +112,9 @@ if($tot_res_sho > 0)
 }
 else{$security_ledger_status='INACTIVE';}
 //echo $security_ledger_status;
-
+/*----disable security ledger status 09-09-26---*/
+$security_ledger_status='ACTIVE';
+/*----disable security ledger status 09-09-26---*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -375,12 +377,7 @@ else{$security_ledger_status='INACTIVE';}
                         <span>Sub dealer Daily Transaction Details</span>
                         </a>
                         </li>
-                        <li <?php if($file_name=="customer_ledger_scl_scln.php"){ echo 'class="active"';}?> >
-                        <a href="customer_ledger_scl_scln.php">
-                        <i class="material-icons">layers</i>
-                        <span>Company wise Daily Transaction Details</span>
-                        </a>
-                        </li>
+                        
                         <li <?php if($file_name=="LiftingFinalFileUpload.php"){ echo 'class="active"';}?> >
                         <a href="LiftingFinalFileUpload.php">
                         <i class="material-icons">layers</i>
@@ -406,7 +403,12 @@ else{$security_ledger_status='INACTIVE';}
                         <span>Security Deposit Ledger</span>
                         </a>
                         </li>
-					
+                        <li <?php if($file_name=="customer_ledger_scl_scln.php"){ echo 'class="active"';}?> >
+                        <a href="customer_ledger_scl_scln.php">
+                        <i class="material-icons">layers</i>
+                        <span>Daily Account Ledger</span>
+                        </a>
+                        </li>
                         
 					<?Php }?>
 					<?php } else if($_SESSION["sswa_user_type"]=="SP"){
@@ -424,7 +426,7 @@ else{$security_ledger_status='INACTIVE';}
 	$the_menu_admin_page_sho = trim($row1["menu_admin_page"]);
         //sk add condition 06-01-26
         if($_SESSION["sswa_selected_cust_type"]=="RSSD" || $_SESSION["sswa_selected_cust_type"]=="Sub Dealer"){
-            if($the_menu_name_sho=="Make Order" || $the_menu_name_sho=="Invoice" || $the_menu_name_sho=="Debit Note" || $the_menu_name_sho=="Credit Note" || $the_menu_name_sho=="Security Deposit Ledger" || $the_menu_name_sho=="Company wise Daily Transaction Details" || $the_menu_name_sho=="Retailer Lifting"  || $the_menu_name_sho=="Detailed Statement"){
+            if($the_menu_name_sho=="Make Order" || $the_menu_name_sho=="Invoice" || $the_menu_name_sho=="Debit Note" || $the_menu_name_sho=="Credit Note" || $the_menu_name_sho=="Company wise Daily Transaction Details" || $the_menu_name_sho=="Retailer Lifting"  || $the_menu_name_sho=="Detailed Statement"){
                 continue;
             }
         }
@@ -541,10 +543,10 @@ else{$security_ledger_status='INACTIVE';}
                         <span>Security Deposit Ledger</span>
                         </a>
                         </li>
-				<li <?php if($file_name=="customer_ledger_scl_scln.php"){ echo 'class="active"';}?> >
+				        <li <?php if($file_name=="customer_ledger_scl_scln.php"){ echo 'class="active"';}?> >
                         <a href="customer_ledger_scl_scln.php">
                         <i class="material-icons">layers</i>
-                        <span>Company wise Daily Transaction Details</span>
+                        <span>Daily Account Ledger</span>
                         </a>
                         </li>
 

@@ -20,6 +20,10 @@ if($_POST["snd_btn"]=="Send Notification"){
 $the_noty_title = $_POST["noty_title"] ? addslashes(trim($_POST["noty_title"])) : "";
 	$the_noty_msg = $_POST["noty_msg"] ? addslashes(trim($_POST["noty_msg"])) : "";
 	$the_astn_branch_code = $_POST["astn_branch_code"] ? $_POST["astn_branch_code"] : "";
+	$the_user_type = $_POST["user_type"] ? strtoupper(addslashes(trim($_POST["user_type"]))) : "ALL";
+	if(!in_array($the_user_type,array("ALL","DEALER","RSSD"))){
+	$the_user_type = "ALL";
+	}
 	$the_radio_file_type = $_POST["radio_file_type"] ? addslashes(trim($_POST["radio_file_type"])) : "NONE";
 	if($the_radio_file_type=="IMAGE"){
 $nimage_file_name = $_FILES["nimage_file"]["name"];
@@ -58,7 +62,7 @@ $nimage_file_tmp = "";
 				$nimage_file_name = str_replace("-","_",$nimage_file_name);		
 				$new_file_name = "icon_".time()."_".$nimage_file_name;
 				$file_up = move_uploaded_file($nimage_file_tmp, $img_dir.$new_file_name);
-				$sql_in = "insert into $notification_message (`title`,`message`,`image_name`,`file_type`,`branch_code`,`date_time`) values('$the_noty_title','$the_noty_msg','$new_file_name','$the_radio_file_type','$the_astn_branch_code_str','$curr_date_time')";
+				$sql_in = "insert into $notification_message (`title`,`message`,`image_name`,`file_type`,`branch_code`,`user_type`,`date_time`) values('$the_noty_title','$the_noty_msg','$new_file_name','$the_radio_file_type','$the_astn_branch_code_str','$the_user_type','$curr_date_time')";
 				$res_in = mysql_query($sql_in);
 				if($res_in){
 				$new_gen_noty_id = mysql_insert_id();
@@ -79,7 +83,7 @@ $nimage_file_tmp = "";
 			$nimage_file_name = str_replace("-","_",$nimage_file_name);		
 			$new_file_name = "pdf_".time()."_".$nimage_file_name;
 			$file_up = move_uploaded_file($nimage_file_tmp, $img_dir.$new_file_name);
-			$sql_in = "insert into $notification_message (`title`,`message`,`image_name`,`file_type`,`branch_code`,`date_time`) values('$the_noty_title','$the_noty_msg','$new_file_name','$the_radio_file_type','$the_astn_branch_code_str','$curr_date_time')";
+			$sql_in = "insert into $notification_message (`title`,`message`,`image_name`,`file_type`,`branch_code`,`user_type`,`date_time`) values('$the_noty_title','$the_noty_msg','$new_file_name','$the_radio_file_type','$the_astn_branch_code_str','$the_user_type','$curr_date_time')";
 			$res_in = mysql_query($sql_in);
 			if($res_in){
 			$new_gen_noty_id = mysql_insert_id();
@@ -92,7 +96,7 @@ $nimage_file_tmp = "";
 			$n_msg = 'Please select PDF file.';
 			}
 		}else{
-			$sql_in = "insert into $notification_message (`title`,`message`,`branch_code`,`date_time`) values('$the_noty_title','$the_noty_msg','$the_astn_branch_code_str','$curr_date_time')";
+			$sql_in = "insert into $notification_message (`title`,`message`,`branch_code`,`user_type`,`date_time`) values('$the_noty_title','$the_noty_msg','$the_astn_branch_code_str','$the_user_type','$curr_date_time')";
 			$res_in = mysql_query($sql_in);
 			if($res_in){
 			$new_gen_noty_id = mysql_insert_id();
@@ -267,6 +271,14 @@ xhr2.abort();
 </div>
 
 <div class="form-group">
+<label class="Select User Type">Send To User Type</label>
+<select class="form-control" id="user_type" name="user_type" style="padding-left:2px;">
+<option value="ALL">ALL (Dealer &amp; RSSD)</option>
+<option value="DEALER">Dealer</option>
+<option value="RSSD">RSSD</option>
+</select>
+</div>
+<div class="form-group">
 <label class="Send to Branch">Send To Multiple Branches</label>
 <select class="form-control" id="astn_branch_code" name="astn_branch_code[]" style="padding-left:2px;" multiple  data-placeholder="Choose Multiple Branches...">
 <?php
@@ -332,6 +344,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                         <th>Message </th>
                                         <th>Image/PDF</th>
                                         <th>Sent to Branch</th>
+                                        <th>User Type</th>
                                         <th style="text-align:center;">Sending Count</th>
                                         <th>Sending Status</th>
                                         <th>Date Time</th>
@@ -343,6 +356,7 @@ echo olcPaging($adjacents,$targetpage,$limit,$page,$prev,$next,$lastpage,$lpm1,"
                                         <th>Message </th>
                                         <th>Image/PDF</th>
                                         <th>Sent to Branch</th>
+                                        <th>User Type</th>
                                         <th style="text-align:center;">Sending Count</th>
                                         <th>Sending Status</th>
                                         <th>Date Time</th>
@@ -375,7 +389,8 @@ if($totres1>0){
 		}else{
 			$branch_nm = show_multiple_branch_name_by_ids($branch_code);
 		}
-		
+		$user_type = $row1["user_type"] ? trim($row1["user_type"]) : "ALL";
+
         $sending_count = $row1["sending_count"];
 		$sending_status = $row1["status"];
 		$date_time = $row1["date_time"];
@@ -400,7 +415,8 @@ echo "NONE";
 }
 ?></td>
 <td><?php echo $branch_nm;?></td>
-<td style="text-align:center;"><?php 
+<td><?php echo $user_type;?></td>
+<td style="text-align:center;"><?php
 if($sending_status=="END"){
 	echo $sending_count;
 }else{
@@ -427,7 +443,7 @@ echo $sending_status;
 }else{
 ?>
 <tr>
-<td style="text-align:center" colspan="7">No notification found.</td>
+<td style="text-align:center" colspan="8">No notification found.</td>
 </tr>
 <?php
 }
