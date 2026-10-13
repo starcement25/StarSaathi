@@ -1,2 +1,5 @@
 **/pma/
 **/pma2/
+# Secrets - never commit
+SAP/service-account.json
+SAP/aws_credentials.php
